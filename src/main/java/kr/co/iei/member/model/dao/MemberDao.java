@@ -26,4 +26,12 @@ public class MemberDao {
 		}
 		return r;
 	}
+
+	public Member selectOneMember(Member m) {
+		String query = "select * from member_tbl where member_id = ? and member_pw = ?";
+		Object[] params = {m.getMemberId(), m.getMemberPw()};
+		List list = jdbc.query(query, memberRowMapper, params);
+		Member member = (Member)list.get(0);
+		return member;
+	}
 }

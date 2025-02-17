@@ -25,7 +25,12 @@ public class MemberController {
 	
 	@PostMapping(value="/login")
 	public String login(Member m, Model model, HttpSession session) {
-		/* Member member = memberService.selectOneMember(m); */
-		return "redirect:/";
+		Member member = memberService.selectOneMember(m);
+		if(member == null) {
+			return "member/loginFrm";
+		}else {
+			session.setAttribute("member", member);
+			return "redirect:/";
+		}
 	}
 }

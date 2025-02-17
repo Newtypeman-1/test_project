@@ -13,7 +13,6 @@
 				<div class="input">
 					<div class="input-name nameId">
 						<span for="memberId">아이디</span>
-						<!-- <span class="wrong-message">아이디 혹은 비밀번호가 잘못되었습니다.</span> -->
 					</div>
 					<div class="input-item">
 						<input type="text" class="memberId" name="memberId" id="memberId">
@@ -26,6 +25,9 @@
 					<div class="input-item">
 						<input type="text" class="memberPw" name="memberPw" id="memberPw">
 					</div>
+				</div>
+				<div class="wrong">
+					<span class="wrong-message"></span>
 				</div>
 				<div>
 					<button type="submit">로그인</button>
@@ -41,18 +43,18 @@
 			<form class="/doctor/login" method="post" autocomplete="off">
 				<div class="input">
 					<div class="input-name">
-						<span for="Id">아이디</span>
+						<span for="doctorId">아이디</span>
 					</div>
 					<div class="input-item">
-						<input type="text" class="Id" name="Id" id="Id">
+						<input type="text" class="doctorId" name="doctorId" id="doctorId">
 					</div>
 				</div>
 				<div class="input">
 					<div class="input-name">
-						<span for="Pw">비밀번호</span>
+						<span for="doctorPw">비밀번호</span>
 					</div>
 					<div class="input-item">
-						<input type="text" class="Pw" name="Pw" id="Pw">
+						<input type="text" class="doctorPw" name="doctorPw" id="doctorPw">
 					</div>
 				</div>
 				<div>
@@ -63,23 +65,12 @@
 	</main>
 	<script>
 		$("#submit").on("click", function(){
-			$.ajax({
-				url: "/etc/ajaxCheckId",
-				type: "post",
-				data: {memberId: memberId, memberPw: memberPw},
-				success: function(m){
-					if(m === 0){
-						const wrong = $("<div>");
-						wrong.attr("class", "wrong-message");
-						wrong.text("아이디 혹은 비밀번호가 잘못되었습니다.");
-						$(".nameId").append(wrong);
-					}
-				},
-				error: function(){
-					console.log("에러");
-				}
-			});
-		});
+			const pw = $("#memberPw").value();
+			if(pw === ""){
+				$(".wrong-message").text("비밀번호를 입력해 주세요.");
+			}
+			
+		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

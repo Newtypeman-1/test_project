@@ -15,4 +15,9 @@ public class MemberService {
 		int r = memberDao.ajaxCheckLogin(m);
 		return r;
 	}
+
+	public Member selectOneMember(Member m) {
+		Member member = memberDao.selectOneMember(m);
+		return member;
+	}
 }
