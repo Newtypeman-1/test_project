@@ -23,13 +23,6 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@ResponseBody
-	@PostMapping(value="/ajaxCheckId")
-	public int ajaxCheckId(Member m) {
-		int r = memberService.checkLogin(m);
-		return r;
-	}
-	
 	@PostMapping(value="/login")
 	public String login(Member m, Model model, HttpSession session) {
 		
