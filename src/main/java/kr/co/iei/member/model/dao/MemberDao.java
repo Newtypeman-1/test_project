@@ -31,7 +31,11 @@ public class MemberDao {
 		String query = "select * from member_tbl where member_id = ? and member_pw = ?";
 		Object[] params = {m.getMemberId(), m.getMemberPw()};
 		List list = jdbc.query(query, memberRowMapper, params);
-		Member member = (Member)list.get(0);
-		return member;
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Member member = (Member)list.get(0);
+			return member;
+		}
 	}
 }
