@@ -323,11 +323,16 @@ ol {
 }
 
 .header__logo {
-	padding: 26px 0;
+	padding: 0;
 }
 
 .header__logo a {
 	display: inline-block;
+}
+
+.header__logo img{
+	object-fit: cover;
+	width: 40%;
 }
 
 .header__menu {
@@ -862,6 +867,10 @@ ol {
 
 .footer__logo {
 	margin-bottom: 20px;
+}
+
+.footer__logo img{
+	width: 50%;
 }
 
 .footer__payment a {
