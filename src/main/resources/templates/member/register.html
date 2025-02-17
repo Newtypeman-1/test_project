@@ -9,19 +9,58 @@
 	<main class="main">
 		<section class="section">
 			<div class="title">회원가입</div>
-			<form action="/member/register" method="get">
+			<form action="/member/register" method="post">
 				<div class="input">
 					<div class="input-name">
 						<span for="memberId">아이디</span>
+						<span id=idCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" name="memberId" id="memberId">
+						<button type="button" class="idCheck">중복체크</button>
 					</div>
 				</div>
-				
+				<div class="input">
+					<div class="input-name">
+						<span for="memberPw">비밀번호</span>
+						<span id=pwCheckMsg"></span>
+					</div>
+					<div class="input-item">
+						<input type="text" name="memberPw" id="memberPw">
+					</div>
+				</div>
+				<div class="input">
+					<div class="input-name">
+						<span for="memberPwRe">비밀번호 확인</span>
+						<span id=pwReCheckMsg"></span>
+					</div>
+					<div class="input-item">
+						<input type="text" name="memberPwRe" id="memberPwRe">
+					</div>
+				</div>
+				<div class="input">
+					<div class="input-name">
+						<span for="memberId">이메일</span>
+					</div>
+					<div class="input-item">
+						<input type="text" name="memberEmail" id="memberEmail">
+						@
+						<select name="memberCom" id="memberCom">
+							<option value="">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="daum.net">daum.net</option>
+						</select>
+					</div>
+				</div>
 			</form>
 		</section>
 	</main>
+	<script>
+		$(".idCheck").on("click", function(){
+			
+		})
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
