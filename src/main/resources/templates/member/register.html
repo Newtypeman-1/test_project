@@ -13,7 +13,7 @@
 				<div class="input">
 					<div class="input-name">
 						<span for="memberId">아이디</span>
-						<span id=idCheckMsg"></span>
+						<span id="idCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" name="memberId" id="memberId">
@@ -23,7 +23,7 @@
 				<div class="input">
 					<div class="input-name">
 						<span for="memberPw">비밀번호</span>
-						<span id=pwCheckMsg"></span>
+						<span id="pwCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" name="memberPw" id="memberPw">
@@ -32,7 +32,7 @@
 				<div class="input">
 					<div class="input-name">
 						<span for="memberPwRe">비밀번호 확인</span>
-						<span id=pwReCheckMsg"></span>
+						<span id="pwReCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" name="memberPwRe" id="memberPwRe">
@@ -45,7 +45,8 @@
 					<div class="input-item">
 						<input type="text" name="memberEmail" id="memberEmail">
 						@
-						<select name="memberCom" id="memberCom">
+						<input type="text" name="memberCom1" id="memberCom1">
+						<select name="memberCom2" id="memberCom2">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -58,8 +59,31 @@
 	</main>
 	<script>
 		$(".idCheck").on("click", function(){
-			
-		})
+			let icm = $(".idCheckMsg");
+			icm.removeClass("invalid").removeClass("valid");
+			$.ajax({
+				url: "/etc/idCheck",
+				type: "get",
+				data: {memberId: memberId},
+				success: function(r){
+					if(r === 0){
+						icm.text("사용 가능한 아이디 입니다.")
+						icm.addClass("valid");
+					}else {
+						icm.text("사용 할 수 없는 아이디 입니다.")
+						icm.addClass("invalid");
+					}
+				},
+				error: function(){
+					console.log("에러");
+				}
+			});
+		});
+		
+		$("#memberCom2").on("change", function(){
+			const it = $("#memberCom2").val();
+			const com = $("#memberCom1").val(it);
+		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

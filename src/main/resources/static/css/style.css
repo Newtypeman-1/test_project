@@ -3688,4 +3688,10 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
+	.valid{
+		color: blue;
+	}
+	.invalid{
+		color: red;
+	}
 }
