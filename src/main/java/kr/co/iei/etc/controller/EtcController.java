@@ -18,7 +18,7 @@ public class EtcController {
 	@ResponseBody
 	@PostMapping(value="ajaxCheckId")
 	public int ajaxCheckId(Member m) {
-		int r = memberService.checkLogin(m);
+		int r = memberService.ajaxCheckLogin(m);
 		return r;
 	}
 }
