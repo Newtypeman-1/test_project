@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>이용안내 - 오시는 길</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="page-title">오시는 길</div>
+			<div id="map" style="width:100%;height:500px;"></div> 
+		</section>
+	</main>
+	<th:block th:include="common/header"></th:block>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nf16rbrofy&submodules=geocoder"></script>
+	<script>
+		const map = new naver.maps.Map("map", {
+			center : new naver.maps.LatLng(37.5338151, 126.8969784),
+			zoom : 17,
+			zoomControl : true,
+			zoomControlOption : {
+				position : naver.maps.Position.TOP_RIGHT,
+				style : naver.maps.ZoomControlStyle.SMALL
+			}
+		});
+		const marker = new naver.maps.Map("map", {
+			position : new naver.maps.LatLng(37.5338151, 126.8969784),
+			map : map
+		});
+	</script>
+</body>
+</html>

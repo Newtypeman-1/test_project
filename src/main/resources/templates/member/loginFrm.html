@@ -27,10 +27,10 @@
 					</div>
 				</div>
 				<div class="wrong">
-					<span class="wrong-message">야</span>
+					<span class="wrong-message"></span>
 				</div>
 				<div>
-					<button type="button" id="member-submit">로그인</button>
+					<button type="submit" id="member-submit">로그인</button>
 				</div>
 				<div class="sub">
 					<a href="/member/registerFrm">회원가입</a>
@@ -57,20 +57,43 @@
 						<input type="text" class="doctorPw" name="doctorPw" id="doctorPw">
 					</div>
 				</div>
+				<div class="wrong">
+					<span class="wrong-message"></span>
+				</div>
 				<div>
-					<button type="submit" id="submit">로그인</button>
+					<button type="submit" id="doctor-submit">로그인</button>
 				</div>
 			</form>
 		</section>
 	</main>
 	<script>
 		$("#member-submit").on("click", function(){
-			const pw = $("#memberPw").value();
-			if(pw === ""){
-				const wm = $(".wrong-message");
+			const wm = $(".wrong-message");
+			const idV = $("#memberId").val();
+			const pwV = $("#memberPw").val();
+			const id = $("#memberId");
+			const pw = $("#memberPw");
+			if(idV === ""){
+				wm.text("아아디를 입력해주세요.");
+				id.focus();
+			}else if(pwV === ""){
 				wm.text("비밀번호를 입력해주세요.");
+				pw.focus();
 			}
-			
+		})
+		$("#doctor-submit").on("click", function(){
+			const wm = $(".wrong-message");
+			const idV = $("#doctorId").val();
+			const pwV = $("#doctorPw").val();
+			const id = $("#doctorId");
+			const pw = $("#doctorPw");
+			if(idV === ""){
+				wm.text("아아디를 입력해주세요.");
+				id.focus();
+			}else if(pwV === ""){
+				wm.text("비밀번호를 입력해주세요.");
+				pw.focus();
+			}
 		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
