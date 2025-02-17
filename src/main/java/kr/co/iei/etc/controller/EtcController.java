@@ -15,10 +15,4 @@ public class EtcController {
 	@Autowired
 	private MemberService memberService;
 	
-	@ResponseBody
-	@PostMapping(value="ajaxCheckId")
-	public int ajaxCheckId(Member m) {
-		int r = memberService.ajaxCheckLogin(m);
-		return r;
-	}
 }

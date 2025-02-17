@@ -15,26 +15,18 @@ public class MemberDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private MemberRowMapper memberRowMapper;
-	
-	public int ajaxCheckLogin(Member m) {
-		String query = "select * from member_tbl where member_id = ? and member_pw = ?";
-		Object[] params = {m.getMemberId(), m.getMemberPw()};
-		List list = jdbc.query(query, memberRowMapper, params);
-		int r = 0;
-		if(!list.isEmpty()) {
-			r = 1;
-		}
-		return r;
-	}
 
 	public Member selectOneMember(Member m) {
-		String query = "select * from member_tbl where member_id = ? and member_pw = ?";
+		String query = "select * from member_tbl where member_id=? and member_pw=?";
 		Object[] params = {m.getMemberId(), m.getMemberPw()};
 		List list = jdbc.query(query, memberRowMapper, params);
+		System.out.println(m.getMemberId());
+		System.out.println(m.getMemberPw());
 		if(list.isEmpty()) {
 			return null;
 		}else {
 			Member member = (Member)list.get(0);
+			System.out.println(member);
 			return member;
 		}
 	}

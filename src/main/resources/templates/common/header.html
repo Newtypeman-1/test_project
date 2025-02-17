@@ -13,7 +13,17 @@
 <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-
+<script src="/js/jquery-3.6.0.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nicescroll.min.js"></script>
+<script src="/js/main.js"></script>
 
 	<header class="header">
         <div class="container-fluid">
@@ -44,8 +54,18 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="/member/loginFrm">Login</a>
-                            <a href="/member/register">Register</a>
+                        	<span th:if="${session.member == null && session.doctor == null}">
+	                            <a href="/member/loginFrm">Login</a>
+	                            <a href="/member/register">Register</a>
+                        	</span>
+                        	<span th:if="${session.member != null}">
+	                            <a href="/member/mypage" th:text="${session.member.memberId}"></a>
+	                            <a href="/member/logout">LogOut</a>
+                        	</span>
+                        	<span th:if="${session.doctor != null}">
+	                            <a href="/doctor/mypage" th:text="${session.doctor.doctorId}"></a>
+	                            <a href="/doctor/logout">LogOut</a>
+                        	</span>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
