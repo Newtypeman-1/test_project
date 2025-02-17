@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+</head>
+<body>
+	<main class="content">
+		<section class="member-login section">
+			<div class="page-title">회원 로그인</div>
+			<form action="/member/login" method="post" autocomplete="off">
+				<div class="input">
+					<div class="input-name">
+						<span for="memberId">아이디</span>
+					</div>
+					<div class="input-item">
+						<input type="text" class="memberId" name="memberId" id="memberId">
+					</div>
+				</div>
+				<div class="input">
+					<div class="input-name">
+						<span for="memberPw">비밀번호</span>
+					</div>
+					<div class="input-item">
+						<input type="text" class="memberPw" name="memberPw" id="memberPw">
+					</div>
+				</div>
+				<div>
+					<button type="submit">로그인</button>
+				</div>
+				<div class="sub">
+					<a href="/member/register">회원가입</a>
+					<a href="/member/findIdPw">아이디 / 비밀번호 찾기</a>
+				</div>
+			</form>
+		</section>
+		<section class="doctor-login section">
+			<div class="page-title">직원 로그인</div>
+			<form class="/doctor/login" method="post" autocomplete="off">
+				<div class="input">
+					<div class="input-name">
+						<span for="Id">아이디</span>
+					</div>
+					<div class="input-item">
+						<input type="text" class="Id" name="Id" id="Id">
+					</div>
+				</div>
+				<div class="input">
+					<div class="input-name">
+						<span for="Pw">비밀번호</span>
+					</div>
+					<div class="input-item">
+						<input type="text" class="Pw" name="Pw" id="Pw">
+					</div>
+				</div>
+				<div>
+					<button type="submit">로그인</button>
+				</div>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
