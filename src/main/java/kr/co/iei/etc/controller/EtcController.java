@@ -1,38 +1,24 @@
-package kr.co.iei.member.controller;
+package kr.co.iei.etc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
 
 @Controller
-@RequestMapping(value="/member")
-public class MemberController {
+@RequestMapping(value="/etc")
+public class EtcController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping(value="/loginFrm")
-	public String loginFrm() {
-		return "member/login";
-	}
-	
 	@ResponseBody
-	@PostMapping(value="/ajaxCheckId")
+	@PostMapping(value="ajaxCheckId")
 	public int ajaxCheckId(Member m) {
 		int r = memberService.checkLogin(m);
 		return r;
-	}
-	
-	@PostMapping(value="/login")
-	public String login(Member m, Model model, HttpSession session) {
-		
-		return "redirect:/";
 	}
 }

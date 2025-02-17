@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Help DOC - 회원가입</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="title">회원가입</div>
+			<form action="/member/register" method="get">
+				<div class="input">
+					<div class="input-name">
+						<span for="memberId">아이디</span>
+					</div>
+					<div class="input-item">
+						<input type="text" name="memberId" id="memberId">
+					</div>
+				</div>
+				
+			</form>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

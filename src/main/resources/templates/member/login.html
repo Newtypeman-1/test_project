@@ -2,16 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>Help DOC - 로그인</title>
 </head>
 <body>
+	<th:block th:include="common/header"></th:block>
 	<main class="content">
 		<section class="member-login section">
-			<div class="page-title">회원 로그인</div>
+			<div class="title">회원 로그인</div>
 			<form action="/member/login" method="post" autocomplete="off">
 				<div class="input">
-					<div class="input-name">
+					<div class="input-name nameId">
 						<span for="memberId">아이디</span>
+						<!-- <span class="wrong-message">아이디 혹은 비밀번호가 잘못되었습니다.</span> -->
 					</div>
 					<div class="input-item">
 						<input type="text" class="memberId" name="memberId" id="memberId">
@@ -29,13 +31,13 @@
 					<button type="submit">로그인</button>
 				</div>
 				<div class="sub">
-					<a href="/member/register">회원가입</a>
+					<a href="/member/registerFrm">회원가입</a>
 					<a href="/member/findIdPw">아이디 / 비밀번호 찾기</a>
 				</div>
 			</form>
 		</section>
 		<section class="doctor-login section">
-			<div class="page-title">직원 로그인</div>
+			<div class="title">직원 로그인</div>
 			<form class="/doctor/login" method="post" autocomplete="off">
 				<div class="input">
 					<div class="input-name">
@@ -54,10 +56,31 @@
 					</div>
 				</div>
 				<div>
-					<button type="submit">로그인</button>
+					<button type="submit" id="submit">로그인</button>
 				</div>
 			</form>
 		</section>
 	</main>
+	<script>
+		$("#submit").on("click", function(){
+			$.ajax({
+				url: "/etc/ajaxCheckId",
+				type: "post",
+				data: {memberId: memberId, memberPw: memberPw},
+				success: function(m){
+					if(m === 0){
+						const wrong = $("<div>");
+						wrong.attr("class", "wrong-message");
+						wrong.text("아이디 혹은 비밀번호가 잘못되었습니다.");
+						$(".nameId").append(wrong);
+					}
+				},
+				error: function(){
+					console.log("에러");
+				}
+			});
+		});
+	</script>
+	<th:block th:include="common/header"></th:block>
 </body>
 </html>
