@@ -28,4 +28,8 @@ public class MemberController {
 		/* Member member = memberService.selectOneMember(m); */
 		return "redirect:/";
 	}
+	@GetMapping(value="/register")
+	public String register() {
+		return "member/register";
+	}
 }
