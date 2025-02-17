@@ -33,4 +33,8 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
+	@GetMapping(value="/register")
+	public String register() {
+		return "member/register";
+	}
 }

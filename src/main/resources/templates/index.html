@@ -4,10 +4,25 @@
 <meta charset="UTF-8">
 <title>프로젝트 - 메인페이지</title>
 <style>
+.guide-box-box{
+	width: 1000px;
+	margin: 30px auto;
+}
 .guide-box{
 	border: 1px solid black;
 	border-radius: 20px;
-	width: 400px;
+	width: 300px;
+}
+.guide-box>div{
+	margin: 20px;
+}
+.guide-link-wrap{
+	border-radius: 20px;
+	width: 200px;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #ccc
 }
 .symptom-box{
 	width: 1000px;
@@ -40,14 +55,16 @@
 		<section class="section">
 			<div class="title">페이지 타이틀</div>
 			<a href="/member/loginFrm">로그인 페이지</a>
-			<div class="guide-box">
-				<div class="guide-title-wrap">
-					<div class="guide-title">비대면 진료가 처음이신가요?</div>
-				</div>
-				<div class="guide-link-box">
-					<div class="guide-link">
-						비대면 진료 가이드
-					</div>>
+			<div class="guide-box-box">
+				<div class="guide-box">
+					<div class="guide-title-wrap">
+						<div class="guide-title">비대면 진료가 처음이신가요?</div>
+					</div>
+					<div class="guide-link-wrap">
+						<div class="guide-link">
+							비대면 진료 가이드
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="symptom-box">
