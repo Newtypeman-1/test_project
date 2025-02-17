@@ -20,7 +20,7 @@ public class MemberController {
 	
 	@GetMapping(value="/loginFrm")
 	public String loginFrm() {
-		return "member/login";
+		return "member/loginFrm";
 	}
 	
 	@ResponseBody
