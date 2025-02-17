@@ -11,8 +11,8 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 
-	public int checkLogin(Member m) {
-		int r = memberDao.checkLogin(m);
+	public int ajaxCheckLogin(Member m) {
+		int r = memberDao.ajaxCheckLogin(m);
 		return r;
 	}
 }

@@ -25,7 +25,7 @@ public class MemberController {
 	
 	@PostMapping(value="/login")
 	public String login(Member m, Model model, HttpSession session) {
-		
+		/* Member member = memberService.selectOneMember(m); */
 		return "redirect:/";
 	}
 }
