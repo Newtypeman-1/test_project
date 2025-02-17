@@ -3,6 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>프로젝트 - 메인페이지</title>
+<style>
+.guide-box{
+	border: 1px solid black;
+	border-radius: 20px;
+	width: 400px;
+}
+.symptom-box{
+	width: 1000px;
+	border: 1px solid black;
+	border-radius: 20px;
+	margin: 0 auto;
+	padding: 30px;
+}
+.symptom-title{
+	margin-bottom: 20px;
+}
+.symptom-title{
+	font-weight: bold;
+	font-size: 20px;
+}
+.symptom-grid-wrap{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 10px;
+}
+.icon{
+	font-size: 80px;
+}
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -10,6 +40,33 @@
 		<section class="section">
 			<div class="title">페이지 타이틀</div>
 			<a href="/member/loginFrm">로그인 페이지</a>
+			<div class="guide-box">
+				<div class="guide-title-wrap">
+					<div class="guide-title">비대면 진료가 처음이신가요?</div>
+				</div>
+				<div class="guide-link-box">
+					<div class="guide-link">
+						비대면 진료 가이드
+					</div>>
+				</div>
+			</div>
+			<div class="symptom-box">
+				<div class="symptom-title-wrap">
+					<div class="symptom-title">비대면 진료 시작하기</div>
+				</div>
+				<div class="symptom-grid-wrap">
+					<div class="icon">🖼</div>
+					<div class="icon">🎧</div>
+					<div class="icon">🎮</div>
+					<div class="icon">📱</div>
+					<div class="icon">💻</div>
+					<div class="icon">📷</div>
+					<div class="icon">🎨</div>
+					<div class="icon">🖋</div>
+					<div class="icon">📚</div>
+					<div class="icon">📝</div>
+				</div>
+			</div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
