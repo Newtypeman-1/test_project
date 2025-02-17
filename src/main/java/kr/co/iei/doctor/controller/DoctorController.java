@@ -23,7 +23,7 @@ public class DoctorController {
 			
 			return "/doctor/loginFrm";
 		}else {
-			
+			session.setAttribute("doctor", doctor);
 			return "redirect:/";
 		}
 	}

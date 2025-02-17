@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>리뷰</title>
+<style>
+	.tbl{
+		width: 80%;
+		margin: 0 auto;	
+		text-align: center;
+		border: 1px solid black;
+	}
+	.page-title{
+		text-align: center;
+		padding: 30px;
+		font-size: 25px;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="content">
+		<section class="section">
+			<div class="page-title">리뷰</div>
+			<div class="review-wrap">
+				<table class="tbl">
+					<tr>
+						<th style="width:15%">별점</th>
+						<th style="width:40%">내용</th>
+						<th style="width:10%">작성자</th>
+						<th style="width:10%">담당의</th>
+						<th style="width:10%">작성일</th>
+					</tr>
+					<tr th:each="review : ${list}">
+						<td th:text="${review.reviewWriter}"></td>
+						<td th:text="${review.reviewTitle}"></td>
+						<td th:text="${review.reviewWriter}"></td>
+						<td th:text="${review.reviewTitle}"></td>
+						<td th:text="${review.reviewDate}"></td>
+					</tr>
+				</table>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
