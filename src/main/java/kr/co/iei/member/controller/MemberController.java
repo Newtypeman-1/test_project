@@ -27,12 +27,13 @@ public class MemberController {
 	public String login(Member m, Model model, HttpSession session) {
 		Member member = memberService.selectOneMember(m);
 		if(member == null) {
-			return "member/loginFrm";
+			return "redirect:/";
 		}else {
 			session.setAttribute("member", member);
 			return "redirect:/";
 		}
 	}
+	
 	@GetMapping(value="/register")
 	public String register() {
 		return "member/register";
