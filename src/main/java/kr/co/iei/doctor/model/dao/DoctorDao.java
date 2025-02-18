@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
-
 @Repository
 public class DoctorDao {
 	@Autowired

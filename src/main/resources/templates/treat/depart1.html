@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>OO진료과 페이지</title>
+</head>
+<body>
+	안녕하세요 OO과입니다.
+	<div th:each="doctor : ${list}">
+		<span>의사: </span>
+		<span th:text="${doctor.doctorName}"></span>
+		<div>
+			<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">예약일정보기</a>
+		</div>
+	</div>
+</body>
+</html>
