@@ -60,7 +60,7 @@
                         <div class="header__right__auth">
                         	<span th:if="${session.member == null && session.doctor == null}">
 	                            <a href="/member/loginFrm">Login</a>
-	                            <a href="/member/register">Register</a>
+	                            <a href="/member/registerFrm">Register</a>
                         	</span>
                         	<span th:if="${session.member != null}">
 	                            <a href="/member/mypage" th:text="${session.member.memberId}"></a>

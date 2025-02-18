@@ -1,5 +1,7 @@
 package kr.co.iei.member.controller;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.util.EmailSender;
 
 @Controller
 @RequestMapping(value="/member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private EmailSender emailSender;
 	
 	@GetMapping(value="/loginFrm")
 	public String loginFrm() {
@@ -40,8 +45,66 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@GetMapping(value="/register")
-	public String register() {
+	@GetMapping(value="/registerFrm")
+	public String registerFrm() {
 		return "member/register";
+	}
+	
+	@PostMapping(value="member/register")
+	public String register(Member m) {
+		int r = memberService.registerMember(m);
+		return "/";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="idCheck")
+	public int idCheck(Member m) {
+		Member member = memberService.idCheck(m);
+		int r = 0;
+		if(member == null) {
+			r = 1;
+		}
+		return r;
+	}
+	
+	@PostMapping(value="/sendMail")
+	public String sendMail(String emailTitle, String receiver, String emailContent) {
+		System.out.println("제목 : "+emailTitle);
+		System.out.println("받는사람 : "+receiver);
+		System.out.println("내용 : "+emailContent);
+		
+		emailSender.sendMail(emailTitle,receiver,emailContent);
+		return "redirect:/api/email";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/sendCode")
+	public String sendCode(String memberEmail) {
+		String emailTitle = "HelpDOC 인증메일 입니다.";
+		Random r = new Random();
+		StringBuffer sb = new StringBuffer();
+		for(int i=0; i<6; i++) {
+			
+			int flag = r.nextInt(3);
+			
+			if(flag == 0) {
+				int randomCode = r.nextInt(10);
+				sb.append(randomCode);
+			}else if(flag == 1) {
+				char randomCode = (char)(r.nextInt(26)+65);
+				sb.append(randomCode);
+			}else {
+				char randomCode = (char)(r.nextInt(26)+97);
+				sb.append(randomCode);
+			}
+		}
+		String emailContent = "<h1>안녕하십니까 HelpDOC 입니다.</h1>"
+								+"<h3>귀하의 인증번호는"
+								+"[<span style='color: red;'>"
+								+sb.toString()
+								+"</span>]"
+								+"입니다.</h3>";
+		emailSender.sendMail(emailTitle, memberEmail, emailContent);
+		return sb.toString();
 	}
 }

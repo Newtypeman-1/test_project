@@ -30,4 +30,15 @@ public class MemberDao {
 			return member;
 		}
 	}
+
+	public Member idCheck(Member m) {
+		String query = "select * from member_tbl where member_id=?";
+		Object[] params = {m.getMemberId()};
+		List list = jdbc.query(query, memberRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		Member member = (Member)list.get(0);
+		return member;
+	}
 }

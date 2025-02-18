@@ -15,4 +15,14 @@ public class MemberService {
 		Member member = memberDao.selectOneMember(m);
 		return member;
 	}
+
+	public int registerMember(Member m) {
+		
+		return 0;
+	}
+
+	public Member idCheck(Member m) {
+		Member member = memberDao.idCheck(m);
+		return member;
+	}
 }
