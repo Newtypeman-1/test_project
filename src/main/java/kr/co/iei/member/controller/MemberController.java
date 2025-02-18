@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
+import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.util.EmailSender;
@@ -106,5 +108,32 @@ public class MemberController {
 								+"입니다.</h3>";
 		emailSender.sendMail(emailTitle, memberEmail, emailContent);
 		return sb.toString();
+	}
+
+	@GetMapping(value="/mypage")
+	public String memberMypage(@SessionAttribute Member member, Model model) {
+		String memberId = member.getMemberId();
+		Member m = memberService.selectOneMember(member);
+		model.addAttribute("member", m);
+		return "member/mypage";
+	}
+	
+	@PostMapping(value="/update")
+	public String update(Member m, @SessionAttribute Member member) {
+		int memberNo = member.getMemberNo();
+		m.setMemberNo(memberNo);
+		int result = memberService.updateMember(m);
+		if(result > 0) {
+			member.setMemberPw(m.getMemberPw());
+			member.setMemberPhone(m.getMemberPhone());
+			member.setMemberEmail(m.getMemberEmail());
+			return "redirect:/member/mypage";
+		}else {
+			return "redirect:/";
+		}
+	}
+	@GetMapping(value="/qna")
+	public String memberQna() {
+		return "member/qna";
 	}
 }

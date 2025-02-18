@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>예약페이지</title>
+<style>
+main{
+	overflow: hidden;
+}
+section{
+	float: left;
+}
+.sub-section{
+}
+.main-header{
+	margin: 10px;
+}
+.body-container{
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 20px;
+}
+.body-container>ul{
+	list-style: none;
+	overflow: hidden;
+}
+.body-container>ul>li{
+	float: left;
+	padding: 10px;
+}
+
+.sub-part{
+	border: 1px solid black;
+	width: 300px;
+}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main>
+		<section class="main-section">
+			<div class="main-header">
+				<h6>온라인 예약</h6>
+				<h3>진료시간 선택</h3>
+			</div>
+			<div class="main-body">
+				<div class="body-container">
+					<div class="body-header">
+						<span>
+							<img>
+						</span>
+						<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
+						<span>전문의 진료일정입니다.</span>
+					</div>
+					<ul>
+						<th:block th:each="num : ${#numbers.sequence(9, 18)}">
+							<th:block th:each="time : ${unavailableTimes}">
+								<li th:if="${num} != ${time}">
+									<a href="#" th:text="${num}"></a>
+								</li>
+							</th:block>
+						</th:block>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="sub-section">
+			<div class="sub-part">
+				<table class="member-tbl">
+					<tr>
+						<th th:text="${session.member.memberName}"></th>
+					</tr>
+					<tr>
+						<th>환자번호</th>
+						<td th:text="${session.member.memberNo}"></td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td th:text="${session.member.memberPhone}"></td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td th:text="${session.member.memberEmail}"></td>
+					</tr>
+				</table>
+				<table class="appoint-tbl">
+					<tr>
+						<th>예약하실 정보 확인</th>
+					</tr>
+					<tr>
+						<th>진료과</th>
+						<td th:text="${doctor.doctorNo}"></td>
+					</tr>
+					<tr>
+						<th>의료진</th>
+						<td th:text="${doctor.doctorName}"></td>
+					</tr>
+					<tr>
+						<th>진료일시</th>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+		</section>
+	</main>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

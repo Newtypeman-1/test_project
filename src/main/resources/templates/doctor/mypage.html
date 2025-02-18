@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>의사 내 정보</title>
+<style>
+	.page-title{
+		text-align: center;
+		padding: 30px;
+		font-size: 25px;
+	}
+	.page-menu{
+		width: 1500px;
+		margin: 0 auto;
+		overflow: hidden;
+	}	
+	.menu-title{
+		padding: 10px;
+		border: 1px solid black;
+		border-radius: 15px;
+		width: 200px;
+		float: left;
+		margin-right: 100px;
+		text-align: center;
+	}
+	.info{
+		margin: 0 auto;
+		margin-bottom: 40px;
+		width: 80%;
+		border: 1px solid black;
+		border-radius: 15px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		width: 1200px;
+		float: left;
+	}
+	.img{
+		width: 400px;
+		margin: 0 auto;
+	}
+	.intro{
+		width: 700px;
+	}
+	.intro .input>input{
+		border: none;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="page-title">내 정보</div>
+			<div class="page-menu">
+				<div class="menu-title">
+					<ul>
+						<li>마이페이지 메뉴</li>
+						<li><a href="/member/mypage">내 정보</a></li>
+						<li>내 진료 기록</li>
+						<li><a href="/member/mypage">내 문의/리뷰 기록</a></li>
+					</ul>
+				</div>
+				<div class="info">
+					<div class="img">
+						<img src="/img/백강혁.webp">
+					</div>
+					<div class="intro">
+						<form action="/doctor/update" method="post">
+							<table class="tbl">
+								<tr>
+									<th width="50%">담당과</th>
+									<td width="50%">내과</td>
+								</tr>
+								<tr>
+									<th>이름</th>
+									<td th:text="${doctor.doctorName}"></td>
+								</tr>
+								<tr>
+									<th>아이디</th>
+									<td th:text="${doctor.doctorId}"></td>
+								</tr>
+								<tr>
+									<th><label for="doctorPw">비밀번호</label></th>
+									<td>
+										<div class="input">
+											<input type="password" name="doctorPw" id="doctorPw" th:value="${doctor.doctorPw}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="doctorPhone">전화번호</label></th>
+									<td>
+										<div class="input">
+											<input type="text" name="doctorPhone" id="doctorPhone" th:value="${doctor.doctorPhone}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="doctorEmail">이메일</label></th>
+									<td>
+										<div class="input">
+											<input type="text" name="doctorEmail" id="doctorEamil" th:value="${doctor.doctorEmail}">
+										</div>
+									</td>
+								</tr>
+							</table>
+							<div class="btn">
+								<button type="submit">정보 수정</button>
+								<button type="button">회원 탈퇴</button>
+							</div>	
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
