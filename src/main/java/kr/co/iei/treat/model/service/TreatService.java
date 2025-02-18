@@ -25,8 +25,8 @@ public class TreatService {
 	}
 
 	public Doctor selectOneDoctor(int doctorNo) {
-		Doctor d = treatDao.selectOneDoctor(doctorNo);
-		return null;
+		Doctor doctor = treatDao.selectOneDoctor(doctorNo);
+		return doctor;
 	}
 
 }

@@ -25,6 +25,7 @@ public class TreatController {
 		mod.addAttribute("unavailableTimes", unavailableTimes);
 		mod.addAttribute("doctor", doctor);
 		System.out.println(unavailableTimes);
+		System.out.println(doctor);
 		return "treat/appointFrm";
 	}
 	
