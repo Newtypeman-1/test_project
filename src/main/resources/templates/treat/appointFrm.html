@@ -10,8 +10,6 @@ main{
 section{
 	float: left;
 }
-.sub-section{
-}
 .main-header{
 	margin: 10px;
 }
@@ -33,7 +31,14 @@ section{
 
 .sub-part{
 	border: 1px solid black;
-	width: 300px;
+	width: 400px;
+	padding: 10px;
+}
+.items{
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 0 10px;
+	margin: 0 auto;
 }
 </style>
 </head>
@@ -55,10 +60,13 @@ section{
 						<span>전문의 진료일정입니다.</span>
 					</div>
 					<ul>
-						<th:block th:each="num : ${#numbers.sequence(9, 18)}">
+						<th:block th:each="num, index : ${#numbers.sequence(9, 18)}">
 							<th:block th:each="time : ${unavailableTimes}">
 								<li th:if="${num} != ${time}">
-									<a href="#" th:text="${num}"></a>
+									<div class="items">
+										<span href="#" th:text="${num}"></span>
+										<span> : 00</span>
+									</div>
 								</li>
 							</th:block>
 						</th:block>
@@ -73,7 +81,7 @@ section{
 						<th th:text="${session.member.memberName}"></th>
 					</tr>
 					<tr>
-						<th>환자번호</th>
+						<th style="width:30%;">환자번호</th>
 						<td th:text="${session.member.memberNo}"></td>
 					</tr>
 					<tr>
@@ -99,13 +107,19 @@ section{
 					</tr>
 					<tr>
 						<th>진료일시</th>
-						<td></td>
+						<td id="appointTime">선택된 진료일시가 없습니다.</td>
 					</tr>
 				</table>
 			</div>
 		</section>
 	</main>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<script>
+		$(".items").on("click", function(){
+			$(".items").css("font-weight", "400");
+			$(this).css("font-weight", "bold");
+			$("#appointTime").text($(this).children().eq(0).text());
+		});
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
