@@ -26,17 +26,21 @@
 	.info{
 		margin: 0 auto;
 		margin-bottom: 40px;
-		width: 80%;
 		border: 1px solid black;
 		border-radius: 15px;
 		padding: 10px;
-		display: flex;
 		align-items: center;
 		width: 1200px;
 		float: left;
 	}
 	.page-menu>.info:last-child{
 		float: right;
+	}
+	.tbl{
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		border-bottom: 1px solid black;
 	}
 </style>
 </head>
@@ -57,36 +61,26 @@
 				<div>
 				</div>
 				<div class="info">
-					<div class="img">
-						<img src="/img/백강혁.webp">
-					</div>
-					<div class="intro">
-						<ul>
-							<li>담당과</li>
-							<li>이름</li>
-							<li>아이디</li>
-							<li>비밀번호</li>
-							<li>전화번호</li>
-							<li>이메일</li>
-							<li>주소</li>
-						</ul>
-					</div>
+					<table class="tbl">
+						<tr>
+							<th style="width:10%">문의번호</th>
+							<th style="width:40%">제목</th>
+							<th style="width:15%">답변</th>
+							<th style="width:10%">작성일</th>
+						</tr>
+						
+					</table>
 				</div>
 				<div class="info">
-					<div class="img">
-						<img src="/img/백강혁.webp">
-					</div>
-					<div class="intro">
-						<ul>
-							<li>담당과</li>
-							<li>이름</li>
-							<li>아이디</li>
-							<li>비밀번호</li>
-							<li>전화번호</li>
-							<li>이메일</li>
-							<li>주소</li>
-						</ul>
-					</div>
+					<table class="tbl">
+						<tr>
+							<!-- select review_no,review_title, reivew_star, review_date from review; -->
+							<th style="width:10%">리뷰번호</th>
+							<th style="width:40%">제목</th>
+							<th style="width:15%">별점</th>
+							<th style="width:10%">작성일</th>
+						</tr>						
+					</table>
 				</div>
 			</div>
 		</section>
