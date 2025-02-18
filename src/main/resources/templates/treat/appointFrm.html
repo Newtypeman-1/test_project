@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>예약페이지</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main>
+		<section>
+			<div>
+				<h6>온라인 예약</h6>
+				<h3>진료시간 선택</h3>
+			</div>
+			<div>
+				<div>
+					<ul>
+						<th:block th:each="num : ${#numbers.sequence(9, 18)}">
+							<th:block th:each="time : ${unavailableTimes}">
+								<th:block th:if="${num} != ${time}">
+									<p th:text="${num}"></p>
+								</th:block>
+							</th:block>
+						</th:block>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
