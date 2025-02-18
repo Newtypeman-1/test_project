@@ -27,10 +27,9 @@ public class DoctorDao {
 			return doctor;
 		}
 	}
-
 	public int updateDoctor(Doctor d) {
-		String query = "update doctor_tbl set doctor_pw = ?, doctor_phone = ?, doctor_email = ?";
-		Object[] params = {d.getDoctorPw(), d.getDoctorPhone(), d.getDoctorEmail()};
+		String query = "update doctor_tbl set doctor_pw = ?, doctor_phone = ?, doctor_email = ? where doctor_no = ?";
+		Object[] params = {d.getDoctorPw(), d.getDoctorPhone(), d.getDoctorEmail(), d.getDoctorNo()};
 		int result = jdbc.update(query, params);
 		return result;
 	}
