@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>의사 내 문의/리뷰 기록</title>
+<style>
+	.page-title{
+		text-align: center;
+		padding: 30px;
+		font-size: 25px;
+	}
+	.page-menu{
+		width: 1500px;
+		margin: 0 auto;
+		overflow: hidden;
+	}	
+	.menu-title{
+		padding: 10px;
+		border: 1px solid black;
+		border-radius: 15px;
+		width: 200px;
+		float: left;
+		margin-right: 100px;
+		text-align: center;
+	}
+	.info{
+		margin: 0 auto;
+		margin-bottom: 40px;
+		width: 80%;
+		border: 1px solid black;
+		border-radius: 15px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		width: 1200px;
+		float: left;
+	}
+	.page-menu>.info:last-child{
+		float: right;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="page-title">내 문의/리뷰 기록</div>
+			<div class="page-menu">
+				<div class="menu-title">
+					<ul>마이페이지 메뉴
+						<li>내 정보</li>
+						<li>내 진료 기록</li>
+						<li>내 문의/리뷰 기록</li>
+					</ul>
+				</div>
+				<div>
+				</div>
+				<div class="info">
+					<div class="img">
+						<img src="/img/백강혁.webp">
+					</div>
+					<div class="intro">
+						<ul>
+							<li>담당과</li>
+							<li>이름</li>
+							<li>아이디</li>
+							<li>비밀번호</li>
+							<li>전화번호</li>
+							<li>이메일</li>
+							<li>주소</li>
+						</ul>
+					</div>
+				</div>
+				<div class="info">
+					<div class="img">
+						<img src="/img/백강혁.webp">
+					</div>
+					<div class="intro">
+						<ul>
+							<li>담당과</li>
+							<li>이름</li>
+							<li>아이디</li>
+							<li>비밀번호</li>
+							<li>전화번호</li>
+							<li>이메일</li>
+							<li>주소</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

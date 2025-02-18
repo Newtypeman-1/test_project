@@ -8,12 +8,22 @@
 		width: 80%;
 		margin: 0 auto;	
 		text-align: center;
-		border: 1px solid black;
+		
 	}
 	.page-title{
 		text-align: center;
 		padding: 30px;
 		font-size: 25px;
+	}
+	.star-wrap>span{
+		color: lightgray;
+	}
+	.tbl tr>th{
+		border-right: 1px solid black;
+		background-color: gray;
+	}
+	.tbl tr>th:last-child{
+		border-right: none;;
 	}
 </style>
 </head>
@@ -31,13 +41,38 @@
 						<th style="width:10%">담당의</th>
 						<th style="width:10%">작성일</th>
 					</tr>
+					<tr>
+						<td>
+							<div class="star-wrap">
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+							</div>
+						</td>
+						<td>내용</td>
+						<td>신종인</td>
+						<td>이국종</td>
+						<td>2025-02-13</td>
+					</tr>
+					<!--
 					<tr th:each="review : ${list}">
-						<td th:text="${review.reviewWriter}"></td>
+						<td>
+							<div class="star-wrap">
+							<span class="material-icons">star_rate</span>
+							<span class="material-icons">star_rate</span>
+							<span class="material-icons">star_rate</span>
+							<span class="material-icons">star_rate</span>
+							<span class="material-icons">star_rate</span>
+							</div>
+						</td>
 						<td th:text="${review.reviewTitle}"></td>
 						<td th:text="${review.reviewWriter}"></td>
 						<td th:text="${review.reviewTitle}"></td>
 						<td th:text="${review.reviewDate}"></td>
 					</tr>
+					-->
 				</table>
 			</div>
 		</section>

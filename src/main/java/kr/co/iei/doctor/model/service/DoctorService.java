@@ -16,5 +16,10 @@ public class DoctorService {
 		return doctor;
 	}
 
+	public int updateDoctor(Doctor d) {
+		int result = doctorDao.updateDoctor(d);
+		return result;
+	}
+
 
 }
