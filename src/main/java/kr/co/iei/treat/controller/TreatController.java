@@ -36,4 +36,5 @@ public class TreatController {
 		mod.addAttribute("list", list);
 		return "treat/depart1";
 	}
+	
 }
