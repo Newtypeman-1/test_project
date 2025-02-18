@@ -57,6 +57,7 @@ public class DoctorController {
 	}
 	@GetMapping(value="/qna")
 	public String doctorQna() {
+		
 		return "/doctor/qna";
 	}
 }
