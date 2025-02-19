@@ -4,37 +4,75 @@
 <meta charset="UTF-8">
 <title>예약페이지</title>
 <style>
-main{
-	overflow: hidden;
+.appoint-main{
+	width: 80%;
+	margin: 20px auto;
+	background-color: #00387E;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
 }
-section{
-	float: left;
-}
-.main-header{
-	margin: 10px;
-}
-.body-container{
-	width: 1000px;
-	margin: 0 auto;
-	border: 1px solid black;
-	border-radius: 10px;
+.appoint-main>section{
 	padding: 20px;
 }
-.body-container>ul{
+.appoint-main-header{
+	margin-bottom: 10px;
+}
+.appoint-body-container{
+	width: 800px;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background-color: white;
+}
+.appoint-body-point{
+	text-align: center;
+	margin: 10px 0;
+	color: #00387E;
+	font-size: 14px;
+	font-weight: bold;
+}
+.appoint-body-header{
+	padding: 20px;
+}
+.appoint-today{
+	font-size: 24px;
+}
+.appoint-body-header img{
+	border-radius: 20px;
+	margin-bottom: 10px;
+}
+.appoint-body-container>ul{
 	list-style: none;
 	overflow: hidden;
+	padding: 20px;
+	margin: 10px;
+	border: 1px solid #ddd;
 }
-.body-container>ul>li{
+.appoint-body-container>ul>li{
 	float: left;
 	padding: 10px;
 }
-
-.sub-part{
-	border: 1px solid black;
-	width: 400px;
-	padding: 10px;
+.appoint-sub-section{
+	padding: 20px;
 }
-.items{
+.appoint-sub-part{
+	width: 400px;
+	height: 700px;
+	padding: 10px;
+	background-color: #0773BD;
+	color: white;
+}
+.appoint-sub-part table{
+	margin: 10px;
+}
+.appoint-sub-part table>tbody>tr{
+	border-bottom: 1px solid #2B81C1;
+}
+.appoint-sub-part th{
+	width: 30%;
+}
+.appoint-items{
 	border: 1px solid black;
 	border-radius: 20px;
 	padding: 0 10px;
@@ -43,82 +81,152 @@ section{
 </style>
 </head>
 <body>
+	<form class="appoint-form" action="/treat/appoint" method="post">
+	<!-- 진료번호, 예약일은 자동처리 -->
+	<!-- 예약시간, 결제금액, 회원번호, 의사번호 -->
+		<input type="text" name="appointTime" id="appointDate">
+		<input type="text" name="payAmount" id="appointTime">
+		<input type="text" name="payAmount" id="payAmount">
+		<input type="text" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
+		<input type="text" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
+	</form>
 	<th:block th:include="common/header"></th:block>
-	<main>
-		<section class="main-section">
-			<div class="main-header">
-				<h6>온라인 예약</h6>
-				<h3>진료시간 선택</h3>
-			</div>
-			<div class="main-body">
-				<div class="body-container">
-					<div class="body-header">
-						<span>
-							<img>
-						</span>
-						<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
-						<span>전문의 진료일정입니다.</span>
+	<main class="appoint-main">
+		<section class="appoint-main-section">
+			<div class="appoint-main-wrap">
+				<div class="appoint-main-header">
+					<h6 style="color:white;">온라인 예약</h6>
+					<h3 style="color:white;">진료시간 선택</h3>
+				</div>
+				<div class="appoint-main-body">
+					<div class="appoint-body-container">
+						<div class="appoint-body-point">진료일정</div>
+						<div class="appoint-body-header">
+							<span>
+								<img style="width:60px;" src=../img/백강혁.webp>
+							</span>
+							<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
+							<span>담당의 진료일정입니다.</span>
+							<div class="appoint-today"></div>
+						</div>
+						<ul class="appoint-ul">
+<!-- 							<th:block th:each="num : ${#numbers.sequence(9, 18)}"> -->
+<!-- 								<th:block th:each="time : ${unavailableTimes}"> -->
+<!-- 									<li th:if="${num} != ${time} && ${num}>  "> -->
+<!-- 										<div class="appoint-items"> -->
+<!-- 											<span th:text="${num}"></span> -->
+<!-- 											<span> : 00</span> -->
+<!-- 										</div> -->
+<!-- 									</li> -->
+<!-- 								</th:block> -->
+<!-- 							</th:block> -->
+						</ul>
 					</div>
-					<ul>
-						<th:block th:each="num : ${#numbers.sequence(9, 18)}">
-							<th:block th:each="time : ${unavailableTimes}">
-								<li th:if="${num} != ${time}">
-									<div class="items">
-										<span th:text="${num}"></span>
-										<span> : 00</span>
-									</div>
-								</li>
-							</th:block>
-						</th:block>
-					</ul>
 				</div>
 			</div>
 		</section>
-		<section class="sub-section">
-			<div class="sub-part">
-				<table class="member-tbl">
-					<tr>
-						<th th:text="${session.member.memberName}"></th>
-					</tr>
-					<tr>
-						<th>환자번호</th>
-						<td th:text="${session.member.memberNo}"></td>
-					</tr>
-					<tr>
-						<th>연락처</th>
-						<td th:text="${session.member.memberPhone}"></td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td th:text="${session.member.memberEmail}"></td>
-					</tr>
-				</table>
-				<table class="appoint-tbl">
-					<tr>
-						<th>예약하실 정보 확인</th>
-					</tr>
-					<tr>
-						<th>진료과</th>
-						<td th:text="${doctor.departmentNo}"></td>
-					</tr>
-					<tr>
-						<th>의료진</th>
-						<td th:text="${doctor.doctorName}"></td>
-					</tr>
-					<tr>
-						<th>진료일시</th>
-						<td id="appointTime">선택된 진료일시가 없습니다.</td>
-					</tr>
-				</table>
+		<section class="appoint-sub-section">
+			<div class="appoint-sub-part">
+					<table class="appoint-member-tbl">
+						<tr>
+							<th th:text="${session.member.memberName}"></th>
+						</tr>
+						<tr>
+							<th>환자번호</th>
+							<td th:text="${session.member.memberNo}"></td>
+						</tr>
+						<tr>
+							<th>연락처</th>
+							<td th:text="${session.member.memberPhone}"></td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td th:text="${session.member.memberEmail}"></td>
+						</tr>
+					</table>
+					<table class="appoint-appoint-tbl">
+						<tr>
+							<th>예약하실 정보 확인</th>
+						</tr>
+						<tr>
+							<th>진료과</th>
+							<td th:text="${doctor.departmentNo}"></td>
+						</tr>
+						<tr>
+							<th>의료진</th>
+							<td th:text="${doctor.doctorName}"></td>
+						</tr>
+						<tr>
+							<th>진료일시</th>
+							<td id="appoint-time">선택된 진료일시가 없습니다.</td>
+						</tr>
+					</table>
 			</div>
 		</section>
 	</main>
 	<script>
-		$(".items").on("click", function(){
-			$(".items").css("font-weight", "400");
+		let hour = 0;
+		function updateTime(){
+			const today = new Date();
+			const year = today.getFullYear() % 100;
+			const month = String(today.getMonth() + 1).padStart(2, "0");
+			const day = String(today.getDate()).padStart(2, "0");
+			
+			const week = ["일", "월", "화", "수", "목", "금", "토"];
+			const weekName = week[today.getDay()];
+			
+			hour = String(today.getHours()).padStart(2, "0");
+			const minute = String(today.getMinutes()).padStart(2, "0");
+			const second = String(today.getSeconds()).padStart(2, "0");
+			
+			const formatDate = `📆 ${year}년 ${month}월 ${day}일 (${weekName})`;
+			const inputDate = `${year}${month}${day}`;
+			const formatTime = `${hour}:${minute}:${second}`;
+			$(".appoint-today").text(formatDate + " " + formatTime);
+			$("#appointDate").val(inputDate);
+		}
+		setInterval(updateTime, 1000);
+		updateTime();
+		
+// 		<th:block th:each="num : ${#numbers.sequence(9, 18)}">
+// 			<th:block th:each="time : ${unavailableTimes}">
+// 				<li th:if="${num} != ${time} && ${num}>  ">
+// 					<div class="appoint-items">
+// 						<span th:text="${num}"></span>
+// 						<span> : 00</span>
+// 					</div>
+// 				</li>
+// 			</th:block>
+// 		</th:block>
+
+		for(let i = 9; i <= 18; i++){
+			const li = $("<li>");
+			const div = $("<div class='appoint-items'>");
+			const span = $("<span>");
+			const span2 = $("<span>");
+			div.append(span).append(span2);
+			li.append(div);
+			let timeEle = i;
+			span.text(timeEle);
+			span2.text(" : 00");
+			$(".appoint-ul").append(li);
+			if(Number(hour) + 1 >= i){
+				div.css("color", "grey");
+				div.addClass("disabled");
+			}
+		}
+		$(".appoint-items").on("click", function(){
+			if($(this).hasClass("disabled")){
+				return;
+			}
+			$(".appoint-items").css("font-weight", "400");
 			$(this).css("font-weight", "bold");
-			$("#appointTime").text($(this).children().eq(0).text());
+			$("#appoint-time").text($(this).children().eq(0).text() + " 진료");
+			$("#appoint-time").css("font-weight", "bold");
+			
+			$("#appointTime").val($(this).children().eq(0).text());
 		});
+		
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
