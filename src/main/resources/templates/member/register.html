@@ -50,11 +50,20 @@
 		        </div>
 				<div class="input">
 					<div class="input-name">
-						<label for="memberPwRe">비밀번호 확인</label>
+						<label for="memberPwRe">비밀번호 확인*</label>
 						<span id="pwReCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" class="essen" name="memberPwRe" id="memberPwRe">
+					</div>
+				</div>
+				<div class="input">
+					<div class="input-name">
+						<label for="memberName">이름*</label>
+						<span id="nameCheckMsg"></span>
+					</div>
+					<div class="input-item">
+						<input type="text" class="essen" name="memberName" id="memberName">
 					</div>
 				</div>
 				<div class="input">
@@ -137,6 +146,9 @@
 						<button type="button"><a href="/">취소</a></button>
 					</div>
 				</div>
+				<div>
+					<span id="registCheckMsg"></span>
+				</div>
 			</form>
 		</section>
 	</main>
@@ -150,25 +162,32 @@
 			const memberId = $("#memberId").val();
 			const icm = $("#idCheckMsg");
 			icm.removeClass("invalid").removeClass("valid").text("");
-			$.ajax({
-				url: "/member/idCheck",
-				type: "get",
-				data: {memberId: memberId},
-				success: function(e){
-					if(e === 1){
-						icm.text("사용 가능한 아이디 입니다.")
-						icm.addClass("valid");
-						essen.eq(0).addClass("correct");
-					}else {
-						icm.text("사용 할 수 없는 아이디 입니다.")
-						icm.addClass("invalid");
-						essen.eq(0).removeClass("correct");
+			const regExp = /^[a-zA-Z0-9]{5,20}$/;
+			if(regExp.test(memberId)){
+				$.ajax({
+					url: "/member/idCheck",
+					type: "get",
+					data: {memberId: memberId},
+					success: function(e){
+						if(e === 1){
+							icm.text("사용 가능한 아이디 입니다.")
+							icm.addClass("valid");
+							essen.eq(0).addClass("correct");
+						}else {
+							icm.text("사용 할 수 없는 아이디 입니다.")
+							icm.addClass("invalid");
+							essen.eq(0).removeClass("correct");
+						}
+					},
+					error: function(){
+						console.log("에러");
 					}
-				},
-				error: function(){
-					console.log("에러");
-				}
-			});
+				});
+			}else{
+				icm.text("최소 아이디는 5자 입니다.")
+				icm.addClass("invalid");
+				essen.eq(0).removeClass("correct");
+			}
 			allCorrect();
 		});
 		
@@ -240,6 +259,23 @@
 			allCorrect();
 		});
 		
+		//이름 확인
+		$("#memberName").on("focusout", function(){
+			const nameV = $("#memberName").val();
+			const nameMsg = $("#nameCheckMsg");
+			const regExp1 = /^[가-힣]{1,10}$/;
+			const regExp2 = /^[a-zA-Z]{1,30}$/;
+			if(regExp1.test(nameV) || regExp2.test(nameV)){
+				nameMsg.removeClass("invalid");
+				nameMsg.addClass("valid").text("이름 입력이 완료되었습니다.");
+				essen.eq(3).addClass("correct");
+			}else{
+				nameMsg.removeClass("valid");
+				nameMsg.addClass("invalid").text("이름을 입력해 주세요.");
+				essen.eq(3).removeClass("correct");
+			}
+		});
+		
 		//전화번호 확인
 		$("#memberPhone").on("focusout", function(){
 			const phoneV = $("#memberPhone").val();
@@ -248,11 +284,11 @@
 			if(!regExp.test(phoneV)){
 				phoneMsg.removeClass("valid").text("");
 				phoneMsg.addClass("invalid").text("올바른 전화번호를 입력해주세요.");
-				essen.eq(3).removeClass("correct");
+				essen.eq(4).removeClass("correct");
 			}else {
 				phoneMsg.removeClass("invalid").text("");
 				phoneMsg.addClass("valid").text("완료되었습니다.");
-				essen.eq(3).addClass("correct");
+				essen.eq(4).addClass("correct");
 			}
 			allCorrect();
 		});
@@ -296,10 +332,10 @@
 				$(".emailAuth").prop("disabled", true);
 				$(".emailCheck").prop("disabled", true);
 				$("#time-zone").remove();
-				essen.eq(4).addClass("correct");
+				essen.eq(5).addClass("correct");
 			}else {
 				authMsg.addClass("invalid").text("인증번호가 다릅니다.");
-				essen.eq(4).removeClass("correct");
+				essen.eq(5).removeClass("correct");
 			}
 			allCorrect();
 		});
@@ -333,7 +369,7 @@
 		};
 		
 		$("[type=radio]").on("change", function(){
-			essen.eq(5).addClass("correct");
+			essen.eq(6).addClass("correct");
 			allCorrect();
 		});
 		
@@ -344,10 +380,10 @@
 			const allCheck = allAgree.is(":checked");
 			if(allCheck){
 				agree.prop("checked", true);
-				essen.eq(6).addClass("correct");
+				essen.eq(7).addClass("correct");
 			}else {
 				agree.prop("checked", false);
-				essen.eq(6).removeClass("correct");
+				essen.eq(7).removeClass("correct");
 			}
 			allCorrect();
 		});
@@ -356,19 +392,26 @@
 			const agreeCheckCount = $("[name=agree]:checked").length;
 			if(agreeCount === agreeCheckCount){
 				allAgree.prop("checked", true);
-				essen.eq(6).addClass("correct");
+				essen.eq(7).addClass("correct");
 			}else{
 				allAgree.prop("checked", false);
-				essen.eq(6).removeClass("correct");
+				essen.eq(7).removeClass("correct");
 			}
 			allCorrect();
 		});
 		function allCorrect(){
 			const all = $(".correct").length;
-			if(all === 7){
+			if(all === 8){
 				$(".regist").prop("disabled", false);
 			}
 		};
+		$(".regist").on("click", function(){
+			const correctCheck = $(".regist").is(":disabled");
+			let registCorrectCheck = $("#registCheckMsg");
+			if(correctCheck){
+				registCorrectCheck.text("모든 *를 올바르게 입력해 주세요.")
+			}
+		})
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

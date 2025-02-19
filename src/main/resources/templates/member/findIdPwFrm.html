@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Help DOC - 로그인</title>
+<title>Help DOC - 아이디 / 비밀번호 찾기</title>
 <style>
 .section{
     width: 800px;
@@ -51,69 +51,53 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="member-login section">
+		<section class="member-findIdPw section">
 			<div class="tab">
-	            <div>회원 로그인</div>
-	            <div>직원 로그인</div>
+	            <div>아이디 찾기</div>
+	            <div>비밀번호 찾기</div>
 	        </div>
 	        <div class="tab-content">
 	        	<div>
-					<form action="/member/login" method="post" autocomplete="off">
-						<div class="input">
-							<div class="input-name nameId">
-								<span for="memberId">아이디</span>
-							</div>
-							<div class="input-item">
-								<input type="text" class="memberId" name="memberId" id="memberId">
-							</div>
-						</div>
+					<form action="/member/findId" method="post" autocomplete="off">
 						<div class="input">
 							<div class="input-name">
-								<span for="memberPw">비밀번호</span>
+								<span for="memberEmail">이메일</span>
 							</div>
 							<div class="input-item">
-								<input type="text" class="memberPw" name="memberPw" id="memberPw">
+								<input type="text" name="memberEmail" id="memberEmail">
 							</div>
 						</div>
 						<div class="wrong">
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="member-submit">로그인</button>
-						</div>
-						<div class="sub">
-							<a href="/member/registerFrm">회원가입</a>
-							<a href="/member/findIdPwFrm">아이디 / 비밀번호 찾기</a>
+							<button type="submit" id="member-submit">이메일 전송</button>
 						</div>
 					</form>
 	        	</div>
 		        <div>
-					<form action="/doctor/login" method="post" autocomplete="off">
+					<form action="/member/findPw" method="post" autocomplete="off">
 						<div class="input">
 							<div class="input-name">
-								<span for="doctorId">아이디</span>
+								<span for="memberId">아이디</span>
 							</div>
 							<div class="input-item">
-								<input type="text" class="doctorId" name="doctorId" id="doctorId">
+								<input type="text" name="memberId" id="memberId">
 							</div>
 						</div>
 						<div class="input">
 							<div class="input-name">
-								<span for="doctorPw">비밀번호</span>
+								<span for="memberEmail">이메일</span>
 							</div>
 							<div class="input-item">
-								<input type="text" class="doctorPw" name="doctorPw" id="doctorPw">
+								<input type="text" name="memberEmail" id="memberEmail">
 							</div>
 						</div>
 						<div class="wrong">
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="doctor-submit">로그인</button>
-						</div>
-						<div class="sub">
-							<a href="/member/findIdPw">아이디 / 비밀번호 찾기</a>
-						</div>
+							<button type="submit" id="doctor-submit">이메일 전송</button>
 					</form>
 		        </div>
 	        </div>
@@ -137,36 +121,7 @@
 		});
 		tabs[0].classList.add("active-tab");
 		contents[0].classList.add("active-content");
-		
-		$("#member-submit").on("click", function(){
-			const wm = $(".wrong-message");
-			const idV = $("#memberId").val();
-			const pwV = $("#memberPw").val();
-			const id = $("#memberId");
-			const pw = $("#memberPw");
-			if(idV === ""){
-				wm.text("아아디를 입력해주세요.");
-				id.focus();
-			}else if(pwV === ""){
-				wm.text("비밀번호를 입력해주세요.");
-				pw.focus();
-			}
-		})
-		$("#doctor-submit").on("click", function(){
-			const wm = $(".wrong-message");
-			const idV = $("#doctorId").val();
-			const pwV = $("#doctorPw").val();
-			const id = $("#doctorId");
-			const pw = $("#doctorPw");
-			if(idV === ""){
-				wm.text("아아디를 입력해주세요.");
-				id.focus();
-			}else if(pwV === ""){
-				wm.text("비밀번호를 입력해주세요.");
-				pw.focus();
-			}
-		})
 	</script>
-	<th:block th:include="common/footer"></th:block>
+	<th:block th:include="common/header"></th:block>
 </body>
 </html>
