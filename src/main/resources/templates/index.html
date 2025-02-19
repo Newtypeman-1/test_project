@@ -58,19 +58,15 @@
 	width: 1200px;
 	display: flex;
 	justify-content: center;
-	margin: 0 auto;
+	margin: 50px auto;
 }
 .boards-box>div{
-	float: left;
 	position: relative;
 	border: 1px solid black;
 	border-radius: 20px;
-	margin: 10px;
+	margin: 20px;
 	padding: 20px;
 	background-color: white;
-}
-.boards-box>div>div{
-	width: 500px;
 }
 .more-btn{
 	position: absolute;
@@ -86,17 +82,15 @@
 	background-color: #ccc;
 	width: 500px;
 }
-.board-content li a>:first-child{
+.board-content a{
+	display: flex;
+	justify-content: space-between;
+}
+.board-content>li>a>:first-child{
 	width: 350px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-.notice-title{
-	width: 400px;
-}
-.notice-date{
-	float: right;
 }
 </style>
 </head>
