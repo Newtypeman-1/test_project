@@ -150,7 +150,6 @@
 			const memberId = $("#memberId").val();
 			const icm = $("#idCheckMsg");
 			icm.removeClass("invalid").removeClass("valid").text("");
-			console.log(essen.eq(0).val());
 			$.ajax({
 				url: "/member/idCheck",
 				type: "get",
@@ -366,7 +365,6 @@
 		});
 		function allCorrect(){
 			const all = $(".correct").length;
-			console.log(all);
 			if(all === 7){
 				$(".regist").prop("disabled", false);
 			}
