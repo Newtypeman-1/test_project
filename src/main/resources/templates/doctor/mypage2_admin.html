@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>의사 내 정보</title>
+<title>회원 내 정보</title>
 <style>
 	.page-title{
 		text-align: center;
@@ -99,16 +99,8 @@
 						<form action="/doctor/update" method="post">
 							<table class="tbl">
 								<tr>
-									<th width="50%">담당과</th>
-									<td width="50%">내과</td>
-								</tr>
-								<tr>
-									<th>이름</th>
-									<td th:text="${doctor.doctorName}"></td>
-								</tr>
-								<tr>
-									<th>아이디</th>
-									<td th:text="${doctor.doctorId}"></td>
+									<th width="50%">아이디</th>
+									<td width="50%" th:text="${doctor.doctorId}"></td>
 								</tr>
 								<tr>
 									<th><label for="doctorPw">비밀번호</label></th>
@@ -118,6 +110,10 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+									<th>이름</th>
+									<td th:text="${doctor.doctorName}"></td>
+								</tr>								
 								<tr>
 									<th><label for="doctorPhone">전화번호</label></th>
 									<td>
@@ -130,15 +126,14 @@
 									<th><label for="doctorEmail">이메일</label></th>
 									<td>
 										<div class="input">
-											<input type="text" name="doctorEmail" id="doctorEamil" th:value="${doctor.doctorEmail}">
+											<input type="text" name="doctorEmail" id="doctorEmail" th:value="${doctor.doctorEmail}">
 										</div>
 									</td>
 								</tr>
 							</table>
 							<div class="btn">
 								<button type="submit">정보 수정</button>
-								<button type="button">회원 탈퇴</button>
-								<a th:if="${doctor.doctorId == 'admin'}" href="/admin/mainPage">관리자페이지</a>
+								<button type="button" class="del">회원 탈퇴</button>
 							</div>	
 						</form>
 					</div>
@@ -147,5 +142,10 @@
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
+	<script>
+		$(".del").on("click",function(){
+			
+		});
+	</script>
 </body>
 </html>
