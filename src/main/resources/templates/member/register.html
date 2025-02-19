@@ -71,9 +71,9 @@
 						<label for="memberEmail">이메일*</label>
 					</div>
 					<div class="input-item">
-						<input type="text" class="essen" name="memberEmail" id="memberEmail">
+						<input type="text" name="memberEmail" id="memberEmail">
 						@
-						<input type="text" class="essen" name="com1" id="com1">
+						<input type="text" name="com1" id="com1">
 						<select name="com2" id="com2">
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
@@ -110,25 +110,25 @@
 				</div>
 				<div class="input">
 					<div class="input-name">
-						<span for="agree">약관*</span>
+						<span>약관*</span>
 					</div>
 					<div>
 						<input type="text" readonly>
 					</div>
 					<div class="input-item">
-						<input type="checkbox" class="essen" name="agree1" id="agree1">
-						<label for="agree">동의</label>
+						<input type="checkbox" name="agree" id="agree1">
+						<label for="agree1">동의</label>
 					</div>
 					<div>
 						<input type="text" readonly>
 					</div>
 					<div class="input-item">
-						<input type="checkbox" class="essen" name="agree2" id="agree2">
-						<label for="agree">동의</label>
+						<input type="checkbox" name="agree" id="agree2">
+						<label for="agree2">동의</label>
 					</div>
 					<div class="input-item">
-						<input type="checkbox" name="agree3" id="agree3">
-						<label for="agree">모든 약관에 동의</label>
+						<input type="checkbox" class="essen" id="all-agree">
+						<label for="all-agree">모든 약관에 동의</label>
 					</div>
 				</div>
 				<div class="input">
@@ -141,10 +141,9 @@
 		</section>
 	</main>
 	<script>
-		$(window).on("load", function(){
-			$(".regist").prop("disabled", true);
-			$(".msg").hide();
-		});
+		$(".regist").prop("disabled", true);
+		$(".msg").hide();
+		const essen = $(".essen");
 		
 		//아이디 조건
 		$(".idCheck").on("click", function(){
@@ -156,25 +155,112 @@
 				type: "get",
 				data: {memberId: memberId},
 				success: function(e){
-					console.log(e);
 					if(e === 1){
 						icm.text("사용 가능한 아이디 입니다.")
 						icm.addClass("valid");
+						essen.eq(0).addClass("correct");
 					}else {
 						icm.text("사용 할 수 없는 아이디 입니다.")
 						icm.addClass("invalid");
+						essen.eq(0).removeClass("correct");
 					}
 				},
 				error: function(){
 					console.log("에러");
 				}
 			});
+			allCorrect();
 		});
 		
+		$("#memberPw").on("keyup", function(){
+		    const pwValue = $("#memberPw").val();
+		    const regArr = [
+		        /^.{8,12}$/,
+		        /[A-Z]/,
+		        /[a-z]/,
+		        /[0-9]/,
+		        /[!@#$%]/
+		    ];
+		    for(let i=0; i<regArr.length; i++){
+		        const check = regArr[i].test(pwValue);
+		        if(check){
+		            $(".msg>div").eq(i).addClass("valid");
+		        }else{
+		            $(".msg>div").eq(i).removeClass("valid");
+		        }
+		    }
+		});
+		let pwMsg = $("#pwCheckMsg");
+		$("#memberPw").on("focus", function(){
+			$(".msg").show();
+		});
+		
+		//비밀번호 조건
+		$("#memberPw").on("focusout", function(){
+			const eq0 = $(".msg>div").eq(0);
+			const eq1 = $(".msg>div").eq(1);
+			const eq2 = $(".msg>div").eq(2);
+			const eq3 = $(".msg>div").eq(3);
+			const eq4 = $(".msg>div").eq(4);
+			if(eq0.hasClass("valid") && eq1.hasClass("valid") && eq2.hasClass("valid") && eq3.hasClass("valid") && eq4.hasClass("valid")){
+				pwMsg.removeClass("invalid").text("");
+				pwMsg.addClass("valid").text("올바른 비밀번호 입니다.");
+				essen.eq(1).addClass("correct");
+			}else {
+				pwMsg.removeClass("valid").text("");
+				pwMsg.addClass("invalid").text("비밀번호 조건을 확인해 주세요.");
+				essen.eq(1).removeClass("correct");
+			}
+			$(".msg").hide();
+			const pwV = $("#memberPw").val();
+			const pwReV = $("#memberPwRe").val();
+			const pwReMsg = $("#pwReCheckMsg");
+			if(pwV === pwReV && pwReV !== ""){
+				pwReMsg.removeClass("invalid");
+				pwReMsg.addClass("valid").text("비밀번호와 일치합니다.");
+				essen.eq(2).addClass("correct");
+			}
+			allCorrect();
+		});
+		
+		//비밀번호 확인 조건
+		$("#memberPwRe").on("focusout", function(){
+			const pwV = $("#memberPw").val();
+			const pwReV = $("#memberPwRe").val();
+			const pwReMsg = $("#pwReCheckMsg");
+			if(pwV === pwReV && pwReV !== ""){
+				pwReMsg.removeClass("invalid");
+				pwReMsg.addClass("valid").text("비밀번호와 일치합니다.");
+				essen.eq(2).addClass("correct");
+			}else {
+				pwReMsg.removeClass("valid");
+				pwReMsg.addClass("invalid").text("비밀번호와 일치해야 합니다.");
+				essen.eq(2).removeClass("correct");
+			}
+			allCorrect();
+		});
+		
+		//전화번호 확인
+		$("#memberPhone").on("focusout", function(){
+			const phoneV = $("#memberPhone").val();
+			const phoneMsg = $("#phoneCheckMsg");
+			const regExp = /^01([0|1|6|7|8|9]?)-([0-9]{4})-([0-9]{4})$/;
+			if(!regExp.test(phoneV)){
+				phoneMsg.removeClass("valid").text("");
+				phoneMsg.addClass("invalid").text("올바른 전화번호를 입력해주세요.");
+				essen.eq(3).removeClass("correct");
+			}else {
+				phoneMsg.removeClass("invalid").text("");
+				phoneMsg.addClass("valid").text("완료되었습니다.");
+				essen.eq(3).addClass("correct");
+			}
+			allCorrect();
+		});
 		$("#com2").on("change", function(){
 			const it = $("#com2").val();
 			const com = $("#com1").val(it);
 		});
+		
 		//이메일 조건 1
 		let mailCode = null;
 		$(".emailCheck").on("click", function(){
@@ -210,9 +296,12 @@
 				$(".emailAuth").prop("disabled", true);
 				$(".emailCheck").prop("disabled", true);
 				$("#time-zone").remove();
+				essen.eq(4).addClass("correct");
 			}else {
 				authMsg.addClass("invalid").text("인증번호가 다릅니다.");
+				essen.eq(4).removeClass("correct");
 			}
+			allCorrect();
 		});
 		let intervalid = null;
 		function authTime(){
@@ -243,72 +332,43 @@
 			},1000);
 		};
 		
-		$("#memberPw").on("keyup", function(){
-		    const pwValue = $("#memberPw").val();
-		    const regArr = [
-		        /^.{8,12}$/,
-		        /[A-Z]/,
-		        /[a-z]/,
-		        /[0-9]/,
-		        /[!@#$%]/
-		    ];
-		    for(let i=0; i<regArr.length; i++){
-		        const check = regArr[i].test(pwValue);
-		        if(check){
-		            $(".msg>div").eq(i).addClass("valid");
-		        }else{
-		            $(".msg>div").eq(i).removeClass("valid");
-		        }
-		    }
+		$("[type=radio]").on("change", function(){
+			essen.eq(5).addClass("correct");
+			allCorrect();
 		});
-		let pwMsg = $("#pwCheckMsg");
-		$("#memberPw").on("focus", function(){
-			$(".msg").show();
-		});
-		//비밀번호 조건
-		$("#memberPw").on("focusout", function(){
-			const eq1 = $(".msg>div").eq(1);
-			const eq2 = $(".msg>div").eq(2);
-			const eq3 = $(".msg>div").eq(3);
-			const eq4 = $(".msg>div").eq(4);
-			const eq5 = $(".msg>div").eq(5);
-			if(eq1.hasClass("valid") && eq2.hasClass("valid") && eq3.hasClass("valid") && eq4.hasClass("valid") && eq5.hasClass("valid")){
-				pwMsg.removeClass("invalid").text("");
-				pwMsg.addClass("valid").text("올바른 비밀번호 입니다.");
+		
+		//동의 확인
+		const allAgree = $("#all-agree");
+		const agree = $("[name=agree]");
+		allAgree.on("click", function(){
+			const allCheck = allAgree.is(":checked");
+			if(allCheck){
+				agree.prop("checked", true);
+				essen.eq(6).addClass("correct");
 			}else {
-				pwMsg.removeClass("valid").text("");
-				pwMsg.addClass("invalid").text("비밀번호 조건을 확인해 주세요.");
+				agree.prop("checked", false);
+				essen.eq(6).removeClass("correct");
 			}
-			$(".msg").hide();
+			allCorrect();
 		});
-		//비밀번호 확인 조건
-		$("#memberPwRe").on("focusout", function(){
-			const pwV = $("#memberPw").val();
-			const pwReV = $("#memberPwRe").val();
-			const pwReMsg = $("#pwReCheckMsg");
-			if(pwV === pwReV && pwReV !== ""){
-				pwReMsg.removeClass("invalid");
-				pwReMsg.addClass("valid").text("비밀번호와 일치합니다.");
-			}else {
-				pwReMsg.removeClass("valid");
-				pwReMsg.addClass("invalid").text("비밀번호와 일치해야 합니다.");
+		agree.on("click", function(){
+			const agreeCount = agree.length;
+			const agreeCheckCount = $("[name=agree]:checked").length;
+			if(agreeCount === agreeCheckCount){
+				allAgree.prop("checked", true);
+				essen.eq(6).addClass("correct");
+			}else{
+				allAgree.prop("checked", false);
+				essen.eq(6).removeClass("correct");
 			}
+			allCorrect();
 		});
-		$("#memberPhone").on("focusout", function(){
-			const phoneV = $("memberPhone").val();
-			const phoneMsg = $("#phoneCheckMsg");
-			const regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
-			if(phoneV === ""){
-				phoneMsg.removeClass("valid").text("");
-				phoneMsg.addClass("invalid").text("전화번호를 입력해주세요.");
-			}else if(!regExp.test(phoneV)){
-				phoneMsg.removeClass("valid").text("");
-				phoneMsg.addClass("invalid").text("올바른 전화번호를 입력해주세요.");
-			}else {
-				phoneMsg.removeClass("invalid").text("");
-				phoneMsg.addClass("valid").text("완료되었습니다.");
+		function allCorrect(){
+			const all = $(".correct").length;
+			if(all === 7){
+				$(".regist").prop("disabled", false);
 			}
-		});
+		};
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

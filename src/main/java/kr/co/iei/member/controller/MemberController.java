@@ -34,7 +34,11 @@ public class MemberController {
 	public String login(Member m, Model model, HttpSession session) {
 		Member member = memberService.selectOneMember(m);
 		if(member == null) {
-			return "redirect:/";
+			model.addAttribute("title","로그인 실패");
+			model.addAttribute("text","아이디 또는 비밀번호를 확인하세요.");
+			model.addAttribute("icon","error");
+			model.addAttribute("loc", "/member/loginFrm");
+			return "common/msg";
 		}else {
 			session.setAttribute("member", member);
 			return "redirect:/";
