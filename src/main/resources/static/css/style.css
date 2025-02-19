@@ -317,11 +317,17 @@ ol {
 -----------------------*/
 
 .header {
+	position: fixed;
+}
+
+.header:hover{
 	background: #ffffff;
 	-webkit-box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 	box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 }
-
+.main{
+	padding-top: 200px;
+}
 .header__logo {
 	padding: 0;
 }
@@ -332,7 +338,6 @@ ol {
 
 .header__logo img{
 	object-fit: cover;
-	width: 40%;
 }
 
 .header__menu {
