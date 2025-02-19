@@ -14,6 +14,81 @@
 		border: 1px solid black;
 		width: 200px;
 	}
+	.title{
+		display: flex;
+		justify-content: center;
+		font-size: 30px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		color: rgba(0,153,153,0.5);
+		font-weight: 900;
+	}
+.section{
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+.input{
+		margin-bottom: 10px;
+	}
+	.input-name{
+		color: rgba(0,153,153,0.5);
+		font-weight: 900;
+		margin-bottom: 5px;
+	}
+	.input-item {
+		display: flex;
+		gap: 10px;
+	}
+	.input-item > input {
+		flex: 1;
+		font-size: 16px;
+		line-height: 1.5;
+		border: 3px solid transparent;
+		border-bottom: 3px solid rgba(0,153,153,0.5);
+		padding: 8px 0px;
+		text-indent: 2%;
+		
+	}
+	.input-item> input:focus{
+		border: 3px solid rgba(0,153,153,0.5);
+		border-radius: 10px;
+	}
+	.input-item span{
+		font-size: 20px;
+		align-items: center;
+	}
+	div>button{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		font-weight: 900;
+		height: 40px;
+		background-color: rgba(0,153,153,0.5);
+		color: #fff;
+		cursor: pointer;
+		border: none;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	div>button:hover{
+		box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
+	}
+	#genderBox{
+		line-height: 45px;
+		text-align: center;
+		color: rgba(0,153,153,0.5);
+		border: 3px solid rgba(0,153,153,0.5);
+		font-weight: 900;
+		width: calc(100% / 2);
+		gap: 0px;
+		height: 50px;
+		cursor: pointer;
+	}
+	.terms-page{
+		border: 3px solid rgba(0,153,153,0.5);
+		border-radius: 10px;
+		padding: 10px;
+	}
 </style>
 </head>
 <body>
@@ -81,7 +156,7 @@
 					</div>
 					<div class="input-item">
 						<input type="text" name="memberEmail" id="memberEmail">
-						@
+						<span>@</span>
 						<input type="text" name="com1" id="com1">
 						<select name="com2" id="com2">
 							<option value="">직접입력</option>
@@ -111,10 +186,10 @@
 						<label for="memberGender">성별*</label>
 					</div>
 					<div class="input-item essen">
-						<input type="radio" name="memberGender" id="man" value="남">
-						<label for="man">남자</label>
-						<input type="radio" name="memberGender" id="woman" value="여">
-						<label for="woman">여자</label>
+						<input type="radio" name="memberGender" id="man" value="남" hidden>
+						<label for="man" id="genderBox">남자</label>
+						<input type="radio" name="memberGender" id="woman" value="여" hidden>
+						<label for="woman" id="genderBox">여자</label>
 					</div>
 				</div>
 				<div class="input">
@@ -122,14 +197,18 @@
 						<span>약관*</span>
 					</div>
 					<div>
-						<input type="text" readonly>
+						<div class="terms-page">
+							아주 긴 장문의 약관
+						</div>
 					</div>
 					<div class="input-item">
 						<input type="checkbox" name="agree" id="agree1">
 						<label for="agree1">동의</label>
 					</div>
 					<div>
-						<input type="text" readonly>
+						<div class="terms-page">
+							아주 긴 장문의 약관
+						</div>
 					</div>
 					<div class="input-item">
 						<input type="checkbox" name="agree" id="agree2">

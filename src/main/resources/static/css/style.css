@@ -337,7 +337,7 @@ ol {
 }
 
 .header__logo img{
-	object-fit: cover;
+	/* object-fit: cover; */
 }
 
 .header__menu {
@@ -3693,4 +3693,5 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
+	
 }
