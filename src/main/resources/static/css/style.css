@@ -318,6 +318,7 @@ ol {
 
 .header {
 	position: fixed;
+	z-index: 1;
 }
 
 .header:hover{
