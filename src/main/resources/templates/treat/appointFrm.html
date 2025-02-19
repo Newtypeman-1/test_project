@@ -17,7 +17,7 @@ section{
 	width: 1000px;
 	margin: 0 auto;
 	border: 1px solid black;
-	border-radius: 20px;
+	border-radius: 10px;
 	padding: 20px;
 }
 .body-container>ul{
@@ -81,7 +81,7 @@ section{
 						<th th:text="${session.member.memberName}"></th>
 					</tr>
 					<tr>
-						<th style="width:30%;">환자번호</th>
+						<th>환자번호</th>
 						<td th:text="${session.member.memberNo}"></td>
 					</tr>
 					<tr>
@@ -99,7 +99,7 @@ section{
 					</tr>
 					<tr>
 						<th>진료과</th>
-						<td th:text="${doctor.doctorNo}"></td>
+						<td th:text="${doctor.departmentNo}"></td>
 					</tr>
 					<tr>
 						<th>의료진</th>
