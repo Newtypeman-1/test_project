@@ -13,7 +13,6 @@
 	.msg{
 		border: 1px solid black;
 		width: 200px;
-		display: none;
 	}
 </style>
 </head>
@@ -61,6 +60,7 @@
 				<div class="input">
 					<div class="input-name">
 						<label for="memberPhone">전화번호*</label>
+						<span id="phoneCheckMsg"></span>
 					</div>
 					<div class="input-item">
 						<input type="text" class="essen" name="memberPhone" id="memberPhone">
@@ -141,6 +141,12 @@
 		</section>
 	</main>
 	<script>
+		$(window).on("load", function(){
+			$(".regist").prop("disabled", true);
+			$(".msg").hide();
+		});
+		
+		//아이디 조건
 		$(".idCheck").on("click", function(){
 			const memberId = $("#memberId").val();
 			const icm = $("#idCheckMsg");
@@ -169,7 +175,7 @@
 			const it = $("#com2").val();
 			const com = $("#com1").val(it);
 		});
-		
+		//이메일 조건 1
 		let mailCode = null;
 		$(".emailCheck").on("click", function(){
 			const email1 = $("#memberEmail").val();
@@ -187,6 +193,7 @@
 				});
 			}
 		});
+		//이메일 조건 2
 		$(".emailAuth").on("click", function(){
 			const memberAuth = $("#memberAuth").val();
 			let authMsg = $("#authMsg");
@@ -235,9 +242,7 @@
 				}
 			},1000);
 		};
-		$(window).on("load", function(){
-			$(".regist").prop("disabled", true);
-		});
+		
 		$("#memberPw").on("keyup", function(){
 		    const pwValue = $("#memberPw").val();
 		    const regArr = [
@@ -255,10 +260,12 @@
 		            $(".msg>div").eq(i).removeClass("valid");
 		        }
 		    }
-		})
-		$("#memberPw").on("focusout", function(){
+		});
+		let pwMsg = $("#pwCheckMsg");
+		$("#memberPw").on("focus", function(){
 			$(".msg").show();
-		}
+		});
+		//비밀번호 조건
 		$("#memberPw").on("focusout", function(){
 			const eq1 = $(".msg>div").eq(1);
 			const eq2 = $(".msg>div").eq(2);
@@ -266,7 +273,40 @@
 			const eq4 = $(".msg>div").eq(4);
 			const eq5 = $(".msg>div").eq(5);
 			if(eq1.hasClass("valid") && eq2.hasClass("valid") && eq3.hasClass("valid") && eq4.hasClass("valid") && eq5.hasClass("valid")){
-				$("#pwCheckMsg").text();
+				pwMsg.removeClass("invalid").text("");
+				pwMsg.addClass("valid").text("올바른 비밀번호 입니다.");
+			}else {
+				pwMsg.removeClass("valid").text("");
+				pwMsg.addClass("invalid").text("비밀번호 조건을 확인해 주세요.");
+			}
+			$(".msg").hide();
+		});
+		//비밀번호 확인 조건
+		$("#memberPwRe").on("focusout", function(){
+			const pwV = $("#memberPw").val();
+			const pwReV = $("#memberPwRe").val();
+			const pwReMsg = $("#pwReCheckMsg");
+			if(pwV === pwReV && pwReV !== ""){
+				pwReMsg.removeClass("invalid");
+				pwReMsg.addClass("valid").text("비밀번호와 일치합니다.");
+			}else {
+				pwReMsg.removeClass("valid");
+				pwReMsg.addClass("invalid").text("비밀번호와 일치해야 합니다.");
+			}
+		});
+		$("#memberPhone").on("focusout", function(){
+			const phoneV = $("memberPhone").val();
+			const phoneMsg = $("#phoneCheckMsg");
+			const regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+			if(phoneV === ""){
+				phoneMsg.removeClass("valid").text("");
+				phoneMsg.addClass("invalid").text("전화번호를 입력해주세요.");
+			}else if(!regExp.test(phoneV)){
+				phoneMsg.removeClass("valid").text("");
+				phoneMsg.addClass("invalid").text("올바른 전화번호를 입력해주세요.");
+			}else {
+				phoneMsg.removeClass("invalid").text("");
+				phoneMsg.addClass("valid").text("완료되었습니다.");
 			}
 		});
 	</script>
