@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.treat.model.service.TreatService;
+import kr.co.iei.treat.model.vo.Treat;
 
 @Controller
 @RequestMapping(value="/treat")
@@ -19,12 +22,9 @@ public class TreatController {
 	private TreatService treatService;
 	
 	@GetMapping(value="/appointFrm")
-	public String getAvailableTimes(int doctorNo, Model mod) {
-		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
+	public String appointFrm(int doctorNo, Model mod) {
 		Doctor doctor = treatService.selectOneDoctor(doctorNo);
-		mod.addAttribute("unavailableTimes", unavailableTimes);
 		mod.addAttribute("doctor", doctor);
-		System.out.println(unavailableTimes);
 		System.out.println(doctor);
 		return "treat/appointFrm";
 	}
@@ -37,4 +37,33 @@ public class TreatController {
 		return "treat/depart1";
 	}
 	
+	@GetMapping(value="/allDepart")
+	public String allDepart() {
+		return "treat/allDepart";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/getTimes")
+	public List<Integer> getTimes(int doctorNo){
+		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
+		return unavailableTimes;
+	}
+	
+	@PostMapping(value="/appoint")
+	public String appoint(Treat t, Model mod) {
+		int result = treatService.insertTreatment(t);
+		if(result == 1) {
+			mod.addAttribute("title", "예약 완료");
+			mod.addAttribute("text", "진료가 예약되었습니다.");
+			mod.addAttribute("icon", "success");
+			mod.addAttribute("loc", "/member/mypage");
+			return "common/msg";
+		}else {
+			mod.addAttribute("title", "알 수 없는 오류");
+			mod.addAttribute("text", "메인 페이지로 이동합니다.");
+			mod.addAttribute("icon", "error");
+			mod.addAttribute("loc", "/");
+			return "common/msg";
+		}
+	}
 }

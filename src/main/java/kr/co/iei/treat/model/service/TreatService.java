@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.treat.model.dao.TreatDao;
+import kr.co.iei.treat.model.vo.Treat;
 
 @Service
 public class TreatService {
@@ -27,6 +29,12 @@ public class TreatService {
 	public Doctor selectOneDoctor(int doctorNo) {
 		Doctor doctor = treatDao.selectOneDoctor(doctorNo);
 		return doctor;
+	}
+
+	@Transactional
+	public int insertTreatment(Treat t) {
+		int result = treatDao.insertTreatment(t);
+		return result;
 	}
 
 }
