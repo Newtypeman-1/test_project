@@ -41,39 +41,31 @@
 						<th style="width:10%">담당의</th>
 						<th style="width:10%">작성일</th>
 					</tr>
-					<tr>
-						<td>
-							<div class="star-wrap">
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-							</div>
-						</td>
-						<td>내용</td>
-						<td>신종인</td>
-						<td>이국종</td>
-						<td>2025-02-13</td>
-					</tr>
-					<!--
 					<tr th:each="review : ${list}">
-						<td>
-							<div class="star-wrap">
-							<span class="material-icons">star_rate</span>
-							<span class="material-icons">star_rate</span>
-							<span class="material-icons">star_rate</span>
-							<span class="material-icons">star_rate</span>
-							<span class="material-icons">star_rate</span>
+						<td th:text="${review.reviewStar}">
+							<!-- <span class="material-icons">star_rate</span> -->
+							<div>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+							</div>
+							<div>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
 							</div>
 						</td>
-						<td th:text="${review.reviewTitle}"></td>
+						<td th:text="${review.reviewContent}"></td>
 						<td th:text="${review.reviewWriter}"></td>
-						<td th:text="${review.reviewTitle}"></td>
+						<td th:text="${review.doctorName}"></td>
 						<td th:text="${review.reviewDate}"></td>
 					</tr>
-					-->
 				</table>
+				<div id="navi" th:utext="${navi}"></div>
 			</div>
 		</section>
 	</main>

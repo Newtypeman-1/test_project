@@ -12,5 +12,9 @@ public class Review {
 	private String reviewTitle;
 	private String reviewContent;
 	private String reviewWriter;
+	private int doctorNo;
 	private String reviewDate;
+	private int reviewStar;
+	private int treatmentNo;
+	private String doctorName;
 }
