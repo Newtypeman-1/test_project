@@ -56,9 +56,39 @@
 				<div class="menu-title">
 					<ul>
 						<li>마이페이지 메뉴</li>
-						<li><a href="/member/mypage">내 정보</a></li>
-						<li>내 진료 기록</li>
-						<li><a href="/member/qna">내 문의/리뷰 기록</a></li>
+						<li>
+							<th:block th:if="${session.member == null && session.doctor == null}">
+                           		<a href="/">내 정보</a>
+							</th:block>
+							<th:block th:if="${session.member != null}">
+								<a href="/member/mypage">내 정보</a>
+							</th:block>
+							<th:block th:if="${session.doctor != null}">
+                            	<a href="/doctor/mypage">내 정보</a>
+							</th:block>
+						</li>
+						<li>
+							<th:block th:if="${session.member == null && session.doctor == null}">
+                           		<a href="/">내 진료 기록</a>
+							</th:block>
+							<th:block th:if="${session.member != null}">
+								<a href="/member/mypage">내 진료 기록</a>
+							</th:block>
+							<th:block th:if="${session.doctor != null}">
+                            	<a href="/doctor/mypage">내 진료 기록</a>
+							</th:block>
+						</li>
+						<li>
+							<th:block th:if="${session.member == null && session.doctor == null}">
+                           		<a href="/">내 문의/리뷰 기록</a>
+							</th:block>
+							<th:block th:if="${session.member != null}">
+								<a href="/member/qna">내 문의/리뷰 기록</a>
+							</th:block>
+							<th:block th:if="${session.doctor != null}">
+								<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
+							</th:block>
+						</li>
 					</ul>
 				</div>
 				<div class="info">
