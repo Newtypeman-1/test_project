@@ -39,7 +39,7 @@ public class ReviewService {
 			navi += "<a class='page-link' href='/review/list?reqPage="+naviNo+"'>";				
 			navi += naviNo;
 			navi += "</a></li>";
-			naviNo++;
+			naviNo++;			
 			if(naviNo > totalPage) {
 				break;
 			}			
