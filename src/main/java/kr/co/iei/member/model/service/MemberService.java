@@ -18,10 +18,11 @@ public class MemberService {
 		Member member = memberDao.selectOneMember(m);
 		return member;
 	}
-
+	
+	@Transactional
 	public int registerMember(Member m) {
-		
-		return 0;
+		int r = memberDao.registerMember(m);
+		return r;
 	}
 
 	public Member idCheck(Member m) {
