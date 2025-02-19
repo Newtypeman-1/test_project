@@ -90,7 +90,7 @@
 				</div>
 				<div>
 				</div>
-				<div class="info">
+				<div class="info quest-page">
 					<table class="tbl">
 						<tr>
 							<th style="width:10%">문의번호</th>
@@ -98,10 +98,9 @@
 							<th style="width:15%">답변</th>
 							<th style="width:10%">작성일</th>
 						</tr>
-						
 					</table>
 				</div>
-				<div class="info">
+				<div class="info review-page">
 					<table class="tbl">
 						<tr>
 							<!-- select review_no,review_title, reivew_star, review_date from review; -->
@@ -109,6 +108,12 @@
 							<th style="width:40%">제목</th>
 							<th style="width:15%">별점</th>
 							<th style="width:10%">작성일</th>
+						</tr>
+						<tr th:each="review : ${list}">
+							<td th:text="${review.reviewNo}"></td>
+							<td th:text="${review.reviewTitle}"></td>
+							<td th:text="${review.reviewStar}"></td>
+							<td th:text="${review.reviewDate}"></td>
 						</tr>						
 					</table>
 				</div>
