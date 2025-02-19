@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Help DOC - 아이디 / 비밀번호 찾기</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="member-login section">
+			<div class="tab">
+	            <div>회원 로그인</div>
+	            <div>직원 로그인</div>
+	        </div>
+	        <div class="tab-content">
+	        	<div>
+					<form action="/member/login" method="post" autocomplete="off">
+						<div class="input">
+							<div class="input-name nameId">
+								<span for="memberId">아이디</span>
+							</div>
+							<div class="input-item">
+								<input type="text" class="memberId" name="memberId" id="memberId">
+							</div>
+						</div>
+						<div class="input">
+							<div class="input-name">
+								<span for="memberPw">비밀번호</span>
+							</div>
+							<div class="input-item">
+								<input type="text" class="memberPw" name="memberPw" id="memberPw">
+							</div>
+						</div>
+						<div class="wrong">
+							<span class="wrong-message"></span>
+						</div>
+						<div>
+							<button type="submit" id="member-submit">로그인</button>
+						</div>
+						<div class="sub">
+							<a href="/member/registerFrm">회원가입</a>
+							<a href="/member/findIdPwFrm">아이디 / 비밀번호 찾기</a>
+						</div>
+					</form>
+	        	</div>
+		        <div>
+					<form action="/doctor/login" method="post" autocomplete="off">
+						<div class="input">
+							<div class="input-name">
+								<span for="doctorId">아이디</span>
+							</div>
+							<div class="input-item">
+								<input type="text" class="doctorId" name="doctorId" id="doctorId">
+							</div>
+						</div>
+						<div class="input">
+							<div class="input-name">
+								<span for="doctorPw">비밀번호</span>
+							</div>
+							<div class="input-item">
+								<input type="text" class="doctorPw" name="doctorPw" id="doctorPw">
+							</div>
+						</div>
+						<div class="wrong">
+							<span class="wrong-message"></span>
+						</div>
+						<div>
+							<button type="submit" id="doctor-submit">로그인</button>
+						</div>
+						<div class="sub">
+							<a href="/member/findIdPw">아이디 / 비밀번호 찾기</a>
+						</div>
+					</form>
+		        </div>
+	        </div>
+		</section>
+	</main>
+	<th:block th:include="common/header"></th:block>
+</body>
+</html>

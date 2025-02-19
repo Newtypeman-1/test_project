@@ -56,10 +56,15 @@ public class MemberController {
 		return "member/register";
 	}
 	
-	@PostMapping(value="member/register")
-	public String register(Member m) {
+	@PostMapping(value="/register")
+	public String register(Member m, Model model) {
 		int r = memberService.registerMember(m);
-		return "/";
+		System.out.println(m.toString());
+		model.addAttribute("title","회원가입 성공");
+		model.addAttribute("text","회원가입에 성공했습니다.");
+		model.addAttribute("icon","success");
+		model.addAttribute("loc", "/member/loginFrm");
+		return "common/msg";
 	}
 	
 	@ResponseBody
@@ -139,5 +144,10 @@ public class MemberController {
 	@GetMapping(value="/qna")
 	public String memberQna() {
 		return "member/qna";
+	}
+	
+	@GetMapping(value="/findIdPwFrm")
+	public String findIdPwFrm() {
+		return "member/findIdPwFrm";
 	}
 }
