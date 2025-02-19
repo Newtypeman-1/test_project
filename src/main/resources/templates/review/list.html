@@ -49,7 +49,20 @@
 					<tr th:each="review : ${list}">
 						<td th:text="${review.reviewStar}">
 							<!-- <span class="material-icons">star_rate</span> -->
-							
+							<div class="star-wrap">
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<span class="material-icons">star_rate</span>
+								<div class="star-wrap">
+									<span class="material-icons">star_rate</span>
+									<span class="material-icons">star_rate</span>
+									<span class="material-icons">star_rate</span>
+									<span class="material-icons">star_rate</span>
+									<span class="material-icons">star_rate</span>
+								</div>	
+							</div>							
 						</td>
 						<td th:text="${review.reviewContent}"></td>
 						<td th:text="${review.reviewWriter}"></td>
