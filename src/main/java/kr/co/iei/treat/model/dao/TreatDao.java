@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -35,13 +36,14 @@ public class TreatDao {
 	}
 
 	public List<Doctor> selectDoctors(int departmentNo) {
-//		String query = "select * from doctor_tbl where department_no = ?";
-//		Object[] params = {departmentNo};
-//		List<Doctor> list = jdbc.query(query, doctorRowMapper, params);
+		String query = "select * from doctor_tbl where department_no = ?";
+		Object[] params = {departmentNo};
+		List<Doctor> list = jdbc.query(query, doctorRowMapper, params);
 		
 		//임시
-		String query = "select * from doctor_tbl";
-		List<Doctor> list = jdbc.query(query, doctorRowMapper);
+//		String query = "select * from doctor_tbl";
+//		List<Doctor> list = jdbc.query(query, doctorRowMapper);
+		
 		return list;
 	}
 
@@ -53,10 +55,21 @@ public class TreatDao {
 	}
 
 	public int insertTreatment(Treat t) {
-		String query = "insert into treatment_tbl value(treatment.nextval, to_char(sysdate, 'yyyy-MM-dd'), ?, 0, 0, null, ?, ?)";
+		String query = "insert into treatment_tbl values(treatment_seq.nextval, to_char(sysdate, 'yyyy-MM-dd'), ?, 0, 0, null, null, ?, ?)";
 		Object[] params = {t.getAppointTime(), t.getMemberNo(), t.getDoctorNo()};
 		int result = jdbc.update(query, params);
 		return result;
+	}
+
+	public String selectDepartmentName(int departmentNo) {
+		String query = "select department_name from department_tbl where department_no = ?";
+		Object[] params = {departmentNo};
+		try {
+			String result = jdbc.queryForObject(query, params, String.class);
+			return result;
+		} catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 }

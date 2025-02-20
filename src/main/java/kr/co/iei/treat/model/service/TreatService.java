@@ -37,4 +37,8 @@ public class TreatService {
 		return result;
 	}
 
+	public String selectDepartmentName(int departmentNo) {
+		return treatDao.selectDepartmentName(departmentNo);
+	}
+
 }

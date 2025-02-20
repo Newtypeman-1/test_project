@@ -13,7 +13,8 @@ public class Treat {
 	private int appointTime;
 	private int payAmount;
 	private String isDone;
-	private String opinion;
+	private String opinionSymptom;
+	private String opinionDecision;
 	private int memberNo;
 	private int doctorNo;
 }
