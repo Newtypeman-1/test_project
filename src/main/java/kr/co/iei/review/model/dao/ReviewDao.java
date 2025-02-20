@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.vo.ReviewRowMapper;
 
 @Repository
@@ -28,13 +30,18 @@ public class ReviewDao {
 		return totalReview;
 	}
 
-	public List allReview() {
-		String query = "select \r\n"
-				+ "    r.*,\r\n"
-				+ "    (select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name\r\n"
-				+ "from review r";
-		List allReview = jdbc.query(query, reviewRowMapper);
+	public List allReview(Doctor doctor) {
+		String query = "select * from (select rownum as rnum, h.* from(select r.*,(select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from review r where doctor_no = ? order by 1 desc)h) where rnum between 1 and 5";
+		Object[] params = {doctor.getDoctorNo()};
+		List allReview = jdbc.query(query, reviewRowMapper, params);
 		return allReview;
+	}
+
+	public List memberAllReview(Member member) {
+		String query = "select * from (select rownum as rnum, e.* from (select * from review r where review_writer = ? order by review_no desc)e) where rnum between 1 and 5";
+		Object[] params = {member.getMemberId()};
+		List memberAllReview = jdbc.query(query, reviewRowMapper);
+		return memberAllReview;
 	}
 	
 }

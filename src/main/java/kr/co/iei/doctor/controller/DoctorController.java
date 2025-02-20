@@ -68,10 +68,10 @@ public class DoctorController {
 		}
 	}
 	@GetMapping(value="/qna")
-	public String doctorQna(Model model) {
-		List allReview = reviewService.allReview();
+	public String doctorQna(Model model, @SessionAttribute(required = false) Doctor doctor) {
+		List allReview = reviewService.allReview(doctor);
 		model.addAttribute("list", allReview);
-		return "/doctor/qna";
+		return "doctor/qna";
 	}
 	
 	@GetMapping(value="/findIdPwFrm")

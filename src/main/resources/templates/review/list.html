@@ -5,7 +5,7 @@
 <title>리뷰</title>
 <style>
 	.tbl {
-        width: 70%;
+        width: 100%;
         margin: 0 auto;	
         text-align: center;
         font-size: 20px;	
@@ -14,6 +14,14 @@
         text-align: center;
         padding: 30px;
         font-size: 25px;
+    }
+    .review-wrap{
+    	border: 1px solid black;
+    	padding: 10px;
+    	border-radius: 20px;
+    	width: 1300px;
+    	margin: 0 auto;
+    	height: 640px;
     }
     .star-wrap {
         display: flex;
@@ -30,6 +38,9 @@
     .tbl tr>td {
         padding: 10px 0;
         border-bottom: 1px solid #ddd;
+    }
+    #navi{
+    	margin-top: 20px;
     }
 </style>
 </head>
@@ -57,8 +68,8 @@
 						<td th:text="${review.reviewDate}"></td>
 					</tr>
 				</table>
-				<div id="navi" th:utext="${navi}"></div>
 			</div>
+				<div id="navi" th:utext="${navi}"></div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>

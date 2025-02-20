@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.dao.ReviewDao;
 import kr.co.iei.review.model.vo.ReviewListData;
 
@@ -51,8 +53,13 @@ public class ReviewService {
 		return rld;
 	}
 
-	public List allReview() {
-		List allReview = reviewDao.allReview();
+	public List allReview(Doctor doctor) {
+		List allReview = reviewDao.allReview(doctor);
 		return allReview;
+	}
+
+	public List memberAllReview(Member member) {
+		List memberAllReview = reviewDao.memberAllReview(member);
+		return memberAllReview;
 	}
 }
