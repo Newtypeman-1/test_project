@@ -51,5 +51,10 @@ public class MemberService {
 		return member;
 	}
 
+	public int deleteMemeber(int memberNo) {
+		int result = memberDao.deleteMember(memberNo);
+		return result;
+	}
+
 	
 }

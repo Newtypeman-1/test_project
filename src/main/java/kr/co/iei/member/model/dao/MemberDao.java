@@ -82,5 +82,12 @@ public class MemberDao {
 		}
 		return (Member)list.get(0);
 	}
+
+	public int deleteMember(int memberNo) {
+		String query = "delete from member_tbl where memberNo = ?";
+		Object[] params = {memberNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
 	
 }

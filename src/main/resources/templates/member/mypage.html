@@ -157,11 +157,33 @@
 			</div>
 		</section>
 	</main>
-	<th:block th:include="common/footer"></th:block>
 	<script>
 		$(".del").on("click",function(){
-			
+			swal : ({
+				title : "회원 탈퇴",
+				text : "회월을 탈퇴하시겠습니까?",
+				icon : "warning",
+				buttons : {
+					confirm : {
+						text : "확인",
+						value : true,
+						visible : true,
+						closeModal : true
+					},
+					cancle : {
+						text : "취소",
+						value : false,
+						visible : true,
+						closeModal : true
+					}
+				}
+			}).then(function(isConfirm){
+				if(isConfirm){
+					location.herf = "/member/delete";	
+				}
+			});
 		});
 	</script>
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
