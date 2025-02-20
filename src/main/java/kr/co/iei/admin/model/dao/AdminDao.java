@@ -15,8 +15,8 @@ public class AdminDao {
 	private AdminRowMapper adminRowMapper;
 
 	public int insertDoctor(Doctor d) {
-		String query = "insert into doctor_tbl values(doctor_seq.nextval, ?, ?, ?, ?, ?,'asdf' , ?)";
-		Object[] params = {d.getDoctorId(),d.getDoctorPw(),d.getDoctorEmail(),d.getDoctorName(),d.getDoctorPhone(),d.getDepartmentNo()};
+		String query = "insert into doctor_tbl values(doctor_seq.nextval,?,?,?,?,?,?,?)";
+		Object[] params = {d.getDoctorId(),d.getDoctorPw(),d.getDoctorEmail(),d.getDoctorName(),d.getDoctorPhone(),d.getDoctorImg(),d.getDepartmentNo()};
 		int result = jdbc.update(query,params);
 		return result;
 	}

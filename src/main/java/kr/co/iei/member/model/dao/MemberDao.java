@@ -94,11 +94,18 @@ public class MemberDao {
 		System.out.println(list.size());
 		return list;
 	}
-	
+
 	public int memberTotalCount() {
 		String query = "select count(*) from treatment_tbl";
 		int r = jdbc.queryForObject(query, Integer.class);
 		return r;
+	}
+	
+	public int deleteMember(int memberNo) {
+		String query = "delete from member_tbl where memberNo = ?";
+		Object[] params = {memberNo};
+		int result = jdbc.update(query, params);
+		return result;
 	}
 	
 }

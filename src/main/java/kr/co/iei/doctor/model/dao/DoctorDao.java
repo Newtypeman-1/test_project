@@ -60,4 +60,5 @@ public class DoctorDao {
 		}
 		return (Doctor)list.get(0);
 	}
+	
 }

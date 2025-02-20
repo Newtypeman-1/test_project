@@ -41,5 +41,6 @@ public class DoctorService {
 		Doctor doctor = doctorDao.findPw(d);
 		return doctor;
 	}
+
 	
 }
