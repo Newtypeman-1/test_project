@@ -7,7 +7,7 @@
 .section{
     width: 800px;
     margin: 0 auto;
-    margin-top: 50px;
+    border-radius: 10px;
 }
 .tab{
     overflow: hidden;
@@ -15,6 +15,7 @@
 }
 .tab>div{
     width: calc(100% / 2);
+    color: #fff;
     box-sizing: border-box;
     height: 50px;
     line-height: 48px;
@@ -40,12 +41,68 @@
     border-bottom: none;
     font-weight: 900;
     background-color: #fff;
+    color: rgba(0,153,153,0.5);
 }
 .tab-content>.active-content{
     display: block;
     background-color: #fff;
     
 }
+.input{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.input-name{
+		color: rgba(0,153,153,0.5);
+		font-weight: 900;
+		margin-bottom: 5px;
+	}
+	.input-item {
+		display: flex;
+		gap: 10px;
+	}
+	.input-item > input {
+		flex: 1;
+		font-size: 16px;
+		line-height: 1.5;
+		border: 3px solid transparent;
+		border-bottom: 3px solid rgba(0,153,153,0.5);
+		padding: 8px 0px;
+		text-indent: 2%;
+	}
+	.input-item> input:focus{
+		border: 3px solid rgba(0,153,153,0.5);
+		border-radius: 10px;
+	}
+	.sub{
+		display: flex;
+		justify-content: space-between;
+	}
+	.sub a{
+		text-decoration: none;
+		color: rgba(0,153,153,0.5);
+	}
+	div>button{
+		margin-top: 10px;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		font-weight: 900;
+		width: 100%;
+		height: 40px;
+		background-color: rgba(0,153,153,0.5);
+		color: #fff;
+		cursor: pointer;
+		border: none;
+	}
+	div>button:hover{
+		box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
+	}
+	.valid{
+		color: blue;
+	}
+	.invalid{
+		color: red;
+	}
 </style>
 </head>
 <body>
@@ -61,17 +118,17 @@
 					<form action="/member/findId" method="post" autocomplete="off">
 						<div class="input">
 							<div class="input-name">
-								<span for="memberEmail">이메일</span>
+								<span for="memberEmail1">이메일</span>
 							</div>
 							<div class="input-item">
-								<input type="text" name="memberEmail" id="memberEmail">
+								<input type="text" name="memberEmail1" id="memberEmail1" class="text">
 							</div>
 						</div>
 						<div class="wrong">
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="member-submit">이메일 전송</button>
+							<button type="button" id="id-find-submit">이메일 전송</button>
 						</div>
 					</form>
 	        	</div>
@@ -82,22 +139,22 @@
 								<span for="memberId">아이디</span>
 							</div>
 							<div class="input-item">
-								<input type="text" name="memberId" id="memberId">
+								<input type="text" name="memberId" id="memberId"class="text">
 							</div>
 						</div>
 						<div class="input">
 							<div class="input-name">
-								<span for="memberEmail">이메일</span>
+								<span for="memberEmail2">이메일</span>
 							</div>
 							<div class="input-item">
-								<input type="text" name="memberEmail" id="memberEmail">
+								<input type="text" name="memberEmail2" id="memberEmail2"class="text">
 							</div>
 						</div>
 						<div class="wrong">
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="doctor-submit">이메일 전송</button>
+							<button type="button" id="pw-find-submit">이메일 전송</button>
 					</form>
 		        </div>
 	        </div>
@@ -121,7 +178,90 @@
 		});
 		tabs[0].classList.add("active-tab");
 		contents[0].classList.add("active-content");
+		
+		$("#id-find-submit").on("click", function(){
+			const wm = $(".wrong-message");
+			const emailV = $("#memberEmail1").val();
+			const email = $("#memberEmail1");
+			if(emailV.eq(1) === ""){
+				event.preventDefault();
+				wm.addClass("invalid");
+				wm.text("찾으실 아이디에 입력된 이메일을 입력해주세요.");
+				email.focus();
+			}else{
+				$.ajax({
+					url: "/member/findId",
+					type: "post",
+					data: {memberEmail: emailV},
+					success: function(r){
+						if(r === 1){
+							swal({
+								title: "아이디 찾기 성공",
+								text : "이메일을 확인해주세요.",
+								icon : "success"
+							})
+						}else {
+							swal({
+								title: "아이디 찾기 실패",
+								text : "이메일과 일치하는 아이디가 없습니다.",
+								icon : "error"
+							})
+						}
+					},
+					error: function(){
+						console.log("에러")
+					}
+				});
+			}
+		})
+		
+		$("#pw-find-submit").on("click", function(){
+			const wm = $(".wrong-message");
+			const idV = $("#memberId").val();
+			const emailV = $("#memberEmail2").val();
+			const id = $("#memberId");
+			const email = $("#memberEmail2");
+			if(idV === ""){
+				event.preventDefault();
+				wm.addClass("invalid");
+				wm.text("아아디를 입력해주세요.");
+				id.focus();
+			}else if(emailV === ""){
+				event.preventDefault();
+				wm.addClass("invalid");
+				wm.text("이메일을 입력해주세요.");
+				email.focus();
+			}else{
+				$.ajax({
+					url: "/member/findPw",
+					type: "post",
+					data: {memberId: idV, memberEmail: emailV},
+					success: function(r){
+						if(r === 1){
+							swal({
+								title: "비밀번호 찾기 성공",
+								text : "이메일을 확인해주세요.",
+								icon : "success"
+							})
+						}else {
+							swal({
+								title: "비밀번호 찾기 실패",
+								text : "아이디,이메일과 일치하는 비밀번호가 없습니다.",
+								icon : "error"
+							})
+						}
+					},
+					error: function(){
+						console.log("에러")
+					}
+				});
+			}
+		})
+		$(".text").on("focusout", function(){
+			const wm = $(".wrong-message");
+			wm.removeClass("invalid").text("");
+		})
 	</script>
-	<th:block th:include="common/header"></th:block>
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

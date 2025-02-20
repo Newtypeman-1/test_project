@@ -40,5 +40,16 @@ public class MemberService {
 		List list = memberDao.selectAllMember();
 		return list;
 	}
+
+	public Member findId(Member m) {
+		Member member = memberDao.findId(m);
+		return member;
+	}
+	
+	public Member findPw(Member m) {
+		Member member = memberDao.findPw(m);
+		return member;
+	}
+
 	
 }

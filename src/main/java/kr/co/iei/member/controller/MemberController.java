@@ -150,4 +150,46 @@ public class MemberController {
 	public String findIdPwFrm() {
 		return "member/findIdPwFrm";
 	}
+	
+	@ResponseBody
+	@PostMapping(value="/findId")
+	public int findId(Member m, Model model) {
+		Member member = memberService.findId(m);
+		int r = 0;
+		if(member == null) {
+			return r;
+		}else {
+			String emailTitle = "HelpDOC 요청하신 아이디 찾기 조회한 결과입니다.";
+			String emailContent = "<h1>안녕하십니까 HelpDOC 입니다.</h1>"
+									+"<h3>귀하의 아이디는"
+									+"[<span style='color: red;'>"
+									+member.getMemberId()
+									+"</span>]"
+									+"입니다.</h3>";
+			emailSender.sendMail(emailTitle, m.getMemberEmail(), emailContent);
+			r = 1;
+			return r;
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/findPw")
+	public int findPw(Member m, Model model) {
+		Member member = memberService.findPw(m);
+		int r = 0;
+		if(member == null) {
+			return r;
+		}else {
+			String emailTitle = "HelpDOC 요청하신 비밀번호 찾기 조회한 결과입니다.";
+			String emailContent = "<h1>안녕하십니까 HelpDOC 입니다.</h1>"
+									+"<h3>귀하의 비밀번호는"
+									+"[<span style='color: red;'>"
+									+member.getMemberPw()
+									+"</span>]"
+									+"입니다.</h3>";
+			emailSender.sendMail(emailTitle, m.getMemberEmail(), emailContent);
+			r = 1;
+			return r;
+		}
+	}
 }
