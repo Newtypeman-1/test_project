@@ -164,12 +164,13 @@
 						<input type="hidden" name="payAmount" id="payAmount" value="10000">
 						<input type="hidden" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
 						<input type="hidden" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
-						<button type="submit" id="purchase-btn">예약 시간을 선택하세요</button>
 					</form>
+						<button type="button" id="purchase-btn">예약 시간을 선택하세요</button>
 				</div>
 			</section>
 		</div>
 	</main>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script>
 		let hour = 0;
@@ -246,7 +247,7 @@
 			IMP.init("imp12411661");
 			IMP.request_pay(
 				{
-					channelKey: "channel-key-727a9682-0123-44ff-b05c-d0e3a67070bf",
+					channelKey: "channel-key-99488d5f-7549-4f8b-bb76-c9725991e5b1",
 			    	pay_method: "card",
 			    	merchant_uid: "order_no_" + dateString, //상점에서 생성한 고유 주문번호
 			    	name: "결제테스트",
@@ -266,7 +267,10 @@
 							icon: "success",
 							confirmButtonText: "확인",
 						}).then(result => {
-							location.href = "/member/mypage2";
+							console.log("hello");
+// 							const form = $(".appoint-form");
+// 							form.submit();
+// 							location.href = "/member/mypage2";
 						});
 					}else{
 						Swal.fire({
