@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.page-title{
+		display: flex;
+		justify-content: center;
+		font-size: 25px;
+	}
+	.section{
+		width: 400px;
+		margin: 0 auto;
+		padding: 10px;
+	}
+	.section .input{
+		padding : 5px 10px;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="page-title">의료진 계정 추가/삭제</div>
+			<form action="/admin/addAcount" method="post" enctype="multipart/form-data">
+				<div class="input">
+					<div class="input-title">
+						<label for="doctorId">아이디 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="doctorId" id="doctorId">
+					</div>
+					<p class="input-msg id-check-msg"></p>
+					
+					<div class="input-title">
+						<label for="doctorPw">비밀번호 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="password" name="doctorPw" id="doctorPw">
+					</div>
+					
+					<div class="input-title">
+						<label for="doctorPw">비밀번호 확인</label>
+					</div>
+					<div class="input-item">
+						<input type="password" name="doctorPwRe" id="doctorPwRe">
+					</div>
+					<p class="input-msg pw-check-msg"></p>
+					
+					<div class="input-title">
+						<label for="doctorEmail">이메일 주소 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="doctorEmail" id="doctorEmail">
+					</div>
+					<span>@</span>
+					<input type="text" name="mail" id="mail">
+					<select name="choiceMail" id="choiceMail">
+						<option value="">수동 입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="nate.com">nate.com</option>
+					</select>
+					
+					<div class="input-title">
+						<label for="doctorName">이름 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="doctorName" id="doctorName">
+					</div>
+					
+					<div class="input-title">
+						<label for="doctorPhone">전화번호 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="doctorPhone" id="doctorPhone">
+					</div>
+					
+					<div class="input-title">
+						<label for="departmentNo">전공과 입력</label>
+					</div>
+					<div class="input-item">
+						<input type="text" name="departmentNo" id="departmentNo">
+					</div>
+					<select name="department" id="department">
+						<option value="">수동 입력</option>
+						<option value="내과">내과</option>
+						<option value="외과">외과</option>
+						<option value="산부인과">산부인과</option>
+						<option value="소아과">소아과</option>
+					</select>
+					
+					<div class="input-title">
+						<label for="doctorImg">의사 사진 업로드</label>
+						<input type="file" name="imgFile" accept="image/*"> 
+						
+					</div>
+					
+					<div class="join-button-box">
+						<button type="submit" class="join-button">회원가입</button>
+					</div>
+				</div>
+			</form>	
+		</section>
+	</main>
+	<script>
+		
+	</script>
+
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>

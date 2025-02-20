@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.iei.admin.model.vo.AdminRowMapper;
+import kr.co.iei.doctor.model.vo.Doctor;
 
 @Repository
 public class AdminDao {
@@ -12,5 +13,12 @@ public class AdminDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private AdminRowMapper adminRowMapper;
+
+	public int insertDoctor(Doctor d) {
+		String query = "insert into doctor_tbl values(doctor_seq.nextval, ?, ?, ?, ?, ?,'asdf' , ?)";
+		Object[] params = {d.getDoctorId(),d.getDoctorPw(),d.getDoctorEmail(),d.getDoctorName(),d.getDoctorPhone(),d.getDepartmentNo()};
+		int result = jdbc.update(query,params);
+		return result;
+	}
 
 }

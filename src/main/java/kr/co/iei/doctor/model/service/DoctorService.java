@@ -28,4 +28,5 @@ public class DoctorService {
 		return list2;
 	}
 
+
 }
