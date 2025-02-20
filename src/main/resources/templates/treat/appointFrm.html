@@ -76,6 +76,17 @@
 	padding: 0 10px;
 	margin: 0 auto;
 }
+#purchase-btn{
+	border-radius: 20px;
+	width: 200px;
+	height: 50px;
+}
+.btn-activated{
+	border: none;
+	background-color: rgb(255, 50, 50);
+	color: white;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -140,21 +151,26 @@
 							<th>진료일시</th>
 							<td id="appoint-time">선택된 진료일시가 없습니다.</td>
 						</tr>
+						<tr>
+							<th>결제금액</th>
+							<td>10,000원</td>
+						</tr>
 					</table>
 					<form class="appoint-form" action="/treat/appoint" method="post">
 						<!-- 진료번호, 예약일은 자동처리 -->
 						<!-- 예약시간, 결제금액, 회원번호, 의사번호 -->
 <!-- 						<input type="hidden" name="appointDate" id="appointDate"> -->
 						<input type="hidden" name="appointTime" id="appointTime" required>
-<!-- 						<input type="hidden" name="payAmount" id="payAmount"> -->
+						<input type="hidden" name="payAmount" id="payAmount" value="10000">
 						<input type="hidden" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
 						<input type="hidden" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
-						<button type="submit">예약하기</button>
+						<button type="submit" id="purchase-btn">예약 시간을 선택하세요</button>
 					</form>
 				</div>
 			</section>
 		</div>
 	</main>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script>
 		let hour = 0;
 		function updateTime(){
@@ -179,22 +195,32 @@
 		setInterval(updateTime, 1000);
 		updateTime();
 		
-// 		for(let i = 9; i <= 18; i++){
-// 			const li = $("<li>");
-// 			const div = $("<div class='appoint-items'>");
-// 			const span = $("<span>");
-// 			const span2 = $("<span>");
-// 			div.append(span).append(span2);
-// 			li.append(div);
-// 			let timeEle = i;
-// 			span.text(timeEle);
-// 			span2.text(" : 00");
-// 			$(".appoint-ul").append(li);
-// 			if(Number(hour) + 1 >= i){
-// 				div.css("color", "grey");
-// 				div.addClass("disabled");
-// 			}
-// 		}
+		const unavailableTimes = [[${unavailableTimes}]];
+		console.log(unavailableTimes);
+		
+		for(let i = 9; i <= 18; i++){
+			const li = $("<li>");
+			const div = $("<div class='appoint-items'>");
+			const span = $("<span>");
+			const span2 = $("<span>");
+			div.append(span).append(span2);
+			li.append(div);
+			let timeEle = i;
+			span.text(timeEle);
+			span2.text(" : 00");
+			$(".appoint-ul").append(li);
+			if(Number(hour) + 1 >= i){
+				div.css("color", "grey");
+				div.addClass("disabled");
+			}
+			unavailableTimes.forEach(function(time){
+				if(Number(time) == i){
+					div.css("color", "grey");
+					div.addClass("disabled");
+				}
+			});
+		}
+
 		$(".appoint-items").on("click", function(){
 			if($(this).hasClass("disabled")){
 				return;
@@ -205,40 +231,89 @@
 			$("#appoint-time").css("font-weight", "bold");
 			
 			$("#appointTime").val($(this).children().eq(0).text());
+			
+			$("#purchase-btn").addClass("btn-activated");
+			$("#purchase-btn").text("결제하고 진료 예약하기");
 		});
 		
-		function getTimes(){
-			const doctorNo = $("#doctorNo").val();
-			$.ajax({
-				url: "/treat/getTimes",
-				type: "get",
-				data: {doctorNo: doctorNo},
-				success: function(data){
-					for(let i = 9; i <= 18; i++){
-						const li = $("<li>");
-						const div = $("<div class='appoint-items'>");
-						const span = $("<span>");
-						const span2 = $("<span>");
-						div.append(span).append(span2);
-						li.append(div);
-						span.text(i);
-						span2.text(" : 00");
-						$(".appoint-ul").append(li);
-						if(Number(hour) + 1 >= i){
-							div.css("color", "grey");
-							div.addClass("disabled");
-						}
-						data.forEach(item => {
-							if(item == i){
-								div.css("color", "grey");
-								div.addClass("disabled");
-							}
+		$("#purchase-btn").on("click", function(e){
+			if(!$(this).hasClass("btn-activated")){
+				e.preventDefault();
+			}
+			const totalPrice = $("#payAmount").val();
+			const date = new Date();
+			const dateString = date.getFullYear() + "" + (date.getMonth() + 1) + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+			IMP.init("imp12411661");
+			IMP.request_pay(
+				{
+					channelKey: "channel-key-727a9682-0123-44ff-b05c-d0e3a67070bf",
+			    	pay_method: "card",
+			    	merchant_uid: "order_no_" + dateString, //상점에서 생성한 고유 주문번호
+			    	name: "결제테스트",
+			    	amount: totalPrice,
+			    	buyer_email: "test@portone.io",
+			    	buyer_name: "구매자이름",
+		    		buyer_tel: "010-1234-5678", //필수 파라미터 입니다.
+			    	buyer_addr: "서울특별시 강남구 삼성동",
+			    	buyer_postcode: "123-456",
+				},
+				function (rsp) {
+					console.log(rsp);
+					if(rsp.success){
+						Swal.fire({
+							title: "결제 완료",
+							text: "페이지로 이동합니다.",
+							icon: "success",
+							confirmButtonText: "확인",
+						}).then(result => {
+							location.href = "/member/mypage2";
+						});
+					}else{
+						Swal.fire({
+							title: "결제 실패",
+							text: rsp.error_msg,
+							icon: "info",
+							confirmButtonText: "확인",
+						}).then(result => {
+							location.href = "/api/pay";
 						});
 					}
 				}
-			});
-		}
-		getTimes();
+			);
+		});
+		
+// 		function getTimes(){
+// 			const doctorNo = $("#doctorNo").val();
+// 			$.ajax({
+// 				url: "/treat/getTimes",
+// 				type: "get",
+// 				data: {doctorNo: doctorNo},
+// 				success: function(data){
+// // 					for(let i = 9; i <= 18; i++){
+// // 						const li = $("<li>");
+// // 						const div = $("<div class='appoint-items'>");
+// // 						const span = $("<span>");
+// // 						const span2 = $("<span>");
+// // 						div.append(span).append(span2);
+// // 						li.append(div);
+// // 						span.text(i);
+// // 						span2.text(" : 00");
+// // 						$(".appoint-ul").append(li);
+// // 						if(Number(hour) >= i){
+// // 							div.css("color", "grey");
+// // 							div.addClass("disabled");
+// // 						}
+// 						data.forEach(item => {
+// 							if(item == i){
+// 								div.css("color", "grey");
+// 								div.addClass("disabled");
+// 							}
+// 						});
+// // 					}
+// 				}
+// 			});
+// 		}
+// 		getTimes();
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

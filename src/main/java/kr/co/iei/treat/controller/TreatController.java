@@ -21,33 +21,37 @@ public class TreatController {
 	@Autowired
 	private TreatService treatService;
 	
-	@GetMapping(value="/appointFrm")
-	public String appointFrm(int doctorNo, Model mod) {
-		Doctor doctor = treatService.selectOneDoctor(doctorNo);
-		mod.addAttribute("doctor", doctor);
-		System.out.println(doctor);
-		return "treat/appointFrm";
-	}
-	
-	@GetMapping(value="/depart1")
-	public String depart1(Model mod) {
-		int departmentNo = 1;
-		List<Doctor> list = treatService.selectDoctors(departmentNo);
-		mod.addAttribute("list", list);
-		return "treat/depart1";
-	}
-	
 	@GetMapping(value="/allDepart")
 	public String allDepart() {
 		return "treat/allDepart";
 	}
 	
-	@ResponseBody
-	@GetMapping(value="/getTimes")
-	public List<Integer> getTimes(int doctorNo){
-		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
-		return unavailableTimes;
+	@GetMapping(value="/department")
+	public String depart1(Model mod, int departmentNo) {
+		List<Doctor> list = treatService.selectDoctors(departmentNo);
+		String departmentName = treatService.selectDepartmentName(departmentNo);
+		System.out.println(departmentName);
+		mod.addAttribute("list", list);
+		mod.addAttribute("departmentName", departmentName);
+		return "treat/department";
 	}
+
+	@GetMapping(value="/appointFrm")
+	public String appointFrm(int doctorNo, Model mod) {
+		Doctor doctor = treatService.selectOneDoctor(doctorNo);
+		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
+		mod.addAttribute("doctor", doctor);
+		mod.addAttribute("unavailableTimes", unavailableTimes);
+		System.out.println(doctor);
+		return "treat/appointFrm";
+	}
+	
+//	@ResponseBody
+//	@GetMapping(value="/getTimes")
+//	public List<Integer> getTimes(int doctorNo){
+//		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
+//		return unavailableTimes;
+//	}
 	
 	@PostMapping(value="/appoint")
 	public String appoint(Treat t, Model mod) {
