@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
+import kr.co.iei.review.model.vo.Review;
+
 @Repository
 public class DoctorDao {
 	@Autowired
@@ -37,4 +39,5 @@ public class DoctorDao {
 		List list2 = jdbc.query(query,doctorRowMapper);
 		return list2;
 	}
+	
 }

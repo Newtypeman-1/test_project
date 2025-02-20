@@ -50,4 +50,9 @@ public class ReviewService {
 		ReviewListData rld = new ReviewListData(list, navi);
 		return rld;
 	}
+
+	public List allReview() {
+		List allReview = reviewDao.allReview();
+		return allReview;
+	}
 }

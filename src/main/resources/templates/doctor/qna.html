@@ -40,7 +40,9 @@
 		width: 100%;
 		margin: 0 auto;
 		text-align: center;
-		border-bottom: 1px solid black;
+	}
+	.tbl tr:first-child{
+		border-bottom: 1px solid black;	
 	}
 </style>
 </head>
@@ -103,7 +105,6 @@
 				<div class="info review-page">
 					<table class="tbl">
 						<tr>
-							<!-- select review_no,review_title, reivew_star, review_date from review; -->
 							<th style="width:10%">리뷰번호</th>
 							<th style="width:40%">제목</th>
 							<th style="width:15%">별점</th>
@@ -121,5 +122,8 @@
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
+	<script>
+		
+	</script>
 </body>
 </html>
