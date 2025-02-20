@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberRowMapper;
+import kr.co.iei.treat.model.vo.TreatRowMapper2;
 
 @Repository
 public class MemberDao {
@@ -15,6 +16,8 @@ public class MemberDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private MemberRowMapper memberRowMapper;
+	@Autowired
+	private TreatRowMapper2 treatRowMapper2;
 
 	public Member selectOneMember(Member m) {
 		String query = "select * from member_tbl where member_id=? and member_pw=?";
@@ -81,6 +84,21 @@ public class MemberDao {
 			return null;
 		}
 		return (Member)list.get(0);
+	}
+
+	public List allMedicalRecords(Member member, int start, int end) {
+		/*String query = "select * from (select rownum as rnum, h.* from(select t.*,(select doctor_name from doctor_tbl where doctor_no = t.doctor_no) doctor_name from treatment_tbl t where (select member_id from member_tbl where member_no = t.member_no) = ? order by 1 desc)h) where rnum between 1 and 5";*/
+		String query = "select * from (select rownum as rnum, h.* from (SELECT t.*, d.doctor_name, p.department_name FROM treatment_tbl t JOIN doctor_tbl d ON t.doctor_no = d.doctor_no JOIN department_tbl p ON d.department_no = p.department_no where member_no = ? order by 1 desc) h) where rnum between ? and ?";
+		Object[] params = {member.getMemberNo(), start, end};
+		List list = jdbc.query(query, treatRowMapper2, params);
+		System.out.println(list.size());
+		return list;
+	}
+	
+	public int memberTotalCount() {
+		String query = "select count(*) from treatment_tbl";
+		int r = jdbc.queryForObject(query, Integer.class);
+		return r;
 	}
 	
 }

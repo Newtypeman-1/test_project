@@ -17,4 +17,6 @@ public class Treat {
 	private String opinionDecision;
 	private int memberNo;
 	private int doctorNo;
+	private String doctorName;
+	private String departmentName;
 }

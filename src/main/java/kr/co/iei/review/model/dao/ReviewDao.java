@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.vo.ReviewRowMapper;
+import kr.co.iei.review.model.vo.ReviewRowMapper2;
 
 @Repository
 public class ReviewDao {
@@ -16,6 +17,8 @@ public class ReviewDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private ReviewRowMapper reviewRowMapper;
+	@Autowired
+	private ReviewRowMapper2 reviewRowMapper2;
 	
 	public List reviewAllList(int start, int end) {
 		String query = "select * from (select rownum as rnum, r.* from (select * from review v join doctor_tbl d on (v.doctor_no = d.doctor_no) order by review_no desc)r) where rnum between ? and ?";
@@ -38,10 +41,12 @@ public class ReviewDao {
 	}
 
 	public List memberAllReview(Member member) {
+		System.out.println(member);
 		String query = "select * from (select rownum as rnum, e.* from (select * from review r where review_writer = ? order by review_no desc)e) where rnum between 1 and 5";
 		Object[] params = {member.getMemberId()};
-		List memberAllReview = jdbc.query(query, reviewRowMapper);
+		List memberAllReview = jdbc.query(query, reviewRowMapper2, params);
 		return memberAllReview;
 	}
+	
 	
 }

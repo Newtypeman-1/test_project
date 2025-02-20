@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.review.model.service.ReviewService;
 import kr.co.iei.util.EmailSender;
 
@@ -201,9 +202,10 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="/myMedicalRecordsPageFrm")
-	public String myMedicalRecordsPageFrm(@SessionAttribute(required = false) Member member) {
-		List list = memberService.allMedicalRecords();
-		
+	public String myMedicalRecordsPageFrm(@SessionAttribute(required = false) Member member, int reqPage, Model model) {
+		MemberPageList mpl = memberService.allMedicalRecords(member, reqPage);
+		model.addAttribute("list", mpl.getList());
+		model.addAttribute("pageNavi", mpl.getPageNavi());
 		return "member/myMedicalRecordsPage";
 	}
 

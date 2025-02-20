@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.member.model.dao.MemberDao;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.member.model.vo.MemberPageList;
 
 @Service
 public class MemberService {
@@ -51,9 +52,74 @@ public class MemberService {
 		return member;
 	}
 
-	public List allMedicalRecords(Member member) {
-		List list = memberDao.allMedicalRecords(member);
-		return list;
+	public MemberPageList allMedicalRecords(Member member, int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage +1;
+		
+		List list = memberDao.allMedicalRecords(member, start, end);
+		
+		int totalCount = memberDao.memberTotalCount();
+		
+		int totalPage = totalCount/numPerPage;
+		if(totalCount%numPerPage != 0) {
+			totalPage += 1;
+		}
+		
+		int pageF = 1;
+		int pageMM = reqPage-2;
+		int pageM = reqPage-1;
+		int pageNo = reqPage;
+		int pageP = reqPage+1;
+		int pagePP = reqPage+2;
+		int pageE = totalPage;
+		String pageNavi = "<ul class='pageNavi'>";
+		if(reqPage > 3){
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage=1'>";
+			pageNavi += pageF;
+			pageNavi += "</a></li>";
+			pageNavi += "<div>...</div>";
+		}
+		if(pageMM > 0) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage="+pageMM+"'>";
+			pageNavi += pageMM;
+			pageNavi += "</a></li>";
+		}
+		if(pageM > 0) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage="+pageM+"'>";
+			pageNavi += pageM;
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "<li>";
+		pageNavi += "<input type='text' value='"+pageNo+"' class='page-item' id='now-page'>";
+		pageNavi += "</li>";
+		if(pageP > 0 && pageP <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage="+pageP+"'>";
+			pageNavi += pageP;
+			pageNavi += "</a></li>";
+		}
+		if(pagePP > 0 && pagePP <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage="+pagePP+"'>";
+			pageNavi += pagePP;
+			pageNavi += "</a></li>";
+		}
+		if(reqPage < totalPage-2){
+			pageNavi += "<div>...</div>";
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/member/myMedicalRecordsPageFrm?reqPage="+pageE+"'>";
+			pageNavi += pageE;
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		MemberPageList mpl = new MemberPageList(list, pageNavi);
+		
+		return mpl;
 	}
 
 	

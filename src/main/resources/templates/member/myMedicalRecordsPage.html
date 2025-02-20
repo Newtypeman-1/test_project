@@ -8,45 +8,6 @@
 	display: flex;
 	margin: 0 auto;
 }
-.menu-section{
-	width: 200px;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: top;
-	flex-direction: column;
-    border: 3px solid rgba(0,153,153,0.5);
-    border-radius: 10px;
-}
-.menu-title{
-	text-align: center;
-	color: #fff;
-	background-color: rgba(0,153,153,0.5);
-	border-top-right-radius: 7px;
-	border-top-left-radius: 7px;
-	padding: 5px;
-	font-weight: 900;
-}
-.menu-section> ul{
-	text-align: center;
-	color: rgba(0,153,153,0.5);
-}
-.menu-section li{
-	list-style: none;
-	padding: 5px;
-	border-bottom: 3px solid rgba(0,153,153,0.5);
-	text-decoration: none;
-	
-}
-a:link{
-	color: rgb(0,153,153);
-}
-a:visited{
-	color: rgb(0,153,153);
-}
-.menu-section li:last-child{
-	border: none;
-}
 .section{
     width: 800px;
     margin: 0 auto;
@@ -84,62 +45,45 @@ a:visited{
 	.intro .input>input{
 		border: none;
 	}
+	#navi{
+		display: flex;
+		justify-content: center;
+	}
+	#navi ul{
+		list-style: none;
+	}
+	
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="menu-section">
-			<div class="menu-title">마이페이지 메뉴</div>
-			<ul>
-				<li>
-					<th:block th:if="${session.member != null}">
-						<a href="/member/mypage">내 정보</a>
-					</th:block>
-					<th:block th:if="${session.doctor != null}">
-                          	<a href="/doctor/mypage">내 정보</a>
-					</th:block>
-				</li>
-				<li>
-					<th:block th:if="${session.member != null}">
-						<a href="/member/myMedicalRecordsPageFrm">내 진료 기록</a>
-					</th:block>
-					<th:block th:if="${session.doctor != null}">
-                          	<a href="/doctor/myMedicalRecordsPageFrm">내 진료 기록</a>
-					</th:block>
-				</li>
-				<li>
-					<th:block th:if="${session.member != null}">
-						<a href="/member/qna">내 문의/리뷰 기록</a>
-					</th:block>
-					<th:block th:if="${session.doctor != null}">
-						<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
-					</th:block>
-				</li>
-			</ul>
-		</section>
+		<th:block th:include="common/menuRemote"></th:block>
 		<section class="section">
 			<div class="page-title">내 진료 기록 검색</div>
 			<div class="review-wrap">
 				<table class="tbl">
 					<tr>
-						<th style="width:15%">별점</th>
-						<th style="width:40%">내용</th>
-						<th style="width:10%">작성자</th>
+						<th style="width:15%">증상과</th>
+						<th style="width:40%">회원 아이디</th>
 						<th style="width:10%">담당의</th>
+						<th style="width:10%">진단 내역</th>
 						<th style="width:10%">작성일</th>
 					</tr>
-					<tr th:each="review : ${list}">
-						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
-							<!-- <span class="material-icons">star_rate</span> -->							
-						
-						<td th:text="${review.reviewContent}"></td>
-						<td th:text="${review.reviewWriter}"></td>
-						<td th:text="${review.doctorName}"></td>
-						<td th:text="${review.reviewDate}"></td>
+					<tr th:each="treatment : ${list}">
+						<td th:text="${treatment.departmentName}"></td>
+						<td th:text="${session.member.memberId}"></td>
+						<td th:text="${treatment.doctorName}"></td>
+						<th:block th:if="${treatment.isDone == 0}">
+							<td>진단 중</td>
+						</th:block>
+						<th:block th:if="${treatment.isDone == 1}">
+							<td>진단 완료</td>
+						</th:block>
+						<td th:text="${treatment.appointDate}"></td>
 					</tr>
 				</table>
-				<div id="navi" th:utext="${navi}"></div>
+				<div id="navi" th:utext="${pageNavi}"></div>
 			</div>
 		</section>
 	</main>
