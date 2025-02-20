@@ -45,11 +45,6 @@
 	grid-template-rows: repeat(2, 1fr);
 	gap: 10px;
 }
-.icon{
-	font-size: 80px;
-	text-align: center;
-}
-
 .boards-div{
 	margin: 50px 0;
 	background-color: #ccc;
@@ -92,6 +87,32 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+.icon-wrap{
+	margin: 0 auto;
+	text-align: center;
+}
+.icon-wrap img{
+	width: 100px;
+	height: 100px;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.icon-wrap a{
+	color: #111111;
+}
+.icon-wrap>a>div{
+	margin-top: 5px;
+}
+.icon-wrap span{
+	width: 100px;
+	height: 100px;
+	font-size: 80px;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	padding: 5px;
+}
 </style>
 </head>
 <body>
@@ -115,18 +136,66 @@
 					<div class="symptom-title">비대면 진료 시작하기</div>
 				</div>
 				<div class="symptom-grid-wrap">
-					<a href="/treat/depart1">
-						<div class="icon">🖼</div>
-					</a>
-					<div class="icon">🎧</div>
-					<div class="icon">🎮</div>
-					<div class="icon">📱</div>
-					<div class="icon">💻</div>
-					<div class="icon">📷</div>
-					<div class="icon">🎨</div>
-					<div class="icon">🖋</div>
-					<div class="icon">📚</div>
-					<div class="icon">📝</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart1" class="icon">
+							<img src="../img/오한.jpg">
+							<div>감기/오한</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart2" class="icon">
+							<img src="../img/비염, 축농증.jpg">
+							<div>비염</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart3" class="icon">
+							<img src="../img/산부인과.jpg">
+							<div>산부인과</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart4" class="icon">
+							<img src="../img/위염.jpg">
+							<div>소화불량</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart5" class="icon">
+							<img src="../img/성병.jpg">
+							<div>성병</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart6" class="icon">
+							<img src="../img/피부 트러블2.jpg">
+							<div>피부트러블</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart7" class="icon">
+							<img src="../img/시력저하.jpg">
+							<div>시력저하</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart8" class="icon">
+							<img src="../img/두근거림.jpg">
+							<div>두근거림</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/depart9" class="icon">
+							<img src="../img/우울감.jpg">
+							<div>우울감</div>
+						</a>
+					</div>
+					<div class="icon-wrap">
+						<a href="/treat/allDepart" class="icon">
+							<span class="material-icons">apps</span>
+							<div>진료과 고르기</div>
+						</a>
+					</div>
 				</div>
 			</div>
 			<div class="boards-div">
