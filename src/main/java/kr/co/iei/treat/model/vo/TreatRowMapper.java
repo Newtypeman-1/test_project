@@ -17,7 +17,8 @@ public class TreatRowMapper implements RowMapper<Treat>{
 		t.setAppointTime(rs.getInt("appoint_time"));
 		t.setPayAmount(rs.getInt("pay_amount"));
 		t.setIsDone(rs.getString("is_done"));
-		t.setOpinion(rs.getString("opinion"));
+		t.setOpinionSymptom(rs.getString("opinion_symptom"));
+		t.setOpinionDecision(rs.getString("opinion_decision"));
 		t.setMemberNo(rs.getInt("member_no"));
 		t.setDoctorNo(rs.getInt("doctor_no"));
 		return t;

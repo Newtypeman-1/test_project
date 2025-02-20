@@ -199,5 +199,10 @@ public class MemberController {
 			return r;
 		}
 	}
+	
+	@GetMapping(value="/myMedicalRecordsPageFrm")
+	public String myMedicalRecordsPageFrm() {
+		return "member/myMedicalRecordsPage";
+	}
 
 }

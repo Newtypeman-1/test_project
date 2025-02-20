@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.menu-section{
+	width: 200px;
+	margin: 0 auto;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: top;
+	flex-direction: column;
+    border: 3px solid rgba(0,153,153,0.5);
+    border-radius: 10px;
+}
+.menu-title{
+	text-align: center;
+	color: #fff;
+}
+.menu-section> ul{
+	list-style: none;
+}
+.menu-section> ul{
+	text-align: center;
+	color: rgba(0,153,153,0.5);
+}
+.section{
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+	.page-title{
+		text-align: center;
+		padding: 30px;
+		font-size: 25px;
+	}
+	.page-menu{
+		width: 1500px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	.info{
+		margin: 0 auto;
+		margin-bottom: 40px;
+		width: 80%;
+		border: 1px solid black;
+		border-radius: 15px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		width: 1200px;
+		float: left;
+	}
+	.img{
+		width: 400px;
+		margin: 0 auto;
+	}
+	.intro{
+		width: 700px;
+	}
+	.intro .input>input{
+		border: none;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="menu-section">
+			<div class="menu-title">마이페이지 메뉴</div>
+			<ul>
+				<li>
+					<th:block th:if="${session.member != null}">
+						<a href="/member/mypage">내 정보</a>
+					</th:block>
+					<th:block th:if="${session.doctor != null}">
+                          	<a href="/doctor/mypage">내 정보</a>
+					</th:block>
+				</li>
+				<li>
+					<th:block th:if="${session.member != null}">
+						<a href="/member/mypage">내 진료 기록</a>
+					</th:block>
+					<th:block th:if="${session.doctor != null}">
+                          	<a href="/doctor/mypage">내 진료 기록</a>
+					</th:block>
+				</li>
+				<li>
+					<th:block th:if="${session.member != null}">
+						<a href="/member/qna">내 문의/리뷰 기록</a>
+					</th:block>
+					<th:block th:if="${session.doctor != null}">
+						<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
+					</th:block>
+				</li>
+			</ul>
+		</section>
+		<section class="section">
+			<div class="page-title">내 진료 기록</div>
+			
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+	<script>
+		$(".del").on("click",function(){
+			
+		});
+	</script>
+</body>
+</html>

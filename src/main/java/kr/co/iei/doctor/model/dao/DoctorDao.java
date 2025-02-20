@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.vo.Review;
 
 @Repository
@@ -40,4 +41,23 @@ public class DoctorDao {
 		return list2;
 	}
 	
+	public Doctor findId(Doctor d) {
+		String query = "select * from doctor_tbl where doctor_email=?";
+		Object[] params = {d.getDoctorEmail()};
+		List list = jdbc.query(query, doctorRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return (Doctor)list.get(0);
+	}
+	
+	public Doctor findPw(Doctor d) {
+		String query = "select * from doctor_tbl where doctor_id=? and doctor_email=?";
+		Object[] params = {d.getDoctorId(), d.getDoctorEmail()};
+		List list = jdbc.query(query, doctorRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}
+		return (Doctor)list.get(0);
+	}
 }
