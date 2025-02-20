@@ -88,6 +88,7 @@
 	font-weight: bold;
 }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -170,8 +171,8 @@
 			</section>
 		</div>
 	</main>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
 	<script>
 		let hour = 0;
 		function updateTime(){
@@ -241,6 +242,7 @@
 			if(!$(this).hasClass("btn-activated")){
 				e.preventDefault();
 			}
+// 			$(".appoint-form").submit();
 			const totalPrice = $("#payAmount").val();
 			const date = new Date();
 			const dateString = date.getFullYear() + "" + (date.getMonth() + 1) + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
@@ -260,26 +262,14 @@
 				},
 				function (rsp) {
 					console.log(rsp);
-					if(rsp.success){
-						Swal.fire({
-							title: "결제 완료",
-							text: "페이지로 이동합니다.",
-							icon: "success",
-							confirmButtonText: "확인",
-						}).then(result => {
-							console.log("hello");
-// 							const form = $(".appoint-form");
-// 							form.submit();
-// 							location.href = "/member/mypage2";
-						});
+					if(rsp.status == "paid"){
+						$(".appoint-form").submit();
 					}else{
 						Swal.fire({
 							title: "결제 실패",
 							text: rsp.error_msg,
 							icon: "info",
 							confirmButtonText: "확인",
-						}).then(result => {
-							location.href = "/api/pay";
 						});
 					}
 				}
