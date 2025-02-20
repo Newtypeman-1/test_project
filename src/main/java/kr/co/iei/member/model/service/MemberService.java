@@ -54,6 +54,11 @@ public class MemberService {
 	public int deleteMemeber(int memberNo) {
 		int result = memberDao.deleteMember(memberNo);
 		return result;
+
+	public List allMedicalRecords(Member member) {
+		List list = memberDao.allMedicalRecords(member);
+		return list;
+
 	}
 
 	

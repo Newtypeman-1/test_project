@@ -201,7 +201,9 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="/myMedicalRecordsPageFrm")
-	public String myMedicalRecordsPageFrm() {
+	public String myMedicalRecordsPageFrm(@SessionAttribute(required = false) Member member) {
+		List list = memberService.allMedicalRecords();
+		
 		return "member/myMedicalRecordsPage";
 	}
 	

@@ -41,4 +41,9 @@ public class TreatService {
 		return treatDao.selectDepartmentName(departmentNo);
 	}
 
+	public List selectAllDepartment() {
+		List list = treatDao.selectAllDepartment();
+		return list;
+	}
+
 }

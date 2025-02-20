@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Helpdoc | 진료과</title>
+</head>
+<style>
+.title-section{
+	height: 120px;
+}
+.page-title{
+	width: 1200px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin: 0 auto;
+}
+.page-title>h2{
+	text-align: center;
+	line-height: 120px;
+	font-weight: 500;
+	font-size: 40px;
+}
+.content-section>div>div{
+	margin: 0 auto;
+}
+.department-search{
+	margin: 40px auto;
+	width: 1200px;
+}
+.department-search>h3{
+	text-align: center;
+	letter-spacing: 10px;
+}
+.department-list{
+	gap: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	align-content: center;
+}
+.department-item{
+	width: 23%;
+	margin: 0 0 2% 2%;
+}
+.department-item a{
+	display: table;
+	color: black;
+	width: 100%;
+	height: 85px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	font-weight: 500;
+	cursor: default;
+}
+.department-name{
+	display: table-cell;
+	line-height: 85px;
+	text-align: center;
+}
+</style>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section title-section">
+			<div class="page-title">
+				<h2>진료과</h2>
+			</div>
+		</section>
+		<section class="section content-section">
+			<div>
+				<div>
+					<div class="department-search">
+						<h3>1 2 3 4 5 6 7 8 9</h3>
+					</div>
+					<ul class="department-list">
+						<th:block th:each="depart, status : ${departments}">
+							<li th:class="'department-' + ${status.index} + ' department-item'">
+								<div>
+									<a th:href="@{/treat/department(departmentNo=${depart.departmentNo})}">
+										<span></span>
+										<span class="department-name" th:text="${depart.departmentName}"></span>
+									</a>
+								</div>
+							</li>
+						</th:block>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
