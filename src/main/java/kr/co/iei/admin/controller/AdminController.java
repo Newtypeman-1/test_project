@@ -16,6 +16,7 @@ import kr.co.iei.admin.model.service.AdminService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
+import kr.co.iei.util.FileUtils;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -28,6 +29,8 @@ public class AdminController {
 	private DoctorService doctorService;
 	@Value(value="${file.root}")
 	private String root;
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@GetMapping(value="/mainPage")
 	public String mainPage() {
@@ -51,6 +54,11 @@ public class AdminController {
 	
 	@PostMapping(value="/addAcount")
 	public String join(Doctor d, Model model, MultipartFile imgFile) {
+		if(!imgFile.isEmpty()) {
+			String savepath = root+"/doctor/";
+			String filepath = fileUtils.upload(savepath, imgFile);
+			d.setDoctorImg(filepath);
+		}
 		int result = adminService.insertDoctor(d);
 		model.addAttribute("title", "회원가입 성공");
 		model.addAttribute("text","회원가입에 성공했습니다.");
