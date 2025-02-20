@@ -22,7 +22,9 @@ public class TreatController {
 	private TreatService treatService;
 	
 	@GetMapping(value="/allDepart")
-	public String allDepart() {
+	public String allDepart(Model mod) {
+		List list = treatService.selectAllDepartment();
+		mod.addAttribute("departments", list);
 		return "treat/allDepart";
 	}
 	
@@ -70,4 +72,5 @@ public class TreatController {
 			return "common/msg";
 		}
 	}
+	
 }

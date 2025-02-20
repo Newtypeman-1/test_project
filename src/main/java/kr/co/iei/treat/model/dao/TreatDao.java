@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
+import kr.co.iei.treat.model.vo.DepartmentRowMapper;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.treat.model.vo.TreatRowMapper;
 
@@ -22,6 +23,8 @@ public class TreatDao {
 	private TreatRowMapper treatRowMapper;
 	@Autowired
 	private DoctorRowMapper doctorRowMapper;
+	@Autowired
+	private DepartmentRowMapper departmentRowMapper;
 	
 	public List<Integer> selectUnavailableTimes(int doctorNo) {
 		String query = "select * from treatment_tbl where appoint_date = to_char(sysdate, 'yyyy-MM-dd') and doctor_no = ?";
@@ -70,6 +73,12 @@ public class TreatDao {
 		} catch(EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+
+	public List selectAllDepartment() {
+		String query = "select * from department_tbl order by 1";
+		List list = jdbc.query(query, departmentRowMapper);
+		return list;
 	}
 
 }
