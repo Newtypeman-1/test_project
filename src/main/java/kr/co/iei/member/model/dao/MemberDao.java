@@ -60,6 +60,5 @@ public class MemberDao {
 		Object[] params = {m.getMemberId(), m.getMemberPw(), m.getMemberName(), m.getMemberPhone(), m.getMemberAddr(), m.getMemberEmail(), m.getMemberGender()};
 		int r = jdbc.update(query, params);
 		return r;
-
 	}
 }
