@@ -1,5 +1,6 @@
 package kr.co.iei.member.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.review.model.service.ReviewService;
 import kr.co.iei.util.EmailSender;
 
 @Controller
@@ -24,6 +26,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private EmailSender emailSender;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@GetMapping(value="/loginFrm")
 	public String loginFrm() {
@@ -142,7 +146,10 @@ public class MemberController {
 		}
 	}
 	@GetMapping(value="/qna")
-	public String memberQna() {
+	public String memberQna(Model model, @SessionAttribute(required = false) Member member) {
+		System.out.println(member.getMemberId());
+		List memberAllReview = reviewService.memberAllReview(member);
+		model.addAttribute("list", memberAllReview);
 		return "member/qna";
 	}
 	
@@ -192,4 +199,5 @@ public class MemberController {
 			return r;
 		}
 	}
+
 }

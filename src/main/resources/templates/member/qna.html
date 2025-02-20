@@ -12,26 +12,31 @@
 	.page-menu{
 		width: 1500px;
 		margin: 0 auto;
-		overflow: hidden;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		flex-wrap: wrap;
 	}	
 	.menu-title{
 		padding: 10px;
 		border: 1px solid black;
 		border-radius: 15px;
-		width: 200px;
-		float: left;
+		width: 200px;		
 		margin-right: 100px;
 		text-align: center;
+		position: fixed;
+ 		left: 200px;
+	}
+	.menu-title>ul{
+		list-style: none;
 	}
 	.info{
-		margin: 0 auto;
 		margin-bottom: 40px;
 		border: 1px solid black;
 		border-radius: 15px;
 		padding: 10px;
 		align-items: center;
 		width: 1200px;
-		float: left;
 	}
 	.page-menu>.info:last-child{
 		float: right;
@@ -40,8 +45,19 @@
 		width: 100%;
 		margin: 0 auto;
 		text-align: center;
-		border-bottom: 1px solid black;
 	}
+	.tbl tr:first-child{
+		border-bottom: 1px solid black;	
+	}
+	.star {
+        color: gold;
+        font-size: 24px;
+    }
+    .qwer{
+    	margin-top: 5px;
+    	margin-bottom: 5px;
+    	box-sizing: border-box;
+    }
 </style>
 </head>
 <body>
@@ -49,48 +65,46 @@
 	<main class="main">
 		<section class="section">
 			<div class="page-title">내 문의/리뷰 기록</div>
+			<div class="menu-title">
+				<ul>
+					<li>마이페이지 메뉴</li>
+					<li>
+						<th:block th:if="${session.member == null && session.doctor == null}">
+                          		<a href="/">내 정보</a>
+						</th:block>
+						<th:block th:if="${session.member != null}">
+							<a href="/member/mypage">내 정보</a>
+						</th:block>
+						<th:block th:if="${session.doctor != null}">
+                           	<a href="/doctor/mypage">내 정보</a>
+						</th:block>
+					</li>
+					<li>
+						<th:block th:if="${session.member == null && session.doctor == null}">
+                          		<a href="/">내 진료 기록</a>
+						</th:block>
+						<th:block th:if="${session.member != null}">
+							<a href="/member/mypage">내 진료 기록</a>
+						</th:block>
+						<th:block th:if="${session.doctor != null}">
+                           	<a href="/doctor/mypage">내 진료 기록</a>
+						</th:block>
+					</li>
+					<li>
+						<th:block th:if="${session.member == null && session.doctor == null}">
+                          		<a href="/">내 문의/리뷰 기록</a>
+						</th:block>
+						<th:block th:if="${session.member != null}">
+							<a href="/member/qna">내 문의/리뷰 기록</a>
+						</th:block>
+						<th:block th:if="${session.doctor != null}">
+							<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
+						</th:block>
+					</li>
+				</ul>
+			</div>
 			<div class="page-menu">
-				<div class="menu-title">
-					<ul>
-						<li>마이페이지 메뉴</li>
-						<li>
-							<th:block th:if="${session.member == null && session.doctor == null}">
-                           		<a href="/">내 정보</a>
-							</th:block>
-							<th:block th:if="${session.member != null}">
-								<a href="/member/mypage">내 정보</a>
-							</th:block>
-							<th:block th:if="${session.doctor != null}">
-                            	<a href="/doctor/mypage">내 정보</a>
-							</th:block>
-						</li>
-						<li>
-							<th:block th:if="${session.member == null && session.doctor == null}">
-                           		<a href="/">내 진료 기록</a>
-							</th:block>
-							<th:block th:if="${session.member != null}">
-								<a href="/member/mypage">내 진료 기록</a>
-							</th:block>
-							<th:block th:if="${session.doctor != null}">
-                            	<a href="/doctor/mypage">내 진료 기록</a>
-							</th:block>
-						</li>
-						<li>
-							<th:block th:if="${session.member == null && session.doctor == null}">
-                           		<a href="/">내 문의/리뷰 기록</a>
-							</th:block>
-							<th:block th:if="${session.member != null}">
-								<a href="/member/qna">내 문의/리뷰 기록</a>
-							</th:block>
-							<th:block th:if="${session.doctor != null}">
-								<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
-							</th:block>
-						</li>
-					</ul>
-				</div>
-				<div>
-				</div>
-				<div class="info">
+				<div class="info quest-page">
 					<table class="tbl">
 						<tr>
 							<th style="width:10%">문의번호</th>
@@ -98,23 +112,58 @@
 							<th style="width:15%">답변</th>
 							<th style="width:10%">작성일</th>
 						</tr>
-						
+						<tr th:each="review : ${list}" class="qwer">
+							<th:block th:if="${session.member.memberId == review.reviewWriter}">
+							<td th:text="${review.reviewNo}"></td>
+							<td th:text="${review.reviewTitle}"></td>
+							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+							<td th:text="${review.reviewDate}"></td>
+							</th:block>
+						</tr>	
 					</table>
+						<button type="button" id="allQna">전체 문의 보기</button>
 				</div>
-				<div class="info">
+				<div class="info review-page">
 					<table class="tbl">
 						<tr>
-							<!-- select review_no,review_title, reivew_star, review_date from review; -->
 							<th style="width:10%">리뷰번호</th>
 							<th style="width:40%">제목</th>
 							<th style="width:15%">별점</th>
 							<th style="width:10%">작성일</th>
-						</tr>						
+						</tr>
+						<tr th:each="review : ${list}" class="qwer">
+							<th:block th:if="${session.member.memberId == review.reviewWriter}">
+								<td th:text="${review.reviewNo}"></td>
+								<td th:text="${review.reviewTitle}"></td>
+								<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+								<td th:text="${review.reviewDate}"></td>
+							</th:block>
+						</tr>
 					</table>
+						<button type="button" id="allReview">전체 리뷰 보기</button>						
 				</div>
 			</div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
+	<script>       
+            $(".star-cell").each(function() {
+                let starCount = parseInt($(this).attr("data-star")) || 0;
+                let stars = "";
+
+                for (let i = 0; i < 5; i++) {
+                    if (i < starCount) {
+                        stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
+                    } else {
+                        stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
+                    }
+                }
+                
+                $(this).html(`<div class="star-wrap">${stars}</div>`);
+            });   
+            $("#allReview").on("click", function(){
+            	
+            });
+    </script>
 </body>
 </html>

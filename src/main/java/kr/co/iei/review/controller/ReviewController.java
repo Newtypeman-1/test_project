@@ -23,6 +23,5 @@ public class ReviewController {
 		model.addAttribute("list", rld.getList());
 		model.addAttribute("navi", rld.getNavi());
 		return "review/list";
-	}
-	
+	}	
 }
