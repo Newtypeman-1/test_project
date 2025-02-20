@@ -1,6 +1,8 @@
 package kr.co.iei.doctor.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +14,17 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.review.model.service.ReviewService;
+import kr.co.iei.review.model.vo.Review;
+import kr.co.iei.review.model.vo.ReviewListData;
 
 @Controller
 @RequestMapping(value="/doctor")
 public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@PostMapping(value="/login")
 	public String doctorLogin(Doctor d, HttpSession session) {
@@ -29,7 +36,7 @@ public class DoctorController {
 			return "redirect:/";
 		}
 	}
-	@GetMapping(value="logout")
+	@GetMapping(value="/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
@@ -56,8 +63,9 @@ public class DoctorController {
 		}
 	}
 	@GetMapping(value="/qna")
-	public String doctorQna() {
-		
+	public String doctorQna(Model model) {
+		List allReview = reviewService.allReview();
+		model.addAttribute("list", allReview);
 		return "/doctor/qna";
 	}
 }

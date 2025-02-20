@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.doctor.model.dao.DoctorDao;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.review.model.vo.Review;
 
 @Service
 public class DoctorService {
@@ -18,14 +19,16 @@ public class DoctorService {
 		Doctor doctor = doctorDao.selectOneDoctor(d);
 		return doctor;
 	}
+	
 	@Transactional
 	public int updateDoctor(Doctor d) {
 		int result = doctorDao.updateDoctor(d);
 		return result;
-	}
+	}	
+
 	public List selectAllDoctor() {
 		List list2 = doctorDao.selectAllDoctor();
 		return list2;
 	}
-
+	
 }

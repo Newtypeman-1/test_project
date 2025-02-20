@@ -4,32 +4,33 @@
 <meta charset="UTF-8">
 <title>리뷰</title>
 <style>
-	.tbl{
-		width: 70%;
-		margin: 0 auto;	
-		text-align: center;
-		font-size: 20px;	
-	}
-	.page-title{
-		text-align: center;
-		padding: 30px;
-		font-size: 25px;
-	}
-	.star-wrap>span{
-		color: lightgray;
-	}
-	.tbl tr>th{
-		
-		background-color: lightgray;
-		padding: 20px;
-	}
-	.tbl tr>th:last-child{
-		border-right: none;
-	}
-	.tbl tr>td{
-		padding: 10px 0;
-		border-bottom: 1px solid #ddd;
-	}
+	.tbl {
+        width: 70%;
+        margin: 0 auto;	
+        text-align: center;
+        font-size: 20px;	
+    }
+    .page-title {
+        text-align: center;
+        padding: 30px;
+        font-size: 25px;
+    }
+    .star-wrap {
+        display: flex;
+        justify-content: center;
+    }
+    .star {
+        color: gold;
+        font-size: 24px;
+    }
+    .tbl tr>th {
+        background-color: lightgray;
+        padding: 20px;
+    }
+    .tbl tr>td {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
 </style>
 </head>
 <body>
@@ -47,23 +48,9 @@
 						<th style="width:10%">작성일</th>
 					</tr>
 					<tr th:each="review : ${list}">
-						<td th:text="${review.reviewStar}">
-							<!-- <span class="material-icons">star_rate</span> -->
-							<div class="star-wrap">
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<span class="material-icons">star_rate</span>
-								<div class="star-wrap">
-									<span class="material-icons">star_rate</span>
-									<span class="material-icons">star_rate</span>
-									<span class="material-icons">star_rate</span>
-									<span class="material-icons">star_rate</span>
-									<span class="material-icons">star_rate</span>
-								</div>	
-							</div>							
-						</td>
+						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+							<!-- <span class="material-icons">star_rate</span> -->							
+						
 						<td th:text="${review.reviewContent}"></td>
 						<td th:text="${review.reviewWriter}"></td>
 						<td th:text="${review.doctorName}"></td>
@@ -75,5 +62,23 @@
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
+	<script>
+       
+            $(".star-cell").each(function() {
+                let starCount = parseInt($(this).attr("data-star")) || 0;
+                let stars = "";
+
+                for (let i = 0; i < 5; i++) {
+                    if (i < starCount) {
+                        stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
+                    } else {
+                        stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
+                    }
+                }
+
+                $(this).html(`<div class="star-wrap">${stars}</div>`);
+            });
+        
+    </script>
 </body>
 </html>

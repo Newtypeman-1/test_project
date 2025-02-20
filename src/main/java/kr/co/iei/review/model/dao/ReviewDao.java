@@ -27,5 +27,14 @@ public class ReviewDao {
 		int totalReview = jdbc.queryForObject(query, Integer.class);
 		return totalReview;
 	}
+
+	public List allReview() {
+		String query = "select \r\n"
+				+ "    r.*,\r\n"
+				+ "    (select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name\r\n"
+				+ "from review r";
+		List allReview = jdbc.query(query, reviewRowMapper);
+		return allReview;
+	}
 	
 }
