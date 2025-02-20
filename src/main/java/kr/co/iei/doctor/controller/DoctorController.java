@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.review.model.vo.ReviewListData;
 
 @Controller
 @RequestMapping(value="/doctor")

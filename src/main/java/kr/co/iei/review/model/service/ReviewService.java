@@ -24,8 +24,6 @@ public class ReviewService {
 		if(totalReview%numPage != 0) {
 			totalPage += 1;
 		}
-		System.out.println(totalReview);
-		System.out.println(totalPage);
 		int naviSize = 5;
 		int naviNo = ((reqPage - 1)/naviSize) * naviSize + 1;
 		String navi = "<ul class='pagination justify-content-center'>";

@@ -21,5 +21,5 @@ public class DoctorService {
 		int result = doctorDao.updateDoctor(d);
 		return result;
 	}
-
+	
 }
