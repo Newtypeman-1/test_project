@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Help DOC - 아이디 / 비밀번호 찾기</title>
+<title>Help DOC - 회원 - 아이디 / 비밀번호 찾기</title>
 <style>
 .section{
     width: 800px;
@@ -11,7 +11,11 @@
 }
 .tab{
     overflow: hidden;
-    background-color: rgba(0,153,153,0.5);
+    background-color: rgb(0,153,153);
+    border: 3px solid rgb(0,153,153);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: none;
 }
 .tab>div{
     width: calc(100% / 2);
@@ -21,18 +25,20 @@
     line-height: 48px;
     float: left;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid transparent;
     border-left: none;
     cursor: pointer;
 }
 .tab>div:first-child{
-    border-left: 1px solid black;
+    border-left: 1px solid transparent;
 }
 .tab-content{
     padding: 20px;
-    border: 1px solid black;
+    border: 3px solid rgb(0,153,153);
     border-top: none;
     transition-duration: 0.5s;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 .tab-content>div{
     display: none;
@@ -183,7 +189,7 @@
 			const wm = $(".wrong-message");
 			const emailV = $("#memberEmail1").val();
 			const email = $("#memberEmail1");
-			if(emailV.eq(1) === ""){
+			if(emailV === ""){
 				event.preventDefault();
 				wm.addClass("invalid");
 				wm.text("찾으실 아이디에 입력된 이메일을 입력해주세요.");
