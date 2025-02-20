@@ -1,5 +1,6 @@
 package kr.co.iei.member.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -194,7 +195,9 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="/myMedicalRecordsPageFrm")
-	public String myMedicalRecordsPageFrm() {
+	public String myMedicalRecordsPageFrm(@SessionAttribute(required = false) Member member) {
+		List list = memberService.allMedicalRecords();
+		
 		return "member/myMedicalRecordsPage";
 	}
 }

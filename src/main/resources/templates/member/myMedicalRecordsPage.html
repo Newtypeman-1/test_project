@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.main{
+	display: flex;
+	margin: 0 auto;
+}
 .menu-section{
 	width: 200px;
 	margin: 0 auto;
-	padding: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: top;
@@ -18,13 +21,31 @@
 .menu-title{
 	text-align: center;
 	color: #fff;
-}
-.menu-section> ul{
-	list-style: none;
+	background-color: rgba(0,153,153,0.5);
+	border-top-right-radius: 7px;
+	border-top-left-radius: 7px;
+	padding: 5px;
+	font-weight: 900;
 }
 .menu-section> ul{
 	text-align: center;
 	color: rgba(0,153,153,0.5);
+}
+.menu-section li{
+	list-style: none;
+	padding: 5px;
+	border-bottom: 3px solid rgba(0,153,153,0.5);
+	text-decoration: none;
+	
+}
+a:link{
+	color: rgb(0,153,153);
+}
+a:visited{
+	color: rgb(0,153,153);
+}
+.menu-section li:last-child{
+	border: none;
 }
 .section{
     width: 800px;
@@ -81,10 +102,10 @@
 				</li>
 				<li>
 					<th:block th:if="${session.member != null}">
-						<a href="/member/mypage">내 진료 기록</a>
+						<a href="/member/myMedicalRecordsPageFrm">내 진료 기록</a>
 					</th:block>
 					<th:block th:if="${session.doctor != null}">
-                          	<a href="/doctor/mypage">내 진료 기록</a>
+                          	<a href="/doctor/myMedicalRecordsPageFrm">내 진료 기록</a>
 					</th:block>
 				</li>
 				<li>
@@ -98,8 +119,28 @@
 			</ul>
 		</section>
 		<section class="section">
-			<div class="page-title">내 진료 기록</div>
-			
+			<div class="page-title">내 진료 기록 검색</div>
+			<div class="review-wrap">
+				<table class="tbl">
+					<tr>
+						<th style="width:15%">별점</th>
+						<th style="width:40%">내용</th>
+						<th style="width:10%">작성자</th>
+						<th style="width:10%">담당의</th>
+						<th style="width:10%">작성일</th>
+					</tr>
+					<tr th:each="review : ${list}">
+						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+							<!-- <span class="material-icons">star_rate</span> -->							
+						
+						<td th:text="${review.reviewContent}"></td>
+						<td th:text="${review.reviewWriter}"></td>
+						<td th:text="${review.doctorName}"></td>
+						<td th:text="${review.reviewDate}"></td>
+					</tr>
+				</table>
+				<div id="navi" th:utext="${navi}"></div>
+			</div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>

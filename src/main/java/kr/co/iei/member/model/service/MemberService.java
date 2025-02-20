@@ -51,5 +51,10 @@ public class MemberService {
 		return member;
 	}
 
+	public List allMedicalRecords(Member member) {
+		List list = memberDao.allMedicalRecords(member);
+		return list;
+	}
+
 	
 }
