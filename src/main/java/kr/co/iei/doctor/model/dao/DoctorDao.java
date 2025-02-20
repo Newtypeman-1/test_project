@@ -32,4 +32,9 @@ public class DoctorDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
+	public List selectAllDoctor() {
+		String query = "select * from doctor_tbl order by 1";
+		List list2 = jdbc.query(query,doctorRowMapper);
+		return list2;
+	}
 }

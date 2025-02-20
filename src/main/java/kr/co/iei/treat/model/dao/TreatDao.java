@@ -52,4 +52,11 @@ public class TreatDao {
 		return (Doctor) list.get(0);
 	}
 
+	public int insertTreatment(Treat t) {
+		String query = "insert into treatment_tbl value(treatment.nextval, to_char(sysdate, 'yyyy-MM-dd'), ?, 0, 0, null, ?, ?)";
+		Object[] params = {t.getAppointTime(), t.getMemberNo(), t.getDoctorNo()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
 }

@@ -49,10 +49,18 @@ public class MemberDao {
 		return result;
 	}
 
+
+	public List selectAllMember() {
+		String query = "select * from member_tbl order by 1";
+		List list = jdbc.query(query, memberRowMapper);
+		return list;
+	}
+
 	public int registerMember(Member m) {
 		String query = "insert into member_tbl values(member_seq.nextval, ?, ?, ?, ?, ?, ?, ?, to_char(sysdate,'yyyy-mm-dd'))";
 		Object[] params = {m.getMemberId(), m.getMemberPw(), m.getMemberName(), m.getMemberPhone(), m.getMemberAddr(), m.getMemberEmail(), m.getMemberGender()};
 		int r = jdbc.update(query, params);
 		return r;
+
 	}
 }

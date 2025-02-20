@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <title>예약페이지</title>
 <style>
-.appoint-main{
+.appoint-main>div{
 	width: 80%;
 	margin: 20px auto;
 	background-color: #00387E;
 	display: flex;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	justify-content: space-around;
+	align-items: center;
 }
-.appoint-main>section{
+.appoint-main>div>section{
 	padding: 20px;
 }
 .appoint-main-header{
@@ -69,9 +70,6 @@
 .appoint-sub-part table>tbody>tr{
 	border-bottom: 1px solid #2B81C1;
 }
-.appoint-sub-part th{
-	width: 30%;
-}
 .appoint-items{
 	border: 1px solid black;
 	border-radius: 20px;
@@ -81,52 +79,34 @@
 </style>
 </head>
 <body>
-	<form class="appoint-form" action="/treat/appoint" method="post">
-	<!-- 진료번호, 예약일은 자동처리 -->
-	<!-- 예약시간, 결제금액, 회원번호, 의사번호 -->
-		<input type="text" name="appointTime" id="appointDate">
-		<input type="text" name="payAmount" id="appointTime">
-		<input type="text" name="payAmount" id="payAmount">
-		<input type="text" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
-		<input type="text" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
-	</form>
 	<th:block th:include="common/header"></th:block>
-	<main class="appoint-main">
-		<section class="appoint-main-section">
-			<div class="appoint-main-wrap">
-				<div class="appoint-main-header">
-					<h6 style="color:white;">온라인 예약</h6>
-					<h3 style="color:white;">진료시간 선택</h3>
-				</div>
-				<div class="appoint-main-body">
-					<div class="appoint-body-container">
-						<div class="appoint-body-point">진료일정</div>
-						<div class="appoint-body-header">
-							<span>
-								<img style="width:60px;" src=../img/백강혁.webp>
-							</span>
-							<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
-							<span>담당의 진료일정입니다.</span>
-							<div class="appoint-today"></div>
+	<main class="main appoint-main">
+		<div>
+			<section class="section appoint-main-section">
+				<div class="appoint-main-wrap">
+					<div class="appoint-main-header">
+						<h6 style="color:white;">온라인 예약</h6>
+						<h3 style="color:white;">진료시간 선택</h3>
+					</div>
+					<div class="appoint-main-body">
+						<div class="appoint-body-container">
+							<div class="appoint-body-point">진료일정</div>
+							<div class="appoint-body-header">
+								<span>
+									<img style="width:60px;" src=../img/백강혁.webp>
+								</span>
+								<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
+								<span>담당의 진료일정입니다.</span>
+								<div class="appoint-today"></div>
+							</div>
+							<ul class="appoint-ul">
+							</ul>
 						</div>
-						<ul class="appoint-ul">
-<!-- 							<th:block th:each="num : ${#numbers.sequence(9, 18)}"> -->
-<!-- 								<th:block th:each="time : ${unavailableTimes}"> -->
-<!-- 									<li th:if="${num} != ${time} && ${num}>  "> -->
-<!-- 										<div class="appoint-items"> -->
-<!-- 											<span th:text="${num}"></span> -->
-<!-- 											<span> : 00</span> -->
-<!-- 										</div> -->
-<!-- 									</li> -->
-<!-- 								</th:block> -->
-<!-- 							</th:block> -->
-						</ul>
 					</div>
 				</div>
-			</div>
-		</section>
-		<section class="appoint-sub-section">
-			<div class="appoint-sub-part">
+			</section>
+			<section class="appoint-sub-section">
+				<div class="appoint-sub-part">
 					<table class="appoint-member-tbl">
 						<tr>
 							<th th:text="${session.member.memberName}"></th>
@@ -161,8 +141,19 @@
 							<td id="appoint-time">선택된 진료일시가 없습니다.</td>
 						</tr>
 					</table>
-			</div>
-		</section>
+					<form class="appoint-form" action="/treat/appoint" method="post">
+						<!-- 진료번호, 예약일은 자동처리 -->
+						<!-- 예약시간, 결제금액, 회원번호, 의사번호 -->
+<!-- 						<input type="hidden" name="appointDate" id="appointDate"> -->
+						<input type="hidden" name="appointTime" id="appointTime" required>
+<!-- 						<input type="hidden" name="payAmount" id="payAmount"> -->
+						<input type="hidden" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
+						<input type="hidden" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
+						<button type="submit">예약하기</button>
+					</form>
+				</div>
+			</section>
+		</div>
 	</main>
 	<script>
 		let hour = 0;
@@ -188,33 +179,22 @@
 		setInterval(updateTime, 1000);
 		updateTime();
 		
-// 		<th:block th:each="num : ${#numbers.sequence(9, 18)}">
-// 			<th:block th:each="time : ${unavailableTimes}">
-// 				<li th:if="${num} != ${time} && ${num}>  ">
-// 					<div class="appoint-items">
-// 						<span th:text="${num}"></span>
-// 						<span> : 00</span>
-// 					</div>
-// 				</li>
-// 			</th:block>
-// 		</th:block>
-
-		for(let i = 9; i <= 18; i++){
-			const li = $("<li>");
-			const div = $("<div class='appoint-items'>");
-			const span = $("<span>");
-			const span2 = $("<span>");
-			div.append(span).append(span2);
-			li.append(div);
-			let timeEle = i;
-			span.text(timeEle);
-			span2.text(" : 00");
-			$(".appoint-ul").append(li);
-			if(Number(hour) + 1 >= i){
-				div.css("color", "grey");
-				div.addClass("disabled");
-			}
-		}
+// 		for(let i = 9; i <= 18; i++){
+// 			const li = $("<li>");
+// 			const div = $("<div class='appoint-items'>");
+// 			const span = $("<span>");
+// 			const span2 = $("<span>");
+// 			div.append(span).append(span2);
+// 			li.append(div);
+// 			let timeEle = i;
+// 			span.text(timeEle);
+// 			span2.text(" : 00");
+// 			$(".appoint-ul").append(li);
+// 			if(Number(hour) + 1 >= i){
+// 				div.css("color", "grey");
+// 				div.addClass("disabled");
+// 			}
+// 		}
 		$(".appoint-items").on("click", function(){
 			if($(this).hasClass("disabled")){
 				return;
@@ -227,6 +207,38 @@
 			$("#appointTime").val($(this).children().eq(0).text());
 		});
 		
+		function getTimes(){
+			const doctorNo = $("#doctorNo").val();
+			$.ajax({
+				url: "/treat/getTimes",
+				type: "get",
+				data: {doctorNo: doctorNo},
+				success: function(data){
+					for(let i = 9; i <= 18; i++){
+						const li = $("<li>");
+						const div = $("<div class='appoint-items'>");
+						const span = $("<span>");
+						const span2 = $("<span>");
+						div.append(span).append(span2);
+						li.append(div);
+						span.text(i);
+						span2.text(" : 00");
+						$(".appoint-ul").append(li);
+						if(Number(hour) + 1 >= i){
+							div.css("color", "grey");
+							div.addClass("disabled");
+						}
+						data.forEach(item => {
+							if(item == i){
+								div.css("color", "grey");
+								div.addClass("disabled");
+							}
+						});
+					}
+				}
+			});
+		}
+		getTimes();
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

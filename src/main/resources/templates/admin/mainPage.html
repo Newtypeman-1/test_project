@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>관리자 메인페이지</title>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<section class="section">
+			<div class="page-title">관리자페이지</div>
+		</section>
+		<a href="/admin/allMember"><button>전체 회원 조회</button></a>
+		<a href="/admin/allSchedule"><button>전체 진료일정 조회</button></a>
+		<a href="/admin/updateDoctor"><button>의료진 계정 추가/삭제</button></a>
+	</main>		
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
