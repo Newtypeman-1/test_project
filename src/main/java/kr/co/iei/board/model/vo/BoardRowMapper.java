@@ -11,8 +11,14 @@ public class BoardRowMapper implements RowMapper<Board> {
 
 	@Override
 	public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Board b = new Board();
+		b.setBoardContent(rs.getString("board_content"));
+		b.setBoardNo(rs.getInt("board_no"));
+		b.setBoardReadCount(rs.getInt("board_read_count"));
+		b.setBoardRegDate(rs.getString("board_reg_date"));
+		b.setBoardTitle(rs.getString("board_title"));
+		b.setBoardWriter(rs.getString("board_writer"));
+		return b;
 	}
 
 }
