@@ -62,4 +62,5 @@ public class ReviewService {
 		List memberAllReview = reviewDao.memberAllReview(member);
 		return memberAllReview;
 	}
+
 }

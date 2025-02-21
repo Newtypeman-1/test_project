@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.doctor.model.vo.DoctorRatingRowMapper;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
 import kr.co.iei.treat.model.vo.DepartmentRowMapper;
 import kr.co.iei.treat.model.vo.Treat;
@@ -24,6 +25,8 @@ public class TreatDao {
 	@Autowired
 	private DoctorRowMapper doctorRowMapper;
 	@Autowired
+	private DoctorRatingRowMapper doctorRatingRowMapper;
+	@Autowired
 	private DepartmentRowMapper departmentRowMapper;
 	
 	public List<Integer> selectUnavailableTimes(int doctorNo) {
@@ -38,15 +41,17 @@ public class TreatDao {
 		return unavailableTimes;
 	}
 
-	public List<Doctor> selectDoctors(int departmentNo) {
-		String query = "select * from doctor_tbl where department_no = ?";
+	public List<Doctor> selectDoctorsWithRating(int departmentNo) {
+		String query = "SELECT\r\n"
+				+ "	    doctor.*,\r\n"
+				+ "	    department_name,\r\n"
+				+ "	    (SELECT COUNT(review_star) FROM review WHERE doctor_no = doctor.doctor_no) AS review_total,\r\n"
+				+ "	    nvl((SELECT AVG(review_star) FROM review WHERE doctor_no = doctor.doctor_no),0.0) AS review_rating\r\n"
+				+ "	    FROM doctor_tbl doctor\r\n"
+				+ "	    JOIN department_tbl dept ON (doctor.department_no = dept.DEPARTMENT_NO)"
+				+ "		WHERE dept.department_no = ?";
 		Object[] params = {departmentNo};
-		List<Doctor> list = jdbc.query(query, doctorRowMapper, params);
-		
-		//임시
-//		String query = "select * from doctor_tbl";
-//		List<Doctor> list = jdbc.query(query, doctorRowMapper);
-		
+		List<Doctor> list = jdbc.query(query, doctorRatingRowMapper, params);
 		return list;
 	}
 

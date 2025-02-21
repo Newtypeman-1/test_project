@@ -43,5 +43,5 @@ public class ReviewDao {
 		List memberAllReview = jdbc.query(query, reviewRowMapper);
 		return memberAllReview;
 	}
-	
+
 }
