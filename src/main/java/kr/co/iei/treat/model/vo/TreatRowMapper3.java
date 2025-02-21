@@ -22,6 +22,7 @@ public class TreatRowMapper3 implements RowMapper<Treat>{
 		t.setMemberNo(rs.getInt("member_no"));
 		t.setDoctorNo(rs.getInt("doctor_no"));
 		t.setDepartmentName(rs.getString("department_name"));
+		t.setMemberId(rs.getString("member_id"));
 		t.setMemberName(rs.getString("member_name"));
 		t.setMemberAddr(rs.getString("member_addr"));
 		t.setMemberPhone(rs.getString("member_phone"));

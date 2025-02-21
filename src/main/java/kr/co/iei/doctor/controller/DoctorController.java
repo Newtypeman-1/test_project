@@ -133,7 +133,7 @@ public class DoctorController {
 		DoctorPageList dpl = doctorService.allMedicalRecords(doctor, reqPage);
 		model.addAttribute("list", dpl.getList());
 		model.addAttribute("pageNavi", dpl.getPageNavi());
-		return "member/myMedicalRecordsPage";
+		return "doctor/myMedicalRecordsPage";
 	}
 	
 }
