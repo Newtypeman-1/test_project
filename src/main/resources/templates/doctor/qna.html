@@ -112,11 +112,11 @@
 							<th style="width:15%">답변</th>
 							<th style="width:10%">작성일</th>
 						</tr>
-						<tr th:each="review : ${list}" class="qwer">
-							<td th:text="${review.reviewNo}"></td>
-							<td th:text="${review.reviewTitle}"></td>
-							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
-							<td th:text="${review.reviewDate}"></td>
+						<tr th:each="board : ${list}" class="qwer">
+							<td th:text="${board.boardNo}"></td>
+							<td th:text="${board.boardTitle}"></td>
+							<td>답변</td>
+							<td th:text="${board.boardRegDate}"></td>
 						</tr>	
 					</table>
 						<button type="button" id="allQna">전체 문의 보기</button>
@@ -130,10 +130,10 @@
 							<th style="width:10%">작성일</th>
 						</tr>
 						<tr th:each="review : ${list}" class="qwer">
-								<td th:text="${review.reviewNo}"></td>
-								<td th:text="${review.reviewTitle}"></td>
-								<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
-								<td th:text="${review.reviewDate}"></td>
+							<td th:text="${review.reviewNo}"></td>
+							<td th:text="${review.reviewTitle}"></td>
+							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
 						<button type="button" id="allReview">전체 리뷰 보기</button>						
