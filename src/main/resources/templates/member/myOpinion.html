@@ -10,6 +10,9 @@
 .section{
 	padding-top: 10px;
 	padding-bottom: 10px;
+	flex-grow: 1;
+	margin: 0 auto;
+	justify-content: center;
 }
 table{
 	border: 1px solid black;
@@ -33,6 +36,12 @@ td{
 	box-sizing: border-box;
 	height: 50px;
 	text-align: center;
+}
+.tbl>.buttons{
+	border: transparent;
+}
+.buttons>td{
+	border: transparent;
 }
 </style>
 </head>
@@ -83,14 +92,11 @@ td{
 					<th:block th:if="${t.isDone} == '0'">
 						<td colspan="10">아직 소견서가 작성되지 않았습니다.</td>
 					</th:block>
-					<th:block th:if="${t.isDone} == '0'">
-						<button type="button">진료 중</button>
-					</th:block>
 					<th:block th:if="${t.isDone} == '1'">
 						<td colspan="10" th:text="${t.opinionDecision}"></td>
 					</th:block>
 				</tr>
-				<tr>
+				<tr class="buttons">
 					<td colspan="2">
 						<button type="button">인쇄</button>
 					</td>
@@ -98,20 +104,18 @@ td{
 						<a href="/member/mypage"><button type="button">취소</button></a>
 					</td>
 					<td colspan="3">
-						<th:block th:if="${t.isDone} == '1'">
+						<th:block th:if="${t.isDone} == '0'">
 							<button type="button">리뷰 작성</button>
 						</th:block>
 					</td>
-						<th:block th:if="${t.isDone} == '0'">
 					<td colspan="3">
+						<th:block th:if="${t.isDone} == '0'">
 							<button type="button">진료 중</button>
-					</td>
 						</th:block>
-					<th:block th:if="${t.isDone} == '1'">
-						<td colspan="3">
+						<th:block th:if="${t.isDone} == '1'">
 							<button type="button">진료 완료</button>
-						</td>
-					</th:block>
+						</th:block>
+					</td>
 				</tr>
 			</table>
 		</section>
