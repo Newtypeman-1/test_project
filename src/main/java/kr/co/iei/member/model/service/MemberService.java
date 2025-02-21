@@ -127,10 +127,5 @@ public class MemberService {
 		return result;
 	}
 
-	public List allMedicalRecords(Member member) {
-		List list = memberDao.allMedicalRecords(member);
-		return list;
-	}
-
 	
 }

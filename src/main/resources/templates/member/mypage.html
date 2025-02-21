@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <title>회원 내 정보</title>
 <style>
-.main{
-	display: flex;
-	margin: 0 auto;
-}
+	.main{
+		display: flex;
+		margin: 0 auto;
+	}
 	.page-title{
 		text-align: center;
 		padding: 30px;
@@ -107,7 +107,7 @@
 	</main>
 	<script>
 		$(".del").on("click",function(){
-			swal : ({
+			swal({
 				title : "회원 탈퇴",
 				text : "회월을 탈퇴하시겠습니까?",
 				icon : "warning",
@@ -127,7 +127,7 @@
 				}
 			}).then(function(isConfirm){
 				if(isConfirm){
-					location.herf = "/member/delete";	
+					location.href = "/member/delete";	
 				}
 			});
 		});

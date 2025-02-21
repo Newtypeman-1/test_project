@@ -102,10 +102,11 @@ public class MemberDao {
 	}
 	
 	public int deleteMember(int memberNo) {
-		String query = "delete from member_tbl where memberNo = ?";
+		String query = "delete from member_tbl where member_no = ?";
 		Object[] params = {memberNo};
 		int result = jdbc.update(query, params);
 		return result;
 	}
-	
+
+
 }
