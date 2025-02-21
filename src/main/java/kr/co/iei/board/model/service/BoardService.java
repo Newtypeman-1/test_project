@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.iei.board.model.dao.BoardDao;
+import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.member.model.vo.Member;
 
 @Service
 public class BoardService {
@@ -26,5 +28,15 @@ public class BoardService {
 		
 		//int pageNaviSize = 5;
 		//int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+	}
+
+	public List allBoard(Doctor doctor) {
+		List allBoard = boardDao.allBoard(doctor);
+		return allBoard;
+	}
+
+	public List memberAllBoard(Member member) {
+		List memberAllBoard = boardDao.memberAllBoard(member);
+		return memberAllBoard;
 	}
 }

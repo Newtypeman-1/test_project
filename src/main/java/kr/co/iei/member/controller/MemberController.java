@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
+import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
@@ -30,6 +31,8 @@ public class MemberController {
 	private EmailSender emailSender;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping(value="/loginFrm")
 	public String loginFrm() {
@@ -150,11 +153,12 @@ public class MemberController {
 	}
 	@GetMapping(value="/qna")
 	public String memberQna(Model model, @SessionAttribute(required = false) Member member) {
-		System.out.println(member.getMemberId());
 		List memberAllReview = reviewService.memberAllReview(member);
-		model.addAttribute("list", memberAllReview);
+		model.addAttribute("reviewList", memberAllReview);	
+		List memberAllBoard = boardService.memberAllBoard(member);
+		model.addAttribute("boardList", memberAllBoard);
 		return "member/qna";
-	}
+	}	
 	
 	@GetMapping(value="/findIdPwFrm")
 	public String findIdPwFrm() {
