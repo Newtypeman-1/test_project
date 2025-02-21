@@ -12,7 +12,9 @@
 	padding-bottom: 10px;
 	flex-grow: 1;
 	margin: 0 auto;
-	justify-content: center;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 table{
 	border: 1px solid black;
@@ -54,28 +56,28 @@ td{
 			<table class="tbl">
 				<tr>
 					<th>성함</th>
-					<td colspan="2" th:text="${session.member.memberName}"></td>
+					<td colspan="2" th:text="${t.memberName}"></td>
 					<th>성별</th>
-					<td th:text="${session.member.memberGender}"></td>
+					<td th:text="${t.memberGender}"></td>
 					<th>이메일</th>
-					<td colspan="4"th:text="${session.member.memberEmail}"></td>
+					<td colspan="4"th:text="${t.memberEmail}"></td>
 				</tr>
 				<tr>
 					<th >주소</th>
-					<td colspan="5" th:text="${session.member.memberAddr}"></td>
+					<td colspan="5" th:text="${t.memberAddr}"></td>
 					<th>전화번호</th>
-					<td colspan="3" th:text="${session.member.memberPhone}"></td>
+					<td colspan="3" th:text="${t.memberPhone}"></td>
 				</tr>
 				<tr>
 					<th rowspan="3">증상</th>
 					<th:block th:if="${t.isDone} == '0'">
-						<td colspan="4" rowspan="3"><input type="text" ></td>
+						<td colspan="4" rowspan="3"><input type="text"></td>
 					</th:block>
 					<th:block th:if="${t.isDone} == '1'">
 						<td colspan="4" rowspan="3" th:text="${t.opinionSymptom}"></td>
 					</th:block>
 					<th>담당 의사</th>
-					<td colspan="4" th:text="${t.doctorName}"></td>
+					<td colspan="4" th:text="${session.doctor.doctorName}"></td>
 				</tr>
 				<tr>
 					<th>진료과</th>
@@ -90,7 +92,7 @@ td{
 				</tr>
 				<tr>
 					<th:block th:if="${t.isDone} == '0'">
-						<td colspan="10">아직 소견서가 작성되지 않았습니다.</td>
+						<td colspan="10"><input type="text"></td>
 					</th:block>
 					<th:block th:if="${t.isDone} == '1'">
 						<td colspan="10" th:text="${t.opinionDecision}"></td>
@@ -98,7 +100,7 @@ td{
 				</tr>
 				<tr class="buttons">
 					<td colspan="2">
-						<button type="button">인쇄</button>
+						<button type="button">소견서 작성</button>
 					</td>
 					<td colspan="2">
 						<a href="/member/mypage"><button type="button">취소</button></a>
