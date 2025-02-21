@@ -18,6 +18,7 @@ import kr.co.iei.member.model.service.MemberService;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.review.model.service.ReviewService;
+import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.util.EmailSender;
 
 @Controller
@@ -62,8 +63,9 @@ public class MemberController {
 	}
 	
 	@PostMapping(value="/register")
-	public String register(Member m, Model model) {
-		int r = memberService.registerMember(m);
+	public String register(Member m, Model model, String email, String com1) {
+		String memberEmail = email+"@"+com1;
+		int r = memberService.registerMember(m, memberEmail);
 		System.out.println(m.toString());
 		model.addAttribute("title","회원가입 성공");
 		model.addAttribute("text","회원가입에 성공했습니다.");
@@ -220,4 +222,10 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	@GetMapping(value="/myOpinion")
+	public String myOpinion(int treatmentNo, int memberNo, Model model) {
+		Treat t = memberService.selectOpinion(treatmentNo, memberNo);
+		model.addAttribute("t", t);
+		return "member/myOpinion";
+	}
 }

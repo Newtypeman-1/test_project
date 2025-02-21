@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.iei.member.model.dao.MemberDao;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberPageList;
+import kr.co.iei.treat.model.vo.Treat;
 
 @Service
 public class MemberService {
@@ -21,8 +22,8 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public int registerMember(Member m) {
-		int r = memberDao.registerMember(m);
+	public int registerMember(Member m, String memberEmail) {
+		int r = memberDao.registerMember(m, memberEmail);
 		return r;
 	}
 
@@ -121,10 +122,17 @@ public class MemberService {
 		
 		return mpl;
 	}
-
+	
+	@Transactional
 	public int deleteMemeber(int memberNo) {
 		int result = memberDao.deleteMember(memberNo);
 		return result;
+	}
+
+
+	public Treat selectOpinion(int treatmentNo, int memberNo) {
+		Treat t = memberDao.selectOpinion(treatmentNo, memberNo);
+		return t;
 	}
 
 	
