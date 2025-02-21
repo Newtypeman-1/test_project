@@ -12,6 +12,7 @@ import kr.co.iei.doctor.model.vo.DoctorPageList;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.review.model.vo.Review;
+import kr.co.iei.treat.model.vo.Treat;
 
 @Service
 public class DoctorService {
@@ -112,6 +113,17 @@ public class DoctorService {
 		DoctorPageList dpl = new DoctorPageList(list, pageNavi);
 		
 		return dpl;
+	}
+
+	public Treat selectOpinion(int treatmentNo, int doctorNo) {
+		Treat t = doctorDao.selectOpinion(treatmentNo, doctorNo);
+		return t;
+	}
+	
+	@Transactional
+	public int updateOpinion(Treat t, Doctor doctor) {
+		int r = doctorDao.updateOpinion(t, doctor);
+		return r;
 	}
 
 	
