@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import jakarta.servlet.http.HttpSession;
+import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
@@ -28,6 +29,8 @@ public class DoctorController {
 	private DoctorService doctorService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private BoardService boardService;
 	@Autowired
 	private EmailSender emailSender;
 	
@@ -70,7 +73,9 @@ public class DoctorController {
 	@GetMapping(value="/qna")
 	public String doctorQna(Model model, @SessionAttribute(required = false) Doctor doctor) {
 		List allReview = reviewService.allReview(doctor);
-		model.addAttribute("list", allReview);
+		model.addAttribute("reviewList", allReview);
+		List allBoard = boardService.allBoard(doctor);
+		model.addAttribute("boardList", allBoard);
 		return "doctor/qna";
 	}
 	
