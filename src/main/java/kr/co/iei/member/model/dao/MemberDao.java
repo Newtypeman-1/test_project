@@ -102,11 +102,12 @@ public class MemberDao {
 	}
 	
 	public int deleteMember(int memberNo) {
-		String query = "delete from member_tbl where memberNo = ?";
+		String query = "delete from member_tbl where member_no = ?";
 		Object[] params = {memberNo};
 		int result = jdbc.update(query, params);
 		return result;
 	}
+
 
 	public Treat selectOpinion(int treatmentNo, int memberNo) {
 		String query = "SELECT t.*, d.doctor_name, p.department_name FROM treatment_tbl t JOIN doctor_tbl d ON t.doctor_no = d.doctor_no JOIN department_tbl p ON d.department_no = p.department_no where member_no = ? and treatment_no = ?";
@@ -115,4 +116,5 @@ public class MemberDao {
 		return (Treat)list.get(0);
 	}
 	
+
 }

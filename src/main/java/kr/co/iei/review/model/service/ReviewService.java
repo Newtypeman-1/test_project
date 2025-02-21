@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.dao.ReviewDao;
+import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.review.model.vo.ReviewListData;
 
 @Service
@@ -61,5 +62,10 @@ public class ReviewService {
 	public List memberAllReview(Member member) {
 		List memberAllReview = reviewDao.memberAllReview(member);
 		return memberAllReview;
+	}
+
+	public int reviewWrite(Review r) {
+		int reviewWrite = reviewDao.reviewWrite(r);
+		return reviewWrite;
 	}
 }

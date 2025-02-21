@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.review.model.vo.ReviewRowMapper;
 import kr.co.iei.review.model.vo.ReviewRowMapper2;
 
@@ -46,6 +47,13 @@ public class ReviewDao {
 		Object[] params = {member.getMemberId()};
 		List memberAllReview = jdbc.query(query, reviewRowMapper2, params);
 		return memberAllReview;
+	}
+
+	public int reviewWrite(Review r) {
+		String query = "insert into review value(review_seq.nextval,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		Object[] params = {r.getReviewTitle(), r.getReviewContent(), r.getReviewWriter(), r.getDoctorNo(), r.getReviewStar(), r.getTreatmentNo()};
+		int reviewWrite = jdbc.update(query, params);
+		return reviewWrite;
 	}
 	
 	

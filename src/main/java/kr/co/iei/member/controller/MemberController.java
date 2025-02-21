@@ -215,7 +215,7 @@ public class MemberController {
 	public String deleteMember(@SessionAttribute Member member, Model model) {
 		int memberNo = member.getMemberNo();
 		int result = memberService.deleteMemeber(memberNo);
-		model.addAttribute("text","탈퇴 완료");
+		model.addAttribute("title","탈퇴 완료");
 		model.addAttribute("text", "회웥 탈퇴가 완료되었습니다.");
 		model.addAttribute("icon", "success");
 		model.addAttribute("loc", "/member/logout");

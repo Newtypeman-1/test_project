@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.iei.review.model.service.ReviewService;
+import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.review.model.vo.ReviewListData;
 
 @Controller
@@ -17,11 +19,24 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@GetMapping(value="list")
+	@GetMapping(value="/list")
 	public String reviewList(Model model, int reqPage) {
 		ReviewListData rld = reviewService.reviewAllList(reqPage);
 		model.addAttribute("list", rld.getList());
 		model.addAttribute("navi", rld.getNavi());
 		return "review/list";
+	}
+	@GetMapping(value="/writeFrm")
+	public String reviewWriteFrm() {
+		return "review/writeFrm";
+	}
+	@PostMapping(value="/write")
+	public String reviewWrite(Review r, Model model) {
+		int reviewWrite = reviewService.reviewWrite(r);
+		model.addAttribute("title", "작성 완료");
+		model.addAttribute("text","리뷰 등록이 완료되었습니다.");
+		model.addAttribute("icon", "success");
+		model.addAttribute("loc", "/review/list?reqPage=1");
+		return "common/msg";
 	}
 }

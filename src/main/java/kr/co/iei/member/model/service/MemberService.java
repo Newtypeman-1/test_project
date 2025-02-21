@@ -129,9 +129,11 @@ public class MemberService {
 		return result;
 	}
 
+
 	public Treat selectOpinion(int treatmentNo, int memberNo) {
 		Treat t = memberDao.selectOpinion(treatmentNo, memberNo);
 		return t;
 	}
+
 	
 }

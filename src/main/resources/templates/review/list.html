@@ -59,9 +59,7 @@
 						<th style="width:10%">작성일</th>
 					</tr>
 					<tr th:each="review : ${list}">
-						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
-							<!-- <span class="material-icons">star_rate</span> -->							
-						
+						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>						
 						<td th:text="${review.reviewContent}"></td>
 						<td th:text="${review.reviewWriter}"></td>
 						<td th:text="${review.doctorName}"></td>
@@ -73,23 +71,21 @@
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
-	<script>
-       
-            $(".star-cell").each(function() {
-                let starCount = parseInt($(this).attr("data-star")) || 0;
-                let stars = "";
-
-                for (let i = 0; i < 5; i++) {
-                    if (i < starCount) {
-                        stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
-                    } else {
-                        stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
-                    }
-                }
-
-                $(this).html(`<div class="star-wrap">${stars}</div>`);
-            });
-        
+	<script>       
+		$(".star-cell").each(function() {
+			let starCount = parseInt($(this).attr("data-star")) || 0;
+			let stars = "";
+			
+			for (let i = 0; i < 5; i++) {
+				if (i < starCount) {
+					stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
+				} else {
+					stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
+				}
+			}
+			
+			$(this).html(`<div class="star-wrap">${stars}</div>`);
+		});        
     </script>
 </body>
 </html>

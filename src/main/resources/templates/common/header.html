@@ -69,7 +69,19 @@
                             	 	</li>
                             	 </ul>
                             </li>
-                            <li><a href="/review/list?reqPage=1">리뷰</a></li>
+                            <li><a href="/review/list?reqPage=1">리뷰</a>
+                            	<ul class="dropdown">
+                            	 	<li>
+                            	 	<th:block th:if="${session.member == null && session.doctor == null}">
+                            		<a href="/">리뷰 작성하기</a>
+									</th:block>
+									<th:block th:if="${session.member != null}">
+									<a href="/review/writeFrm">리뷰 작성하기</a>
+									</th:block>
+									
+                            	 	</li>
+                            	 </ul>
+                            </li>
                         </ul>
                     </nav>
                 </div>
