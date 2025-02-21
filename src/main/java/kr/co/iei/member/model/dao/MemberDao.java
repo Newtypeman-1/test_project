@@ -91,13 +91,13 @@ public class MemberDao {
 		String query = "select * from (select rownum as rnum, h.* from (SELECT t.*, d.doctor_name, p.department_name FROM treatment_tbl t JOIN doctor_tbl d ON t.doctor_no = d.doctor_no JOIN department_tbl p ON d.department_no = p.department_no where member_no = ? order by 1 desc) h) where rnum between ? and ?";
 		Object[] params = {member.getMemberNo(), start, end};
 		List list = jdbc.query(query, treatRowMapper2, params);
-		System.out.println(list.size());
 		return list;
 	}
 
-	public int memberTotalCount() {
-		String query = "select count(*) from treatment_tbl";
-		int r = jdbc.queryForObject(query, Integer.class);
+	public int memberTotalCount(Member member) {
+		String query = "select count(*) from treatment_tbl where member_no = ?";
+		Object[] params = {member.getMemberNo()};
+		int r = jdbc.queryForObject(query, Integer.class, params);
 		return r;
 	}
 	

@@ -10,6 +10,7 @@ import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.vo.Review;
+import kr.co.iei.treat.model.vo.TreatRowMapper3;
 
 @Repository
 public class DoctorDao {
@@ -17,6 +18,8 @@ public class DoctorDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private DoctorRowMapper doctorRowMapper;
+	@Autowired
+	private TreatRowMapper3 treatRowMapper3;
 	
 	public Doctor selectOneDoctor(Doctor d) {
 		String query = "select * from doctor_tbl where doctor_id = ? and doctor_pw = ?";
@@ -59,6 +62,18 @@ public class DoctorDao {
 			return null;
 		}
 		return (Doctor)list.get(0);
+	}
+	public List allMedicalRecords(Doctor doctor, int start, int end) {
+		String query = "select * from (select rownum as rnum, z.* from (select * from treatment_tbl t join doctor_tbl d on t.doctor_no = d.doctor_no join member_tbl m on t.member_no = m.member_no join department_tbl p on d.department_no = p.department_no where d.doctor_no = ? order by 1 desc) z) where rnum between ? and ?";
+		Object[] params = {doctor.getDoctorNo(), start, end};
+		List list = jdbc.query(query, treatRowMapper3, params);
+		return list;
+	}
+	public int memberTotalCount(Doctor doctor) {
+		String query = "select count(*) from treatment_tbl where doctor_no = ?";
+		Object[] params = {doctor.getDoctorNo()};
+		int r = jdbc.queryForObject(query, Integer.class, params);
+		return r;
 	}
 	
 }

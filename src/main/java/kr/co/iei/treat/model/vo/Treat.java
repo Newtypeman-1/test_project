@@ -17,6 +17,12 @@ public class Treat {
 	private String opinionDecision;
 	private int memberNo;
 	private int doctorNo;
+	
 	private String doctorName;
 	private String departmentName;
+	private String memberName;
+	private String memberPhone;
+	private String memberAddr;
+	private String memberEmail;
+	private String memberGender;
 }
