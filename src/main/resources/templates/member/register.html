@@ -205,7 +205,7 @@
 						<label for="memberEmail">이메일*</label>
 					</div>
 					<div class="input-item">
-						<input type="text" name="memberEmail" id="memberEmail">
+						<input type="text" name="email" id="email">
 						<span class="material-icons">alternate_email</span>
 						<input type="text" name="com1" id="com1">
 						<select name="com2" id="com2">
@@ -1042,7 +1042,7 @@
 		//이메일 조건 1
 		let mailCode = null;
 		$(".emailCheck").on("click", function(){
-			const email1 = $("#memberEmail").val();
+			const email1 = $("#email").val();
 			const email2 = $("#com1").val();
 			const memberEmail = email1+"@"+email2;
 			if(email1 !== "" && email2 !== ""){
@@ -1067,7 +1067,7 @@
 				mailCode = null;
 				authMsg.addClass("valid").text("인증되었습니다.");
 				
-				$("#memberEmail").prop("readonly", true);
+				$("#email").prop("readonly", true);
 				$("#memberAuth").prop("readonly", true);
 				$("#com1").prop("readonly", true);
 				$("#com2").prop("disabled", true);

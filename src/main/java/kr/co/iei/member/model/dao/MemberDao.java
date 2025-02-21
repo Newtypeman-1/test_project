@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.member.model.vo.MemberRowMapper;
+import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.treat.model.vo.TreatRowMapper2;
 
 @Repository
@@ -59,9 +60,9 @@ public class MemberDao {
 		return list;
 	}
 
-	public int registerMember(Member m) {
+	public int registerMember(Member m, String memberEmail) {
 		String query = "insert into member_tbl values(member_seq.nextval, ?, ?, ?, ?, ?, ?, ?, to_char(sysdate,'yyyy-mm-dd'))";
-		Object[] params = {m.getMemberId(), m.getMemberPw(), m.getMemberName(), m.getMemberPhone(), m.getMemberAddr(), m.getMemberEmail(), m.getMemberGender()};
+		Object[] params = {m.getMemberId(), m.getMemberPw(), m.getMemberName(), m.getMemberPhone(), m.getMemberAddr(), memberEmail, m.getMemberGender()};
 		int r = jdbc.update(query, params);
 		return r;
 	}
@@ -87,7 +88,6 @@ public class MemberDao {
 	}
 
 	public List allMedicalRecords(Member member, int start, int end) {
-		/*String query = "select * from (select rownum as rnum, h.* from(select t.*,(select doctor_name from doctor_tbl where doctor_no = t.doctor_no) doctor_name from treatment_tbl t where (select member_id from member_tbl where member_no = t.member_no) = ? order by 1 desc)h) where rnum between 1 and 5";*/
 		String query = "select * from (select rownum as rnum, h.* from (SELECT t.*, d.doctor_name, p.department_name FROM treatment_tbl t JOIN doctor_tbl d ON t.doctor_no = d.doctor_no JOIN department_tbl p ON d.department_no = p.department_no where member_no = ? order by 1 desc) h) where rnum between ? and ?";
 		Object[] params = {member.getMemberNo(), start, end};
 		List list = jdbc.query(query, treatRowMapper2, params);
@@ -106,6 +106,13 @@ public class MemberDao {
 		Object[] params = {memberNo};
 		int result = jdbc.update(query, params);
 		return result;
+	}
+
+	public Treat selectOpinion(int treatmentNo, int memberNo) {
+		String query = "SELECT t.*, d.doctor_name, p.department_name FROM treatment_tbl t JOIN doctor_tbl d ON t.doctor_no = d.doctor_no JOIN department_tbl p ON d.department_no = p.department_no where member_no = ? and treatment_no = ?";
+		Object[] params = {memberNo, treatmentNo};
+		List list = jdbc.query(query, treatRowMapper2, params);
+		return (Treat)list.get(0);
 	}
 	
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Help DOC - 진료 소견서</title>
+<style>
+.page-title{
+	margin: 20px auto;
+}
+.section{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+table{
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+tr{
+	
+}
+.tbl th{
+	border: 1px solid black;
+	box-sizing: border-box;
+	background-color: #bbb;
+	color: white;
+	width: 100px;
+	height: 50px;
+	text-align: center;
+}
+td{
+	border: 1px solid black;
+	box-sizing: border-box;
+	height: 50px;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<th:block th:include="common/menuRemote"></th:block>
+		<section class="section">
+			<div class="page-title">진료 소견서</div>
+			<table class="tbl">
+				<tr>
+					<th>성함</th>
+					<td colspan="2" th:text="${session.member.memberName}"></td>
+					<th>성별</th>
+					<td th:text="${session.member.memberGender}"></td>
+					<th>이메일</th>
+					<td colspan="4"th:text="${session.member.memberEmail}"></td>
+				</tr>
+				<tr>
+					<th >주소</th>
+					<td colspan="5" th:text="${session.member.memberAddr}"></td>
+					<th>전화번호</th>
+					<td colspan="3" th:text="${session.member.memberPhone}"></td>
+				</tr>
+				<tr>
+					<th rowspan="3">증상</th>
+					<th:block th:if="${t.isDone} == '0'">
+						<td colspan="4" rowspan="3">증상 입력이 작성되지 않았습니다.</td>
+					</th:block>
+					<th:block th:if="${t.isDone} == '1'">
+						<td colspan="4" rowspan="3" th:text="${t.opinionSymptom}"></td>
+					</th:block>
+					<th>담당 의사</th>
+					<td colspan="4" th:text="${t.doctorName}"></td>
+				</tr>
+				<tr>
+					<th>진료과</th>
+					<td colspan="4" th:text="${t.departmentName}"></td>
+				</tr>
+				<tr>
+					<th>진단일</th>
+					<td colspan="4" th:text="${t.appointDate}"></td>
+				</tr>
+				<tr>
+					<th colspan="10">의사 소견서</th>
+				</tr>
+				<tr>
+					<th:block th:if="${t.isDone} == '0'">
+						<td colspan="10">아직 소견서가 작성되지 않았습니다.</td>
+					</th:block>
+					<th:block th:if="${t.isDone} == '0'">
+						<button type="button">진료 중</button>
+					</th:block>
+					<th:block th:if="${t.isDone} == '1'">
+						<td colspan="10" th:text="${t.opinionDecision}"></td>
+					</th:block>
+					<th:block th:if="${t.isDone} == '1'">
+						<button type="button">진료 완료</button>
+					</th:block>
+				</tr>
+				<div>
+					<button type="button">인쇄</button>
+					<a href="/member/mypage"><button type="button">취소</button></a>
+					<th:block th:if="${t.isDone} == '1'">
+						<button type="button">리뷰 작성</button>
+					</th:block>
+				</div>
+			</table>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+</body>
+</html>
