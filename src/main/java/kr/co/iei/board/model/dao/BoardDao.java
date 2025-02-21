@@ -31,15 +31,15 @@ public class BoardDao {
 	}
 
 	public List allBoard(Doctor doctor) {
-		String query = "select * from (select rownum as rnum, h.* from(select r.*,(select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from review r where doctor_no = ? order by 1 desc)h) where rnum between 1 and 5";
+		String query = "";
 		Object[] params = {doctor.getDoctorNo()};
 		List allBoard = jdbc.query(query, boardRowMapper,params);
 		return allBoard;
 	}
 
 	public List memberAllBoard(Member member) {
-		String query = "select * from (select rownum as rnum, o.* from (select b.*, (select member_id from member_tbl where member_no = ?) member_id from board b order by board_no desc)o) where rnum between 1 and 5";
-		Object[] params = {member.getMemberNo()};
+		String query = "select * from (select rownum as rnum, o.* from (select b.* from board b where board_writer = ? order by board_no desc)o) where rnum between 1 and 5";
+		Object[] params = {member.getMemberId()};
 		List memberAllBoard = jdbc.query(query, boardRowMapper, params);
 		return memberAllBoard;
 	}

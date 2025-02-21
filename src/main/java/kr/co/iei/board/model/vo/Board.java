@@ -14,4 +14,6 @@ public class Board {
 	private String boardContent;
 	private int boardReadCount;
 	private String boardRegDate;
+	private String isDone;
+
 }
