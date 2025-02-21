@@ -16,7 +16,9 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.doctor.model.vo.DoctorPageList;
 import kr.co.iei.member.model.vo.Member;
+import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.review.model.service.ReviewService;
 import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.review.model.vo.ReviewListData;
@@ -125,6 +127,13 @@ public class DoctorController {
 			return r;
 		}
 	}
-
-
+	
+	@GetMapping(value="/myMedicalRecordsPageFrm")
+	public String myMedicalRecordsPageFrm(@SessionAttribute(required = false) Doctor doctor, int reqPage, Model model) {
+		DoctorPageList dpl = doctorService.allMedicalRecords(doctor, reqPage);
+		model.addAttribute("list", dpl.getList());
+		model.addAttribute("pageNavi", dpl.getPageNavi());
+		return "member/myMedicalRecordsPage";
+	}
+	
 }

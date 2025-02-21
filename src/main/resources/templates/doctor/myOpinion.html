@@ -69,7 +69,7 @@ td{
 				<tr>
 					<th rowspan="3">증상</th>
 					<th:block th:if="${t.isDone} == '0'">
-						<td colspan="4" rowspan="3">증상 입력이 작성되지 않았습니다.</td>
+						<td colspan="4" rowspan="3"><input type="text" ></td>
 					</th:block>
 					<th:block th:if="${t.isDone} == '1'">
 						<td colspan="4" rowspan="3" th:text="${t.opinionSymptom}"></td>

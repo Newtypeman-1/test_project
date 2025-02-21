@@ -15,5 +15,4 @@ public class Board {
 	private int boardReadCount;
 	private String boardRegDate;
 	private String isDone;
-
 }

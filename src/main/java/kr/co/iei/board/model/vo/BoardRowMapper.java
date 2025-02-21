@@ -21,5 +21,4 @@ public class BoardRowMapper implements RowMapper<Board> {
 		b.setIsDone(rs.getString("is_done"));
 		return b;
 	}
-
 }

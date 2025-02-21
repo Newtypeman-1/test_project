@@ -60,7 +60,7 @@ public class MemberService {
 		
 		List list = memberDao.allMedicalRecords(member, start, end);
 		
-		int totalCount = memberDao.memberTotalCount();
+		int totalCount = memberDao.memberTotalCount(member);
 		
 		int totalPage = totalCount/numPerPage;
 		if(totalCount%numPerPage != 0) {

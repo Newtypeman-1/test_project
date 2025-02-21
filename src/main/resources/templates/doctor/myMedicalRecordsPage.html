@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Help DOC - 내 진료 목록</title>
+<style>
+.section{
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+	.page-title{
+		text-align: center;
+		padding: 30px;
+		font-size: 25px;
+	}
+	.tbl tr{
+		border-bottom: 1px solid black;
+		height: 40px;
+		text-align: center;
+		cursur: pointer;
+	}
+	.tbl a{
+		width: 100%;
+	}
+	#navi{
+		margin-top: 10px;
+		display: flex;
+		justify-content: center;
+	}
+	#navi ul{
+		list-style: none;
+	}
+	#navi input{
+		width: 30px;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<th:block th:include="common/menuRemote"></th:block>
+		<section class="section">
+			<div class="page-title">내 진료 기록 검색</div>
+			<div class="medicalRecord-wrap">
+				<table class="tbl">
+					<tr>
+						<th style="width:10%">진단번호</th>
+						<th style="width:10%">증상과</th>
+						<th style="width:15%">회원 아이디</th>
+						<th style="width:15%">담당의</th>
+						<th style="width:10%">진단 내역</th>
+						<th style="width:20%">작성일</th>
+					</tr>
+					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/member/myOpinion (treatmentNo=${treatment.treatmentNo}, memberNo=${session.member.memberNo})}'|">
+						<td th:text="${treatment.treatmentNo}"></td>
+						<td th:text="${treatment.departmentName}"></td>
+						<td th:text="${session.member.memberId}"></td>
+						<td th:text="${treatment.doctorName}"></td>
+						<th:block th:if="${treatment.isDone == '0'}">
+							<td>진단 중</td>
+						</th:block>
+						<th:block th:if="${treatment.isDone == '1'}">
+							<td>진단 완료</td>
+						</th:block>
+						<td th:text="${treatment.appointDate}"></td>
+					</tr>
+				</table>
+				<div id="navi" th:utext="${pageNavi}"></div>
+			</div>
+		</section>
+	</main>
+	<th:block th:include="common/footer"></th:block>
+	<script>
+		
+	</script>
+</body>
+</html>
