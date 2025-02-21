@@ -24,45 +24,33 @@
 		<section class="section">
 			<div class="page-title">리뷰 작성</div>
 			<table class="tbl">
-					<tr>
-						<th>제목</th>
-						<td colspan="3">
-							<div>
-								<input type="text" name="reviewTitle">
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th style="width:10%">작성자</th>
-						<td style="width:40%">
-							<span th:text="${session.member.memberId}"></span>
-							<input type="hidden" name="reivewWriter" th:value="${session.member.memberId}">
-						</td>
-						<th style="width:10%">담당의</th>
-						<td style="width:40%">
-							<!--
-								input type="file"의 name은 vo의 변수명과 다르게 작성
-								multiple 속성을 사용하지 않으면 첨부파일은 1개
-							-->
-							<input type="text" name="doctorName" id="doctorName">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
-							<div>
-								<textarea name="reviewContent"></textarea>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button type="submit" class="ok-btn">리뷰 등록</button>
-						</td>
-						<td>
-							<button type="submit" class="can-btn">리뷰 취소</button>
-						</td>
-					</tr>
-				</table>
+				<tr>
+					<th style="width:10%">작성자</th>
+					<td style="width:40%">
+						<span th:text="${session.member.memberId}"></span>
+						<input type="hidden" name="reivewWriter" th:value="${session.member.memberId}">
+					</td>
+					<th style="width:10%">담당의</th>
+					<td style="width:40%">
+						<input type="text" name="doctorName" id="doctorName">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div>
+							<textarea name="reviewContent"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" class="ok-btn">리뷰 등록</button>
+					</td>
+					<td>
+						<button type="submit" class="can-btn">리뷰 취소</button>
+					</td>
+				</tr>
+			</table>
 		</section>
 	</main>
 		<script>
