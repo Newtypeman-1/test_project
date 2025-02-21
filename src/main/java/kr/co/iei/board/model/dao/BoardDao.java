@@ -31,7 +31,7 @@ public class BoardDao {
 	}
 
 	public List allBoard(Doctor doctor) {
-		String query = "";
+		String query = "select * from (select rownum as rnum, h.* from(select r.*,(select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from comment_tbl r where doctor_no = ? order by 1 desc)h) where rnum between 1 and 5;";
 		Object[] params = {doctor.getDoctorNo()};
 		List allBoard = jdbc.query(query, boardRowMapper,params);
 		return allBoard;

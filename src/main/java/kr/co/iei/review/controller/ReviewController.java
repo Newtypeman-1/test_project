@@ -37,7 +37,7 @@ public class ReviewController {
 		model.addAttribute("title", "작성 완료");
 		model.addAttribute("text","리뷰 등록이 완료되었습니다.");
 		model.addAttribute("icon", "success");
-		model.addAttribute("loc", "/review/list?reqPage=1");
+		model.addAttribute("loc", "/member/qna");
 		return "common/msg";
 	}
 }

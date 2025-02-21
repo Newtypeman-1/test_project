@@ -23,16 +23,17 @@
 	<main class="main">
 		<section class="section">
 			<div class="page-title">리뷰 작성</div>
+			<form action="/review/write" method="post">
 			<table class="tbl">
 				<tr>
 					<th style="width:10%">작성자</th>
 					<td style="width:40%">
 						<span th:text="${session.member.memberId}"></span>
-						<input type="hidden" name="reivewWriter" th:value="${session.member.memberId}">
+						<input type="hidden" name="reviewWriter" th:value="${session.member.memberId}">
 					</td>
 					<th style="width:10%">담당의</th>
 					<td style="width:40%">
-						<input type="text" name="doctorName" id="doctorName">
+						<input type="text" name="doctorNo" id="doctorNo">
 					</td>
 				</tr>
 				<tr>
@@ -43,67 +44,49 @@
 					</td>
 				</tr>
 				<tr>
+					<th>별점</th>
+					<td>
+						<input type="text" name="reviewStar" id="reviewStar">
+					</td>	
+				</tr>
+				<tr>
 					<td>
 						<button type="submit" class="ok-btn">리뷰 등록</button>
 					</td>
 					<td>
-						<button type="submit" class="can-btn">리뷰 취소</button>
+						<button type="button" class="can-btn">리뷰 취소</button>
 					</td>
 				</tr>
 			</table>
+			</form>
 		</section>
 	</main>
 		<script>
-		$(".ok-btn").on("click",function(){
-			swal({
-				title : "등록 완료",
-				text : "등록이 완료되었습니다.",
-				icon : "success",
-				buttons : {
-					confirm : {
-						text : "확인",
-						value : true,
-						visible : true,
-						closeModal : true
-					},
-					cancle : {
-						text : "취소",
-						value : false,
-						visible : true,
-						closeModal : true
-					}
-				}
-			}).then(function(isConfirm){
-				if(isConfirm){
-					location.href = "/review/list?reqPage=1";	
-				}
-			});
-		});
-		$(".can-btn").on("click",function(){
-			swal({
-				title : "작성 취소",
-				text : "작성을 취소하시겠습니까?",
-				icon : "warning",
-				buttons : {
-					confirm : {
-						text : "확인",
-						value : true,
-						visible : true,
-						closeModal : true
-					},
-					cancle : {
-						text : "취소",
-						value : false,
-						visible : true,
-						closeModal : true
-					}
-				}
-			}).then(function(isConfirm){
-				if(isConfirm){
-					location.href = "/review/list?reqPage=1";	
-				}
-			});
-		});
+	 		$(".can-btn").on("click",function(){
+	 			swal({
+					title : "작성 취소",
+	 				text : "작성을 취소하시겠습니까?",
+	 				icon : "warning",
+	 				buttons : {
+	 					confirm : {
+							text : "확인",
+	 						value : true,
+	 						visible : true,
+	 						closeModal : true
+	 					},
+	 					cancle : {
+	 						text : "취소",
+	 						value : false,
+	 						visible : true,
+	 						closeModal : true
+	 					}
+	 				}
+	 			}).then(function(isConfirm){
+	 				if(isConfirm){
+	 					location.href = "/review/list?reqPage=1";
+	 				}
+	 			});
+	 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
