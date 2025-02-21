@@ -63,12 +63,10 @@
 							<th style="width:10%">작성일</th>
 						</tr>
 						<tr th:each="review : ${list}" class="qwer">
-							<th:block th:if="${session.member.memberId == review.reviewWriter}">
 							<td th:text="${review.reviewNo}"></td>
 							<td th:text="${review.reviewTitle}"></td>
 							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
 							<td th:text="${review.reviewDate}"></td>
-							</th:block>
 						</tr>	
 					</table>
 						<button type="button" id="allQna">전체 문의 보기</button>
@@ -82,12 +80,10 @@
 							<th style="width:10%">작성일</th>
 						</tr>
 						<tr th:each="review : ${list}" class="qwer">
-							<th:block th:if="${session.member.memberId == review.reviewWriter}">
 								<td th:text="${review.reviewNo}"></td>
 								<td th:text="${review.reviewTitle}"></td>
 								<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
 								<td th:text="${review.reviewDate}"></td>
-							</th:block>
 						</tr>
 					</table>
 						<button type="button" id="allReview">전체 리뷰 보기</button>						
