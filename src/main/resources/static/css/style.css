@@ -344,8 +344,9 @@ ol {
 .header__menu ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 40px;
+	margin-right: 90px;
 	position: relative;
+	height: 30px;
 }
 
 .header__menu ul li.active a:after {
@@ -383,7 +384,7 @@ ol {
 	visibility: hidden;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
+	transition: all, 0.1s;
 }
 
 .header__menu ul li .dropdown li {
