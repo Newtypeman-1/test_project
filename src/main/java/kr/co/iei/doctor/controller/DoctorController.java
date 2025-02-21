@@ -17,11 +17,8 @@ import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;
-import kr.co.iei.member.model.vo.Member;
-import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.review.model.service.ReviewService;
-import kr.co.iei.review.model.vo.Review;
-import kr.co.iei.review.model.vo.ReviewListData;
+import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.util.EmailSender;
 
 @Controller
@@ -136,4 +133,29 @@ public class DoctorController {
 		return "doctor/myMedicalRecordsPage";
 	}
 	
+	@GetMapping(value="/myOpinion")
+	public String myOpinion(int treatmentNo, int doctorNo, Model model) {
+		Treat t = doctorService.selectOpinion(treatmentNo, doctorNo);
+		model.addAttribute("t", t);
+		return "doctor/myOpinion";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/opinionSubmit")
+	public String opinionSubmit(Treat t, @SessionAttribute(required = false) Doctor doctor, Model model) {
+		int r = doctorService.updateOpinion(t, doctor);
+		if(r != 0) {
+			model.addAttribute("title","소견서 작성 완료");
+			model.addAttribute("text","소견서 작성이 완료되었습니다.");
+			model.addAttribute("icon","success");
+			model.addAttribute("loc", "/doctor/myOpinion?treatment_no="+t.getTreatmentNo());
+			return "common/msg";
+		}else {
+			model.addAttribute("title","소견서 작성 실패");
+			model.addAttribute("text","소견서 작성 실패.");
+			model.addAttribute("icon","warning");
+			model.addAttribute("loc", "/doctor/myOpinion?treatment_no="+t.getTreatmentNo());
+			return "common/msg";
+		}
+	}
 }
