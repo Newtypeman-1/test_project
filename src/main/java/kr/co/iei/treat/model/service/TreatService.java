@@ -21,8 +21,8 @@ public class TreatService {
 		return unavailableTimes;
 	}
 
-	public List<Doctor> selectDoctors(int departmentNo) {
-		List<Doctor> list = treatDao.selectDoctors(departmentNo);
+	public List<Doctor> selectDoctorsWithRating(int departmentNo) {
+		List<Doctor> list = treatDao.selectDoctorsWithRating(departmentNo);
 		return list;
 	}
 
