@@ -25,9 +25,6 @@ public class BoardService {
 			totalPage += 1;
 		}
 		return list;
-		
-		//int pageNaviSize = 5;
-		//int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 	}
 
 	public List allBoard(Doctor doctor) {

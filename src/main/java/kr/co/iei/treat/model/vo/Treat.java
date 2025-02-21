@@ -25,4 +25,5 @@ public class Treat {
 	private String memberAddr;
 	private String memberEmail;
 	private String memberGender;
+	private String memberId;
 }

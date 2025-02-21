@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Help DOC - 내 진료 목록</title>
+<title>Help DOC - 내 진단 목록</title>
 <style>
 .section{
     width: 800px;
@@ -53,11 +53,11 @@
 						<th style="width:10%">진단 내역</th>
 						<th style="width:20%">작성일</th>
 					</tr>
-					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/member/myOpinion (treatmentNo=${treatment.treatmentNo}, memberNo=${session.member.memberNo})}'|">
+					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/doctor/myOpinion (treatmentNo=${treatment.treatmentNo}, doctorNo=${session.doctor.doctorNo})}'|">
 						<td th:text="${treatment.treatmentNo}"></td>
 						<td th:text="${treatment.departmentName}"></td>
-						<td th:text="${session.member.memberId}"></td>
-						<td th:text="${treatment.doctorName}"></td>
+						<td th:text="${treatment.memberId}"></td>
+						<td th:text="${session.doctor.doctorName}"></td>
 						<th:block th:if="${treatment.isDone == '0'}">
 							<td>진단 중</td>
 						</th:block>

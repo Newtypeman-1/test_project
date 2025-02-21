@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.treat.model.service.TreatService;
 import kr.co.iei.treat.model.vo.Treat;
 
@@ -29,11 +30,10 @@ public class TreatController {
 	}
 	
 	@GetMapping(value="/department")
-	public String depart1(Model mod, int departmentNo) {
-		List<Doctor> list = treatService.selectDoctors(departmentNo);
+	public String department(Model mod, int departmentNo) {
+		List<Doctor> doctors = treatService.selectDoctorsWithRating(departmentNo);
 		String departmentName = treatService.selectDepartmentName(departmentNo);
-		System.out.println(departmentName);
-		mod.addAttribute("list", list);
+		mod.addAttribute("doctors", doctors);
 		mod.addAttribute("departmentName", departmentName);
 		return "treat/department";
 	}
@@ -47,13 +47,6 @@ public class TreatController {
 		System.out.println(doctor);
 		return "treat/appointFrm";
 	}
-	
-//	@ResponseBody
-//	@GetMapping(value="/getTimes")
-//	public List<Integer> getTimes(int doctorNo){
-//		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
-//		return unavailableTimes;
-//	}
 	
 	@PostMapping(value="/appoint")
 	public String appoint(Treat t, Model mod) {

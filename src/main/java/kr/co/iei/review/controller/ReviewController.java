@@ -1,6 +1,5 @@
 package kr.co.iei.review.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +25,12 @@ public class ReviewController {
 		model.addAttribute("navi", rld.getNavi());
 		return "review/list";
 	}
+
 	@GetMapping(value="/writeFrm")
 	public String reviewWriteFrm() {
 		return "review/writeFrm";
 	}
+
 	@PostMapping(value="/write")
 	public String reviewWrite(Review r, Model model) {
 		int reviewWrite = reviewService.reviewWrite(r);

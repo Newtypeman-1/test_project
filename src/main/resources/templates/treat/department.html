@@ -2,34 +2,120 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>OO진료과 페이지</title>
+<title>Helpdoc | 진료과</title>
+</head>
 <style>
-.department-title{
-	margin: 0 auto;
-	width: 100%;
+.title-section{
 	height: 120px;
 }
-.department-title>div{
+.page-title{
+	width: 1200px;
 	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin: 0 auto;
+}
+.page-title>h2{
+	text-align: center;
+	line-height: 120px;
+	font-weight: 500;
+	font-size: 40px;
+}
+.doctor-up{
+	display: flex;
+	
 }
 </style>
-</head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<main class="main department-main">
-		<section class="section department-title">
-			<div>
+	<main class="main">
+		<section class="section title-section">
+			<div class="page-title">
 				<h2 th:text="${departmentName}"></h2>
 			</div>
 		</section>
-		<div th:each="doctor : ${list}">
-			<span>의사: </span>
-			<span th:text="${doctor.doctorName}"></span>
-			<div>
-				<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">예약일정보기</a>
+		<section class="section content-section">
+			<div class="content-main">
+				<div class="introduce-detail">
+					<div class="introduce-img-wrap">
+						<img class="sub-img" src="/img/logo.png" style="width:20%;">
+						<img class="introduce-img" src="/img/오한.jpg">
+					</div>
+					<div class="introduce-headline">
+						<div>
+							내과는 호흡기질환, 소화기질환, 순환기질환을 망라하는 병원에서 가장 큰 전문과입니다.
+						</div>
+					</div>
+					<hr>
+					<div class="introduce-additional">
+						<div>
+							우리나라는 근래에 식생활이 서구화되면서 각종 내장암으로 인한 사망률이 높고, 염증성, 과민성을 비롯한 각종 내장 증후군의 발병률이 높아지고 있습니다. 또한 B형 및 C형간염의 유병률이 높고 간암 역시 여전히 국내 사망원인 질환의 수위를 차지하고 있어서, 내과 분야의 중요성은 갈수록 부각되고 있습니다. 내과는 진료뿐만 아니라 연구, 그리고 교육적 측면에서의 역할이 매우 중요한 것으로 잘 알려져 있습니다.
+						</div>
+					</div>
+					<div class="introduce-doctors">
+						<div>의료진 소개</div>
+						<ul class="doctor-list">
+							<th:block th:each="doctor, status : ${doctors}">
+								<li th:class="'doctor-' + ${doctor.doctorNo} + ' doctor'">
+									<div class="doctor-up">
+										<div style="width:180px;" class="doctor-img-box">
+											<img src="/img/백강혁.webp">
+										</div>
+										
+										<table class="doctor-text-tbl">
+											<tr>
+												<td>
+													<span th:text="${doctor.doctorName}"></span>
+													[<span th:text="${departmentName}"></span>]
+												</td>
+											</tr>
+											<tr>
+												<!-- 리뷰 평점, 리뷰 총갯수 -->
+												<td>
+													<a href="/review/list?reqPage=1">
+														<span>⭐</span>
+														<span id="review-rating" th:text="${doctor.reviewRating}"></span>
+														(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<!-- 오늘 예약 가능 / 불가 여부 -->
+											</tr>
+											<tr>
+												<!-- 진료 예약 버튼 -->
+												<td>
+													<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
+														<button type="button" id="appoint-btn">진료 예약</button>
+													</a>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div class="doctor-down">
+										<table th:class="'schedule-' + ${status.index} + ' schedule'">
+											<tr>
+												<th>구분</th>
+												<td></td>
+											</tr>
+										</table>
+									</div>
+								</li>
+							</th:block>
+						</ul>
+					</div>
+				</div>
 			</div>
-		</div>
+		</section>
 	</main>
+	<script>
+// 		$("#appoint-btn").on("click", function(doctorNo){
+// 			location.href = "/treat/appointFrm?doctorNo=" + doctorNo;
+// 		});
+
+		function appoint(obj){
+			console.log(obj);
+		}
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
@@ -64,6 +65,7 @@ public class ReviewService {
 		return memberAllReview;
 	}
 
+	@Transactional
 	public int reviewWrite(Review r) {
 		int reviewWrite = reviewDao.reviewWrite(r);
 		return reviewWrite;
