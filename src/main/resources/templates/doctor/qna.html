@@ -119,7 +119,7 @@
 							<td th:text="${comment.commentDate}"></td>
 						</tr>	
 					</table>
-						<button type="button" id="allQna">전체 문의 보기</button>
+						<button type="button" class="allQna">전체 문의 보기</button>
 				</div>
 				<div class="info review-page">
 					<table class="tbl">
@@ -136,30 +136,75 @@
 							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-						<button type="button" id="allReview">전체 리뷰 보기</button>						
+						<button type="button" class="allReview">전체 리뷰 보기</button>						
 				</div>
 			</div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
 	<script>       
-            $(".star-cell").each(function() {
-                let starCount = parseInt($(this).attr("data-star")) || 0;
-                let stars = "";
-
-                for (let i = 0; i < 5; i++) {
-                    if (i < starCount) {
-                        stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
-                    } else {
-                        stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
-                    }
-                }
-                
-                $(this).html(`<div class="star-wrap">${stars}</div>`);
-            });   
-            $("#allReview").on("click", function(){
-            	
-            });
+		$(".star-cell").each(function () {
+		    let starCount = parseInt($(this).attr("data-star")) || 0;
+		    let stars = "";
+		    for (let i = 0; i < 5; i++) {
+		        if (i < starCount) {
+		            stars += '<span class="material-icons star">star_rate</span>'; // Filled star
+		        } else {
+		            stars += '<span class="material-icons star" style="color: lightgray;">star_rate</span>'; // Empty star
+		        }
+		    }
+		    $(this).html(`<div class="star-wrap">${stars}</div>`);
+		}); 
+		$(".allReview").on("click", function(){
+			swal({
+				title : "확인",
+ 				text : "리뷰 전체 보시겠습니까?",
+ 				icon : "success",
+ 				buttons : {
+ 					confirm : {
+						text : "확인",
+ 						value : true,
+ 						visible : true,
+ 						closeModal : true
+ 					},
+ 					cancle : {
+ 						text : "취소",
+ 						value : false,
+ 						visible : true,
+ 						closeModal : true
+ 					}
+ 				}
+ 			}).then(function(isConfirm){
+ 				if(isConfirm){
+ 					location.href = "/review/list?reqPage=1";
+ 				}
+ 			});
+		});
+		$(".allQna").on("click", function(){
+			swal({
+				title : "확인",
+ 				text : "문의 전체 보시겠습니까?",
+ 				icon : "success",
+ 				buttons : {
+ 					confirm : {
+						text : "확인",
+ 						value : true,
+ 						visible : true,
+ 						closeModal : true
+ 					},
+ 					cancel : {
+ 						text : "취소",
+ 						value : false,
+ 						visible : true,
+ 						closeModal : true
+ 					}
+ 				}
+ 			}).then(function(isConfirm){
+ 				if(isConfirm){
+ 					location.href = "/doctor/myMedicalRecordsPageFrm?reqPage=1";
+ 				}
+ 			});
+		});
     </script>
 </body>
 </html>

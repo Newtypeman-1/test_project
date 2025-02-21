@@ -15,7 +15,26 @@
 		margin: 0 auto;
 		padding: 10px;
 	}
-	
+	.star-wrap{
+    	overflow: hidden;
+	}
+	.star-wrap>span{
+	    float: left;
+	    font-size: 30px;
+	    color: lightgray;
+	    cursor: pointer;
+	}
+	.star-on{
+	    position: absolute;
+	    width: 0px;
+	    overflow: hidden;
+	}
+	.star-on-wrap{
+	    width: 150px;
+	}
+	.star-on-wrap>span{
+	    color: gold;
+	}
 </style>
 </head>
 <body>
@@ -40,13 +59,24 @@
 					<td colspan="4">
 						<div>
 							<textarea name="reviewContent"></textarea>
+							<input type="hidden" id="reviewStar" name="reviewStar">
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>별점</th>
 					<td>
-						<input type="text" name="reviewStar" id="reviewStar">
+						<div class="star-wrap star-wrap1">
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					    </div>
+					    <p>
+				        	<span id="star-result">0</span>
+					        <span>점</span>
+					    </p>
 					</td>	
 				</tr>
 				<tr>
@@ -58,8 +88,8 @@
 					</td>
 				</tr>
 			</table>
-			</form>
-		</section>
+		</form>
+	</section>
 	</main>
 		<script>
 	 		$(".can-btn").on("click",function(){
@@ -74,7 +104,7 @@
 	 						visible : true,
 	 						closeModal : true
 	 					},
-	 					cancle : {
+	 					cancel : {
 	 						text : "취소",
 	 						value : false,
 	 						visible : true,
@@ -86,6 +116,15 @@
 	 					location.href = "/review/list?reqPage=1";
 	 				}
 	 			});
+	 		});
+	 		const stars = $(".star-wrap1>span");
+	 		stars.on("click", function () {
+	 		   stars.css("color", "gold");
+	 		   $(this).nextAll().css("color", "lightgray");
+
+	 		   const index = stars.index(this);
+	 		   $("#star-result").text(index + 1);
+	 		   $("#reviewStar").val(index + 1);
 	 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>

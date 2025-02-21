@@ -50,8 +50,8 @@ public class ReviewDao {
 	}
 
 	public int reviewWrite(Review r) {
-		String query = "insert into review values(review_seq.nextval, 'asdf',?,?,?,to_char(sysdate,'yyyy-mm-dd'), 1, 0)";
-		Object[] params = {r.getReviewContent(), r.getReviewWriter(), r.getDoctorNo()};
+		String query = "insert into review values(review_seq.nextval, 'asdf',?,?,?,to_char(sysdate,'yyyy-mm-dd'), ?, 0)";
+		Object[] params = {r.getReviewContent(), r.getReviewWriter(), r.getDoctorNo(), r.getReviewStar()};
 		int reviewWrite = jdbc.update(query, params);
 		return reviewWrite;
 	}
