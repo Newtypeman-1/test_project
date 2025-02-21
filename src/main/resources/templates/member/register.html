@@ -1083,6 +1083,7 @@
 		});
 		let intervalid = null;
 		function authTime(){
+			window.clearInterval(intervalid);
 			$("#time-zone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
 			
 			intervalid = window.setInterval(function(){

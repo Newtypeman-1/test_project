@@ -53,75 +53,105 @@ td{
 		<th:block th:include="common/menuRemote"></th:block>
 		<section class="section">
 			<div class="page-title">진료 소견서</div>
-			<table class="tbl">
-				<tr>
-					<th>성함</th>
-					<td colspan="2" th:text="${t.memberName}"></td>
-					<th>성별</th>
-					<td th:text="${t.memberGender}"></td>
-					<th>이메일</th>
-					<td colspan="4"th:text="${t.memberEmail}"></td>
-				</tr>
-				<tr>
-					<th >주소</th>
-					<td colspan="5" th:text="${t.memberAddr}"></td>
-					<th>전화번호</th>
-					<td colspan="3" th:text="${t.memberPhone}"></td>
-				</tr>
-				<tr>
-					<th rowspan="3">증상</th>
-					<th:block th:if="${t.isDone} == '0'">
-						<td colspan="4" rowspan="3"><input type="text"></td>
-					</th:block>
-					<th:block th:if="${t.isDone} == '1'">
-						<td colspan="4" rowspan="3" th:text="${t.opinionSymptom}"></td>
-					</th:block>
-					<th>담당 의사</th>
-					<td colspan="4" th:text="${session.doctor.doctorName}"></td>
-				</tr>
-				<tr>
-					<th>진료과</th>
-					<td colspan="4" th:text="${t.departmentName}"></td>
-				</tr>
-				<tr>
-					<th>진단일</th>
-					<td colspan="4" th:text="${t.appointDate}"></td>
-				</tr>
-				<tr>
-					<th colspan="10">의사 소견서</th>
-				</tr>
-				<tr>
-					<th:block th:if="${t.isDone} == '0'">
-						<td colspan="10"><input type="text"></td>
-					</th:block>
-					<th:block th:if="${t.isDone} == '1'">
-						<td colspan="10" th:text="${t.opinionDecision}"></td>
-					</th:block>
-				</tr>
-				<tr class="buttons">
-					<td colspan="2">
-						<button type="button">소견서 작성</button>
-					</td>
-					<td colspan="2">
-						<a href="/member/mypage"><button type="button">취소</button></a>
-					</td>
-					<td colspan="3">
-						<th:block th:if="${t.isDone} == '1'">
-							<button type="button">리뷰 작성</button>
-						</th:block>
-					</td>
-					<td colspan="3">
+			<form action="/doctor/opinionSubmit" method="post">
+				<table class="tbl">
+					<tr>
+						<th>성함</th>
+						<td colspan="2" th:text="${t.memberName}"></td>
+						<th>성별</th>
+						<td th:text="${t.memberGender}"></td>
+						<th>이메일</th>
+						<td colspan="4"th:text="${t.memberEmail}"></td>
+					</tr>
+					<tr>
+						<th >주소</th>
+						<td colspan="5" th:text="${t.memberAddr}"></td>
+						<th>전화번호</th>
+						<td colspan="3" th:text="${t.memberPhone}"></td>
+					</tr>
+					<tr>
+						<th rowspan="3">증상</th>
 						<th:block th:if="${t.isDone} == '0'">
-							진료 중
+							<td colspan="4" rowspan="3"><input type="text" class="symptom"></td>
 						</th:block>
 						<th:block th:if="${t.isDone} == '1'">
-							진료 완료
+							<td colspan="4" rowspan="3" th:text="${t.opinionSymptom}"></td>
 						</th:block>
-					</td>
-				</tr>
-			</table>
+						<th>담당 의사</th>
+						<td colspan="4" th:text="${session.doctor.doctorName}"></td>
+					</tr>
+					<tr>
+						<th>진료과</th>
+						<td colspan="4" th:text="${t.departmentName}"></td>
+					</tr>
+					<tr>
+						<th>진단일</th>
+						<td colspan="4" th:text="${t.appointDate}"></td>
+					</tr>
+					<tr>
+						<th colspan="10">의사 소견서</th>
+					</tr>
+					<tr>
+						<th:block th:if="${t.isDone} == '0'">
+							<td colspan="10"><input type="text" class="decision"></td>
+						</th:block>
+						<th:block th:if="${t.isDone} == '1'">
+							<td colspan="10" th:text="${t.opinionDecision}"></td>
+						</th:block>
+					</tr>
+					<tr class="buttons">
+						<td colspan="2">
+							<button type="submit" class="opinionCheck">소견서 작성</button>
+						</td>
+						<td colspan="2">
+							<a href="/member/mypage"><button type="button">취소</button></a>
+						</td>
+						<td colspan="3" class="wrong-message">
+							
+						</td>
+						<td colspan="3">
+							<th:block th:if="${t.isDone} == '0'">
+								진료 중
+							</th:block>
+							<th:block th:if="${t.isDone} == '1'">
+								진료 완료
+							</th:block>
+						</td>
+					</tr>
+				</table>
+			</form>
 		</section>
 	</main>
+	<script>
+		$(window).on("load", function(){
+			const done = [[${t.isDone}]];
+			if(done === 1) {
+				$(".opinionCheck").prop("disabled", true);
+			}
+		})
+		$(".opinionCheck").on("click", function(){
+			const symptomV = $(".symptom").val();
+			const decisionV = $(".decision").val();
+			const symptom = $(".symptom");
+			const decision = $(".decision");
+			const treatNo = [[${t.treatmentNo}]]
+			if(symptomV === "" || decisionV === ""){
+				$(".wrong-message").text("증상과 소견서 모두 작성해주세요.");
+				$(".opinionCheck").preventDefault();
+			}else {
+				$.ajax({
+					url: "/doctor/opinionSubmit",
+					data: {opinionSymptom: symptomV, opinionDecision: decisionV, treatmentNo: treatNo},
+					success: function(){
+						console.log("성공");
+					},
+					error: function(){
+						console.log("에러");
+					}
+				});
+			}
+		})
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
