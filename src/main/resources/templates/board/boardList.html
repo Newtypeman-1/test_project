@@ -38,15 +38,18 @@ body {
 	padding: 10px 0;
 }
 
+/*
 .post img {
 	width: 100px;
 	height: 100px;
 	background-color: #ddd;
 	margin-left: auto;
 }
+*/
 
 .post-title {
 	flex: 1;
+	margin-top: 10px;
 	padding-right: 10px;
 }
 
@@ -60,6 +63,7 @@ body {
 	-webkit-box-orient: vertical;
 }
 
+/*
 .tag {
 	display: flex;
 	align-items: center;
@@ -72,6 +76,7 @@ body {
 .tag span {
 	margin-right: 5px;
 }
+*/
 
 .refresh-btn {
 	cursor: pointer;
@@ -86,6 +91,7 @@ body {
 	position: fixed;
 	bottom: 100px;
 	right: 50px;
+	z-index: 1;
 }
 .write-btn{
 	width: 100px;
@@ -124,22 +130,20 @@ body {
 							사람 대한으로 길이 보전하세 남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리
 							화려강산 대한 사람 대한으로 길이 보전하세~</p>
 						<div class="tag">
-							<span>👃</span> 비염
+<!-- 							<span>👃</span> 비염 -->
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
+<!-- 					<img src="" alt="첨부 이미지 미리보기"> -->
 				</div>
 				<div class="post" data-tag="기타">
 					<div class="post-title">
 						<h3>다른 증상에 대한 질문</h3>
 						<p class="post-content">기타 증상에 대한 질문입니다...</p>
 						<div class="tag">
-							<span>🤔</span> 기타
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
 				</div>
 				<div class="post" data-tag="비염">
 					<div class="post-title">
@@ -153,11 +157,9 @@ body {
 							사람 대한으로 길이 보전하세 남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리
 							화려강산 대한 사람 대한으로 길이 보전하세~</p>
 						<div class="tag">
-							<span>👃</span> 비염
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
 				</div>
 				<div class="post" data-tag="비염">
 					<div class="post-title">
@@ -171,11 +173,9 @@ body {
 							사람 대한으로 길이 보전하세 남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리
 							화려강산 대한 사람 대한으로 길이 보전하세~</p>
 						<div class="tag">
-							<span>👃</span> 비염
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
 				</div>
 				<div class="post" data-tag="비염">
 					<div class="post-title">
@@ -189,11 +189,9 @@ body {
 							사람 대한으로 길이 보전하세 남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리
 							화려강산 대한 사람 대한으로 길이 보전하세~</p>
 						<div class="tag">
-							<span>👃</span> 비염
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
 				</div>
 				<div class="post" data-tag="비염">
 					<div class="post-title">
@@ -207,11 +205,9 @@ body {
 							사람 대한으로 길이 보전하세 남산 위에 저 소나무 철갑을 두른 듯 바람서리 불변함은 우리 기상일세 무궁화 삼천리
 							화려강산 대한 사람 대한으로 길이 보전하세~</p>
 						<div class="tag">
-							<span>👃</span> 비염
 						</div>
 						<p>2025.02.22</p>
 					</div>
-					<img src="" alt="첨부 이미지 미리보기">
 				</div>
 			</div>
 		</section>
@@ -289,35 +285,4 @@ body {
    	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <title>Insert title here</title> -->
-<!-- </head> -->
-<!-- <body> -->
-<!-- 	<th:block th:include="common/header"></th:block> -->
-<!-- 	<main class="main"> -->
-<!-- 		<section class="section"> -->
-<!-- 			<div class="page-title">상담게시판</div> -->
-<!-- 			<div class="boardlist-tbl"> -->
-<!-- 				<table class="tbl tbl-hover"> -->
-<!-- 					<tr> -->
-<!-- 						<th style="width:10%">글번호</th> -->
-<!-- 						<th style="width:10%">제목</th> -->
-<!-- 						<th style="width:10%">작성자</th> -->
-<!-- 						<th style="width:10%">작성일</th> -->
-<!-- 						<th style="width:10%">조회수</th> -->
-<!-- 					</tr> -->
-<!-- 					<tr th:each="board : ${list}"> -->
-<!-- 						<td th:text="${board.boardNo}"></td> -->
-<!-- 						<td th:text="${board.boardTitle}"></td> -->
-<!-- 						<td th:text="${board.boardWriter}"></td> -->
-<!-- 						<td th:text="${board.boardRegDate}"></td> -->
-<!-- 						<td th:text="${board.boardReadCount}"></td> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-<!-- 			</div> -->
-<!-- 		</section> -->
-<!-- 	</main> -->
-<!-- 	<th:block th:include="common/footer"></th:block> -->
-<!-- </body> -->
 </html>
