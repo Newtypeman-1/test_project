@@ -1504,11 +1504,9 @@ tr input{
 }
 .boardList-tbl tr{
 	text-align: center;
-		border-bottom: 1px solid black;
-		height: 40px;
-		background-color: var(--color4);
+	border-bottom: 1px solid black;
+	height: 40px;
 }
-.boardList-tbl
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1500px) and (max-width: 1900px) {
