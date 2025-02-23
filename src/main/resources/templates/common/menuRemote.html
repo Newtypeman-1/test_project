@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 
 <style>
-.main{
-	display: flex;
-	margin: 0 auto;
-}
 .menu-section{
+	position: fixed;
+	left: 30px;
+	overflow: hidden;
 	width: 200px;
-	height: 147px;
+	height: 130px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
-	align-items: top;
 	flex-direction: column;
-    border: 3px solid rgba(0,153,153,0.5);
+    border: 3px solid var(--color4);
     border-radius: 10px;
 }
 .menu-title{
 	text-align: center;
 	color: #fff;
-	background-color: rgba(0,153,153,0.5);
-	border-top-right-radius: 7px;
-	border-top-left-radius: 7px;
-	padding: 5px;
+	background-color: var(--color4);
+	padding: 10px;
 	font-weight: 900;
 }
 .menu-section> ul{
 	text-align: center;
-	color: rgba(0,153,153,0.5);
+	color: var(--color4);
 }
 .menu-section li{
 	list-style: none;
 	padding: 5px;
-	border-bottom: 3px solid rgba(0,153,153,0.5);
+	border-bottom: 3px solid var(--color4);
 	text-decoration: none;
-	
+}
+.menu-section a{
+	text-decoration: none;
 }
 .menu-section a:link{
-	color: rgb(0,153,153);
+	color: var(--color2);
 }
 .menu-section a:visited{
-	color: rgb(0,153,153);
+	color: var(--color2);
 }
 .menu-section li:last-child{
 	border: none;
