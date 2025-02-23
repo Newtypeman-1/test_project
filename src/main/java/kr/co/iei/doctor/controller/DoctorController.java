@@ -4,6 +4,7 @@ package kr.co.iei.doctor.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.board.model.service.BoardService;
@@ -19,8 +21,10 @@ import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;
 import kr.co.iei.review.model.service.ReviewService;
+import kr.co.iei.treat.model.service.TreatService;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.util.EmailSender;
+import kr.co.iei.util.FileUtils;
 
 @Controller
 @RequestMapping(value="/doctor")
@@ -28,11 +32,17 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	@Autowired
+	private TreatService treatService;
+	@Autowired
 	private ReviewService reviewService;
 	@Autowired
 	private CommentService commentService;
 	@Autowired
 	private EmailSender emailSender;
+	@Value(value="${file.root}")
+	private String root;
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@PostMapping(value="/login")
 	public String doctorLogin(Doctor d, HttpSession session) {
@@ -52,8 +62,10 @@ public class DoctorController {
 	@GetMapping(value="/mypage")
 	public String doctorMypage(@SessionAttribute Doctor doctor, Model model) {
 		String doctorId = doctor.getDoctorId();
+		String departmentName = treatService.selectDepartmentName(doctor.getDepartmentNo());
 		Doctor d = doctorService.selectOneDoctor(doctor);
 		model.addAttribute("doctor", d);
+		model.addAttribute("departmentName", departmentName);
 		return "doctor/mypage";
 	}
 	@PostMapping(value="/update")

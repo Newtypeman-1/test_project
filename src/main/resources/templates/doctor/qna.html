@@ -119,24 +119,26 @@
 							<td th:text="${comment.commentDate}"></td>
 						</tr>	
 					</table>
-						<button type="button" class="allQna">전체 문의 보기</button>
+					<button type="button" class="allQna">전체 문의 보기</button>
 				</div>
 				<div class="info review-page">
 					<table class="tbl">
 						<tr>
-							<th style="width:10%">리뷰번호</th>
+							<th style="width:15%">리뷰번호</th>
 							<th style="width:40%">제목</th>
+							<th style="width:15%">담당의</th>
 							<th style="width:15%">별점</th>
-							<th style="width:10%">작성일</th>
+							<th style="width:15%">작성일</th>
 						</tr>
 						<tr th:each="review : ${reviewList}" class="qwer">
 							<td th:text="${review.reviewNo}"></td>
 							<td th:text="${review.reviewTitle}"></td>
+							<td th:text="${review.doctorName}"></td>
 							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
 							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-						<button type="button" class="allReview">전체 리뷰 보기</button>						
+					<a href="/review/list?reqPage=1"><button type="button" class="allReview">전체 리뷰 보기</button></a>						
 				</div>
 			</div>
 		</section>

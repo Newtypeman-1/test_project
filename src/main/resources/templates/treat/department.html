@@ -71,7 +71,7 @@
 											<tr>
 												<!-- 리뷰 평점, 리뷰 총갯수 -->
 												<td>
-													<a href="/review/list?reqPage=1">
+													<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
 														<span>⭐</span>
 														<span id="review-rating" th:text="${doctor.reviewRating}"></span>
 														(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
