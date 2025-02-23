@@ -141,21 +141,24 @@ public class DoctorController {
 		return "doctor/myOpinion";
 	}
 	
-	@ResponseBody
 	@PostMapping(value="/opinionSubmit")
 	public String opinionSubmit(Treat t, @SessionAttribute(required = false) Doctor doctor, Model model) {
+		System.out.println(t.getOpinionSymptom());
+		System.out.println(t.getOpinionDecision());
+		System.out.println(doctor.getDoctorNo());
 		int r = doctorService.updateOpinion(t, doctor);
+		System.out.println(r);
 		if(r != 0) {
 			model.addAttribute("title","소견서 작성 완료");
 			model.addAttribute("text","소견서 작성이 완료되었습니다.");
 			model.addAttribute("icon","success");
-			model.addAttribute("loc", "/doctor/myOpinion?treatment_no="+t.getTreatmentNo());
+			model.addAttribute("loc", "redirect:/doctor/myOpinion?treatment_no="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
 			return "common/msg";
 		}else {
 			model.addAttribute("title","소견서 작성 실패");
 			model.addAttribute("text","소견서 작성 실패.");
 			model.addAttribute("icon","warning");
-			model.addAttribute("loc", "/doctor/myOpinion?treatment_no="+t.getTreatmentNo());
+			model.addAttribute("loc", "redirect:/doctor/myOpinion?treatment_no="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
 			return "common/msg";
 		}
 	}

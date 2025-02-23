@@ -109,7 +109,10 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
-
+body{
+	margin: 0 auto;
+	padding: 0;
+}
 .section-title {
 	margin-bottom: 45px;
 }
@@ -315,26 +318,42 @@ ol {
 /*---------------------
   Header
 -----------------------*/
-
-.header {
+.header{
+	width: 100%;
+	display: flex;
+	background-color: rgba(255,255,255,0.7);
 	position: fixed;
 	z-index: 1;
 }
 
-.header:hover{
-	background: rgba(255, 255, 255, 0.7);
+.header:hover {
+	background: #ffffff;
 	-webkit-box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 	box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
+	
 }
-.main{
-	padding-top: 300px;
+.row{
+	display: flex;
+	justify-content: space-around;
+}
+.row div{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+.row a{
+	text-decoration: none;
 }
 .header__logo {
-	padding: 0;
+	padding: 26px 0;
+	width: 20%;
 }
 
 .header__logo a {
 	display: inline-block;
+}
+
+.header__logo img{
+	object-fit: contains;
 }
 
 .header__menu {
@@ -344,9 +363,8 @@ ol {
 .header__menu ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 90px;
+	margin-right: 40px;
 	position: relative;
-	height: 30px;
 }
 
 .header__menu ul li.active a:after {
@@ -384,7 +402,7 @@ ol {
 	visibility: hidden;
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
-	transition: all, 0.1s;
+	transition: all, 0.3s;
 }
 
 .header__menu ul li .dropdown li {
@@ -431,8 +449,9 @@ ol {
 }
 
 .header__right {
-	text-align: right;
+	text-align: center;
 	padding: 30px 0 27px;
+	margin-right: 30px;
 }
 
 .header__right__auth {
@@ -507,6 +526,10 @@ ol {
 
 .canvas__open {
 	display: none;
+}
+
+.main{
+	padding-top: 300px;
 }
 
 /*---------------------
@@ -859,31 +882,26 @@ ol {
 .footer {
 	padding-top: 55px;
 }
-
+.bottom-row{
+	margin: 0 auto;
+	width: 1800px;
+}
 .footer__about {
 	margin-bottom: 30px;
+	width: 300px;
 }
 
 .footer__about p {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .footer__logo {
-	margin-bottom: 20px;
-}
-
-.footer__logo img{
+	margin-bottom: 10px;
 	width: 50%;
 }
 
-.footer__payment a {
-	margin-right: 6px;
-	margin-bottom: 10px;
-	display: inline-block;
-}
-
-.footer__payment a:last-child {
-	margin-right: 0;
+.footer__logo img{
+	object-fit: contains;
 }
 
 .footer__widget {
@@ -1047,6 +1065,7 @@ ol {
 
 .categories .container-fluid {
 	padding-right: 5px;
+	
 }
 
 .categories__item {
@@ -3174,9 +3193,7 @@ ol {
 }
 
 @media only screen and (min-width: 1200px) {
-	.container {
-		max-width: 1170px;
-	}
+
 }
 
 /* Medium Device = 1200px */
@@ -3691,5 +3708,4 @@ ol {
 		width: 100%;
 		font-size: 24px;
 	}
-	
 }
