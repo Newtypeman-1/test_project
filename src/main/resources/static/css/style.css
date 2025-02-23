@@ -31,6 +31,15 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+:root{
+	--color1: white;
+	--color2: black;
+	--color3: #009999;
+	--color4: #0773BD;
+	--color5: #39A7CC;
+}
+
+
 html,
 body {
 	height: 100%;
@@ -3213,6 +3222,9 @@ body{
 	}
 	.nav::after {
 		width: 240px;
+	}
+	.bottom-row{
+		width: 1200px;
 	}
 }
 
