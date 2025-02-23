@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.vo.Review;
+import kr.co.iei.review.model.vo.ReviewListData;
 import kr.co.iei.review.model.vo.ReviewRowMapper;
 import kr.co.iei.review.model.vo.ReviewRowMapper2;
 
@@ -50,10 +51,24 @@ public class ReviewDao {
 	}
 
 	public int reviewWrite(Review r) {
-		String query = "insert into review value(review_seq.nextval,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
-		Object[] params = {r.getReviewTitle(), r.getReviewContent(), r.getReviewWriter(), r.getDoctorNo(), r.getReviewStar(), r.getTreatmentNo()};
+		String query = "insert into review values(review_seq.nextval, 'asdf',?,?,?,to_char(sysdate,'yyyy-mm-dd'), ?, ?)";
+		Object[] params = {r.getReviewContent(), r.getReviewWriter(), r.getDoctorNo(), r.getReviewStar(), r.getTreatmentNo()};
 		int reviewWrite = jdbc.update(query, params);
 		return reviewWrite;
+	}
+
+	public List reviewAllList2(int doctorNo, int start, int end) {
+		String query = "select * from (select rownum as rnum, r.* from (select * from review v join doctor_tbl d on (v.doctor_no = d.doctor_no) where d.doctor_no = ?  order by review_no desc)r) where rnum between ? and ?";
+		Object[] params = {doctorNo, start, end};
+		List reviewList = jdbc.query(query, reviewRowMapper, params);
+		return reviewList;
+	}
+
+	public int totalReview2(int doctorNo) {
+		String query = "select count(*) from review where doctor_no = ?";
+		Object[] params = {doctorNo};
+		int totalReview = jdbc.queryForObject(query, Integer.class, params);
+		return totalReview;
 	}
 	
 }

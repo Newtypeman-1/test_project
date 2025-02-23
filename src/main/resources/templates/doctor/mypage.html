@@ -12,14 +12,14 @@
 			<div class="page-title">내 정보</div>
 			<div class="info mypage-info">
 				<div class="img">
-					<img src="/img/백강혁.webp">
+					<img src="/doctor/+${doctor.doctorImg}">
 				</div>
 				<div class="intro">
 					<form action="/doctor/update" method="post">
 						<table class="tbl">
 							<tr>
 								<th width="50%">담당과</th>
-								<td width="50%">내과</td>
+								<td width="50%" th:text="${departmentName}"></td>
 							</tr>
 							<tr>
 								<th>이름</th>

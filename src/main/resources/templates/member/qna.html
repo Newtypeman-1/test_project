@@ -68,47 +68,46 @@
 							<td th:text="${board.boardRegDate}"></td>
 						</tr>	
 					</table>
-						<button type="button" id="allQna">전체 문의 보기</button>
+					<a href="/member/myMedicalRecordsPageFrm?reqPage=1"><button type="button" class="allQna">전체 문의 보기</button></a>
 				</div>
 				<div class="info review-page">
 					<table class="tbl">
 						<tr>
-							<th style="width:10%">리뷰번호</th>
-							<th style="width:40%">제목</th>
+							<th style="width:15%">리뷰번호</th>
+							<th style="width:40%">내용</th>
+							<th style="width:15%">담당의</th>
 							<th style="width:15%">별점</th>
-							<th style="width:10%">작성일</th>
+							<th style="width:15%">작성일</th>
 						</tr>
 						<tr th:each="review : ${reviewList}" class="qwer">
-								<td th:text="${review.reviewNo}"></td>
-								<td th:text="${review.reviewTitle}"></td>
-								<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
-								<td th:text="${review.reviewDate}"></td>
+<!-- 						<th:if="${session.member.memberId} == ${review.reviewWriter}"> -->
+							<td th:text="${review.reviewNo}"></td>
+							<td th:text="${review.reviewContent}"></td>
+							<td th:text="${review.doctorName}"></td>
+							<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>
+							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-						<button type="button" id="allReview">전체 리뷰 보기</button>						
+					<a href="/review/list?reqPage=1"><button type="button" class="allReview">전체 리뷰 보기</button></a>						
 				</div>
 			</div>
 		</section>
 	</main>
 	<th:block th:include="common/footer"></th:block>
 	<script>       
-            $(".star-cell").each(function() {
-                let starCount = parseInt($(this).attr("data-star")) || 0;
-                let stars = "";
-
-                for (let i = 0; i < 5; i++) {
-                    if (i < starCount) {
-                        stars += '<span class="material-icons star">star_rate</span>'; // 꽉 찬 별
-                    } else {
-                        stars += '<span class="material-icons star" style="color : lightgray"">star_rate</span>'; // 빈 별
-                    }
-                }
-                
-                $(this).html(`<div class="star-wrap">${stars}</div>`);
-            });   
-            $("#allReview").on("click", function(){
-            	
-            });
-    </script>
+		$(".star-cell").each(function () {
+		    let starCount = parseInt($(this).attr("data-star")) || 0;
+		    let stars = "";
+		    for (let i = 0; i < 5; i++) {
+		        if (i < starCount) {
+		            stars += '<span class="material-icons star">star_rate</span>'; // Filled star
+		        } else {
+		            stars += '<span class="material-icons star" style="color: lightgray;">star_rate</span>'; // Empty star
+		        }
+		    }
+		    $(this).html(`<div class="star-wrap">${stars}</div>`);
+		});   
+		
+	</script>
 </body>
 </html>

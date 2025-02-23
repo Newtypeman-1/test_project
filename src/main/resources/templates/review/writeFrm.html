@@ -15,7 +15,26 @@
 		margin: 0 auto;
 		padding: 10px;
 	}
-	
+	.star-wrap{
+    	overflow: hidden;
+	}
+	.star-wrap>span{
+	    float: left;
+	    font-size: 30px;
+	    color: lightgray;
+	    cursor: pointer;
+	}
+	.star-on{
+	    position: absolute;
+	    width: 0px;
+	    overflow: hidden;
+	}
+	.star-on-wrap{
+	    width: 150px;
+	}
+	.star-on-wrap>span{
+	    color: gold;
+	}
 </style>
 </head>
 <body>
@@ -23,87 +42,90 @@
 	<main class="main">
 		<section class="section">
 			<div class="page-title">리뷰 작성</div>
+			<form action="/review/write" method="post">
 			<table class="tbl">
 				<tr>
 					<th style="width:10%">작성자</th>
 					<td style="width:40%">
 						<span th:text="${session.member.memberId}"></span>
-						<input type="hidden" name="reivewWriter" th:value="${session.member.memberId}">
+						<input type="hidden" name="reviewWriter" th:value="${session.member.memberId}">
 					</td>
 					<th style="width:10%">담당의</th>
 					<td style="width:40%">
-						<input type="text" name="doctorName" id="doctorName">
+						<input type="text" name="doctorNo" id="doctorNo">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="4">
 						<div>
 							<textarea name="reviewContent"></textarea>
+							<input type="hidden" id="reviewStar" name="reviewStar">
 						</div>
 					</td>
+				</tr>
+				<tr>
+					<th>별점</th>
+					<td>
+						<div class="star-wrap star-wrap1">
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					        <span class="material-icons">star_rate</span>
+					    </div>
+					    <p>
+				        	<span id="star-result">0</span>
+					        <span>점</span>
+					    </p>
+					</td>	
 				</tr>
 				<tr>
 					<td>
 						<button type="submit" class="ok-btn">리뷰 등록</button>
 					</td>
 					<td>
-						<button type="submit" class="can-btn">리뷰 취소</button>
+						<button type="button" class="can-btn">리뷰 취소</button>
 					</td>
 				</tr>
 			</table>
-		</section>
+		</form>
+	</section>
 	</main>
 		<script>
-		$(".ok-btn").on("click",function(){
-			swal({
-				title : "등록 완료",
-				text : "등록이 완료되었습니다.",
-				icon : "success",
-				buttons : {
-					confirm : {
-						text : "확인",
-						value : true,
-						visible : true,
-						closeModal : true
-					},
-					cancle : {
-						text : "취소",
-						value : false,
-						visible : true,
-						closeModal : true
-					}
-				}
-			}).then(function(isConfirm){
-				if(isConfirm){
-					location.href = "/review/list?reqPage=1";	
-				}
-			});
-		});
-		$(".can-btn").on("click",function(){
-			swal({
-				title : "작성 취소",
-				text : "작성을 취소하시겠습니까?",
-				icon : "warning",
-				buttons : {
-					confirm : {
-						text : "확인",
-						value : true,
-						visible : true,
-						closeModal : true
-					},
-					cancle : {
-						text : "취소",
-						value : false,
-						visible : true,
-						closeModal : true
-					}
-				}
-			}).then(function(isConfirm){
-				if(isConfirm){
-					location.href = "/review/list?reqPage=1";	
-				}
-			});
-		});
+	 		$(".can-btn").on("click",function(){
+	 			swal({
+					title : "작성 취소",
+	 				text : "작성을 취소하시겠습니까?",
+	 				icon : "warning",
+	 				buttons : {
+	 					confirm : {
+							text : "확인",
+	 						value : true,
+	 						visible : true,
+	 						closeModal : true
+	 					},
+	 					cancel : {
+	 						text : "취소",
+	 						value : false,
+	 						visible : true,
+	 						closeModal : true
+	 					}
+	 				}
+	 			}).then(function(isConfirm){
+	 				if(isConfirm){
+	 					location.href = "/review/list?reqPage=1";
+	 				}
+	 			});
+	 		});
+	 		const stars = $(".star-wrap1>span");
+	 		stars.on("click", function () {
+	 		   stars.css("color", "gold");
+	 		   $(this).nextAll().css("color", "lightgray");
+
+	 		   const index = stars.index(this);
+	 		   $("#star-result").text(index + 1);
+	 		   $("#reviewStar").val(index + 1);
+	 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
