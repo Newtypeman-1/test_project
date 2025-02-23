@@ -21,4 +21,6 @@ public class Doctor {
 	private String departmentName;
 	private int reviewTotal;
 	private int reviewRating;
+	
+	private int appointTime;
 }

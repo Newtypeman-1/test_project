@@ -46,4 +46,9 @@ public class TreatService {
 		return list;
 	}
 
+	public List<Doctor> selectDoctorsWithSchedule(int departmentNo) {
+		List list = treatDao.selectDoctorsWithSchedule(departmentNo);
+		return list;
+	}
+
 }

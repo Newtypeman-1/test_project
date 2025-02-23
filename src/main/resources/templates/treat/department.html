@@ -5,24 +5,164 @@
 <title>Helpdoc | 진료과</title>
 </head>
 <style>
-.title-section{
+.title-section {
 	height: 120px;
 }
-.page-title{
+
+.page-title {
 	width: 1200px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	margin: 0 auto;
 }
-.page-title>h2{
+
+.page-title>h2 {
 	text-align: center;
 	line-height: 120px;
 	font-weight: 500;
 	font-size: 40px;
 }
-.doctor-up{
+
+.content-section{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.introduce-detail {
+	margin-bottom: 100px;
+}
+
+.introduce-headline {
+	text-align: center;
+	padding: 50px 0;
+	border-bottom: 1px solid black;
+}
+.introduce-headline>h5{
+	font-weight: bold;
+}
+
+.introduce-additional {
+	text-align: left;
+	margin: 20px 0;
+}
+
+.doctor-up {
 	display: flex;
-	
+}
+
+#appoint-btn {
+	border-radius: 20px;
+	padding: 8px;
+	background-color: #39A7CC;
+	border: none;
+	color: white;
+}
+
+.doctor-name {
+	font-size: 28px;
+}
+
+.department-name {
+	font-size: 14px;
+}
+
+.schedule {
+	border: 1px solid #ddd;
+}
+
+.doctor-wrap{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 50px;
+	justify-content: center;
+}
+
+.doctor-container {
+	width: 500px;
+}
+
+.doctor-card {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #ddd;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.image-box {
+	width: 150px;
+	height: 150px;
+	margin-top: 10px;
+	background-color: #ddd;
+}
+
+.info {
+	flex-grow: 1;
+	margin-left: 30px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.rating {
+	color: #ffa500;
+	font-size: 14px;
+}
+
+.status {
+	color: green;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.buttons {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.buttons a {
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	color: white;
+}
+
+.info-btn {
+	background-color: #f0ad4e;
+	margin-right: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.reserve-btn {
+	background-color: #007bff;
+	display: flex;
+	align-items: center;
+}
+
+.schedule {
+	width: 500px;
+	border-collapse: collapse;
+	margin-top: 10px;
+	background-color: #eaeaea;
+}
+
+.schedule th, .schedule td {
+	border: 1px solid #aaa;
+	padding: 5px;
+	text-align: center;
+}
+
+.closed {
+	color: red;
+	font-weight: bold;
+}
+
+.refer{
+	text-align: right;
 }
 </style>
 <body>
@@ -37,83 +177,83 @@
 			<div class="content-main">
 				<div class="introduce-detail">
 					<div class="introduce-img-wrap">
-						<img class="sub-img" src="/img/logo.png" style="width:20%;">
-						<img class="introduce-img" src="/img/오한.jpg">
+						<img class="introduce-img" src="/img/img_department1.jpg">
 					</div>
-					<div class="introduce-headline">
-						<div>
-							내과는 호흡기질환, 소화기질환, 순환기질환을 망라하는 병원에서 가장 큰 전문과입니다.
-						</div>
-					</div>
-					<hr>
-					<div class="introduce-additional">
-						<div>
-							우리나라는 근래에 식생활이 서구화되면서 각종 내장암으로 인한 사망률이 높고, 염증성, 과민성을 비롯한 각종 내장 증후군의 발병률이 높아지고 있습니다. 또한 B형 및 C형간염의 유병률이 높고 간암 역시 여전히 국내 사망원인 질환의 수위를 차지하고 있어서, 내과 분야의 중요성은 갈수록 부각되고 있습니다. 내과는 진료뿐만 아니라 연구, 그리고 교육적 측면에서의 역할이 매우 중요한 것으로 잘 알려져 있습니다.
-						</div>
-					</div>
-					<div class="introduce-doctors">
-						<div>의료진 소개</div>
-						<ul class="doctor-list">
-							<th:block th:each="doctor, status : ${doctors}">
-								<li th:class="'doctor-' + ${doctor.doctorNo} + ' doctor'">
-									<div class="doctor-up">
-										<div style="width:180px;" class="doctor-img-box">
-											<img src="/img/백강혁.webp">
-										</div>
-										
-										<table class="doctor-text-tbl">
-											<tr>
-												<td>
-													<span th:text="${doctor.doctorName}"></span>
-													[<span th:text="${departmentName}"></span>]
-												</td>
-											</tr>
-											<tr>
-												<!-- 리뷰 평점, 리뷰 총갯수 -->
-												<td>
-													<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
-														<span>⭐</span>
-														<span id="review-rating" th:text="${doctor.reviewRating}"></span>
-														(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<!-- 오늘 예약 가능 / 불가 여부 -->
-											</tr>
-											<tr>
-												<!-- 진료 예약 버튼 -->
-												<td>
-													<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
-														<button type="button" id="appoint-btn">진료 예약</button>
-													</a>
-												</td>
-											</tr>
-										</table>
+					<div class="introduce-headline"><h5>내과는 호흡기질환, 소화기질환, 순환기질환을 망라하는
+						병원에서 가장 큰 전문과입니다.</h5></div>
+					<div class="introduce-additional">우리나라는 근래에 식생활이 서구화되면서 각종
+						내장암으로 인한 사망률이 높고, 염증성, 과민성을 비롯한 각종 내장 증후군의 발병률이 높아지고 있습니다. 또한 B형 및
+						C형간염의 유병률이 높고 간암 역시 여전히 국내 사망원인 질환의 수위를 차지하고 있어서, 내과 분야의 중요성은 갈수록
+						부각되고 있습니다. 내과는 진료뿐만 아니라 연구, 그리고 교육적 측면에서의 역할이 매우 중요한 것으로 잘 알려져
+						있습니다.</div>
+				</div>
+				<div class="doctor-wrap">
+					<th:block th:each="doctor, status : ${doctorsWithRating}">
+						<div class="doctor-container">
+							<div class="doctor-card">
+								<div class="image-box">
+									<img th:src="${doctor.doctorImg}">
+								</div>
+								<div class="info">
+									<p class="title">
+										<span th:text="${doctor.doctorName}"></span>
+										[<span th:text="${departmentName}">OO</span>]
+									</p>
+									<p class="rating">
+										<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
+											<span>⭐</span>
+											<span id="review-rating" th:text="${doctor.reviewRating}"></span>
+											(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
+										</a>
+									</p>
+									<p class="status">🟢 예약 가능</p>
+									<p>09:00 ~ 18:00</p>
+									<div class="buttons">
+										<a href="#" class="info-btn">👨‍⚕️ 의료진 소개</a>
+										<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
+											<button type="button" id="appoint-btn">📆 진료 예약</button>
+										</a>
 									</div>
-									<div class="doctor-down">
-										<table th:class="'schedule-' + ${status.index} + ' schedule'">
-											<tr>
-												<th>구분</th>
-												<td></td>
-											</tr>
-										</table>
-									</div>
-								</li>
-							</th:block>
-						</ul>
-					</div>
+								</div>
+							</div>
+							<table th:class="'schedule-' + ${status.index} + ' schedule'">
+								<tr>
+									<td>09:00</td>
+									<td>10:00</td>
+									<td>11:00</td>
+									<td>13:00</td>
+									<td>14:00</td>
+									<td>15:00</td>
+									<td>16:00</td>
+									<td>17:00</td>
+									<td>18:00</td>
+								</tr>
+								<tr class="">
+									<td></td>
+									<td class="closed">❌</td>
+									<td></td>
+									<td></td>
+									<td class="closed">❌</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>안내</td>
+									<td colspan="8" class="refer">❌ 마감</td>
+								</tr>
+							</table>
+						</div>
+					</th:block>
 				</div>
 			</div>
 		</section>
 	</main>
 	<script>
-// 		$("#appoint-btn").on("click", function(doctorNo){
-// 			location.href = "/treat/appointFrm?doctorNo=" + doctorNo;
-// 		});
-
-		function appoint(obj){
-			console.log(obj);
+		[[${doctorsWithSchedule}]];
+		for(let i = 0; i < 9; i++){
+			const td = $("<td>")
 		}
 	</script>
 	<th:block th:include="common/footer"></th:block>

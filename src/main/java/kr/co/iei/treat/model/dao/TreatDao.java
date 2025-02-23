@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRatingRowMapper;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
+import kr.co.iei.doctor.model.vo.DoctorScheduleRowMapper;
 import kr.co.iei.treat.model.vo.DepartmentRowMapper;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.treat.model.vo.TreatRowMapper;
@@ -28,6 +29,8 @@ public class TreatDao {
 	private DoctorRatingRowMapper doctorRatingRowMapper;
 	@Autowired
 	private DepartmentRowMapper departmentRowMapper;
+	@Autowired
+	private DoctorScheduleRowMapper doctorScheduleRowMapper;
 	
 	public List<Integer> selectUnavailableTimes(int doctorNo) {
 		String query = "select * from treatment_tbl where appoint_date = to_char(sysdate, 'yyyy-MM-dd') and doctor_no = ?";
@@ -83,6 +86,15 @@ public class TreatDao {
 	public List selectAllDepartment() {
 		String query = "select * from department_tbl order by 1";
 		List list = jdbc.query(query, departmentRowMapper);
+		return list;
+	}
+
+	public List selectDoctorsWithSchedule(int departmentNo) {
+		String query = "select doctor.doctor_no, appoint_time from doctor_tbl doctor\r\n"
+					+ "join treatment_tbl treat on (doctor.doctor_no = treat.doctor_no)\r\n"
+					+ "where treat.appoint_date = to_char(sysdate, 'yyyy-MM-dd') and doctor.department_no = ?";
+		Object[] params = {departmentNo};
+		List list = jdbc.query(query, doctorScheduleRowMapper, params);
 		return list;
 	}
 
