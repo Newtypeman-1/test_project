@@ -24,9 +24,9 @@
 						</tr>
 						<tr>
 							<th >주소</th>
-							<td colspan="5" th:text="${t.memberAddr}"></td>
+							<td colspan="4" th:text="${t.memberAddr}"></td>
 							<th>전화번호</th>
-							<td colspan="3" th:text="${t.memberPhone}"></td>
+							<td colspan="4" th:text="${t.memberPhone}"></td>
 						</tr>
 						<tr>
 							<th rowspan="3">증상</th>
@@ -61,24 +61,24 @@
 						<tr class="buttons">
 							<td colspan="2">
 								<th:block th:if="${t.isDone} == '0'">
-									<button type="submit" class="opinionCheck">소견서 작성</button>
+									<button type="submit" class="opinionCheck submit-button one-button">소견서 작성</button>
 								</th:block>
 								<th:block th:if="${t.isDone} == '1'">
-									<button type="button" class="opinionCheck" disabled>작성 완료</button>
+									<button type="button" class="opinionCheck submit-button one-button" disabled>작성 완료</button>
 								</th:block>
 							</td>
 							<td colspan="2">
-								<a href="/doctor/mypage"><button type="button">취소</button></a>
+								<a href="/doctor/mypage"><button type="button" class="submit-button two-button">취소</button></a>
 							</td>
 							<td colspan="3" class="wrong-message">
 								
 							</td>
 							<td colspan="3">
 								<th:block th:if="${t.isDone} == '0'">
-									진료 중
+									<button type="button" class="submit-button four-button">진료 중</button>
 								</th:block>
 								<th:block th:if="${t.isDone} == '1'">
-									진료 완료
+									<button type="button" class="submit-button four-button" style="">진료 완료</button>
 								</th:block>
 							</td>
 						</tr>

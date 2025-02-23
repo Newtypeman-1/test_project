@@ -3,126 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>의사 내 문의/리뷰 기록</title>
-<style>
-	.page-title{
-		text-align: center;
-		padding: 30px;
-		font-size: 25px;
-	}
-	.page-menu{
-		width: 1500px;
-		margin: 0 auto;
-		display: flex;
-		justify-content: flex-end;
-		align-items: center;
-		flex-wrap: wrap;
-	}	
-	.menu-title{
-		padding: 10px;
-		border: 1px solid black;
-		border-radius: 15px;
-		width: 200px;		
-		margin-right: 100px;
-		text-align: center;
-		position: fixed;
- 		left: 200px;
-	}
-	.menu-title>ul{
-		list-style: none;
-	}
-	.info{
-		margin-bottom: 40px;
-		border: 1px solid black;
-		border-radius: 15px;
-		padding: 10px;
-		align-items: center;
-		width: 1200px;
-	}
-	.page-menu>.info:last-child{
-		float: right;
-	}
-	.tbl{
-		width: 100%;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.tbl tr:first-child{
-		border-bottom: 1px solid black;	
-	}
-	.star {
-        color: gold;
-        font-size: 24px;
-    }
-    .qwer{
-    	margin-top: 5px;
-    	margin-bottom: 5px;
-    	box-sizing: border-box;
-    }
-</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="section">
+		<th:block th:include="common/menuRemote"></th:block>
+		<section class="section mypage-section">
 			<div class="page-title">내 문의/리뷰 기록</div>
-			<div class="menu-title">
-				<ul>
-					<li>마이페이지 메뉴</li>
-					<li>
-						<th:block th:if="${session.member == null && session.doctor == null}">
-                          		<a href="/">내 정보</a>
-						</th:block>
-						<th:block th:if="${session.member != null}">
-							<a href="/member/mypage">내 정보</a>
-						</th:block>
-						<th:block th:if="${session.doctor != null}">
-                           	<a href="/doctor/mypage">내 정보</a>
-						</th:block>
-					</li>
-					<li>
-						<th:block th:if="${session.member == null && session.doctor == null}">
-                          		<a href="/">내 진료 기록</a>
-						</th:block>
-						<th:block th:if="${session.member != null}">
-							<a href="/member/mypage">내 진료 기록</a>
-						</th:block>
-						<th:block th:if="${session.doctor != null}">
-                           	<a href="/doctor/mypage">내 진료 기록</a>
-						</th:block>
-					</li>
-					<li>
-						<th:block th:if="${session.member == null && session.doctor == null}">
-                          		<a href="/">내 문의/리뷰 기록</a>
-						</th:block>
-						<th:block th:if="${session.member != null}">
-							<a href="/member/qna">내 문의/리뷰 기록</a>
-						</th:block>
-						<th:block th:if="${session.doctor != null}">
-							<a href="/doctor/qna">내 문의/리뷰 기록</a>                            	
-						</th:block>
-					</li>
-				</ul>
-			</div>
 			<div class="page-menu">
-				<div class="info quest-page">
-					<table class="tbl">
+				<div class="info review-page">
+					<table class="qna-tbl">
 						<tr>
 							<th style="width:10%">문의번호</th>
 							<th style="width:40%">내용</th>
 							<th style="width:15%">답변</th>
 							<th style="width:10%">작성일</th>
 						</tr>
-						<tr th:each="comment : ${commentList}" class="qwer">
+						<tr th:each="comment : ${commentList}" class="myList">
 							<td th:text="${comment.commentNo}"></td>
 							<td th:text="${comment.commentContent}"></td>
 							<td>답변</td>
 							<td th:text="${comment.commentDate}"></td>
 						</tr>	
 					</table>
-					<a href="/doctor/myMedicalRecordsPageFrm?reqPage=1"><button type="button" class="allQna">전체 문의 보기</button></a>
+					<a href="/doctor/myMedicalRecordsPageFrm?reqPage=1"><button type="button" class="allQna submit-button one-button">전체 문의 보기</button></a>
 				</div>
 				<div class="info review-page">
-					<table class="tbl">
+					<table class="qna-tbl">
 						<tr>
 							<th style="width:15%">리뷰번호</th>
 							<th style="width:40%">내용</th>
@@ -130,7 +37,7 @@
 							<th style="width:15%">별점</th>
 							<th style="width:15%">작성일</th>
 						</tr>
-						<tr th:each="review : ${reviewList}" class="qwer">
+						<tr th:each="review : ${reviewList}" class="myList">
 							<td th:text="${review.reviewNo}"></td>
 							<td th:text="${review.reviewContent}"></td>
 							<td th:text="${review.doctorName}"></td>
@@ -138,7 +45,7 @@
 							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-					<a href="/review/list?reqPage=1"><button type="button" class="allReview">전체 리뷰 보기</button></a>						
+					<a href="/review/list?reqPage=1"><button type="button" class="allReview submit-button one-button">전체 리뷰 보기</button></a>						
 				</div>
 			</div>
 		</section>

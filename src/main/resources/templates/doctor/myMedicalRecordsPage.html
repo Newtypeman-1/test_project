@@ -2,50 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Help DOC - 내 진단 목록</title>
-<style>
-.section{
-    width: 800px;
-    margin: 0 auto;
-    border-radius: 10px;
-}
-	.page-title{
-		text-align: center;
-		padding: 30px;
-		font-size: 25px;
-	}
-	.tbl tr{
-		border-bottom: 1px solid black;
-		height: 40px;
-		text-align: center;
-		cursur: pointer;
-	}
-	.tbl a{
-		width: 100%;
-	}
-	#navi{
-		margin-top: 10px;
-		display: flex;
-		justify-content: center;
-	}
-	#navi ul{
-		list-style: none;
-	}
-	#navi input{
-		width: 30px;
-		text-align: center;
-	}
-</style>
+<title>Help DOC - 의사 진단 목록</title>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
 		<th:block th:include="common/menuRemote"></th:block>
-		<section class="section">
+		<section class="section mypage-section">
 			<div class="page-title">내 진료 기록 검색</div>
 			<div class="medicalRecord-wrap">
 				<table class="tbl records-tbl">
-					<tr>
+					<tr class="tbl-header">
 						<th>진단번호</th>
 						<th>증상과</th>
 						<th>회원 아이디</th>
