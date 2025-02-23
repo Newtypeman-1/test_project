@@ -3188,9 +3188,7 @@ body{
     margin: 0 auto;
     border-radius: 10px;
 }
-.mypage-section{
-	margin-left: 300px;
-}
+
 .title{
 	text-align: center;
 	margin-top: 20px;
@@ -3347,7 +3345,8 @@ body{
 	.submit-button:hover{
 		box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 	}
-	.yesOrNo *{
+	.yesOrNo a{
+		display: flex;
 		width: calc(100% / 2);
 	}
 	.one-button{
@@ -3360,25 +3359,16 @@ body{
 	    color: #fff;
 	    border: 3px solid transparent;
 	}
-	
-	/* a>button{
-		width: 100%;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		border-radius: 10px;
-		font-weight: 900;
-		height: 40px;
-		background-color: rgba(0,153,153,0.5);
-		color: #fff;
-		cursor: pointer;
-		border: none;
-		padding-left: 20px;
-		padding-right: 20px;
-		color: #fff;
+	.three-button{
+		background-color: var(--color5);
+	    color: #fff;
+	    border: 3px solid transparent;
 	}
-	a>button:hover{
-		color: #fff;
-	} */
+	.four-button{
+		background-color: var(--color2);
+	    color: #fff;
+	    border: 3px solid transparent;
+	}
 	.input-item>.material-icons{
 		align-content: center;
 		color: var(--color4);
@@ -3390,15 +3380,11 @@ body{
 	.invalid{
 		color: red;
 	}
-.tbl tr{
-		border-bottom: 1px solid black;
-		height: 40px;
-		text-align: center;
-		cursor: pointer;
+	
+	table{
+		border-collapse: collapse;
 	}
-	.tbl a{
-		width: 100%;
-	}
+
 	#navi{
 		display: flex;
 		justify-content: center;
@@ -3440,6 +3426,10 @@ body{
 		justify-content: flex-start;
 		width: 1000px;
 	}
+	.mypage-section{
+		margin-left: 300px;
+		width: 1000px;
+	}
 	.img{
 		width: 300px;
 		margin: 0 auto;
@@ -3454,7 +3444,99 @@ body{
 	.intro .input>input{
 		border: none;
 	}
-
+	
+	.records-tbl{
+		width: 100%;
+	}
+	.records-tbl>*{
+		border: none;
+	}
+	.records-tbl tr{
+		text-align: center;
+		border-bottom: 1px solid black;
+		height: 40px;
+	}
+	.records-tbl td{
+		text-align: center;
+	}
+	.tbl-header{
+		background-color: var(--color4);
+		color: #fff;
+	}
+.opinion-section{
+	width: 900px;
+	
+}
+.opinion-page{
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+.opinion-title{
+	border: 1px solid black;
+	border-bottom: none;
+}
+.opinion-tbl{
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+.opinion-tbl tr{
+		border-bottom: 1px solid black;
+		height: 40px;
+		text-align: center;
+		cursor: pointer;
+	}
+	.opinion-tbl a{
+		width: 100%;
+	}
+.opinion-tbl th{
+	border: 1px solid black;
+	box-sizing: border-box;
+	background-color: #bbb;
+	color: white;
+	width: 100px;
+	height: 50px;
+	text-align: center;
+	padding: 10px;
+}
+.opinion-tbl td{
+	border: 1px solid black;
+	box-sizing: border-box;
+	height: 50px;
+	text-align: center;
+	padding: 10px;
+	width: 150px;
+}
+.buttons>td{
+	border: transparent;
+}
+/* [type=button]{
+	border: transparent;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: #bbb;
+	color: white;
+}
+[type=button]:hover{
+	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
+}
+[type=submit]{
+	border: transparent;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: #bbb;
+	color: white;
+}
+[type=submit]:hover{
+	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
+} */
+tr input{
+	width: 100%;
+	height: 100%;
+}
+.opinion-input{
+	height: 150px;
+}
 
 
 

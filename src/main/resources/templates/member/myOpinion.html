@@ -3,69 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Help DOC - 회원 진료 소견서</title>
-<style>
-.page-title{
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-	padding: 20px;
-	border: 1px solid black;
-	border-bottom: none;
-	box-sizing: border-box;
-	font-weight: 900;
-}
-.section{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	flex-grow: 1;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-}
-table{
-	border: 1px solid black;
-	box-sizing: border-box;
-}
-.opinion-page{
-	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
-}
-.tbl th{
-	border: 1px solid black;
-	box-sizing: border-box;
-	background-color: #bbb;
-	color: white;
-	width: 100px;
-	height: 50px;
-	text-align: center;
-	padding: 10px;
-}
-td{
-	border: 1px solid black;
-	box-sizing: border-box;
-	height: 50px;
-	text-align: center;
-	padding: 10px;
-	width: 100px;
-}
-.buttons>td{
-	border: transparent;
-}
-[type=button]{
-	border: transparent;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background-color: #bbb;
-	color: white;
-}
-[type=button]:hover{
-	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
-}
-.opinion-input{
-	height: 150px;
-}
-</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -121,22 +58,22 @@ td{
 					</tr>
 					<tr class="buttons">
 						<td colspan="2">
-							<button type="button" class="print">인쇄</button>
+							<button type="button" class="print one-button">인쇄</button>
 						</td>
 						<td colspan="2">
-							<a href="/member/mypage"><button type="button">취소</button></a>
+							<a href="/member/mypage"><button type="button" class="two-button">취소</button></a>
 						</td>
 						<td colspan="3">
 							<th:block th:if="${t.isDone} == '1'">
-								<a href="/review/writeFrm"><button type="button">리뷰 작성</button></a>
+								<a href="/review/writeFrm"><button type="button" class="three-button">리뷰 작성</button></a>
 							</th:block>
 						</td>
 						<td colspan="3">
 							<th:block th:if="${t.isDone} == '0'">
-								진료 중
+								<div class="four-button">진료 중</div>
 							</th:block>
 							<th:block th:if="${t.isDone} == '1'">
-								진료 완료
+								<div class="four-button">진료 완료</div>
 							</th:block>
 						</td>
 					</tr>

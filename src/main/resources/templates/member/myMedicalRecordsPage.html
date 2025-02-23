@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Help DOC - 내 진료 목록</title>
+<title>Help DOC - 회원 진료 목록</title>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -11,8 +11,8 @@
 		<section class="section mypage-section">
 			<div class="page-title">내 진료 기록 검색</div>
 			<div class="medicalRecord-wrap">
-				<table class="tbl" style="width: 100%;">
-					<tr>
+				<table class="tbl records-tbl">
+					<tr class="tbl-header">
 						<th>진단번호</th>
 						<th>증상과</th>
 						<th>회원 아이디</th>

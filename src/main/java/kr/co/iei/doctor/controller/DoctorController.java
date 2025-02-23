@@ -164,13 +164,13 @@ public class DoctorController {
 			model.addAttribute("title","소견서 작성 완료");
 			model.addAttribute("text","소견서 작성이 완료되었습니다.");
 			model.addAttribute("icon","success");
-			model.addAttribute("loc", "redirect:/doctor/myOpinion?treatment_no="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
+			model.addAttribute("loc", "/doctor/myOpinion?treatmentNo="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
 			return "common/msg";
 		}else {
 			model.addAttribute("title","소견서 작성 실패");
 			model.addAttribute("text","소견서 작성 실패.");
 			model.addAttribute("icon","warning");
-			model.addAttribute("loc", "redirect:/doctor/myOpinion?treatment_no="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
+			model.addAttribute("loc", "/doctor/myOpinion?treatmentNo="+t.getTreatmentNo()+"&doctorNo="+doctor.getDoctorNo());
 			return "common/msg";
 		}
 	}

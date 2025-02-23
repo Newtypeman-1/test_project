@@ -3,95 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Help DOC - 의사 진료 소견서</title>
-<style>
-.page-title{
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-	padding: 20px;
-	border: 1px solid black;
-	border-bottom: none;
-	box-sizing: border-box;
-	font-weight: 900;
-}
-.section{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	flex-grow: 1;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-}
-table{
-	border: 1px solid black;
-	box-sizing: border-box;
-}
-.opinion-page{
-	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
-}
-.tbl th{
-	border: 1px solid black;
-	box-sizing: border-box;
-	background-color: #bbb;
-	color: white;
-	width: 100px;
-	height: 50px;
-	text-align: center;
-	padding: 10px;
-}
-td{
-	border: 1px solid black;
-	box-sizing: border-box;
-	height: 50px;
-	text-align: center;
-	padding: 10px;
-	width: 100px;
-}
-.buttons>td{
-	border: transparent;
-}
-[type=button]{
-	border: transparent;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background-color: #bbb;
-	color: white;
-}
-[type=button]:hover{
-	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
-}
-[type=submit]{
-	border: transparent;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background-color: #bbb;
-	color: white;
-}
-[type=submit]:hover{
-	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
-}
-tr input{
-	width: 100%;
-	height: 100%;
-}
-.opinion-input{
-	height: 150px;
-}
-</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
 		<th:block th:include="common/menuRemote"></th:block>
-		<section class="section">
+		<section class="opinion-section section">
 			<div class="opinion-page">
-				<div class="page-title" th:text="'NO. '+${t.treatmentNo}+' 진료 소견서'"></div>
+				<div class="page-title opinion-title" th:text="'NO. '+${t.treatmentNo}+' 진료 소견서'"></div>
 				<form action="/doctor/opinionSubmit" method="post">
 					<input type="text" name="treatmentNo" th:value="${t.treatmentNo}" hidden>
-					<table class="tbl">
+					<table class="tbl opinion-tbl">
 						<tr>
 							<th>성함</th>
 							<td colspan="2" th:text="${t.memberName}"></td>

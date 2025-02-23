@@ -44,14 +44,14 @@
 		<section class="section">
 			<div class="page-title">내 진료 기록 검색</div>
 			<div class="medicalRecord-wrap">
-				<table class="tbl">
+				<table class="tbl records-tbl">
 					<tr>
-						<th style="width:10%">진단번호</th>
-						<th style="width:10%">증상과</th>
-						<th style="width:15%">회원 아이디</th>
-						<th style="width:15%">담당의</th>
-						<th style="width:10%">진단 내역</th>
-						<th style="width:20%">작성일</th>
+						<th>진단번호</th>
+						<th>증상과</th>
+						<th>회원 아이디</th>
+						<th>담당의</th>
+						<th>진단 내역</th>
+						<th>작성일</th>
 					</tr>
 					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/doctor/myOpinion (treatmentNo=${treatment.treatmentNo}, doctorNo=${session.doctor.doctorNo})}'|">
 						<td th:text="${treatment.treatmentNo}"></td>

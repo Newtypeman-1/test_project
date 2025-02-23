@@ -43,44 +43,38 @@
 								</th:block>
                         	<ul class="dropdown">
                         	 	<li>
-                        	 	<th:block th:if="${session.member == null && session.doctor == null}">
-                        		<a href="/">Q&A</a>
-								</th:block>
+	                        	 	<th:block th:if="${session.member == null && session.doctor == null}">
+	                        			<a href="/">Q&A</a>
+									</th:block>
 									<th:block th:if="${session.member != null}">
-									<a href="/member/qna">Q&A</a>
+										<a href="/member/qna">Q&A</a>
 									</th:block>
 									<th:block th:if="${session.doctor != null}">
-				                         	<a href="/doctor/qna">Q&A</a>
+										<a href="/doctor/qna">Q&A</a>
 									</th:block>
-                            	 	</li>
-                            	 </ul>
-                            </li>
-                            <li><a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                        	<span th:if="${session.member == null && session.doctor == null}">
-	                            <a href="/member/loginFrm">Login</a>
-	                            <a href="/member/registerFrm">Register</a>
-                        	</span>
-                        	<span th:if="${session.member != null}">
-	                            <a href="/member/mypage" th:text="${session.member.memberId}"></a>
-	                            <a href="/member/logout">LogOut</a>
-                        	</span>
-                        	<span th:if="${session.doctor != null}">
-	                            <a href="/doctor/mypage" th:text="${session.doctor.doctorId}"></a>
-	                            <a href="/doctor/logout">LogOut</a>
-                        	</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
+                           	 	</li>
+							</ul>
+							</li>
+							<li><a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>
+							</li>
+						</ul>
+					</nav>
+				<div class="header__right">
+				    <div class="header__right__auth">
+				    	<span th:if="${session.member == null && session.doctor == null}">
+							<a href="/member/loginFrm">Login</a>
+							<a href="/member/registerFrm">Register</a>
+				    	</span>
+						<span th:if="${session.member != null}">
+							<a href="/member/mypage" th:text="${session.member.memberId}"></a>
+							<a href="/member/logout">LogOut</a>
+				    	</span>
+				    	<span th:if="${session.doctor != null}">
+							<a href="/doctor/mypage" th:text="${session.doctor.doctorId}"></a>
+							<a href="/doctor/logout">LogOut</a>
+				    	</span>
+				    </div>
+				</div>
+			</div>
         </div>
     </header>
