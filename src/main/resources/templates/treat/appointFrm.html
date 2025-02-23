@@ -204,6 +204,9 @@
 		console.log(unavailableTimes);
 		
 		for(let i = 9; i <= 18; i++){
+			if(i == 12){
+				continue;
+			}
 			const li = $("<li>");
 			const div = $("<div class='appoint-items'>");
 			const span = $("<span>");
