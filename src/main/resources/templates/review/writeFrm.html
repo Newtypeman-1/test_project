@@ -46,14 +46,18 @@
 			<table class="tbl">
 				<tr>
 					<th style="width:10%">작성자</th>
-					<td style="width:40%">
+					<td style="width:10%">
 						<span th:text="${session.member.memberId}"></span>
 						<input type="hidden" name="reviewWriter" th:value="${session.member.memberId}">
 					</td>
-					<th style="width:10%">담당의</th>
-					<td style="width:40%">
-						<input type="text" name="doctorNo" id="doctorNo">
+					<th>담당의</th>
+					<td>
+					
 					</td>
+					<th>담당과</th>
+					<td ></td>
+					<th>날짜</th>
+					<td ></td>
 				</tr>
 				<tr>
 					<td colspan="4">

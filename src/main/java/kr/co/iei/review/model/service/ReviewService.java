@@ -95,11 +95,12 @@ public class ReviewService {
 		int naviSize = 5;
 		int naviNo = ((reqPage - 1)/naviSize) * naviSize + 1;
 		String navi = "<ul class='pagination justify-content-center'>";
-		navi += "<li class='page-item'>";
-		navi += "<a class='page-link' href='/review/list?reqPage="+(naviNo-1)+"&doctorNo="+doctorNo+"' aria-label='Previous'>";
-		navi += "<span aria-hidden='true'>&laquo;</span>";
-		navi += "</a></li>";
-		
+		if(naviNo != 1) {
+			navi += "<li class='page-item'>";
+			navi += "<a class='page-link' href='/review/list?reqPage="+(naviNo-1)+"&doctorNo="+doctorNo+"' aria-label='Previous'>";
+			navi += "<span aria-hidden='true'>&laquo;</span>";
+			navi += "</a></li>";
+		}
 		for(int i=0;i<naviSize;i++) {
 			navi += "<li class='page-item'>";
 			navi += "<a class='page-link' href='/review/list?reqPage="+naviNo+"&doctorNo="+doctorNo+"'>";				
@@ -110,10 +111,12 @@ public class ReviewService {
 				break;
 			}
 		}
-		navi += "<li class='page-item'>";
-		navi += "<a class='page-link' href='/review/list?reqPage="+naviNo+"' aria-label='Next'>";
-		navi += "<span aria-hidden='true'>&raquo;</span>";
-		navi += "</a></li>";
+		if(naviNo <= totalPage) {
+			navi += "<li class='page-item'>";
+			navi += "<a class='page-link' href='/review/list?reqPage="+naviNo+"' aria-label='Next'>";
+			navi += "<span aria-hidden='true'>&raquo;</span>";
+			navi += "</a></li>";
+		}
 		navi += "</ul>";
 		ReviewListData rld = new ReviewListData(list, navi);
 		System.out.println(totalPage);
