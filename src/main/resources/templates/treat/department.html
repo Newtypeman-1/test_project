@@ -22,7 +22,19 @@
 }
 .doctor-up{
 	display: flex;
-	
+}
+#appoint-btn{
+	border-radius: 20px;
+	padding: 8px;
+	background-color: #39A7CC;
+	border: none;
+	color: white;
+}
+.doctor-name{
+	font-size: 28px;
+}
+.department-name{
+	font-size: 14px;
 }
 </style>
 <body>
@@ -64,8 +76,8 @@
 										<table class="doctor-text-tbl">
 											<tr>
 												<td>
-													<span th:text="${doctor.doctorName}"></span>
-													[<span th:text="${departmentName}"></span>]
+													<span class="doctor-name" th:text="${doctor.doctorName}"></span>
+													[<span class="department-name" th:text="${departmentName}"></span>]
 												</td>
 											</tr>
 											<tr>
@@ -79,13 +91,19 @@
 												</td>
 											</tr>
 											<tr>
+												<td class="possibility">오늘 예약</td>
+											</tr>
+											<tr>
+												<td class="work-time">09:00 ~ 18:00</td>
+											</tr>
+											<tr>
 												<!-- 오늘 예약 가능 / 불가 여부 -->
 											</tr>
 											<tr>
 												<!-- 진료 예약 버튼 -->
 												<td>
 													<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
-														<button type="button" id="appoint-btn">진료 예약</button>
+														<button type="button" id="appoint-btn">📆 진료 예약</button>
 													</a>
 												</td>
 											</tr>
