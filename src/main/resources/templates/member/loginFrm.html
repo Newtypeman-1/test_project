@@ -3,118 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Help DOC - 로그인</title>
-<style>
-.section{
-    width: 800px;
-    margin: 0 auto;
-    border-radius: 10px;
-}
-.tab{
-    overflow: hidden;
-    background-color: var(--color4);
-    border: 3px solid var(--color4);
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    border-bottom: none;
-}
-.tab>div{
-    width: calc(100% / 2);
-    color: #fff;
-    box-sizing: border-box;
-    height: 50px;
-    line-height: 48px;
-    float: left;
-    text-align: center;
-    border: 1px solid transparent;
-    border-left: none;
-    cursor: pointer;
-}
-.tab>div:first-child{
-    border-left: 1px solid transparent;
-}
-.tab-content{
-    padding: 20px;
-    border: 3px solid var(--color4);
-    border-top: none;
-    transition-duration: 0.5s;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-.tab-content>div{
-    display: none;
-}
-.tab>.active-tab{
-    border-bottom: none;
-    font-weight: 900;
-    background-color: #fff;
-    color: var(--color4);;
-}
-.tab-content>.active-content{
-    display: block;
-    background-color: #fff;
-    
-}
-.input{
-		width: 100%;
-		margin-bottom: 10px;
-	}
-	.input-name{
-		color: var(--color4);;
-		font-weight: 900;
-		margin-bottom: 5px;
-	}
-	.input-item {
-		display: flex;
-		gap: 10px;
-	}
-	.input-item > input {
-		flex: 1;
-		font-size: 16px;
-		line-height: 1.5;
-		border: 3px solid transparent;
-		border-bottom: 3px solid var(--color2);
-		padding: 8px 0px;
-		text-indent: 2%;
-	}
-	.input-item> input:focus{
-		border: 3px solid var(--color2);
-		border-radius: 10px;
-	}
-	.sub{
-		display: flex;
-		justify-content: space-between;
-	}
-	.sub a{
-		text-decoration: none;
-		color: var(--color4);
-	}
-	div>button{
-		margin-top: 10px;
-		margin-bottom: 10px;
-		border-radius: 10px;
-		font-weight: 900;
-		width: 100%;
-		height: 40px;
-		background-color: var(--color4);
-		color: #fff;
-		cursor: pointer;
-		border: none;
-	}
-	div>button:hover{
-		box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
-	}
-	.valid{
-		color: blue;
-	}
-	.invalid{
-		color: red;
-	}
-</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="member-login section">
+		<section class="login-section section">
 			<div class="tab">
 	            <div>회원 로그인</div>
 	            <div>직원 로그인</div>
@@ -142,7 +35,7 @@
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="member-submit">로그인</button>
+							<button type="submit" class="submit-button one-button">로그인</button>
 						</div>
 						<div class="sub">
 							<a href="/member/findIdPwFrm" id="idPwFind">아이디 / 비밀번호 찾기</a>
@@ -172,7 +65,7 @@
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="submit" id="doctor-submit">로그인</button>
+							<button type="submit" class="submit-button one-button">로그인</button>
 						</div>
 						<div class="sub">
 							<a href="/doctor/findIdPwFrm">아이디 / 비밀번호 찾기</a>
