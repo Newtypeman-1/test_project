@@ -96,17 +96,17 @@
 	background-color: #ddd;
 }
 
-.info {
+.doctor-info {
 	flex-grow: 1;
 	margin-left: 30px;
 }
 
-.title {
+.doctor-info-title {
 	font-size: 20px;
 	font-weight: bold;
 }
 
-.rating {
+.doctor-rating {
 	color: #ffa500;
 	font-size: 14px;
 }
@@ -156,12 +156,12 @@
 	text-align: center;
 }
 
-.closed {
+.appointed {
 	color: red;
 	font-weight: bold;
 }
 
-.refer{
+.schedule-bottom{
 	text-align: right;
 }
 </style>
@@ -191,25 +191,25 @@
 					<th:block th:each="doctor, status : ${doctorsWithRating}">
 						<div class="doctor-container">
 							<div class="doctor-card">
-								<div class="image-box">
+								<div class="doctor-image-box">
 									<img th:src="${doctor.doctorImg}">
 								</div>
-								<div class="info">
-									<p class="title">
+								<div class="doctor-info">
+									<p class="doctor-info-title">
 										<span th:text="${doctor.doctorName}"></span>
 										[<span th:text="${departmentName}">OO</span>]
 									</p>
-									<p class="rating">
+									<p class="doctor-rating">
 										<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
 											<span>⭐</span>
 											<span id="review-rating" th:text="${doctor.reviewRating}"></span>
 											(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
 										</a>
 									</p>
-									<p class="status">🟢 예약 가능</p>
+									<p class="doctor-status">🟢 예약 가능</p>
 									<p>09:00 ~ 18:00</p>
-									<div class="buttons">
-										<a href="#" class="info-btn">👨‍⚕️ 의료진 소개</a>
+									<div class="doctor-buttons">
+										<a href="#" class="one-button">👨‍⚕️ 의료진 소개</a>
 										<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
 											<button type="button" id="appoint-btn">📆 진료 예약</button>
 										</a>
@@ -230,10 +230,10 @@
 								</tr>
 								<tr class="">
 									<td></td>
-									<td class="closed">❌</td>
+									<td class="appointed">❌</td>
 									<td></td>
 									<td></td>
-									<td class="closed">❌</td>
+									<td class="appointed">❌</td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -241,7 +241,7 @@
 								</tr>
 								<tr>
 									<td>안내</td>
-									<td colspan="8" class="refer">❌ 마감</td>
+									<td colspan="8" class="schedule-bottom">❌ 마감</td>
 								</tr>
 							</table>
 						</div>
