@@ -1,98 +1,64 @@
 <!DOCTYPE html>
 
-<link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
 
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="/css/style.css" type="text/css">
 
-<script src="/js/jquery-3.6.0.js"></script>
 <script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery.magnific-popup.min.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/mixitup.min.js"></script>
-<script src="/js/jquery.countdown.min.js"></script>
-<script src="/js/jquery.slicknav.js"></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/jquery.nicescroll.min.js"></script>
-<script src="/js/main.js"></script>
 <script src="/js/sweetalert.min.js"></script>
 
 	<header class="header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="/"><img src="/img/logo.png" alt=""></a>
-                    </div>
+                <div class="header__logo">
+                    <a href="/"><img src="/img/logo.png"></a>
                 </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="/treat/allDepart">진료예약</a>
-                            	<ul class="dropdown">
-                            		<li><a href="/treat/department?departmentNo=1">내과</a></li>
-                            		<li><a href="/treat/department?departmentNo=2">이비인후과</a></li>
-                            		<li><a href="/treat/department?departmentNo=3">산부인과</a></li>
-                            		<li><a href="/treat/department?departmentNo=4">비뇨기과</a></li>
-                            		<li><a href="/treat/department?departmentNo=5">피부과</a></li>
-                            		<li><a href="/treat/department?departmentNo=6">안과</a></li>
-                            		<li><a href="/treat/department?departmentNo=7">정신과</a></li>
-                            	</ul>
-                            </li>
-                            <li><a href="/board/boardList?reqPage=1">상담게시판</a></li>
-                            <li><a href="#">이용안내</a>
-                            	 <ul class="dropdown">
-                            	 	<li><a href="/etc/map">오시는 길</a></li>
-                            	 </ul>
-                            </li>
-                            <li>
-                            	<th:block th:if="${session.member == null && session.doctor == null}">
-                            		<a href="/">마이페이지</a>
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="/treat/allDepart">진료예약</a>
+                        	<ul class="dropdown">
+                        		<li><a href="/treat/department?departmentNo=1">내과</a></li>
+                        		<li><a href="/treat/department?departmentNo=2">이비인후과</a></li>
+                        		<li><a href="/treat/department?departmentNo=3">산부인과</a></li>
+                        		<li><a href="/treat/department?departmentNo=4">비뇨기과</a></li>
+                        		<li><a href="/treat/department?departmentNo=5">피부과</a></li>
+                        		<li><a href="/treat/department?departmentNo=6">안과</a></li>
+                        		<li><a href="/treat/department?departmentNo=7">정신과</a></li>
+                        	</ul>
+                        </li>
+                        <li><a href="/board/boardList?reqPage=1">상담게시판</a></li>
+                        <li><a href="#">이용안내</a>
+                        	 <ul class="dropdown">
+                        	 	<li><a href="/etc/map">오시는 길</a></li>
+                        	 </ul>
+                        </li>
+                        <li>
+                        	<th:block th:if="${session.member == null && session.doctor == null}">
+                        		<a href="/">마이페이지</a>
 								</th:block>
 								<th:block th:if="${session.member != null}">
 									<a href="/member/mypage">마이페이지</a>
 								</th:block>
 								<th:block th:if="${session.doctor != null}">
-	                            	<a href="/doctor/mypage">마이페이지</a>
+				                         	<a href="/doctor/mypage">마이페이지</a>
 								</th:block>
-                            	<ul class="dropdown">
-                            	 	<li>
-                            	 	<th:block th:if="${session.member == null && session.doctor == null}">
-                            		<a href="/">Q&A</a>
-									</th:block>
+                        	<ul class="dropdown">
+                        	 	<li>
+                        	 	<th:block th:if="${session.member == null && session.doctor == null}">
+                        		<a href="/">Q&A</a>
+								</th:block>
 									<th:block th:if="${session.member != null}">
 									<a href="/member/qna">Q&A</a>
 									</th:block>
 									<th:block th:if="${session.doctor != null}">
-	                            	<a href="/doctor/qna">Q&A</a>
+				                         	<a href="/doctor/qna">Q&A</a>
 									</th:block>
-                            	 	</li>
-                            	 </ul>
-                            </li>
-                            <li><a href="/review/list?reqPage=1">리뷰</a>
-                            	<ul class="dropdown">
-                            	 	<li>
-                            	 	<th:block th:if="${session.member == null && session.doctor == null}">
-                            		<a href="/">리뷰 작성하기</a>
-									</th:block>
-									<th:block th:if="${session.member != null}">
-									<a href="/review/writeFrm">리뷰 작성하기</a>
-									</th:block>
-                            	 	</li>
-                            	 </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                        	 	</li>
+                        	 </ul>
+                        </li>
+                        <li><a href="/review/list?reqPage=1">리뷰</a>
+                        </li>
+                    </ul>
+                </nav>
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">

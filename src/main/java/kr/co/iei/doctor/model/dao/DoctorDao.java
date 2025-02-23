@@ -90,7 +90,7 @@ public class DoctorDao {
 	}
 	
 	public int updateOpinion(Treat t, Doctor doctor) {
-		String query = "update treatment_tbl set opinion_symptom = ?, opinion_decision = ? where treatment_no = ?";
+		String query = "update treatment_tbl set opinion_symptom = ?, opinion_decision = ?, is_done = 1 where treatment_no = ?";
 		Object[] params = {t.getOpinionSymptom(), t.getOpinionDecision(), t.getTreatmentNo()};
 		int r = jdbc.update(query, params);
 		return r;
