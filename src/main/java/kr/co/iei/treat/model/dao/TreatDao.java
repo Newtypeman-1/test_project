@@ -77,7 +77,11 @@ public class TreatDao {
 		String query = "select * from department_tbl where department_no = ?";
 		Object[] params = {departmentNo};
 		List list = jdbc.query(query, departmentRowMapper, params);
-		return (Department) list.get(0);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (Department) list.get(0);
+		}
 	}
 
 	public List selectAllDepartment() {

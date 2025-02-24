@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>예약페이지</title>
 <style>
-.appoint-main>div{
+.appoint-main>div {
 	min-width: 1200px;
 	max-width: 1200px;
 	height: 740px;
@@ -15,60 +15,70 @@
 	justify-content: space-around;
 	align-items: center;
 }
-.appoint-main>div>section{
+
+.appoint-main>div>section {
 	padding: 20px;
 }
-.appoint-main-header{
+
+.appoint-main-header {
 	margin-bottom: 10px;
 }
-.appoint-body-container{
+
+.appoint-body-container {
 	width: 800px;
 	margin: 0 auto;
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	background-color: white;
 }
-.appoint-body-point{
+
+.appoint-body-point {
 	text-align: center;
 	margin: 10px 0;
 	color: #00387E;
 	font-size: 14px;
 	font-weight: bold;
 }
-.appoint-body-header{
+
+.appoint-body-header {
 	padding: 20px;
 }
-.appoint-today{
+
+.appoint-today {
 	font-size: 24px;
 }
-.appoint-body-header img{
+
+.appoint-body-header img {
 	border-radius: 20px;
 	margin-bottom: 10px;
 	margin-right: 10px;
 }
-.appoint-body-header-header{
+
+.appoint-body-header-header {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 20px;
 }
-.appoint-body-container>ul{
+
+.appoint-body-container>ul {
 	list-style: none;
 	overflow: hidden;
 	padding: 20px;
 	margin: 10px;
 	border: 1px solid #ddd;
 }
-.appoint-body-container>ul>li{
+
+.appoint-body-container>ul>li {
 	float: left;
 	padding: 10px;
 }
 
-
-.appoint-sub-section{
+.appoint-sub-section {
 	padding: 20px;
 }
-.appoint-sub-part{
+
+.appoint-sub-part {
 	width: 400px;
 	height: 700px;
 	padding: 10px;
@@ -76,46 +86,85 @@
 	color: white;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
-.appoint-sub-part table{
-	margin: 10px;
+
+.appoint-sub-part table {
+	width: 100%;
+	margin-bottom: 20px;
 }
-.appoint-sub-part table>tbody>tr{
+
+.appoint-sub-part table>tbody>tr {
 	border-bottom: 1px solid #2B81C1;
 }
-.appoint-items{
+
+.appoint-sub-part td {
+	padding: 5px;
+}
+
+.appoint-items {
 	border: 1px solid black;
 	border-radius: 20px;
 	padding: 0 10px;
 	margin: 0 auto;
 }
-#purchase-btn{
+
+#purchase-btn {
 	border-radius: 20px;
 	width: 200px;
 	height: 50px;
 }
-.btn-activated{
+
+.btn-activated {
 	border: none;
 	background-color: rgb(255, 50, 50);
 	color: white;
 	font-weight: bold;
 }
 
-.ul-below{
+.ul-below {
 	margin: 20px;
 	text-align: right;
 }
 
-.member-name{
+.member-name {
 	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 10px;
 }
 
-.appoint-member-tbl, .appoint-appoint-tbl{
-	
+.additional-effect {
+	font-weight: bold;
+}
+
+.member-number {
+	background-color: #003f7f;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.sub-part-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.sub-part-footer-item {
+	flex: 1;
+	text-align: center;
+	font-size: 12px;
+}
+
+.sub-part-footer-item img {
+	width: 24px;
+	height: 24px;
+	display: block;
+	margin: 0 auto 5px;
 }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.css"
+	rel="stylesheet">
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -124,18 +173,19 @@
 			<section class="section appoint-main-section">
 				<div class="appoint-main-wrap">
 					<div class="appoint-main-header">
-						<h6 style="color:white;">온라인 예약</h6>
-						<h3 style="color:white;">진료시간 선택</h3>
+						<h6 style="color: white;">온라인 예약</h6>
+						<h3 style="color: white;">진료시간 선택</h3>
 					</div>
 					<div class="appoint-main-body">
 						<div class="appoint-body-container">
 							<div class="appoint-body-point">진료일정</div>
 							<div class="appoint-body-header">
 								<div class="appoint-body-header-header">
-									<img style="width:60px;" src=../img/백강혁.webp>
+									<img style="width: 60px;" th:src="@{'/doctor/' + ${doctor.doctorImg}}">
 									<div>
-										<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
-										<span>담당의 진료일정입니다.</span>
+										<span style="font-weight: bold;"
+											th:text="${doctor.doctorName}"></span> <span>담당의
+											진료일정입니다.</span>
 									</div>
 								</div>
 								<div class="appoint-today"></div>
@@ -153,77 +203,72 @@
 					<table class="appoint-member-tbl">
 						<tr>
 							<td>환자번호</td>
-							<td>
-								<span class="member-number" th:text="${session.member.memberNo}"></span>
-							</td>
+							<td><span class="member-number"
+								th:text="${session.member.memberNo}"></span></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td>
-								<span class="additional-effect" th:text="${session.member.memberPhone}"></span>
-							</td>
+							<td><span class="additional-effect"
+								th:text="${session.member.memberPhone}"></span></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>
-								<span class="additional-effect" th:text="${session.member.memberEmail}"></span>
-							</td>
+							<td><span class="additional-effect"
+								th:text="${session.member.memberEmail}"></span></td>
 						</tr>
 					</table>
 					<div class="appoint-tbl-title">예약하실 정보 확인</div>
 					<table class="appoint-appoint-tbl">
 						<tr>
 							<th>진료과</th>
-							<td>
-								<span class="additional-effect" th:text="${doctor.departmentNo}"></span>
-							</td>
+							<td><span class="additional-effect"
+								th:text="${doctor.departmentNo}"></span></td>
 						</tr>
 						<tr>
 							<th>의료진</th>
-							<td>
-								<span class="additional-effect" th:text="${doctor.doctorName}"></span>
-							</td>
+							<td><span class="additional-effect"
+								th:text="${doctor.doctorName}"></span></td>
 						</tr>
 						<tr>
 							<th>진료일시</th>
-							<td>
-								<span style="opacity:0.7;" id="appoint-time">선택된 진료일시가 없습니다.</span>
-							</td>
+							<td><span style="opacity: 0.7;" id="appoint-time">선택된
+									진료일시가 없습니다.</span></td>
 						</tr>
 						<tr>
 							<th>결제금액</th>
-							<td>
-								<span class="additional-effect">10,000원</span>
-							</td>
+							<td><span class="additional-effect">10,000원</span></td>
 						</tr>
-						<div class="sub-part-footer">
-							<div class="sub-part-footer-item">
-								<img src="" alt="">01 진료과 선택
-							</div>
-							<div class="sub-part-footer-item">
-								<img src="" alt="">02 의료진 선택
-							</div>
-							<div class="sub-part-footer-item">
-								<img src="" alt="">03 진료시간 선택
-							</div>
-						</div>
 					</table>
 					<form class="appoint-form" action="/treat/appoint" method="post">
 						<!-- 진료번호, 예약일은 자동처리 -->
 						<!-- 예약시간, 결제금액, 회원번호, 의사번호 -->
-<!-- 						<input type="hidden" name="appointDate" id="appointDate"> -->
+						<!-- 						<input type="hidden" name="appointDate" id="appointDate"> -->
 						<input type="hidden" name="appointTime" id="appointTime" required>
 						<input type="hidden" name="payAmount" id="payAmount" value="10000">
-						<input type="hidden" name="memberNo" id="memberNo" th:value="${session.member.memberNo}">
-						<input type="hidden" name="doctorNo" id="doctorNo" th:value="${doctor.doctorNo}">
+						<input type="hidden" name="memberNo" id="memberNo"
+							th:value="${session.member.memberNo}"> <input
+							type="hidden" name="doctorNo" id="doctorNo"
+							th:value="${doctor.doctorNo}">
 					</form>
-						<button type="button" id="purchase-btn">예약 시간을 선택하세요</button>
+					<button type="button" id="purchase-btn">예약 시간을 선택하세요</button>
+					<div class="sub-part-footer">
+						<div class="sub-part-footer-item">
+							<img src="" alt="">01 진료과 선택
+						</div>
+						<div class="sub-part-footer-item">
+							<img src="" alt="">02 의료진 선택
+						</div>
+						<div class="sub-part-footer-item">
+							<img src="" alt="">03 진료시간 선택
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
 	</main>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
 	<script>
 		let hour = 0;
 		let minute = 0;
@@ -254,7 +299,6 @@
 		
 		for(let i = 9; i <= 18; i++){
 			if(i == 12){
-				
 				continue;
 			}
 			const li = $("<li>");

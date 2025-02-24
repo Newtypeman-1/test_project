@@ -52,7 +52,6 @@ public class TreatController {
 	public String appointFrm(int doctorNo, Model mod) {
 		Doctor doctor = treatService.selectOneDoctor(doctorNo);
 		List<Integer> unavailableTimes = treatService.selectUnavailableTimes(doctorNo);
-		
 		mod.addAttribute("doctor", doctor);
 		mod.addAttribute("unavailableTimes", unavailableTimes);
 		System.out.println(doctor);

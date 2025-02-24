@@ -1188,6 +1188,7 @@ body{
 	}
 	.input-item {
 		display: flex;
+		justify-content: space-around;
 		gap: 10px;
 	}
 	.input-item span{
@@ -1308,6 +1309,9 @@ body{
 	.emailCheck,.idCheck{
 		height: 60px;
 		border-radius: 10px;
+	}
+	.emailCheck{
+		min-width: 120px;
 	}
 	.input-item>.material-icons{
 		align-content: center;
@@ -1498,8 +1502,10 @@ tr input{
 	height: 100%;
 }
 select{
-	width: 100px;
-	height: 50px;
+	width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .icon{
 	text-decoration: none;

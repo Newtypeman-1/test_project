@@ -1,5 +1,7 @@
 package kr.co.iei.admin.model.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,12 @@ public class AdminDao {
 		Object[] params = {d.getDoctorId()};
 		int r = jdbc.update(query, params);
 		return r;
+	}
+
+	public List allSchedule() {
+		String query = "select * from treatment_tbl";
+		List list = jdbc.queryForList(query);
+		return list;
 	}
 
 }

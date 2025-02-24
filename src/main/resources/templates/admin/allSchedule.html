@@ -7,8 +7,34 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="section">
-			<div class="page-title">전체 진료일정 조회</div>
+		<section class="section mypage-section">
+			<h3 class="page-title">전체 진료 기록 검색</h3>
+			<div class="medicalRecord-wrap">
+				<table class="tbl records-tbl">
+					<tr class="tbl-header">
+						<th>진단번호</th>
+						<th>증상과</th>
+						<th>회원 아이디</th>
+						<th>담당의</th>
+						<th>진단 내역</th>
+						<th>작성일</th>
+					</tr>
+					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/member/myOpinion (treatmentNo=${treatment.treatmentNo}, memberNo=${session.member.memberNo})}'|">
+						<td th:text="${treatment.treatmentNo}"></td>
+						<td th:text="${treatment.departmentName}"></td>
+						<td th:text="${session.member.memberId}"></td>
+						<td th:text="${treatment.doctorName}"></td>
+						<th:block th:if="${treatment.isDone == '0'}">
+							<td>진단 중</td>
+						</th:block>
+						<th:block th:if="${treatment.isDone == '1'}">
+							<td>진단 완료</td>
+						</th:block>
+						<td th:text="${treatment.appointDate}"></td>
+					</tr>
+				</table>
+				<div id="navi" th:utext="${pageNavi}"></div>
+			</div>
 		</section>
 	</main>	
 	<th:block th:include="common/footer"></th:block>
