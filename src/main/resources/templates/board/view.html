@@ -73,16 +73,13 @@
 <body>	
 	<div class="container">
         <div class="boardTitle" th:text="${board.boardTitle}"></div>
-        <div class="metadata" th:text="${session.member.memberId}+' | '+${board.boardRegDate}"></div>
+        <div class="metadata" th:text="${board.boardWriter}+' | '+${board.boardRegDate}"></div>
         <div class="content" th:text="${board.boardContent}"></div>
-        <div class="buttons">
-            <button class="button submit-button">수정하기</button>
-            <button class="button delete-button">삭제하기</button>
+        
+        <div class="btn">
+        	<a href="/board/commentWriteFrm"><button type="button">답변하기</button></a>
         </div>
-        <div class="reply">
-            <div class="metadata">신종인 | 나과 | 2025-02-24</div>
-            <div class="content">답변답변답변답변...</div>
-        </div>
+        
         <div class="noted-item-wrap">
         	<div class="noted-item-title">
         		✔ 꼭 확인해주세요
