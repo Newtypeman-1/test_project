@@ -22,6 +22,7 @@ import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;
 import kr.co.iei.review.model.service.ReviewService;
 import kr.co.iei.treat.model.service.TreatService;
+import kr.co.iei.treat.model.vo.Department;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.util.EmailSender;
 import kr.co.iei.util.FileUtils;
@@ -62,10 +63,10 @@ public class DoctorController {
 	@GetMapping(value="/mypage")
 	public String doctorMypage(@SessionAttribute Doctor doctor, Model model) {
 		String doctorId = doctor.getDoctorId();
-		String departmentName = treatService.selectDepartmentName(doctor.getDepartmentNo());
+		Department department = treatService.selectDepartment(doctor.getDepartmentNo());
 		Doctor d = doctorService.selectOneDoctor(doctor);
 		model.addAttribute("doctor", d);
-		model.addAttribute("departmentName", departmentName);
+		model.addAttribute("department", department);
 		return "doctor/mypage";
 	}
 	@PostMapping(value="/update")
