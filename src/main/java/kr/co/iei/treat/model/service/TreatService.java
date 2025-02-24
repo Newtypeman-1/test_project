@@ -52,4 +52,9 @@ public class TreatService {
 		return list;
 	}
 
+	public List allSchedule() {
+		List list = treatDao.allSchedule();
+		return list;
+	}
+
 }

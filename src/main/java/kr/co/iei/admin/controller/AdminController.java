@@ -16,6 +16,7 @@ import kr.co.iei.admin.model.service.AdminService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
+import kr.co.iei.treat.model.service.TreatService;
 import kr.co.iei.util.FileUtils;
 
 @Controller
@@ -31,6 +32,8 @@ public class AdminController {
 	private String root;
 	@Autowired
 	private FileUtils fileUtils;
+	@Autowired
+	private TreatService treatService;
 	
 	@GetMapping(value="/mainPage")
 	public String mainPage() {
@@ -84,6 +87,13 @@ public class AdminController {
 			return "common/msg";
 		}
 	}
+	@GetMapping(value="allSchedule")
+	public String allSchedule(Model model) {
+		List list = adminService.allSchedule();
+		model.addAttribute("list", list);
+		return "admin/allSchedule";
+	}
+	
 	
 }
 

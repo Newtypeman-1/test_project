@@ -1188,6 +1188,7 @@ body{
 	}
 	.input-item {
 		display: flex;
+		justify-content: space-between;
 		gap: 10px;
 	}
 	.input-item span{
@@ -1498,8 +1499,10 @@ tr input{
 	height: 100%;
 }
 select{
-	width: 100px;
-	height: 50px;
+	width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 .icon{
 	text-decoration: none;
