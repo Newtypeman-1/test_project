@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.iei.board.model.dao.BoardDao;
 import kr.co.iei.board.model.vo.Board;
+import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.member.model.vo.Member;
 
 @Service
 public class BoardService {
@@ -22,4 +24,10 @@ public class BoardService {
 		List list = boardDao.selectBoardList(start, end);
 		return list;
 	}
+
+	public List memberAllBoard(Member member) {
+		List list = boardDao.memberAllBoard(member);
+		return list;
+	}
+
 }
