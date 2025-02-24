@@ -123,9 +123,26 @@
 }
 
 .doctor-rating {
-	color: #ffa500;
 	font-size: 14px;
 	margin-bottom: 20px;
+}
+
+.doctor-rating a{
+	display: flex;
+	font-size: 16px;
+}
+
+.doctor-rating a>span{
+	color: #ffa500;
+	font-weight: bold;
+}
+
+.doctor-rating>a :first-child{
+	margin-right: 3px;
+}
+
+#review-total{
+	color: #bbb;
 }
 
 .doctor-status {
@@ -240,7 +257,7 @@
 										<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
 											<span>⭐</span>
 											<span id="review-rating" th:text="${doctor.reviewRating}"></span>
-											(<span id="review-total" th:text="${doctor.reviewTotal}"></span>)
+											<span id="review-total" th:text="'(' + ${doctor.reviewTotal} + ')'"></span>
 										</a>
 									</p>
 									<p class="doctor-status">🟢 예약 가능</p>
@@ -265,7 +282,7 @@
 									<td>17:00</td>
 									<td>18:00</td>
 								</tr>
-								<tr class="checkedTr">
+								<tr th:class="'checkedTr ' + 'checkedTr-' + ${status.index}">
 									<td></td>
 									<td></td>
 									<td></td>
@@ -294,8 +311,8 @@
 				type: "get",
 				success: function(data){
 					data.forEach(item => {
-						let appointTime = item.appointTime;
 						const tr = $(".checkedTr");
+						let appointTime = item.appointTime;
 						if(item.appointTime < 12){
 							appointTime = item.appointTime - 9; 
 						}else{
@@ -307,6 +324,56 @@
 			});
 		}
 		schedule();
+		
+		const today = new Date();
+		const hour = String(today.getHours()).padStart(2, "0");
+		const minute = String(today.getMinutes()).padStart(2, "0");
+		for(let i = 9; i <= 18; i++){
+			const tr = $(".checkedTr");
+			tr.each(function(idx){
+				if(Number(hour) >= i){
+					if(i < 12){
+						$(this).children().eq(i - 9).text("❌");
+					}else{
+						$(this).children().eq(i - 10).text("❌");
+					}
+				}
+				if(Number(hour) == i - 1 && Number(minute) >= 50){
+					//진료시간 10분 전이면 예약 불가
+					if(i < 12){
+						$(this).children().eq(i - 9).text("❌");
+					}else{
+						$(this).children().eq(i - 10).text("❌");
+					}
+				}
+			});
+		}
+		
+// 		function checking(){
+// 			const tr = $(".checkedTr");
+// 			tr.each(function(){
+// 				let count = $(this).filter(function(item) {
+// 					return $(item).text().trim() === '❌';
+// 				}).length;
+// 				console.log(count);
+// 			});
+// 		}
+// 		checking();
+
+		function checking(){
+			const tr = $(".checkedTr");
+			tr.each(function(){
+				let count = $(this).find('td').filter(function() {
+					return $(this).text().trim() === '❌';
+				}).length;
+				if(count == 9){
+					$(".doctor-status").text("🔴 예약 불가");
+					$(".doctor-status").css("color", "red");
+				}
+			});
+		}
+		checking();
+		
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

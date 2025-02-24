@@ -22,7 +22,7 @@ public class DoctorRatingRowMapper implements RowMapper<Doctor>{
 		d.setDoctorPw(rs.getString("doctor_pw"));
 		d.setDepartmentName(rs.getString("department_no"));
 		d.setReviewTotal(rs.getInt("review_total"));
-		d.setReviewRating(rs.getInt("review_rating"));
+		d.setReviewRating(rs.getDouble("review_rating"));
 		return d;
 	}
 }
