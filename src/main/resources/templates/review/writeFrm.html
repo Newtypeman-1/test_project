@@ -43,57 +43,57 @@
 		<section class="section">
 			<div class="page-title">리뷰 작성</div>
 			<form action="/review/write" method="post">
-			<table class="tbl">
-				<tr>
-					<th style="width:10%">작성자</th>
-					<td style="width:10%">
-						<span th:text="${session.member.memberId}"></span>
-						<input type="hidden" name="reviewWriter" th:value="${session.member.memberId}">
-					</td>
-					<th>담당의</th>
-					<td>
-					
-					</td>
-					<th>담당과</th>
-					<td ></td>
-					<th>날짜</th>
-					<td ></td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<div>
-							<textarea name="reviewContent"></textarea>
-							<input type="hidden" id="reviewStar" name="reviewStar">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>별점</th>
-					<td>
-						<div class="star-wrap star-wrap1">
-					        <span class="material-icons">star_rate</span>
-					        <span class="material-icons">star_rate</span>
-					        <span class="material-icons">star_rate</span>
-					        <span class="material-icons">star_rate</span>
-					        <span class="material-icons">star_rate</span>
-					    </div>
-					    <p>
-				        	<span id="star-result">0</span>
-					        <span>점</span>
-					    </p>
-					</td>	
-				</tr>
-				<tr>
-					<td>
-						<button type="submit" class="ok-btn">리뷰 등록</button>
-					</td>
-					<td>
-						<button type="button" class="can-btn">리뷰 취소</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</section>
+				<table class="tbl">
+					<tr>
+						<th style="width:10%">작성자</th>
+						<td style="width:10%">
+							<span th:text="${session.member.memberId}"></span>
+							<input type="hidden" name="reviewWriter" th:value="${session.member.memberId}">
+						</td>
+						<th>담당의</th>
+						<td>
+						
+						</td>
+						<th>담당과</th>
+						<td ></td>
+						<th>날짜</th>
+						<td ></td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<div>
+								<textarea name="reviewContent"></textarea>
+								<input type="hidden" id="reviewStar" name="reviewStar">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>별점</th>
+						<td>
+							<div class="star-wrap star-wrap1">
+						        <span class="material-icons">star_rate</span>
+						        <span class="material-icons">star_rate</span>
+						        <span class="material-icons">star_rate</span>
+						        <span class="material-icons">star_rate</span>
+						        <span class="material-icons">star_rate</span>
+						    </div>
+						    <p>
+					        	<span id="star-result">0</span>
+						        <span>점</span>
+						    </p>
+						</td>	
+					</tr>
+					<tr>
+						<td>
+							<button type="submit" class="ok-btn">리뷰 등록</button>
+						</td>
+						<td>
+							<button type="button" class="can-btn">리뷰 취소</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</section>
 	</main>
 		<script>
 	 		$(".can-btn").on("click",function(){
