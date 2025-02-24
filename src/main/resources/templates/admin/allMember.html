@@ -7,39 +7,51 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="section">
-			<div class="page-title">전체 회원 조회</div>
-			<table class="tbl tbl-hover">
-				<tr>
-					<th style="width:5%">번호</th>
-					<th style="width:8%">아이디</th>
-					<th style="width:8%">이름</th>
-					<th style="width:15%">전화번호</th>
-					<th style="width:27%">주소</th>
-					<th style="width:17%">이메일</th>
-					<th style="width:5%">성별</th>
-					<th style="width:13%">가입일</th>
-				</tr>
-				<tr th:each="m,status : ${list}">
-					<td th:text="${m.memberNo}"></td>
-					<td th:text="${m.memberId}"></td>
-					<td th:text="${m.memberName}"></td>
-					<td th:text="${m.memberPhone}"></td>
-					<td th:text="${m.memberAddr}"></td>
-					<td th:text="${m.memberEmail}"></td>
-					<td th:text="${m.memberGender}"></td>
-					<td th:text="${m.enrollDate}"></td>
-				</tr>
-				<tr th:each="d,status : ${list2}">
-					<td th:text="${d.doctorNo}"></td>
-					<td th:text="${d.doctorId}"></td>
-					<td th:text="${d.doctorName}"></td>
-					<td th:text="${d.doctorPhone}"></td>
-					<td th:text="${d.doctorImg}"></td>
-					<td th:text="${d.doctorEmail}"></td>
-				</tr>		
-			</table>	
-		</section>
+		<div class="page-title">전체 회원 조회</div>
+		<div class="double-section">
+			<section class="list-section member-list">
+				<table class="member-list-tbl">
+					<tr class="tbl-header">
+						<th>번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>전화번호</th>
+						<th>주소</th>
+						<th>이메일</th>
+						<th>성별</th>
+						<th>가입일</th>
+					</tr>
+					<tr th:each="m,status : ${list}">
+						<td th:text="${m.memberNo}"></td>
+						<td th:text="${m.memberId}"></td>
+						<td th:text="${m.memberName}"></td>
+						<td th:text="${m.memberPhone}"></td>
+						<td th:text="${m.memberAddr}"></td>
+						<td th:text="${m.memberEmail}"></td>
+						<td th:text="${m.memberGender}"></td>
+						<td th:text="${m.enrollDate}"></td>
+					</tr>
+				</table>
+			</section>
+			<section class="list-section doctor-list">
+				<table class="doctor-list-tbl">
+					<tr class="tbl-header">
+						<th>번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>전화번호</th>
+						<th>이메일</th>
+					</tr>
+					<tr th:each="d,status : ${list2}">
+						<td th:text="${d.doctorNo}"></td>
+						<td th:text="${d.doctorId}"></td>
+						<td th:text="${d.doctorName}"></td>
+						<td th:text="${d.doctorPhone}"></td>
+						<td th:text="${d.doctorEmail}"></td>
+					</tr>
+				</table>
+			</section>
+		</div>
 	</main>	
 	<th:block th:include="common/footer"></th:block>
 </body>

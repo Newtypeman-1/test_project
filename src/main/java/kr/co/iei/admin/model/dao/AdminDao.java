@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.admin.model.vo.AdminRowMapper;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.treat.model.vo.TreatRowMapper2;
+import kr.co.iei.treat.model.vo.TreatRowMapper3;
 
 @Repository
 public class AdminDao {
@@ -15,6 +17,8 @@ public class AdminDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private AdminRowMapper adminRowMapper;
+	@Autowired
+	private TreatRowMapper3 treatRowMapper3;
 
 	public int insertDoctor(Doctor d) {
 		String query = "insert into doctor_tbl values(doctor_seq.nextval,?,?,?,?,?,?,?)";
@@ -31,8 +35,8 @@ public class AdminDao {
 	}
 
 	public List allSchedule() {
-		String query = "select * from treatment_tbl";
-		List list = jdbc.queryForList(query);
+		String query = "select * from (select rownum as rnum, z.* from (select * from treatment_tbl t join doctor_tbl d on t.doctor_no = d.doctor_no join member_tbl m on t.member_no = m.member_no join department_tbl p on d.department_no = p.department_no order by 1 desc) z)";
+		List list = jdbc.query(query, treatRowMapper3);
 		return list;
 	}
 

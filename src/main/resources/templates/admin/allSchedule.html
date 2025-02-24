@@ -19,10 +19,10 @@
 						<th>진단 내역</th>
 						<th>작성일</th>
 					</tr>
-					<tr th:each="treatment : ${list}" th:onclick="|location.href='@{/member/myOpinion (treatmentNo=${treatment.treatmentNo}, memberNo=${session.member.memberNo})}'|">
+					<tr th:each="treatment : ${list}">
 						<td th:text="${treatment.treatmentNo}"></td>
 						<td th:text="${treatment.departmentName}"></td>
-						<td th:text="${session.member.memberId}"></td>
+						<td th:text="${treatment.memberId}"></td>
 						<td th:text="${treatment.doctorName}"></td>
 						<th:block th:if="${treatment.isDone == '0'}">
 							<td>진단 중</td>
