@@ -53,7 +53,9 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="/addAcount")
-	public String join(Doctor d, Model model, MultipartFile imgFile) {
+	public String addAccount(Doctor d, Model model, MultipartFile imgFile, String email, String com1) {
+		String doctorEmail = email+"@"+com1;
+		d.setDoctorEmail(doctorEmail);
 		if(!imgFile.isEmpty()) {
 			String savepath = root+"/doctor/";
 			String filepath = fileUtils.upload(savepath, imgFile);
@@ -66,7 +68,22 @@ public class AdminController {
 		model.addAttribute("loc", "/admin/mainPage");
 		return "common/msg";
 	}
-
+	
+	@PostMapping(value="delAccount")
+	public String delAccount(Doctor d, Model model) {
+		int r = adminService.deleteDoctor(d);
+		if(r != 0) {
+			model.addAttribute("title", "직원 해고 성공");
+			model.addAttribute("text", "성공적으로 직원을 해고했습니다.");
+			model.addAttribute("icon", "success");
+			return "common/msg";
+		}else {
+			model.addAttribute("title", "직원 해고 실패");
+			model.addAttribute("text", "애석하게도 직원을 해고하지 못했습니다.");
+			model.addAttribute("icon", "error");
+			return "common/msg";
+		}
+	}
 	
 }
 

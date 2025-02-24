@@ -9,8 +9,8 @@
 	<main class="main">
 		<section class="login-section section">
 			<div class="tab">
-	            <div>아이디 찾기</div>
-	            <div>비밀번호 찾기</div>
+	            <h5>아이디 찾기</h5>
+	            <h5>비밀번호 찾기</h5>
 	        </div>
 	        <div class="tab-content">
 	        	<div>
@@ -27,7 +27,7 @@
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="button" class="submit-button id-find-btn">이메일 전송</button>
+							<button type="button" class="submit-button one-button id-find-btn">이메일 전송</button>
 						</div>
 					</form>
 	        	</div>
@@ -53,14 +53,14 @@
 							<span class="wrong-message"></span>
 						</div>
 						<div>
-							<button type="button" class="submit-button pw-find-btn">이메일 전송</button>
+							<button type="button" class="submit-button one-button pw-find-btn">이메일 전송</button>
 					</form>
 		        </div>
 	        </div>
 		</section>
 	</main>
 	<script>
-		const tabs = document.querySelectorAll(".tab>div");
+		const tabs = document.querySelectorAll(".tab>h5");
 		const contents = document.querySelectorAll(".tab-content>div");
 	
 		tabs.forEach(function(tab,i){

@@ -18,4 +18,10 @@ public class AdminService {
 		return result;
 		
 	}
+	
+	@Transactional
+	public int deleteDoctor(Doctor d) {
+		int r = adminDao.deleteDoctor(d);
+		return r;
+	}
 }

@@ -9,17 +9,22 @@
 	<main class="main">
 		<th:block th:include="common/menuRemote"></th:block>
 		<section class="section mypage-section">
-			<div class="page-title">내 정보</div>
+			<h3 class="page-title">내 정보</h3>
+			<form action="/member/update" method="post" class="mypage-form">
 			<div class="info mypage-info">
-				<div class="img">
+				<div class="info-title">
+					<img src="/img/logo2.png" class="union-logo">
+					<span class="union-name">즥이는 의사 협의회</span>
+				</div>
+				<div class="info-main">
+				<div class="myImg">
 					<img src="/img/백강혁.webp">
 				</div>
 				<div class="intro">
-					<form action="/member/update" method="post" class="mypage-form">
 						<table class="tbl mypage-tbl">
 							<tr>
-								<th width="50%">아이디</th>
-								<td width="50%" th:text="${member.memberId}"></td>
+								<th>아이디</th>
+								<td th:text="${member.memberId}"></td>
 							</tr>
 							<tr>
 								<th><label for="memberPw">비밀번호</label></th>
@@ -61,18 +66,17 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<th>가입일</th>
-								<td th:text="${member.enrollDate}"></td>
-							</tr>
 						</table>
+						<div>가입일</div>
+						<span th:text="${member.enrollDate}"></span>
 						<div class="btn yesOrNo">
 							<button type="submit" class="submit-button one-button">정보 수정</button>
 							<button type="button" class="del submit-button two-button">회원 탈퇴</button>
-						</div>	
-					</form>
+						</div>
+					</div>	
 				</div>
 			</div>
+			</form>
 		</section>
 	</main>
 	<script>
