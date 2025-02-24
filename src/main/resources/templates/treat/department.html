@@ -229,8 +229,7 @@
 						<div class="doctor-container">
 							<div class="doctor-card">
 								<div class="doctor-image-box">
-<!-- 									<img th:src="${doctor.doctorImg}"> -->
-									<img src="/img/default_profile31.png">
+									<img th:src="@{'/doctor/' + ${doctor.doctorImg}}">
 								</div>
 								<div class="doctor-info">
 									<p class="doctor-info-title">

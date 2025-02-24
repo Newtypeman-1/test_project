@@ -16,14 +16,16 @@
 						<img src="/img/logo2.png" class="union-logo">
 						<span class="union-name">즥이는 의사 협의회</span>
 					</div>
-					<img src="/doctor/+${doctor.doctorImg}">
+					<img th:src="@{'/doctor/' + ${doctor.doctorImg}}">
 				</div>
 				<div class="intro">
 					<form action="/doctor/update" method="post">
 						<table class="tbl">
 							<tr>
 								<th width="50%">담당과</th>
-								<td width="50%" th:text="${department.departmentName}"></td>
+								<th:block th:if="${department} != null">
+									<td width="50%" th:text="${department.departmentName}"></td>
+								</th:block>
 							</tr>
 							<tr>
 								<th>이름</th>
