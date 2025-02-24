@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer{
 	@Value(value="${file.root}")
 	private String root;
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
@@ -22,8 +23,5 @@ public class WebConfig implements WebMvcConfigurer{
 			.addResourceHandler("/doctor/**")
 			.addResourceLocations("file:///"+root+"/doctor/");
 		
-		registry
-			.addResourceHandler("/notice/editor/**")
-			.addResourceLocations("file:///"+root+"/notice/editor/");
 	}
 }
