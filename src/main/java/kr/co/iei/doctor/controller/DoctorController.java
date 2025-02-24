@@ -66,6 +66,7 @@ public class DoctorController {
 		Doctor d = doctorService.selectOneDoctor(doctor);
 		model.addAttribute("doctor", d);
 		model.addAttribute("departmentName", departmentName);
+		
 		return "doctor/mypage";
 	}
 	@PostMapping(value="/update")
