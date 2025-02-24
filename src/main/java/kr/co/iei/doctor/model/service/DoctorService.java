@@ -30,7 +30,11 @@ public class DoctorService {
 		return result;
 	}	
 
-	public List selectAllDoctor() {
+	public List selectAllDoctor(int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage +1;
+		
 		List list2 = doctorDao.selectAllDoctor();
 		return list2;
 	}

@@ -11,71 +11,80 @@
 		<section class="section mypage-section">
 			<h3 class="page-title">내 정보</h3>
 			<form action="/member/update" method="post" class="mypage-form">
-			<div class="info mypage-info">
-				<div class="info-title">
-					<img src="/img/logo2.png" class="union-logo">
-					<span class="union-name">즥이는 의사 협의회</span>
-				</div>
-				<div class="info-main">
-				<div class="myImg">
-					<img src="/img/default_profile31.png">
-				</div>
-				<div class="intro">
-						<table class="tbl mypage-tbl">
-							<tr>
-								<th>아이디</th>
-								<td th:text="${member.memberId}"></td>
-							</tr>
-							<tr>
-								<th><label for="memberPw">비밀번호</label></th>
-								<td>
-									<div class="input">
-										<input type="password" name="memberPw" id="memberPw" th:value="${member.memberPw}">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>이름</th>
-								<td th:text="${member.memberName}"></td>
-							</tr>								
-							<tr>
-								<th><label for="memberPhone">전화번호</label></th>
-								<td>
-									<div class="input">
-										<input type="text" name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>성별</th>
-								<td th:text="${member.memberGender}"></td>
-							</tr>
-							<tr>
-								<th><label for="memberEmail">이메일</label></th>
-								<td>
-									<div class="input">
-										<input type="text" name="memberEmail" id="memberEmail" th:value="${member.memberEmail}">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="memberAddr">주소</label></th>
-								<td>
-									<div class="input">
-										<input type="text" name="memberAddr" id="memberAddr" th:value="${member.memberAddr}">
-									</div>
-								</td>
-							</tr>
-						</table>
-						<div>가입일</div>
-						<span th:text="${member.enrollDate}"></span>
-						<div class="btn yesOrNo">
+				<div class="info mypage-info">
+					<div class="info-title">
+						<div class="union">
+							<img src="/img/logo2.png" class="union-logo">
+							<span class="union-name">즥이는 의사 협의회</span>
+						</div>
+						<div class="mypage-title">
+							치료받을 자격증
+						</div>
+					</div>
+					<div class="info-main">
+						<div class="myImg">
+							<img src="/img/default_profile31.png">
+						</div>
+						<div class="intro">
+							<table class="tbl mypage-tbl">
+								<tr>
+									<th>아이디</th>
+									<td th:text="${member.memberId}"></td>
+								</tr>
+								<tr>
+									<th><label for="memberPw">비밀번호</label></th>
+									<td>
+										<div class="input">
+											<input type="password" name="memberPw" id="memberPw" th:value="${member.memberPw}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>이름</th>
+									<td th:text="${member.memberName}"></td>
+								</tr>								
+								<tr>
+									<th><label for="memberPhone">전화번호</label></th>
+									<td>
+										<div class="input">
+											<input type="text" name="memberPhone" id="memberPhone" th:value="${member.memberPhone}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>성별</th>
+									<td th:text="${member.memberGender}"></td>
+								</tr>
+								<tr>
+									<th><label for="memberEmail">이메일</label></th>
+									<td>
+										<div class="input">
+											<input type="text" name="memberEmail" id="memberEmail" th:value="${member.memberEmail}">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="memberAddr">주소</label></th>
+									<td>
+										<div class="input">
+											<input type="text" name="memberAddr" id="memberAddr" th:value="${member.memberAddr}">
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="info-end">
+						<div class="enrollDate">
+							<span>가입일 :</span>
+							<span th:text="${member.enrollDate}"></span>
+						</div>
+						<div class="input yesOrNo">
 							<button type="submit" class="submit-button one-button">정보 수정</button>
 							<button type="button" class="del submit-button two-button">회원 탈퇴</button>
 						</div>
-					</div>	
+					</div>
 				</div>
-			</div>
 			</form>
 		</section>
 	</main>

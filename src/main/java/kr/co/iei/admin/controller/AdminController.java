@@ -41,9 +41,9 @@ public class AdminController {
 	}	
 		
 	@GetMapping(value="/allMember")
-	public String allMember(Model model) {
-		List list = memberService.selectAllMember();
-		List list2 = doctorService.selectAllDoctor();
+	public String allMember(Model model,int reqPage) {
+		List list = memberService.selectAllMember(reqPage);
+		List list2 = doctorService.selectAllDoctor(reqPage);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		return "admin/allMember";

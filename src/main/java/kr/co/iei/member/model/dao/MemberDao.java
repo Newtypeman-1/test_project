@@ -115,6 +115,11 @@ public class MemberDao {
 		List list = jdbc.query(query, treatRowMapper2, params);
 		return (Treat)list.get(0);
 	}
+
+	public List allMemberList(int start, int end) {
+		String query = ""
+		return null;
+	}
 	
 
 }
