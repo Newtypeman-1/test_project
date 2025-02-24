@@ -11,8 +11,12 @@
 		<section class="section mypage-section">
 			<div class="page-title">내 정보</div>
 			<div class="info mypage-info">
-				<div class="img">
-					<img th:src="'/doctor/'+${doctor.doctorImg}">
+				<div class="myImg">
+					<div class="union-title">
+						<img src="/img/logo2.png" class="union-logo">
+						<span class="union-name">즥이는 의사 협의회</span>
+					</div>
+					<img src="/doctor/+${doctor.doctorImg}">
 				</div>
 				<div class="intro">
 					<form action="/doctor/update" method="post">
@@ -56,7 +60,7 @@
 						</table>
 						<div class="btn yesOrNo">
 							<button type="submit" class="submit-button one-button">정보 수정</button>
-							<a th:if="${doctor.doctorId == 'admin'}" href="/admin/mainPage"><button type="button" class="submit-button two-button">관리자페이지</button></a>
+							<a th:if="${doctor.doctorId == 'admin'}" href="/admin/mainPage"><button type="button"class=" submit-button two-button">관리자페이지</button></a>
 						</div>	
 					</form>
 				</div>

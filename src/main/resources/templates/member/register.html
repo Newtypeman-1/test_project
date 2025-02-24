@@ -3,13 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Help DOC | 회원가입</title>
+<style>
+.emailCheck+.idChek{
+	height: 40px;
+	border-radius: 10px;
+}
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
 		<section class="section">
 			<div class="title">회원가입</div>
-			<form action="/member/register" method="post">
+			<form action="/member/register" method="post" class="register-page">
 				<div class="input">
 					<div class="input-name">
 						<label for="memberId">아이디*</label>
@@ -17,7 +23,7 @@
 					</div>
 					<div class="input-item">
 						<input type="text" class="essen" name="memberId" id="memberId">
-						<button type="button" class="idCheck">중복체크</button>
+						<button type="button" class="idCheck one-button">중복체크</button>
 					</div>
 				</div>
 				<div class="input">
@@ -27,7 +33,6 @@
 					</div>
 					<div class="input-item">
 						<input type="text" class="essen" name="memberPw" id="memberPw">
-						
 					</div>
 					<div class="msg">
 			            <div>8글자 이상 12글자 이하</div>
@@ -78,7 +83,7 @@
 							<option value="gmail.com">gmail.com</option>
 							<option value="daum.net">daum.net</option>
 						</select>
-						<button type="button" class="emailCheck">인증문자 전송</button>
+						<button type="button" class="emailCheck one-button">인증문자 전송</button>
 					</div>
 					<div class="input-item emailToggle" style="display: none;">
 						<input type="text" class="essen" name="memberAuth" id="memberAuth">
@@ -520,7 +525,7 @@
 				<div class="input">
 					<div class="input-item yesOrNo">
 						<button type="submit" class="regist submit-button one-button">회원가입</button>
-						<a href="/"><button type="button" class="submit-button two-button">취소</button></a>
+						<a href="/" style="width: 100%;"><button type="button" class="submit-button two-button">취소</button></a>
 					</div>
 				</div>
 				<div>
@@ -673,6 +678,7 @@
 			const it = $("#com2").val();
 			const com = $("#com1").val(it);
 		});
+		
 		
 		//이메일 조건 1
 		let mailCode = null;
