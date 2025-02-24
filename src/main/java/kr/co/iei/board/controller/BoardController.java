@@ -55,8 +55,9 @@ public class BoardController {
 		return list;
 	}
 	@GetMapping(value="/view")
-	public String boardView(int boardNo) {
+	public String boardView(int boardNo, @SessionAttribute(required=false) Member member, Model model) {
 		Board b = boardService.selectBoard(boardNo);
+		model.addAttribute("board", b);
 		return "board/view";
 	}
 }
