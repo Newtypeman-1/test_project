@@ -9,14 +9,14 @@
 	height: 120px;
 }
 
-.page-title {
+.department-page-title {
 	width: 1200px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	margin: 0 auto;
 }
 
-.page-title>h2 {
+.department-page-title>h2 {
 	text-align: center;
 	line-height: 120px;
 	font-weight: 500;
@@ -44,12 +44,14 @@
 .introduce-additional {
 	text-align: left;
 	margin: 20px 0;
+	letter-spacing: -0.25px;
 }
 
 .doctor-up {
 	display: flex;
 }
 
+/*
 #appoint-btn {
 	border-radius: 20px;
 	padding: 8px;
@@ -57,6 +59,7 @@
 	border: none;
 	color: white;
 }
+*/
 
 .doctor-name {
 	font-size: 28px;
@@ -73,23 +76,27 @@
 .doctor-wrap{
 	display: flex;
 	flex-wrap: wrap;
-	gap: 50px;
-	justify-content: center;
+	/*gap: 50px;
+	justify-content: center;*/
+	justify-content: space-between;
 }
 
 .doctor-container {
-	width: 500px;
+	/*width: 500px;*/
+	width: calc(50% - 30px);
+	border-top: 1px solid #ccc;
+	margin: 30px 0;
 }
 
 .doctor-card {
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid #ddd;
+	/*border: 1px solid #ddd;
+	border-radius: 10px;*/
 	padding: 15px;
-	border-radius: 10px;
 }
 
-.image-box {
+.doctor-image-box {
 	width: 150px;
 	height: 150px;
 	margin-top: 10px;
@@ -101,33 +108,39 @@
 	margin-left: 30px;
 }
 
+.doctor-info p{
+	line-height: normal;
+}
+
 .doctor-info-title {
 	font-size: 20px;
 	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .doctor-rating {
 	color: #ffa500;
 	font-size: 14px;
+	margin-bottom: 20px;
 }
 
-.status {
+.doctor-status {
 	color: green;
 	font-size: 14px;
 	font-weight: bold;
 }
 
-.buttons {
+.doctor-buttons {
 	margin-top: 10px;
 	display: flex;
-	align-items: center;
 }
 
-.buttons a {
+.doctor-buttons a {
 	text-decoration: none;
 	padding: 5px 10px;
 	border-radius: 5px;
 	color: white;
+	margin-right: 10px;
 }
 
 .info-btn {
@@ -144,10 +157,12 @@
 }
 
 .schedule {
-	width: 500px;
+	/*width: 500px;*/
+	width: 100%;
 	border-collapse: collapse;
 	margin-top: 10px;
 	background-color: #eaeaea;
+	font-size: 14px;
 }
 
 .schedule th, .schedule td {
@@ -168,12 +183,12 @@
 <body>
 	<th:block th:include="common/header"></th:block>
 	<main class="main">
-		<section class="section title-section">
-			<div class="page-title">
+		<section class="title-section">
+			<div class="department-page-title">
 				<h2 th:text="${departmentName}"></h2>
 			</div>
 		</section>
-		<section class="section content-section">
+		<section class="content-section">
 			<div class="content-main">
 				<div class="introduce-detail">
 					<div class="introduce-img-wrap">
@@ -184,7 +199,7 @@
 					<div class="introduce-additional">우리나라는 근래에 식생활이 서구화되면서 각종
 						내장암으로 인한 사망률이 높고, 염증성, 과민성을 비롯한 각종 내장 증후군의 발병률이 높아지고 있습니다. 또한 B형 및
 						C형간염의 유병률이 높고 간암 역시 여전히 국내 사망원인 질환의 수위를 차지하고 있어서, 내과 분야의 중요성은 갈수록
-						부각되고 있습니다. 내과는 진료뿐만 아니라 연구, 그리고 교육적 측면에서의 역할이 매우 중요한 것으로 잘 알려져
+						부각되고 있습니다.<br>내과는 진료뿐만 아니라 연구, 그리고 교육적 측면에서의 역할이 매우 중요한 것으로 잘 알려져
 						있습니다.</div>
 				</div>
 				<div class="doctor-wrap">
@@ -210,8 +225,8 @@
 									<p>09:00 ~ 18:00</p>
 									<div class="doctor-buttons">
 										<a href="#" class="one-button">👨‍⚕️ 의료진 소개</a>
-										<a th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
-											<button type="button" id="appoint-btn">📆 진료 예약</button>
+										<a class="two-button" th:href="@{/treat/appointFrm(doctorNo=${doctor.doctorNo})}">
+											📆 진료 예약
 										</a>
 									</div>
 								</div>
@@ -240,7 +255,7 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td>안내</td>
+									<td></td>
 									<td colspan="8" class="schedule-bottom">❌ 마감</td>
 								</tr>
 							</table>
