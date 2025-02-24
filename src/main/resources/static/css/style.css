@@ -1446,6 +1446,7 @@ body{
 	.tbl-header{
 		background-color: var(--color4);
 		color: #fff;
+		border-bottom: 2px solid black;
 	}
 	
 .opinion-section{
@@ -1550,6 +1551,29 @@ select{
 	height: 200px;
 	object-fit: cover;
 }
+.double-section{
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	align-items: center;
+}
+.list-section{
+	border: 1px solid var(--color4);
+	border-radius: 10px;
+	margin-left: 50px;
+	margin-right: 50px;
+	overflow: hidden;
+}
+.member-list-tbl tr,.doctor-list-tbl tr{
+	border-bottom: 1px solid black;
+}
+.member-list-tbl *,.doctor-list-tbl *{
+	padding: 5px;
+	text-align: center;
+}
+
+
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1500px) and (max-width: 1900px) {
