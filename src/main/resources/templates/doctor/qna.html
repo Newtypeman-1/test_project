@@ -45,7 +45,7 @@
 							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-					<a href="/review/list?reqPage=1"><button type="button" class="allReview submit-button one-button">전체 리뷰 보기</button></a>						
+					<a th:href="@{/review/list(reqPage=1, doctorNo=${session.doctor.doctorNo})}"><button type="button" class="allReview submit-button one-button">전체 리뷰 보기</button></a>
 				</div>
 			</div>
 		</section>
