@@ -36,4 +36,23 @@ public class BoardDao {
 		List memberAllBoard = jdbc.query(query, boardRowMapper, params);
 		return memberAllBoard;
 	}
+
+	public int insertBoard(Board b, Member member) {
+		String query = "insert into board values(board_seq.nextval,?,?,?,to_char(sysdate,'yyyy-mm-dd'),0)";
+		Object[] params = {b.getBoardTitle(), member.getMemberId(), b.getBoardContent()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public Board selectBoard(int boardNo) {
+		String query = "select * from board where board_no = ?";
+		Object[] params = {boardNo};
+		 List list = jdbc.query(query, boardRowMapper, params);
+		 if(list.isEmpty()) {
+			 return null;
+		 }else {
+			 Board b = (Board)list.get(0);			 
+			 return b;
+		 }
+	}
 }
