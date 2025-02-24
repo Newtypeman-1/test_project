@@ -75,7 +75,7 @@ public class DoctorDao {
 		return list;
 	}
 	
-	public int memberTotalCount(Doctor doctor) {
+	public int memberSelectCount(Doctor doctor) {
 		String query = "select count(*) from treatment_tbl where doctor_no = ?";
 		Object[] params = {doctor.getDoctorNo()};
 		int r = jdbc.queryForObject(query, Integer.class, params);
@@ -93,6 +93,11 @@ public class DoctorDao {
 		String query = "update treatment_tbl set opinion_symptom = ?, opinion_decision = ?, is_done = 1 where treatment_no = ?";
 		Object[] params = {t.getOpinionSymptom(), t.getOpinionDecision(), t.getTreatmentNo()};
 		int r = jdbc.update(query, params);
+		return r;
+	}
+	public int memberTotalCount() {
+		String query = "select count(*) from doctor_tbl";
+		int r = jdbc.queryForObject(query, Integer.class);
 		return r;
 	}
 	

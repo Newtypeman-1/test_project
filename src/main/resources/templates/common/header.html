@@ -43,17 +43,28 @@
 				                         	<a href="/doctor/mypage">마이페이지</a>
 								</th:block>
                         	<ul class="dropdown">
-                        	 	<li>
-	                        	 	<th:block th:if="${session.member == null && session.doctor == null}">
-	                        			<a href="/">Q&A</a>
-									</th:block>
-									<th:block th:if="${session.member != null}">
-										<a href="/member/qna">Q&A</a>
-									</th:block>
-									<th:block th:if="${session.doctor != null}">
-										<a href="/doctor/qna">Q&A</a>
-									</th:block>
-                           	 	</li>
+								<th:block th:if="${session.member != null}">
+									<li>
+										<a href="/member/mypage">내 페이지</a>
+                           	 		</li>
+                        	 		<li>
+										<a href="/member/myMedicalRecordsPage">내 진료기록</a>
+                           	 		</li>
+                           	 		<li>
+										<a href="/member/qna">내 문의/리뷰</a>
+                           	 		</li>
+								</th:block>
+								<th:block th:if="${session.doctor != null}">
+									<li>
+										<a href="/doctor/mypage">내 페이지</a>
+                           	 		</li>
+                        	 		<li>
+										<a href="/doctor/myMedicalRecordsPage">내 진료기록</a>
+                           	 		</li>
+                           	 		<li>
+										<a href="/doctor/qna">내 문의/리뷰</a>
+                           	 		</li>
+								</th:block>
 							</ul>
 							</li>
 							<li><a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>

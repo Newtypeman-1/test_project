@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class MemberPageList {
 	private List list;
 	private String pageNavi;
+	private int memberNo;
+	private int doctorNo;
 }

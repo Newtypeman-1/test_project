@@ -1375,11 +1375,63 @@ body{
 	}
 	.mypage-info{
 		display: flex;
-		width: 600px;
+		width: 700px;
 		border: none;
 		border-top: 10px solid var(--color4);
 		border-bottom: 10px solid var(--color4);
 		background-color: #EEE;
+		flex-direction: column;
+		align-items: center;
+	}
+	.info-title{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-bottom: 5px;
+	}
+	.union{
+		width: 50%;
+		height: 30px;
+		display: flex;
+		align-items: center;
+	}
+	.union-logo{
+		width: 20%;
+	}
+	.union-name{
+		font-size: 18px;
+		font-weight: 900;
+	}
+	.info-main{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.myImg{
+		width: 35%;
+		margin: 10px auto;
+	}
+	.myImg img{
+		border-radius: 30px;
+	}
+	.intro{
+		width: 65%;
+		margin: 10px auto;
+	}
+	.intro .input>input{
+		border: none;
+	}
+	.info-end{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 5px;
+		width: 100%;
+	}
+	.enrollDate{
+		width: 50%;
 	}
 	.mypage-form{
 		width: 100%;
@@ -1395,34 +1447,6 @@ body{
 	}
 	.mypage-tbl td{
 		width: 70%;
-	}
-	.myImg{
-		width: 30%;
-		margin: 10px auto;
-	}
-	.union-title{
-		width: 100%;
-		margin-bottom: 10px;
-		height: 30px;
-		display: flex;
-		align-items: center;
-	}
-	.union-logo{
-		width: 25%;
-	}
-	.union-name{
-		font-size: 14px;
-		font-weight: 900;
-	}
-	.myImg img{
-		border-radius: 30px;
-	}
-	.intro{
-		width: 70%;
-		margin: 10px auto;
-	}
-	.intro .input>input{
-		border: none;
 	}
 	.medicalRecord-wrap{
 		display: flex;
@@ -1556,6 +1580,7 @@ select{
 	flex-direction: column;
 	margin: 0 auto;
 	align-items: center;
+	width: 1000px;
 }
 .list-section{
 	border: 1px solid var(--color4);
@@ -1563,6 +1588,10 @@ select{
 	margin-left: 50px;
 	margin-right: 50px;
 	overflow: hidden;
+	width: 100%;
+}
+.member-list-tbl,.doctor-list-tbl{
+	width: 100%;
 }
 .member-list-tbl tr,.doctor-list-tbl tr{
 	border-bottom: 1px solid black;

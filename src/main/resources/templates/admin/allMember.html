@@ -21,7 +21,7 @@
 						<th>성별</th>
 						<th>가입일</th>
 					</tr>
-					<tr th:each="m,status : ${list}">
+					<tr th:each="m,status : ${list1}">
 						<td th:text="${m.memberNo}"></td>
 						<td th:text="${m.memberId}"></td>
 						<td th:text="${m.memberName}"></td>
@@ -32,6 +32,7 @@
 						<td th:text="${m.enrollDate}"></td>
 					</tr>
 				</table>
+				<div id="navi1" th:utext="${pageNavi1}"></div>
 			</section>
 			<section class="list-section doctor-list">
 				<table class="doctor-list-tbl">
@@ -50,9 +51,13 @@
 						<td th:text="${d.doctorEmail}"></td>
 					</tr>
 				</table>
+				<div id="navi2" th:utext="${pageNavi2}"></div>
 			</section>
 		</div>
-	</main>	
+	</main>
+	<script>
+		
+	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
 </html>
