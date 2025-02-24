@@ -85,7 +85,7 @@
 	/*width: 500px;*/
 	width: calc(50% - 30px);
 	border-top: 1px solid #ccc;
-	margin: 30px 0;
+	margin: 20px 0;
 }
 
 .doctor-card {
@@ -100,7 +100,11 @@
 	width: 150px;
 	height: 150px;
 	margin-top: 10px;
-	background-color: #ddd;
+	/*background-color: #ddd;*/
+}
+
+.doctor-image-box img{
+	border-radius: 20px;
 }
 
 .doctor-info {
@@ -157,11 +161,11 @@
 }
 
 .schedule {
-	/*width: 500px;*/
-	width: 100%;
-	border-collapse: collapse;
+	width: 450px;
+	/*width: 100%;*/
 	margin-top: 10px;
-	background-color: #eaeaea;
+	margin-left: 15px;
+	background-color: #eee;
 	font-size: 14px;
 }
 
@@ -178,6 +182,17 @@
 
 .schedule-bottom{
 	text-align: right;
+}
+
+.checkedTr{
+	background-color: white;
+}
+
+.table-below{
+	text-align: right;
+    margin-right: 100px;
+    margin-top: 3px;
+    font-size: 12px;
 }
 </style>
 <body>
@@ -207,7 +222,8 @@
 						<div class="doctor-container">
 							<div class="doctor-card">
 								<div class="doctor-image-box">
-									<img th:src="${doctor.doctorImg}">
+<!-- 									<img th:src="${doctor.doctorImg}"> -->
+									<img src="/img/default_profile31.png">
 								</div>
 								<div class="doctor-info">
 									<p class="doctor-info-title">
@@ -243,7 +259,7 @@
 									<td>17:00</td>
 									<td>18:00</td>
 								</tr>
-								<tr class="">
+								<tr class="checkedTr">
 									<td></td>
 									<td class="appointed">❌</td>
 									<td></td>
@@ -253,12 +269,9 @@
 									<td></td>
 									<td></td>
 									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="8" class="schedule-bottom">❌ 마감</td>
 								</tr>
 							</table>
+							<div class="table-below">❌ 예약됨</div>
 						</div>
 					</th:block>
 				</div>
@@ -266,10 +279,28 @@
 		</section>
 	</main>
 	<script>
-// 		[[${doctorsWithSchedule}]];
-		for(let i = 0; i < 9; i++){
-			const td = $("<td>")
+		function schedule(){
+			const departmentName = [[${departmentName}]];
+			$.ajax({
+				url: "/treat/schedule",
+				data: {departmentName, departmentName},
+				type: "get",
+				success: function(data){
+					console.log(data);
+				}
+			});
 		}
+		schedule();
+		
+		function getQueryParam(param) {
+		    const urlParams = new URLSearchParams(window.location.search);
+		    return urlParams.get(param);
+		}
+
+		$(document).ready(function() {
+		    const id = getQueryParam('departmentNo');
+		    console.log(id);
+		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>
