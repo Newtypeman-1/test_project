@@ -30,17 +30,19 @@
 
 /* Template default CSS
 /*----------------------------------------*/
-.black-han-sans-regular {
-  font-family: "Black Han Sans", serif;
-  font-weight: 400;
-  font-style: normal;
+
+@font-face {
+    font-family: hFont;
+    src: url(/css/BlackHanSans-Regular.ttf);
 }
+
 :root{
 	--color1: white;
 	--color2: black;
 	--color3: #009999;
 	--color4: #0773BD;
 	--color5: #39A7CC;
+	--color6: rgb(255, 189, 97);
 }
 
 
@@ -59,8 +61,8 @@ h5,
 h6 {
 	margin: 0;
 	color: #111111;
-	font-weight: 400;
-	font-family: "Montserrat", sans-serif;
+	font-weight: 900;
+	font-family: hFont;
 }
 
 h1 {
@@ -99,7 +101,9 @@ p {
 img {
 	max-width: 100%;
 }
-
+a{
+	text-decoration: none;
+}
 input:focus,
 select:focus,
 button:focus,
@@ -1104,7 +1108,7 @@ body{
 
 
 .section{
-	width: 1000px;
+	width: 1600px;
     margin: 0 auto;
     border-radius: 10px;
 }
@@ -1125,7 +1129,7 @@ body{
     border-top-left-radius: 10px;
     border-bottom: none;
 }
-.tab>div{
+.tab>*{
     width: calc(100% / 2);
     color: #fff;
     box-sizing: border-box;
@@ -1137,7 +1141,7 @@ body{
     border-left: none;
     cursor: pointer;
 }
-.tab>div:first-child{
+.tab>h5:first-child{
     border-left: 1px solid transparent;
 }
 .tab-content{
@@ -1162,15 +1166,20 @@ body{
     background-color: #fff;
     
 }
+.register-page{
+	margin: 0 auto;
+	width: 700px;
+}
 .msg{
 		width: 200px;
 		border: 3px solid rgba(0,153,153,0.5);
 		border-radius: 10px;
 		margin-top: 10px;
 	}
-.input{
+	.input{
 		width: 100%;
 		margin-bottom: 10px;
+		margin-top: 10px;
 	}
 	.input-name{
 		color: var(--color4);;
@@ -1262,12 +1271,14 @@ body{
 		height: 40px;
 		cursor: pointer;
 	}
+	.submit-button:has(a){
+		width: 100%;
+	}
 	.submit-button:hover{
 		box-shadow: 0px 5px 10px rgba(91, 91, 91, 0.1);
 	}
 	.yesOrNo{
 		display: flex;
-		width: calc(100% / 2);
 	}
 	.one-button{
 		background-color: var(--color4);
@@ -1285,9 +1296,18 @@ body{
 	    border: 3px solid transparent;
 	}
 	.four-button{
+		background-color: var(--color6);
+	    color: #fff;
+	    border: 3px solid transparent;
+	}
+	.five-button{
 		background-color: var(--color2);
 	    color: #fff;
 	    border: 3px solid transparent;
+	}
+	.emailCheck,.idCheck{
+		height: 60px;
+		border-radius: 10px;
 	}
 	.input-item>.material-icons{
 		align-content: center;
@@ -1334,45 +1354,79 @@ body{
 		padding: 30px;
 		font-size: 25px;
 	}
+	.myList-info{
+		margin: auto;
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	.info{
 		margin: 0 auto;
 		margin-bottom: 40px;
 		border: 1px solid black;
 		border-radius: 15px;
 		padding: 10px;
+		width: 70%;
 	}
 	.mypage-info{
 		display: flex;
-		justify-content: flex-start;
-		width: 1000px;
+		width: 600px;
+		border: none;
+		border-top: 10px solid var(--color4);
+		border-bottom: 10px solid var(--color4);
+		background-color: #EEE;
 	}
-	
 	.mypage-form{
 		width: 100%;
 	}
 	.mypage-tbl{
 		width: 100%;
-		margin-top: 10px;
 	}
 	.mypage-tbl+*{
 		width: 100%;
 	}
-	.img{
-		width: 275px;
+	.mypage-tbl th{
+		width: 30%;
+	}
+	.mypage-tbl td{
+		width: 70%;
+	}
+	.myImg{
+		width: 30%;
 		margin: 10px auto;
 	}
-	.img img{
+	.union-title{
+		width: 100%;
+		margin-bottom: 10px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+	}
+	.union-logo{
+		width: 25%;
+	}
+	.union-name{
+		font-size: 14px;
+		font-weight: 900;
+	}
+	.myImg img{
 		border-radius: 30px;
 	}
 	.intro{
-		width: 700px;
+		width: 70%;
+		margin: 10px auto;
 	}
 	.intro .input>input{
 		border: none;
 	}
-	
+	.medicalRecord-wrap{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	.records-tbl{
-		width: 100%;
+		width: 80%;
 	}
 	.records-tbl>*{
 		border: none;
@@ -1439,41 +1493,19 @@ body{
 .buttons>td{
 	border: transparent;
 }
-/* [type=button]{
-	border: transparent;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background-color: #bbb;
-	color: white;
-}
-[type=button]:hover{
-	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
-}
-[type=submit]{
-	border: transparent;
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background-color: #bbb;
-	color: white;
-}
-[type=submit]:hover{
-	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.7);
-} */
 tr input{
 	width: 100%;
 	height: 100%;
 }
-
+select{
+	width: 100px;
+	height: 50px;
+}
 .icon{
 	text-decoration: none;
 }
 .guide-title{
 	text-align: center;
-}
-.guide-link-wrap{
-	width: 80%;
 }
 .qna-tbl{
 		width: 100%;
@@ -1506,6 +1538,11 @@ tr input{
 	text-align: center;
 	border-bottom: 1px solid black;
 	height: 40px;
+}
+#img-view{
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
 }
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
