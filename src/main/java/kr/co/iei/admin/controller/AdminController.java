@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.iei.admin.model.service.AdminService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.doctor.model.vo.DoctorPageList;
 import kr.co.iei.member.model.service.MemberService;
+import kr.co.iei.member.model.vo.MemberPageList;
 import kr.co.iei.treat.model.service.TreatService;
 import kr.co.iei.util.FileUtils;
 
@@ -41,11 +43,13 @@ public class AdminController {
 	}	
 		
 	@GetMapping(value="/allMember")
-	public String allMember(Model model,int reqPage) {
-		List list = memberService.selectAllMember(reqPage);
-		List list2 = doctorService.selectAllDoctor(reqPage);
-		model.addAttribute("list", list);
-		model.addAttribute("list2", list2);
+	public String allMember(Model model,int memberNo, int doctorNo) {
+		MemberPageList mpl = memberService.allMemberList(memberNo, doctorNo);
+		DoctorPageList dpl = doctorService.allDoctorList(doctorNo ,mpl.getMemberNo());
+		model.addAttribute("list1", mpl.getList());
+		model.addAttribute("navi1", mpl.getPageNavi());
+		model.addAttribute("list2", dpl.getList());
+		model.addAttribute("navi2", dpl.getPageNavi());
 		return "admin/allMember";
 	}
 	

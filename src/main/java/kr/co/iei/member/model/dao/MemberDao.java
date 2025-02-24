@@ -94,7 +94,7 @@ public class MemberDao {
 		return list;
 	}
 
-	public int memberTotalCount(Member member) {
+	public int memberSelectCount(Member member) {
 		String query = "select count(*) from treatment_tbl where member_no = ?";
 		Object[] params = {member.getMemberNo()};
 		int r = jdbc.queryForObject(query, Integer.class, params);
@@ -117,8 +117,16 @@ public class MemberDao {
 	}
 
 	public List allMemberList(int start, int end) {
-		String query = ""
-		return null;
+		String query = "select * from (select rownum as rnum ,m.* from (select * from member_tbl order by 1 desc) m) where rnum between ? and ?";
+		Object[] params = {start, end};
+		List list = jdbc.query(query, memberRowMapper, params);
+		return list;
+	}
+
+	public int memberTotalCount() {
+		String query = "select count(*) from member_tbl";
+		int r = jdbc.queryForObject(query, Integer.class);
+		return r;
 	}
 	
 
