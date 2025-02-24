@@ -44,9 +44,9 @@ public class ReviewDao {
 
 	public List memberAllReview(Member member) {
 		System.out.println(member);
-		String query = "select * from (select rownum as rnum, e.* from (select * from review r where review_writer = ? order by review_no desc)e) where rnum between 1 and 5";
+		String query = "select * from (select rownum as rnum, e.* from (select r.*, (select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from review r where review_writer = ? order by review_no desc)e) where rnum between 1 and 5";
 		Object[] params = {member.getMemberId()};
-		List memberAllReview = jdbc.query(query, reviewRowMapper2, params);
+		List memberAllReview = jdbc.query(query, reviewRowMapper, params);
 		return memberAllReview;
 	}
 
