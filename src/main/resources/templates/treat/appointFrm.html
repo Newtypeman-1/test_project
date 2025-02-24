@@ -44,6 +44,13 @@
 .appoint-body-header img{
 	border-radius: 20px;
 	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.appoint-body-header-header{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 20px;
 }
 .appoint-body-container>ul{
 	list-style: none;
@@ -56,6 +63,8 @@
 	float: left;
 	padding: 10px;
 }
+
+
 .appoint-sub-section{
 	padding: 20px;
 }
@@ -90,6 +99,21 @@
 	color: white;
 	font-weight: bold;
 }
+
+.ul-below{
+	margin: 20px;
+	text-align: right;
+}
+
+.member-name{
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.appoint-member-tbl, .appoint-appoint-tbl{
+	
+}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
@@ -107,58 +131,82 @@
 						<div class="appoint-body-container">
 							<div class="appoint-body-point">진료일정</div>
 							<div class="appoint-body-header">
-								<span>
+								<div class="appoint-body-header-header">
 									<img style="width:60px;" src=../img/백강혁.webp>
-								</span>
-								<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
-								<span>담당의 진료일정입니다.</span>
+									<div>
+										<span style="font-weight:bold;" th:text="${doctor.doctorName}"></span>
+										<span>담당의 진료일정입니다.</span>
+									</div>
+								</div>
 								<div class="appoint-today"></div>
 							</div>
 							<ul class="appoint-ul">
 							</ul>
+							<div class="ul-below">※진료시간 10분 전에는 예약이 불가능합니다.</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<section class="appoint-sub-section">
 				<div class="appoint-sub-part">
+					<div class="member-name" th:text="${session.member.memberName}"></div>
 					<table class="appoint-member-tbl">
 						<tr>
-							<th th:text="${session.member.memberName}"></th>
-						</tr>
-						<tr>
-							<th>환자번호</th>
-							<td th:text="${session.member.memberNo}"></td>
+							<td>환자번호</td>
+							<td>
+								<span class="member-number" th:text="${session.member.memberNo}"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td th:text="${session.member.memberPhone}"></td>
+							<td>
+								<span class="additional-effect" th:text="${session.member.memberPhone}"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td th:text="${session.member.memberEmail}"></td>
+							<td>
+								<span class="additional-effect" th:text="${session.member.memberEmail}"></span>
+							</td>
 						</tr>
 					</table>
+					<div class="appoint-tbl-title">예약하실 정보 확인</div>
 					<table class="appoint-appoint-tbl">
 						<tr>
-							<th>예약하실 정보 확인</th>
-						</tr>
-						<tr>
 							<th>진료과</th>
-							<td th:text="${doctor.departmentNo}"></td>
+							<td>
+								<span class="additional-effect" th:text="${doctor.departmentNo}"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>의료진</th>
-							<td th:text="${doctor.doctorName}"></td>
+							<td>
+								<span class="additional-effect" th:text="${doctor.doctorName}"></span>
+							</td>
 						</tr>
 						<tr>
 							<th>진료일시</th>
-							<td id="appoint-time">선택된 진료일시가 없습니다.</td>
+							<td>
+								<span style="opacity:0.7;" id="appoint-time">선택된 진료일시가 없습니다.</span>
+							</td>
 						</tr>
 						<tr>
 							<th>결제금액</th>
-							<td>10,000원</td>
+							<td>
+								<span class="additional-effect">10,000원</span>
+							</td>
 						</tr>
+						<div class="sub-part-footer">
+							<div class="sub-part-footer-item">
+								<img src="" alt="">01 진료과 선택
+							</div>
+							<div class="sub-part-footer-item">
+								<img src="" alt="">02 의료진 선택
+							</div>
+							<div class="sub-part-footer-item">
+								<img src="" alt="">03 진료시간 선택
+							</div>
+						</div>
 					</table>
 					<form class="appoint-form" action="/treat/appoint" method="post">
 						<!-- 진료번호, 예약일은 자동처리 -->
@@ -178,6 +226,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.22/dist/sweetalert2.min.js"></script>
 	<script>
 		let hour = 0;
+		let minute = 0;
 		function updateTime(){
 			const today = new Date();
 			const year = today.getFullYear() % 100;
@@ -188,7 +237,7 @@
 			const weekName = week[today.getDay()];
 			
 			hour = String(today.getHours()).padStart(2, "0");
-			const minute = String(today.getMinutes()).padStart(2, "0");
+			minute = String(today.getMinutes()).padStart(2, "0");
 			const second = String(today.getSeconds()).padStart(2, "0");
 			
 			const formatDate = `📆 ${year}년 ${month}월 ${day}일 (${weekName})`;
@@ -205,6 +254,7 @@
 		
 		for(let i = 9; i <= 18; i++){
 			if(i == 12){
+				
 				continue;
 			}
 			const li = $("<li>");
@@ -217,7 +267,12 @@
 			span.text(timeEle);
 			span2.text(" : 00");
 			$(".appoint-ul").append(li);
-			if(Number(hour) + 1 >= i){
+			if(Number(hour) >= i){
+				div.css("color", "grey");
+				div.addClass("disabled");
+			}
+			if(Number(hour) == i - 1 && Number(minute) >= 50){
+				//진료시간 10분 전이면 예약 불가
 				div.css("color", "grey");
 				div.addClass("disabled");
 			}

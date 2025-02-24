@@ -188,6 +188,13 @@
 	background-color: white;
 }
 
+.checkedTr{
+	height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+}
+
 .table-below{
 	text-align: right;
     margin-right: 100px;
@@ -200,7 +207,7 @@
 	<main class="main">
 		<section class="title-section">
 			<div class="department-page-title">
-				<h2 th:text="${departmentName}"></h2>
+				<h2 th:text="${department.departmentName}"></h2>
 			</div>
 		</section>
 		<section class="content-section">
@@ -228,7 +235,7 @@
 								<div class="doctor-info">
 									<p class="doctor-info-title">
 										<span th:text="${doctor.doctorName}"></span>
-										[<span th:text="${departmentName}">OO</span>]
+										[<span th:text="${department.departmentName}">OO</span>]
 									</p>
 									<p class="doctor-rating">
 										<a th:href="@{/review/list(reqPage=1, doctorNo=${doctor.doctorNo})}">
@@ -261,17 +268,18 @@
 								</tr>
 								<tr class="checkedTr">
 									<td></td>
-									<td class="appointed">❌</td>
 									<td></td>
 									<td></td>
-									<td class="appointed">❌</td>
+									<td></td>
+									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
 								</tr>
 							</table>
-							<div class="table-below">❌ 예약됨</div>
+							<div class="table-below">❌ 마감</div>
+							<div class="table-below">※12:00-13:00 점심시간</div>
 						</div>
 					</th:block>
 				</div>
@@ -279,28 +287,27 @@
 		</section>
 	</main>
 	<script>
+		const departmentNo = [[${department.departmentNo}]];
 		function schedule(){
-			const departmentName = [[${departmentName}]];
 			$.ajax({
 				url: "/treat/schedule",
-				data: {departmentName, departmentName},
+				data: {departmentNo, departmentNo},
 				type: "get",
 				success: function(data){
-					console.log(data);
+					data.forEach(item => {
+						let appointTime = item.appointTime;
+						const tr = $(".checkedTr");
+						if(item.appointTime < 12){
+							appointTime = item.appointTime - 9; 
+						}else{
+							appointTime = item.appointTime - 10;
+						}
+						tr.children().eq(appointTime).text("❌");
+					});
 				}
 			});
 		}
 		schedule();
-		
-		function getQueryParam(param) {
-		    const urlParams = new URLSearchParams(window.location.search);
-		    return urlParams.get(param);
-		}
-
-		$(document).ready(function() {
-		    const id = getQueryParam('departmentNo');
-		    console.log(id);
-		});
 	</script>
 	<th:block th:include="common/footer"></th:block>
 </body>

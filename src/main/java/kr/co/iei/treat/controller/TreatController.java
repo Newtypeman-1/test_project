@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.review.model.vo.Review;
 import kr.co.iei.treat.model.service.TreatService;
+import kr.co.iei.treat.model.vo.Department;
 import kr.co.iei.treat.model.vo.Treat;
 
 @Controller
@@ -32,14 +33,19 @@ public class TreatController {
 	@GetMapping(value="/department")
 	public String department(Model mod, int departmentNo) {
 		List<Doctor> doctorsWithRating = treatService.selectDoctorsWithRating(departmentNo);
-		String departmentName = treatService.selectDepartmentName(departmentNo);
-		List<Doctor> doctorsWithSchedule = treatService.selectDoctorsWithSchedule(departmentNo);
+		Department department = treatService.selectDepartment(departmentNo);
 		
-		System.out.println(doctorsWithSchedule);
 		mod.addAttribute("doctorsWithRating", doctorsWithRating);
-		mod.addAttribute("departmentName", departmentName);
-		mod.addAttribute("doctorsWithSchedule", doctorsWithSchedule);
+		mod.addAttribute("department", department);
 		return "treat/department";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/schedule")
+	public List schedule(int departmentNo, Model mod) {
+		List<Doctor> schedule = treatService.selectDoctorsWithSchedule(departmentNo);
+		mod.addAttribute("schedule", schedule);
+		return schedule;
 	}
 
 	@GetMapping(value="/appointFrm")
@@ -70,5 +76,4 @@ public class TreatController {
 			return "common/msg";
 		}
 	}
-	
 }

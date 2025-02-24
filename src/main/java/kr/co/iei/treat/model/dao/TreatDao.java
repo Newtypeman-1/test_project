@@ -12,6 +12,7 @@ import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorRatingRowMapper;
 import kr.co.iei.doctor.model.vo.DoctorRowMapper;
 import kr.co.iei.doctor.model.vo.DoctorScheduleRowMapper;
+import kr.co.iei.treat.model.vo.Department;
 import kr.co.iei.treat.model.vo.DepartmentRowMapper;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.treat.model.vo.TreatRowMapper;
@@ -72,15 +73,11 @@ public class TreatDao {
 		return result;
 	}
 
-	public String selectDepartmentName(int departmentNo) {
-		String query = "select department_name from department_tbl where department_no = ?";
+	public Department selectDepartment(int departmentNo) {
+		String query = "select * from department_tbl where department_no = ?";
 		Object[] params = {departmentNo};
-		try {
-			String result = jdbc.queryForObject(query, params, String.class);
-			return result;
-		} catch(EmptyResultDataAccessException e) {
-			return null;
-		}
+		List list = jdbc.query(query, departmentRowMapper, params);
+		return (Department) list.get(0);
 	}
 
 	public List selectAllDepartment() {
