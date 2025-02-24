@@ -20,7 +20,7 @@ public class Doctor {
 	// 여기서부터는 doctor_tbl 테이블에 있진 않은 것들입니다
 	private String departmentName;
 	private int reviewTotal;
-	private int reviewRating;
+	private double reviewRating;
 	
 	private int appointTime;
 }
