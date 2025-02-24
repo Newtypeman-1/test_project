@@ -166,8 +166,14 @@ body {
 							div.addClass("post");
 							//<div class="post"></div>
 							const titleDiv = $("<div>");
-							titleDiv.addClass("post-title");
+							titleDiv.addClass("post-title").css("cursor","pointer");
+							titleDiv.on("click",function(){
+								location.href="/board/view?boardNo="+b.boardNo;
+							});
 							//<div class="post-title"></div>
+							//const a = $("<a>");
+							//a.attr("href","/board/view");
+							//<a href="/board/view"></a>
 							const h3 = $("<h3 >");
 							h3.append(b.boardTitle);
 							//<h3 th:text="${board.boardTitle}"></h3>
@@ -178,11 +184,12 @@ body {
 							const dateP = $("<p >");
 							dateP.append(b.boardRegDate);
 							//<p th:text="${board.boardRegDate}"></p>
-							
+							//a.append(h3);
+							//<a href="/board/view"><h3>b.boardTitle</h3></a>
 							titleDiv.append(h3).append(p).append(dateP);
 							/*
 							<div class="post-title">
-								<h3 th:text="${board.boardTitle}"></h3>
+								<a href="/board/view"><h3>b.boardTitle</h3></a>
 								<p th:text="${board.boardContent} class="post-content"></p>
 								<p th:text="${board.boardRegDate}"></p>
 							</div>

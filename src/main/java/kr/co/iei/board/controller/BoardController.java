@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -41,9 +42,9 @@ public class BoardController {
 		return "board/writeFrm";
 	}
 	
-	@GetMapping(value="write")
-	public String boardWrite(Board b) {
-		int result = boardService.insertBoard(b);
+	@PostMapping(value="write")
+	public String boardWrite(Board b, @SessionAttribute Member member) {
+		int result = boardService.insertBoard(b, member);
 		return "redirect:/board/boardList";
 	}
 	
@@ -52,5 +53,10 @@ public class BoardController {
 	public List<Board> boardMore(int start, int amount){
 		List<Board> list = boardService.selectBoardList(start, amount);
 		return list;
+	}
+	@GetMapping(value="/view")
+	public String boardView(int boardNo) {
+		Board b = boardService.selectBoard(boardNo);
+		return "board/view";
 	}
 }

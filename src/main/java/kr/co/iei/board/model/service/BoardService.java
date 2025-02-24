@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.board.model.dao.BoardDao;
 import kr.co.iei.board.model.vo.Board;
@@ -28,6 +29,17 @@ public class BoardService {
 	public List memberAllBoard(Member member) {
 		List list = boardDao.memberAllBoard(member);
 		return list;
+	}
+	
+	@Transactional
+	public int insertBoard(Board b, Member member) {
+		int result = boardDao.insertBoard(b, member);
+		return result;
+	}
+
+	public Board selectBoard(int boardNo) {
+		Board b = boardDao.selectBoard(boardNo);
+		return b;
 	}
 
 }
