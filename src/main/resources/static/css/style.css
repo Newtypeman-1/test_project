@@ -1188,7 +1188,7 @@ body{
 	}
 	.input-item {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		gap: 10px;
 	}
 	.input-item span{
@@ -1309,6 +1309,9 @@ body{
 	.emailCheck,.idCheck{
 		height: 60px;
 		border-radius: 10px;
+	}
+	.emailCheck{
+		min-width: 120px;
 	}
 	.input-item>.material-icons{
 		align-content: center;
