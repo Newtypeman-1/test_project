@@ -77,12 +77,22 @@ public class BoardDao {
 		return allComment;
 	}
 
-	public int deleteComment(int boardNo) {
+
+	public int deleteBoard(int boardNo) {
 		String query = "delete from comment_tbl where board_no = ?";
 		Object[] params = {boardNo};
 		int result = jdbc.update(query, params);
 		return result;
 	}
+
+	public int writeComment(Comment c) {
+		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		Object[] params = {c.getCommentContent(), c.getDoctorNo(), c.getBoardNo()};
+
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
 
 	public Comment selectComment(int boardNo) {
 		String query = "select * from comment_tbl where board_no = ?";
@@ -94,5 +104,11 @@ public class BoardDao {
 			Comment c = (Comment)list.get(0);
 			return c;
 		}
+	}
+	public List selectRecentBoardList() {
+		String query = "select * from (select rownum as rnum, b.* from (select * from board order by 1 desc) b) where rnum between 1 and 5";
+		List list = jdbc.query(query, boardRowMapper);
+		return list;
+
 	}
 }

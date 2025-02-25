@@ -54,9 +54,10 @@ public class BoardService {
 		List allComment = boardDao.allComment(doctor);
 		return allComment;
 	}
+
 	@Transactional
-	public int deleteComment(int boardNo) {
-		int result = boardDao.deleteComment(boardNo);
+	public int deleteBoard(int boardNo) {
+		int result = boardDao.deleteBoard(boardNo);
 		return result;
 	}
 
@@ -64,4 +65,11 @@ public class BoardService {
 		Comment c = boardDao.selectComment(boardNo);
 		return c;
 	}
+
+	public List<Board> selectRecentBoardList() {
+		List list = boardDao.selectRecentBoardList();
+		return list;
+	}
+
+
 }
