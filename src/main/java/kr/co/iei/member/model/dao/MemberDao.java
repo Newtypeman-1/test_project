@@ -119,8 +119,8 @@ public class MemberDao {
 	public List allMemberList(int start, int end) {
 		String query = "select * from (select rownum as rnum ,m.* from (select * from member_tbl order by 1 desc) m) where rnum between ? and ?";
 		Object[] params = {start, end};
-		List list = jdbc.query(query, memberRowMapper, params);
-		return list;
+		List list1 = jdbc.query(query, memberRowMapper, params);
+		return list1;
 	}
 
 	public int memberTotalCount() {

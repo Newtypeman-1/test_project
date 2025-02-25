@@ -21,7 +21,7 @@
 						<th>성별</th>
 						<th>가입일</th>
 					</tr>
-					<tr th:each="m,status : ${list1}">
+					<tr th:each="m : ${list1}">
 						<td th:text="${m.memberNo}"></td>
 						<td th:text="${m.memberId}"></td>
 						<td th:text="${m.memberName}"></td>
@@ -32,7 +32,7 @@
 						<td th:text="${m.enrollDate}"></td>
 					</tr>
 				</table>
-				<div id="navi1" th:utext="${pageNavi1}"></div>
+				<div id="navi1" th:utext="${navi1}"></div>
 			</section>
 			<section class="list-section doctor-list">
 				<table class="doctor-list-tbl">
@@ -43,7 +43,7 @@
 						<th>전화번호</th>
 						<th>이메일</th>
 					</tr>
-					<tr th:each="d,status : ${list2}">
+					<tr th:each="d : ${list2}">
 						<td th:text="${d.doctorNo}"></td>
 						<td th:text="${d.doctorId}"></td>
 						<td th:text="${d.doctorName}"></td>
@@ -51,7 +51,7 @@
 						<td th:text="${d.doctorEmail}"></td>
 					</tr>
 				</table>
-				<div id="navi2" th:utext="${pageNavi2}"></div>
+				<div id="navi2" th:utext="${navi2}"></div>
 			</section>
 		</div>
 	</main>
