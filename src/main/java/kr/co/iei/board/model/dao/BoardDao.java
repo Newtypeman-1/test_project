@@ -12,7 +12,6 @@ import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.board.model.vo.CommentRowMapper;
 import kr.co.iei.board.model.vo.CommentRowMapper2;
 import kr.co.iei.doctor.model.vo.Doctor;
-import kr.co.iei.doctor.model.vo.DoctorRowMapper2;
 import kr.co.iei.member.model.vo.Member;
 
 @Repository
@@ -98,7 +97,7 @@ public class BoardDao {
 
 
 	public Comment selectComment(int boardNo) {
-		String query = "select * from comment_tbl where board_no = ?";
+		String query = "select * from (select * from board join comment_tbl using (board_no))c join doctor_tbl d using(doctor_no) join department_tbl p on d.department_no = p.department_no where doctor_no = 10";
 		Object[] params = {boardNo};
 		List list = jdbc.query(query, commentRowMapper, params);
 		if(list.isEmpty()) {

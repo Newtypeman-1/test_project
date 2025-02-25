@@ -60,17 +60,27 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
-	.notice-title{
-		text-indent: 20px;
+	.form-grop-wrap{
+		margin-top: 50px;
 	}
+	.form-grop-wrap>div{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	#boardContent{
+		height: 360px;
+		margin-bottom: 60px;
+	}
+	
 </style>
 </head>
 <body>
-	
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
     <div class="container">
         <h2>간단한 건강 고민을 물어보세요</h2>
         <h4 style="color:lightgray">Helpdoc의 전문의들이 직접 답변해 드려요</h4>
-        <form action="/board/write" method="post">
+        <form action="/board/write" method="post" class="form-grop-wrap">
 	        <div class="form-group">
 	            <label for="boardTitle">제목</label>
 	            <input type="text" name="boardTitle" id="boardTitle" placeholder="질문의 제목을 입력하세요">
@@ -79,29 +89,9 @@
 	            <label for="boardContent">질문</label>
 	            <textarea name="boardContent" id="boardContent" rows="4" placeholder="예) 약을 처방 받았는데 술을 마셔도 될까요?"></textarea>
 	        </div>
-	        <div class="form-row">
-	            <div class="form-group">
-	                <label for="category">카테고리</label>
-	                <select id="category">
-	                    <option>감기/오한</option>
-	                    <option>비염</option>
-	                    <option>두통</option>
-	                    <option>소화불량</option>
-	                </select>
-	            </div>
-<!--             <div class="form-group"> -->
-<!--                 <label>사진 첨부 [선택]</label> -->
-<!--                 <div class="image-preview"> -->
-<!--                     <div>+</div> -->
-<!--                     <div></div> -->
-<!--                     <div></div> -->
-<!--                     <div></div> -->
-<!--                 </div> -->
-<!--             </div> -->
-	        </div>
 	        <div class="notice-wrap">
 	        	<div class="notice-title">
-	        		실시간 의료 상담은 이렇게 운영돼요.
+	        		※ 실시간 의료 상담은 이렇게 운영돼요.
 	        	</div>
 	        	<ul class="notice-content">	        	
 					<li>폭력적/공격적인 글, 서비스 목적과 맞지 않는 질문, 여러번 중복된(도배성) 질문은 예고 없이 삭제될 수 있습니다.</li>
@@ -118,6 +108,7 @@
 	        </div>
     	</form>
     </div>
+    </main>
     <script>
         document.querySelector('.image-preview div').addEventListener('click', function() {
             alert('이미지 업로드 기능은 아직 구현되지 않았습니다.');
@@ -127,5 +118,6 @@
             alert('선택한 카테고리: ' + this.value);
         });
     </script>
+    <th:block th:include="common/footer"></th:block>
 </body>
 </html>

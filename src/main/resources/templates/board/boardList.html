@@ -115,7 +115,7 @@ body {
 				<h2>실시간 의료상담</h2>
 				<button class="refresh-btn one-button">🔄 페이지 새로고침</button>
 			</div>
-			<button class="filter-btn">증상 선택 ▼</button>
+			
 	
 			<div class="post-list">
 				
@@ -132,14 +132,7 @@ body {
             location.reload();
         });
 
-        $(".filter-btn").on("click", function() {
-            let posts = $(".post");
-            posts.forEach(post => {
-                if (post.getAttribute("data-tag") !== "비염") {
-                    post.classList.toggle("hidden");
-                }
-            });
-        });
+       
         
         $(".write-btn").on("click", function(){
 			location.href = "/board/writeFrm";
