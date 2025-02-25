@@ -1589,6 +1589,7 @@ select{
 	margin-right: 50px;
 	overflow: hidden;
 	width: 100%;
+	margin-bottom: 20px;
 }
 .member-list-tbl,.doctor-list-tbl{
 	width: 100%;
@@ -1600,8 +1601,14 @@ select{
 	padding: 5px;
 	text-align: center;
 }
-
-
+#navi1,#navi2{
+	display: flex;
+	justify-content: center;
+}
+#navi1 ul,#navi2 ul{
+	text-decoration: none;
+	list-style: none;
+}
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 

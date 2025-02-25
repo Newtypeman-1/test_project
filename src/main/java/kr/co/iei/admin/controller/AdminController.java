@@ -45,7 +45,7 @@ public class AdminController {
 	@GetMapping(value="/allMember")
 	public String allMember(Model model,int memberNo, int doctorNo) {
 		MemberPageList mpl = memberService.allMemberList(memberNo, doctorNo);
-		DoctorPageList dpl = doctorService.allDoctorList(doctorNo ,mpl.getMemberNo());
+		DoctorPageList dpl = doctorService.allDoctorList(memberNo, doctorNo);
 		model.addAttribute("list1", mpl.getList());
 		model.addAttribute("navi1", mpl.getPageNavi());
 		model.addAttribute("list2", dpl.getList());
