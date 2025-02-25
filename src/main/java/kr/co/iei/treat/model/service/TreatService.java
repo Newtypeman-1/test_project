@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.treat.model.dao.TreatDao;
 import kr.co.iei.treat.model.vo.Department;
+import kr.co.iei.treat.model.vo.Symptom;
 import kr.co.iei.treat.model.vo.Treat;
 
 @Service
@@ -49,6 +50,11 @@ public class TreatService {
 
 	public List<Doctor> selectDoctorsWithSchedule(int departmentNo) {
 		List list = treatDao.selectDoctorsWithSchedule(departmentNo);
+		return list;
+	}
+
+	public List<Symptom> selectAllSymptoms() {
+		List list = treatDao.selectAllSymptoms();
 		return list;
 	}
 

@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.iei.board.model.service.BoardService;
-import kr.co.iei.comment.model.service.CommentService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;

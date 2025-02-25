@@ -14,6 +14,7 @@ import kr.co.iei.doctor.model.vo.DoctorRowMapper;
 import kr.co.iei.doctor.model.vo.DoctorScheduleRowMapper;
 import kr.co.iei.treat.model.vo.Department;
 import kr.co.iei.treat.model.vo.DepartmentRowMapper;
+import kr.co.iei.treat.model.vo.SymptomRowMapper;
 import kr.co.iei.treat.model.vo.Treat;
 import kr.co.iei.treat.model.vo.TreatRowMapper;
 
@@ -32,6 +33,8 @@ public class TreatDao {
 	private DepartmentRowMapper departmentRowMapper;
 	@Autowired
 	private DoctorScheduleRowMapper doctorScheduleRowMapper;
+	@Autowired
+	private SymptomRowMapper symptomRowMapper;
 	
 	public List<Integer> selectUnavailableTimes(int doctorNo) {
 		String query = "select * from treatment_tbl where appoint_date = to_char(sysdate, 'yyyy-MM-dd') and doctor_no = ?";
@@ -96,6 +99,12 @@ public class TreatDao {
 					+ "where treat.appoint_date = to_char(sysdate, 'yyyy-MM-dd') and doctor.department_no = ?";
 		Object[] params = {departmentNo};
 		List list = jdbc.query(query, doctorScheduleRowMapper, params);
+		return list;
+	}
+
+	public List selectAllSymptoms() {
+		String query = "select * from symptom_tbl order by 1";
+		List list = jdbc.query(query, symptomRowMapper);
 		return list;
 	}
 
