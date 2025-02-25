@@ -16,15 +16,6 @@
 .guide-box>div{
 	margin: 20px;
 }
-/* .guide-link-wrap{
-	border-radius: 20px;
-	width: 200px;
-	padding: 10px;
-	text-align: center;
-	font-weight: bold;
-	background-color: #ccc
-} */
-
 .symptom-box{
 	width: 1000px;
 	border: 1px solid black;
@@ -77,16 +68,16 @@
 	border: 1px solid black;
 	margin-top: 10px;
 	list-style: none;
-	padding: 10px;
 	background-color: #ccc;
 	width: 500px;
+	padding: 15px 10px 0 10px;
 }
 .board-content a{
 	display: flex;
 	justify-content: space-between;
 }
 .board-content>li>a>:first-child{
-	width: 350px;
+	width: 300px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -98,7 +89,7 @@
 .icon-wrap img{
 	width: 100px;
 	height: 100px;
-	border: 1px solid #ddd;
+	border: 1px solid #ccc;
 	border-radius: 20px;
 	padding: 5px;
 	margin-bottom: 5px;
@@ -113,10 +104,11 @@
 	width: 100px;
 	height: 100px;
 	font-size: 80px;
-	border: 1px solid #ddd;
+	border: 1px solid #ccc;
 	border-radius: 20px;
 	padding: 5px;
 	line-height: 100px;
+	margin-bottom: 10px;
 }
 .guide-modal-background{
 	width: 100%;
@@ -203,12 +195,28 @@
     font-size: 16px;
     font-weight: bold;
 }
+.guide-section{
+	margin: 0 auto;
+}
+.index-main{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.index-main>section{
+	width: 100%;
+}
+.index-review-star{
+	text-align: left;
+	width: 100px;
+}
 </style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
-	<main class="main">
-		<section class="section">
+	<main class="main index-main">
+		<section class="guide-section">
 			<div class="guide-box-box">
 				<div class="guide-box">
 					<div class="guide-title-wrap">
@@ -221,6 +229,8 @@
 					</div>
 				</div>
 			</div>
+		</section>
+		<section class="symptom-section">
 			<div class="symptom-box">
 				<div class="symptom-title-wrap">
 					<div class="symptom-title">비대면 진료 시작하기</div>
@@ -288,45 +298,25 @@
 					</div>
 				</div>
 			</div>
+		</section>
+		<section class="boards-section">
 			<div class="boards-div">
 				<div class="boards-box">
 					<div class="notice-box">
 						<div class="notice">
 							<h4 style="width:90%;">의료상담</h4>
 							<div style="width:10%;">
-								<a href="#" class="notice-btn more-btn">더보기</a>
+								<a href="/board/boardList?reqPage=1" class="notice-btn more-btn">더보기</a>
 							</div>
 							<ul class="board-content notice-content">
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
+								<th:block th:each="board : ${boardList}">
+									<li>
+										<a th:href="@{/board/view(boardNo = ${board.boardNo})}">
+											<p class="notice-title" th:text="${board.boardTitle}"></p>
+											<p class="notice-date" th:text="${board.boardRegDate}"></p>
+										</a>
+									</li>
+								</th:block>
 							</ul>
 						</div>
 					</div>
@@ -334,39 +324,20 @@
 						<div class="magazine">
 							<h4 style="width:90%;">리뷰</h4>
 							<div style="width:10%;">
-								<a href="#" class="magazine-btn more-btn">더보기</a>
+								<a href="/review/list?reqPage=1&doctorNo=0" class="magazine-btn more-btn">더보기</a>
 							</div>
 							<ul class="board-content magazine-content">
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<p class="notice-title">연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내연말정산 서류 발급 안내</p>
-										<p class="notice-date">2025-02-17</p>
-									</a>
-								</li>
+								<th:block th:each="review : ${reviewList}">
+									<li>
+										<a>
+											<p class="notice-title" th:text="${review.reviewContent}"></p>
+											<p class="index-review-star">
+												<span th:each="i : ${#numbers.sequence(1, review.reviewStar)}">⭐</span>
+											</p>
+											<p class="notice-date" th:text="${review.reviewDate}"></p>
+										</a>
+									</li>
+								</th:block>
 							</ul>
 						</div>
 					</div>

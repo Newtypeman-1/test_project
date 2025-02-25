@@ -122,4 +122,9 @@ public class ReviewService {
 		System.out.println(totalPage);
 		return rld;
 	}
+
+	public List<Review> selectRecentReviewList() {
+		List list = reviewDao.selectRecentReviewList();
+		return list;
+	}
 }

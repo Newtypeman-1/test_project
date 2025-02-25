@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.board.model.vo.Board;
 import kr.co.iei.board.model.vo.BoardRowMapper;
+import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -55,4 +56,18 @@ public class BoardDao {
 			 return b;
 		 }
 	}
+
+	public int writeComment(Comment c) {
+		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		Object[] params = {c.getCommentContent(), c.getDoctorNo(), c.getBoardNo()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public List selectRecentBoardList() {
+		String query = "select * from (select rownum as rnum, b.* from (select * from board order by 1 desc) b) where rnum between 1 and 5";
+		List list = jdbc.query(query, boardRowMapper);
+		return list;
+	}
+	
 }

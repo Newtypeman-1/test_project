@@ -62,7 +62,9 @@
 						<td class="star-cell" th:attr="data-star=${review.reviewStar}"></td>						
 						<td th:text="${review.reviewContent}"></td>
 						<td th:text="${review.reviewWriter}"></td>
-						<td th:text="${review.doctorName}"></td>
+						<td>
+							<a th:href="@{/review/list(reqPage=1, doctorNo=${review.doctorNo})}" th:text="${review.doctorName}"></a>
+						</td>
 						<td th:text="${review.reviewDate}"></td>
 					</tr>
 				</table>

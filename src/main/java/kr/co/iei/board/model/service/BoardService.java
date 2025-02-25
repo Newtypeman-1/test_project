@@ -42,4 +42,9 @@ public class BoardService {
 		return b;
 	}
 
+	public List<Board> selectRecentBoardList() {
+		List list = boardDao.selectRecentBoardList();
+		return list;
+	}
+
 }
