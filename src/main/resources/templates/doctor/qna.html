@@ -22,12 +22,18 @@
 						<tr th:each="comment : ${commentList}" class="myList">
 							<td th:text="${comment.commentNo}"></td>
 							<td th:text="${comment.commentContent}"></td>
-							<td>답변</td>
+							<th:block th:if="${comment.isDone} == '1'">
+								<td>답변 완료</td>
+							</th:block>
+							<th:block th:if="${comment.isDone} == '0'">
+								<td>답변 대기</td>
+							</th:block>
 							<td th:text="${comment.commentDate}"></td>
 						</tr>	
 					</table>
-					<a href="/doctor/myMedicalRecordsPageFrm?reqPage=1"><button type="button" class="allQna submit-button one-button">전체 문의 보기</button></a>
-				</div>
+					<div class="tbl-div">
+						<a href="/board/boardList?reqPage=1" class="btn-a width90"><button type="button" class="allQna submit-button three-button">전체 문의 보기</button></a>
+					</div>
 				<div class="info review-page">
 					<table class="qna-tbl">
 						<tr>
