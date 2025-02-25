@@ -70,5 +70,11 @@ public class ReviewDao {
 		int totalReview = jdbc.queryForObject(query, Integer.class, params);
 		return totalReview;
 	}
+
+	public List selectRecentReviewList() {
+		String query = "select * from (select rownum as rnum, r.* from (select * from review order by 1 desc) r) where rnum between 1 and 5";
+		List list = jdbc.query(query, reviewRowMapper2);
+		return list;
+	}
 	
 }

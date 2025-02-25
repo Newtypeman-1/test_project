@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.board.model.vo.Board;
-import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
@@ -56,19 +56,31 @@ public class BoardController {
 		List<Board> list = boardService.selectBoardList(start, amount);
 		return list;
 	}
+	
 	@GetMapping(value="/view")
 	public String boardView(int boardNo, @SessionAttribute(required=false) Member member, Model model) {
 		Board b = boardService.selectBoard(boardNo);
+		Comment c = boardService.selectComment(boardNo);
 		model.addAttribute("board", b);
+		model.addAttribute("comment", c);
 		return "board/view";
 	}
-	@PostMapping(value="/writeComment")
-	public String writeComment(Comment c) {
-		int result = boardService.writeComment(c);
-		return "redirect:/board/view?boardNo="+c.getBoardNo();
-	}
+	
 	@GetMapping(value="/commentWriteFrm")
-	public String commentWriteFrm() {
+	public String commentWriteFrm(Board b, Model model) {
+		model.addAttribute("board", b);
 		return "board/commentWriteFrm";
+	}
+	
+	@PostMapping(value="/commentWrite")
+	public String commentWrite(Comment c, @SessionAttribute Doctor doctor, Board board) {
+		int result = boardService.commentWrtie(c, doctor, board);
+		return "redirect:/board/view?boardNo="+board.getBoardNo();
+	}
+	@ResponseBody
+	@GetMapping(value="/delete")
+	public int deleteBoard(int boardNo, Model model) {
+		int result = boardService.deleteBoard(boardNo);
+		return result;
 	}
 }

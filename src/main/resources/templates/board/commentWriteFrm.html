@@ -5,10 +5,27 @@
 <title>답변 작성하기</title>
 </head>
 <body>
-	<div class="container">
-        <h2>간단한 건강 고민을 물어보세요</h2>
-        <h4 style="color:lightgray">Helpdoc의 전문의들이 직접 답변해 드려요</h4>
-        
-    </div>
+	<th:block th:include="common/header"></th:block>
+	<main class="main">
+		<div class="container">
+			<div class="page-title">
+		        <h2>간단한 건강 고민을 물어보세요</h2>
+		        <h4 style="color:lightgray">Helpdoc의 전문의들이 직접 답변해 드려요</h4>
+	        </div>
+	      	<div class="content">
+	      		<form action="/board/commentWrite" method="post">
+		       	 	<div class="form-group">
+			            <label for="commentContent">질문</label>
+			            <textarea name="commentContent" id="commentContent" rows="4" placeholder="예) 약을 처방 받았는데 술을 마셔도 될까요?"></textarea>
+		        	</div>
+		        	<input type="text" th:value="${board.boardNo}" name="boardNo" hidden>
+		        	<div class="btn">
+		        		<button type="submit">등록하기</button>
+		        	</div>
+	      		</form>
+	      	</div>
+	    </div>
+	</main>
+    <th:block th:include="common/footer"></th:block>
 </body>
 </html>

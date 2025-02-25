@@ -37,7 +37,7 @@ public class DoctorController {
 	@Autowired
 	private ReviewService reviewService;
 	@Autowired
-	private CommentService commentService;
+	private BoardService boardService;
 	@Autowired
 	private EmailSender emailSender;
 	@Value(value="${file.root}")
@@ -87,7 +87,7 @@ public class DoctorController {
 	public String doctorQna(Model model, @SessionAttribute(required = false) Doctor doctor) {
 		List allReview = reviewService.allReview(doctor);
 		model.addAttribute("reviewList", allReview);
-		List allComment = commentService.allComment(doctor);
+		List allComment = boardService.allComment(doctor);
 		model.addAttribute("commentList", allComment);
 		return "doctor/qna";
 	}

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.iei.board.model.vo.Board;
 import kr.co.iei.board.model.vo.BoardRowMapper;
-import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.board.model.vo.Comment;
+import kr.co.iei.board.model.vo.CommentRowMapper;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -18,6 +19,8 @@ public class BoardDao {
 	private JdbcTemplate jdbc;
 	@Autowired
 	private BoardRowMapper boardRowMapper;
+	@Autowired
+	private CommentRowMapper commentRowMapper;
 	
 	public int selectBoardTotalCount() {
 		String query = "select count(*) from board";
@@ -56,11 +59,56 @@ public class BoardDao {
 			 return b;
 		 }
 	}
+	
+	public int commentWrite(Comment c, Doctor doctor, Board board) {
+		System.out.println(c.getCommentContent());
+		System.out.println(doctor.getDoctorNo());
+		System.out.println(board.getBoardNo());
+		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
+		Object[] params = {c.getCommentContent(), doctor.getDoctorNo(), board.getBoardNo()};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+	
+	public List allComment(Doctor doctor) {
+		String query = "select * from (select rownum as rnum, h.* from(select r.*,(select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from comment_tbl r where doctor_no = ? order by 1 desc)h) where rnum between 1 and 5";
+		Object[] params = {doctor.getDoctorNo()};
+		List allComment = jdbc.query(query, commentRowMapper, params);
+		return allComment;
+	}
+
+
+	public int deleteBoard(int boardNo) {
+		String query = "delete from comment_tbl where board_no = ?";
+		Object[] params = {boardNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
 
 	public int writeComment(Comment c) {
 		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		Object[] params = {c.getCommentContent(), c.getDoctorNo(), c.getBoardNo()};
+
 		int result = jdbc.update(query, params);
 		return result;
+	}
+
+
+	public Comment selectComment(int boardNo) {
+		String query = "select * from comment_tbl where board_no = ?";
+		Object[] params = {boardNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Comment c = (Comment)list.get(0);
+			return c;
+		}
+	}
+	public List selectRecentBoardList() {
+		String query = "select * from (select rownum as rnum, b.* from (select * from board order by 1 desc) b) where rnum between 1 and 5";
+		List list = jdbc.query(query, boardRowMapper);
+		return list;
+
 	}
 }
