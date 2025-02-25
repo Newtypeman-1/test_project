@@ -77,7 +77,7 @@
         <div class="content" th:text="${board.boardContent}"></div>
         
         <div class="btn">
-        	<a href="/board/commentWriteFrm"><button type="button">답변하기</button></a>
+        	<a th:href="${'/board/commentWriteFrm?boardNo='+board.boardNo}"><button type="button">답변하기</button></a>
         </div>
         
         <div class="noted-item-wrap">

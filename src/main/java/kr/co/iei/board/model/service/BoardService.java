@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.board.model.dao.BoardDao;
 import kr.co.iei.board.model.vo.Board;
-import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -42,10 +42,15 @@ public class BoardService {
 		Board b = boardDao.selectBoard(boardNo);
 		return b;
 	}
+	
 	@Transactional
-	public int writeComment(Comment c) {
-		int result = boardDao.writeComment(c);
+	public int commentWrtie(Comment c, Doctor doctor, Board board) {
+		int result = boardDao.commentWrite(c, doctor, board);
 		return result;
 	}
-
+	
+	public List allComment(Doctor doctor) {
+		List allComment = boardDao.allComment(doctor);
+		return allComment;
+	}
 }

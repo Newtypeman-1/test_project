@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.board.model.vo.Board;
-import kr.co.iei.comment.model.vo.Comment;
+import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.service.MemberService;
@@ -62,13 +62,18 @@ public class BoardController {
 		model.addAttribute("board", b);
 		return "board/view";
 	}
-	@PostMapping(value="/writeComment")
-	public String writeComment(Comment c) {
-		int result = boardService.writeComment(c);
-		return "redirect:/board/view?boardNo="+c.getBoardNo();
-	}
+	
 	@GetMapping(value="/commentWriteFrm")
-	public String commentWriteFrm() {
+	public String commentWriteFrm(Board b, Model model) {
+		model.addAttribute("board", b);
 		return "board/commentWriteFrm";
+	}
+	
+	@PostMapping(value="/commentWrite")
+	private String commentWrite(Comment c, @SessionAttribute Doctor doctor, Board board) {
+		System.out.println(board);
+		System.out.println(doctor);
+		int result = boardService.commentWrtie(c, doctor, board);
+		return "board/view";
 	}
 }
