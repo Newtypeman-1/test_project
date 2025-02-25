@@ -53,4 +53,10 @@ public class BoardService {
 		List allComment = boardDao.allComment(doctor);
 		return allComment;
 	}
+
+	public List<Board> selectRecentBoardList() {
+		List list = boardDao.selectRecentBoardList();
+		return list;
+	}
+
 }
