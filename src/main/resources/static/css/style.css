@@ -1589,6 +1589,7 @@ select{
 	margin-right: 50px;
 	overflow: hidden;
 	width: 100%;
+	margin-bottom: 20px;
 }
 .member-list-tbl,.doctor-list-tbl{
 	width: 100%;
@@ -1600,37 +1601,76 @@ select{
 	padding: 5px;
 	text-align: center;
 }
-
-
+/* #navi1,#navi2{
+	display: flex;
+	justify-content: center;
+} */
+.pageNavi{
+	display: flex;
+	justify-content: center;
+}
+.pageNavi li{
+	margin: 5px;
+	font-size: 16px;
+}
+#navi1 ul,#navi2 ul{
+	text-decoration: none;
+	list-style: none;
+}
+.width50{
+	width: 50%;
+}
+.width45{
+	width: 45%;
+}
+.width40{
+	width: 40%;
+}
+.width35{
+	width: 35%;
+}
+.width30{
+	width: 30%;
+}
+.width25{
+	width: 25%;
+}
+.width20{
+	width: 20%;
+}
+.width15{
+	width: 15%;
+}
+.width10{
+	width: 10%;
+}
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
-@media only screen and (min-width: 1500px) and (max-width: 1900px) {
+@media only screen and (min-width: 1600px) and (max-width: 1900px) {
 	.header {
 		padding: 0 85px;
 	}
+	.section{
+		width: 1400px;
+	}
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1499px) {
+@media only screen and (min-width: 1200px) and (max-width: 1599px) {
 	.header__menu ul li {
 		margin-right: 20px;
 	}
 	.header {
 		padding: 0 30px;
 	}
-	.mypage-section{
-		margin-left: 300px;
+	.section{
 		width: 1000px;
 	}
 }
 
-@media only screen and (min-width: 1200px) {
-
-}
-
 /* Medium Device = 1200px */
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 800px) and (max-width: 1199px) {
 	.header__menu ul li {
 		margin-right: 20px;
 	}
@@ -1649,11 +1689,14 @@ select{
 	.bottom-row{
 		width: 1200px;
 	}
+	.section{
+		width: 600px;
+	}
 }
 
 /* Tablet Device = 768px */
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 400px) and (max-width: 799px) {
 	.filter__controls li {
 		margin-right: 15px;
 	}
@@ -1854,10 +1897,13 @@ select{
 	.header__right {
 		display: none;
 	}
+	.section{
+		width: 200px;
+	}
 }
 
 /* Wide Mobile = 480px */
-
+/*
 @media only screen and (max-width: 767px) {
 	.canvas__open {
 		display: block;
@@ -2082,9 +2128,9 @@ select{
 		margin-bottom: 40px;
 	}
 }
-
+*/
 /* Small Device = 320px */
-
+/*
 @media only screen and (max-width: 479px) {
 	.categories__item.categories__large__item {
 		padding-left: 30px;
@@ -2144,3 +2190,4 @@ select{
 		font-size: 24px;
 	}
 }
+*/

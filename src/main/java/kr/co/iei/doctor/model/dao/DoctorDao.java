@@ -42,9 +42,10 @@ public class DoctorDao {
 		int result = jdbc.update(query, params);
 		return result;
 	}
-	public List selectAllDoctor() {
-		String query = "select * from doctor_tbl order by 1";
-		List list2 = jdbc.query(query,doctorRowMapper);
+	public List selectAllDoctor(int start, int end) {
+		String query = "select * from (select rownum as rnum ,m.* from (select * from doctor_tbl order by 1 desc) m) where rnum between ? and ?";
+		Object[] params = {start, end};
+		List list2 = jdbc.query(query,doctorRowMapper, params);
 		return list2;
 	}
 	
@@ -95,7 +96,7 @@ public class DoctorDao {
 		int r = jdbc.update(query, params);
 		return r;
 	}
-	public int memberTotalCount() {
+	public int doctorTotalCount() {
 		String query = "select count(*) from doctor_tbl";
 		int r = jdbc.queryForObject(query, Integer.class);
 		return r;

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.board.model.dao.BoardDao;
 import kr.co.iei.board.model.vo.Board;
+import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -36,15 +37,39 @@ public class BoardService {
 		int result = boardDao.insertBoard(b, member);
 		return result;
 	}
-
+	
+	@Transactional
 	public Board selectBoard(int boardNo) {
-		Board b = boardDao.selectBoard(boardNo);
+		Board b = boardDao.selectBoard(boardNo);		
 		return b;
+	}
+	
+	@Transactional
+	public int commentWrtie(Comment c, Doctor doctor, Board board) {
+		int result = boardDao.commentWrite(c, doctor, board);
+		return result;
+	}
+	
+	public List allComment(Doctor doctor) {
+		List allComment = boardDao.allComment(doctor);
+		return allComment;
+	}
+
+	@Transactional
+	public int deleteBoard(int boardNo) {
+		int result = boardDao.deleteBoard(boardNo);
+		return result;
+	}
+
+	public Comment selectComment(int boardNo) {
+		Comment c = boardDao.selectComment(boardNo);
+		return c;
 	}
 
 	public List<Board> selectRecentBoardList() {
 		List list = boardDao.selectRecentBoardList();
 		return list;
 	}
+
 
 }

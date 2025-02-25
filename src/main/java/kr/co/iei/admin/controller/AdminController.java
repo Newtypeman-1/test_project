@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.iei.admin.model.service.AdminService;
+import kr.co.iei.admin.model.vo.AdminPageList;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;
@@ -45,7 +46,7 @@ public class AdminController {
 	@GetMapping(value="/allMember")
 	public String allMember(Model model,int memberNo, int doctorNo) {
 		MemberPageList mpl = memberService.allMemberList(memberNo, doctorNo);
-		DoctorPageList dpl = doctorService.allDoctorList(doctorNo ,mpl.getMemberNo());
+		DoctorPageList dpl = doctorService.allDoctorList(memberNo, doctorNo);
 		model.addAttribute("list1", mpl.getList());
 		model.addAttribute("navi1", mpl.getPageNavi());
 		model.addAttribute("list2", dpl.getList());
@@ -92,9 +93,10 @@ public class AdminController {
 		}
 	}
 	@GetMapping(value="allSchedule")
-	public String allSchedule(Model model) {
-		List list = adminService.allSchedule();
-		model.addAttribute("list", list);
+	public String allSchedule(Model model, int reqPage) {
+		AdminPageList apl = adminService.allSchedule(reqPage);
+		model.addAttribute("list", apl.getList());
+		model.addAttribute("pageNavi", apl.getPageNavi());
 		return "admin/allSchedule";
 	}
 	

@@ -1,4 +1,4 @@
-package kr.co.iei.comment.model.vo;
+package kr.co.iei.board.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

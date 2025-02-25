@@ -122,13 +122,13 @@ public class DoctorService {
 	}
 
 	public DoctorPageList allDoctorList(int i, int j) {
-		int numPerPage = 10;
+		int numPerPage = 5;
 		int end = j * numPerPage;
 		int start = end - numPerPage +1;
 		
-		List list2 = doctorDao.selectAllDoctor();
+		List list2 = doctorDao.selectAllDoctor(start, end);
 		
-		int totalCount = doctorDao.memberTotalCount();
+		int totalCount = doctorDao.doctorTotalCount();
 		
 		int totalPage = totalCount/numPerPage;
 		if(totalCount%numPerPage != 0) {
@@ -145,42 +145,42 @@ public class DoctorService {
 		String pageNavi = "<ul class='pageNavi'>";
 		if(j > 3){
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage=1'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo=1'>";
 			pageNavi += pageF;
 			pageNavi += "</a></li>";
 			pageNavi += "<div>...</div>";
 		}
 		if(pageMM > 0) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage="+pageMM+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo="+pageMM+"'>";
 			pageNavi += pageMM;
 			pageNavi += "</a></li>";
 		}
 		if(pageM > 0) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage="+pageM+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo="+pageM+"'>";
 			pageNavi += pageM;
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "<li>";
-		pageNavi += "<input type='text' value='"+doctorNo+"' class='page-item' id='now-page'>";
+		pageNavi += "<div class='page-item' id='now-page' >"+doctorNo+"</div>";
 		pageNavi += "</li>";
 		if(pageP > 0 && pageP <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage="+pageP+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo="+pageP+"'>";
 			pageNavi += pageP;
 			pageNavi += "</a></li>";
 		}
 		if(pagePP > 0 && pagePP <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage="+pagePP+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo="+pagePP+"'>";
 			pageNavi += pagePP;
 			pageNavi += "</a></li>";
 		}
 		if(j < totalPage-2){
 			pageNavi += "<div>...</div>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/allMember?memberPage="+i+"&doctorPage="+pageE+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allMember?memberNo="+i+"&doctorNo="+pageE+"'>";
 			pageNavi += pageE;
 			pageNavi += "</a></li>";
 		}
