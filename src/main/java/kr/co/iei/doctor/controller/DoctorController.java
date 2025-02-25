@@ -174,4 +174,13 @@ public class DoctorController {
 			return "common/msg";
 		}
 	}
+	
+	@GetMapping(value="/loginMsg")
+	public String loginMsg(Model model) {
+		model.addAttribute("title","로그인 필요");
+		model.addAttribute("text","로그인.");
+		model.addAttribute("icon","warning");
+		model.addAttribute("loc", "/member/loginMsg");
+		return "common/msg";
+	}
 }
