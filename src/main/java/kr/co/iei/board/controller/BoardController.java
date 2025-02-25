@@ -56,10 +56,13 @@ public class BoardController {
 		List<Board> list = boardService.selectBoardList(start, amount);
 		return list;
 	}
+	
 	@GetMapping(value="/view")
 	public String boardView(int boardNo, @SessionAttribute(required=false) Member member, Model model) {
 		Board b = boardService.selectBoard(boardNo);
+		Comment c = boardService.selectComment(boardNo);
 		model.addAttribute("board", b);
+		model.addAttribute("comment", c);
 		return "board/view";
 	}
 	
@@ -70,10 +73,14 @@ public class BoardController {
 	}
 	
 	@PostMapping(value="/commentWrite")
-	private String commentWrite(Comment c, @SessionAttribute Doctor doctor, Board board) {
-		System.out.println(board);
-		System.out.println(doctor);
+	public String commentWrite(Comment c, @SessionAttribute Doctor doctor, Board board) {
 		int result = boardService.commentWrtie(c, doctor, board);
-		return "board/view";
+		return "redirect:/board/view?boardNo="+board.getBoardNo();
+	}
+	@ResponseBody
+	@GetMapping(value="/delete")
+	public int deleteComment(int boardNo, Model model) {
+		int result = boardService.deleteComment(boardNo);
+		return result;
 	}
 }

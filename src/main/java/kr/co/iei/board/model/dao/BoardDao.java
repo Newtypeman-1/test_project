@@ -61,6 +61,9 @@ public class BoardDao {
 	}
 	
 	public int commentWrite(Comment c, Doctor doctor, Board board) {
+		System.out.println(c.getCommentContent());
+		System.out.println(doctor.getDoctorNo());
+		System.out.println(board.getBoardNo());
 		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		Object[] params = {c.getCommentContent(), doctor.getDoctorNo(), board.getBoardNo()};
 		int result = jdbc.update(query, params);
@@ -74,4 +77,22 @@ public class BoardDao {
 		return allComment;
 	}
 
+	public int deleteComment(int boardNo) {
+		String query = "delete from comment_tbl where board_no = ?";
+		Object[] params = {boardNo};
+		int result = jdbc.update(query, params);
+		return result;
+	}
+
+	public Comment selectComment(int boardNo) {
+		String query = "select * from comment_tbl where board_no = ?";
+		Object[] params = {boardNo};
+		List list = jdbc.query(query, commentRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			Comment c = (Comment)list.get(0);
+			return c;
+		}
+	}
 }

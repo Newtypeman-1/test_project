@@ -18,7 +18,7 @@
 			            <label for="commentContent">질문</label>
 			            <textarea name="commentContent" id="commentContent" rows="4" placeholder="예) 약을 처방 받았는데 술을 마셔도 될까요?"></textarea>
 		        	</div>
-		        	<input type="text" value="${board.boardNo}" hidden>
+		        	<input type="text" th:value="${board.boardNo}" name="boardNo" hidden>
 		        	<div class="btn">
 		        		<button type="submit">등록하기</button>
 		        	</div>

@@ -37,9 +37,10 @@ public class BoardService {
 		int result = boardDao.insertBoard(b, member);
 		return result;
 	}
-
+	
+	@Transactional
 	public Board selectBoard(int boardNo) {
-		Board b = boardDao.selectBoard(boardNo);
+		Board b = boardDao.selectBoard(boardNo);		
 		return b;
 	}
 	
@@ -52,5 +53,15 @@ public class BoardService {
 	public List allComment(Doctor doctor) {
 		List allComment = boardDao.allComment(doctor);
 		return allComment;
+	}
+	@Transactional
+	public int deleteComment(int boardNo) {
+		int result = boardDao.deleteComment(boardNo);
+		return result;
+	}
+
+	public Comment selectComment(int boardNo) {
+		Comment c = boardDao.selectComment(boardNo);
+		return c;
 	}
 }
