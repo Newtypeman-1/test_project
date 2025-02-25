@@ -65,7 +65,7 @@ public class TreatController {
 			mod.addAttribute("title", "예약 완료");
 			mod.addAttribute("text", "진료가 예약되었습니다.");
 			mod.addAttribute("icon", "success");
-			mod.addAttribute("loc", "/member/mypage");
+			mod.addAttribute("loc", "/member/myMedicalRecordsPageFrm?reqPage=1");
 			return "common/msg";
 		}else {
 			mod.addAttribute("title", "알 수 없는 오류");
