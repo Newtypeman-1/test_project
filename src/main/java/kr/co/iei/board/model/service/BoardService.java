@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.iei.board.model.dao.BoardDao;
 import kr.co.iei.board.model.vo.Board;
+import kr.co.iei.comment.model.vo.Comment;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -40,6 +41,11 @@ public class BoardService {
 	public Board selectBoard(int boardNo) {
 		Board b = boardDao.selectBoard(boardNo);
 		return b;
+	}
+	@Transactional
+	public int writeComment(Comment c) {
+		int result = boardDao.writeComment(c);
+		return result;
 	}
 
 }
