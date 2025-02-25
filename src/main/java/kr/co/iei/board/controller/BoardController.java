@@ -79,8 +79,8 @@ public class BoardController {
 	}
 	@ResponseBody
 	@GetMapping(value="/delete")
-	public int deleteComment(int boardNo, Model model) {
-		int result = boardService.deleteComment(boardNo);
+	public int deleteBoard(int boardNo, Model model) {
+		int result = boardService.deleteBoard(boardNo);
 		return result;
 	}
 }
