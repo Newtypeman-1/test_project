@@ -34,10 +34,16 @@ public class AdminDao {
 		return r;
 	}
 
-	public List allSchedule() {
-		String query = "select * from (select rownum as rnum, z.* from (select * from treatment_tbl t join doctor_tbl d on t.doctor_no = d.doctor_no join member_tbl m on t.member_no = m.member_no join department_tbl p on d.department_no = p.department_no order by 1 desc) z)";
-		List list = jdbc.query(query, treatRowMapper3);
+	public List allSchedule(int start, int end) {
+		String query = "select * from (select rownum as rnum, z.* from (select * from treatment_tbl t join doctor_tbl d on t.doctor_no = d.doctor_no join member_tbl m on t.member_no = m.member_no join department_tbl p on d.department_no = p.department_no order by 1 desc) z) where rnum between ? and ?";
+		Object[] params = {start, end};
+		List list = jdbc.query(query, treatRowMapper3, params);
 		return list;
+	}
+
+	public int scheduleTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -23,4 +23,5 @@ public class Doctor {
 	private double reviewRating;
 	
 	private int appointTime;
+	private String isDone;
 }

@@ -26,6 +26,8 @@ import kr.co.iei.member.model.vo.Member;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private DoctorService doctorService;
 	
 	@Value(value="${file.root}")
 	private String root;

@@ -9,26 +9,31 @@
 	margin: 30px auto;
 }
 .guide-box{
-	border: 1px solid black;
+	border: 1px solid #ccc;
 	border-radius: 20px;
-	width: 300px;
+	font-size: 18px;
+	width: 320px;
 }
 .guide-box>div{
-	margin: 20px;
+	margin: 10px 20px;
+}
+.guide-link{
+	text-align: center;
+}
+#guidebtn{
+	width: 200px;
 }
 .symptom-box{
 	width: 1000px;
-	border: 1px solid black;
+	border: 1px solid var(--color4);
 	border-radius: 20px;
 	margin: 0 auto;
-	padding: 30px;
+	padding: 30px 0;
 }
 .symptom-title{
-	margin-bottom: 20px;
-}
-.symptom-title{
-	font-weight: bold;
-	font-size: 20px;
+	margin-bottom: 30px;
+	margin-left: 40px;
+	font-size: 24px;
 }
 .symptom-grid-wrap{
 	display: grid;
@@ -89,7 +94,7 @@
 .icon-wrap img{
 	width: 100px;
 	height: 100px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--color5);
 	border-radius: 20px;
 	padding: 5px;
 	margin-bottom: 5px;
@@ -211,6 +216,39 @@
 	text-align: left;
 	width: 100px;
 }
+.board-link{
+	text-decoration: underline;
+}
+.gap{
+	padding: 25px;
+}
+.viewmore-icon-wrap{
+	margin: 0 auto;
+	text-align: center;
+	border: 1px solid transparent;
+	height: 112px;	
+}
+.viewmore-icon-wrap a{
+	color: #111111;
+}
+.viewmore-icon-wrap>a>div{
+	font-size: 14px;
+	font-weight: bold;
+	/*margin-top: 5px;*/
+}
+.viewmore-icon-wrap span{
+	width: 100px;
+	font-size: 80px;
+	color: var(--color4);
+	/*height: 100px;
+	padding: 5px;
+	line-height: 100px;
+	margin-bottom: 10px;*/
+}
+.viewmore-icon-wrap:hover{
+	border: 1px solid var(--color6);
+	border-radius: 20px;
+}
 </style>
 </head>
 <body>
@@ -236,69 +274,30 @@
 					<div class="symptom-title">비대면 진료 시작하기</div>
 				</div>
 				<div class="symptom-grid-wrap">
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=1" class="icon">
-							<img src="../img/오한.jpg">
-							<div>감기/오한</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=2" class="icon">
-							<img src="../img/비염, 축농증.jpg">
-							<div>비염</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=3" class="icon">
-							<img src="../img/산부인과.jpg">
-							<div>산부인과</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=1" class="icon">
-							<img src="../img/위염.jpg">
-							<div>소화불량</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=4" class="icon">
-							<img src="../img/성병.jpg">
-							<div>성병</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=5" class="icon">
-							<img src="../img/피부 트러블2.jpg">
-							<div>피부트러블</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=6" class="icon">
-							<img src="../img/시력저하.jpg">
-							<div>시력저하</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=1" class="icon">
-							<img src="../img/두근거림.jpg">
-							<div>두근거림</div>
-						</a>
-					</div>
-					<div class="icon-wrap">
-						<a href="/treat/department?departmentNo=7" class="icon">
-							<img src="../img/우울감.jpg">
-							<div>우울감</div>
-						</a>
-					</div>
+					<th:block th:each="s, status : ${symptomList}">
+						<div th:class="'icon-wrap ' + 'icon-wrap-' + ${status.index}">
+							<a th:href="@{/treat/department(departmentNo = ${s.departmentNo})}" class="icon">
+								<img th:src="'../img/' + ${s.symptomImg}">
+								<div th:text="${s.symptomName}"></div>
+							</a>
+						</div>
+					</th:block>
 					<div class="icon-wrap">
 						<a href="/treat/allDepart" class="icon">
 							<span class="material-icons">apps</span>
 							<div>진료과 고르기</div>
 						</a>
 					</div>
+					<div class="viewmore-icon-wrap">
+						<a id="viewmore-symptom" class="icon">
+							<span class="material-icons">expand_more</span>
+							<div>더보기</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
+		<div class="gap"></div>
 		<section class="boards-section">
 			<div class="boards-div">
 				<div class="boards-box">
@@ -312,7 +311,7 @@
 								<th:block th:each="board : ${boardList}">
 									<li>
 										<a th:href="@{/board/view(boardNo = ${board.boardNo})}">
-											<p class="notice-title" th:text="${board.boardTitle}"></p>
+											<p class="notice-title board-link" th:text="${board.boardTitle}"></p>
 											<p class="notice-date" th:text="${board.boardRegDate}"></p>
 										</a>
 									</li>
@@ -387,6 +386,18 @@
 		});
 		$("#guideclosebtn").on("click", function(){
 			$(".guide-modal-background").css("display", "none");
+		});
+		
+		const iconWrap = $(".icon-wrap");
+		iconWrap.slice(9, iconWrap.length).hide();
+		let idx = 1;
+		$("#viewmore-symptom").on("click", function(){
+			iconWrap.slice(idx*10, (idx+1)*10).show();
+			if((idx+1)*10 >= iconWrap.length){
+				$(this).removeClass();
+				$(this).remove();
+			}
+			idx++;
 		});
 	</script>
 	<th:block th:include="common/footer"></th:block>

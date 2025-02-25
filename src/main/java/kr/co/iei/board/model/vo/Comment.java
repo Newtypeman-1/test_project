@@ -13,4 +13,5 @@ public class Comment {
 	private String commentDate;
 	private int doctorNo;
 	private int boardNo;
+	private String isDone;
 }

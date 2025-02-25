@@ -4,7 +4,101 @@
 <meta charset="UTF-8">
 <title>상담게시판 상세보기</title>
 <style>
-        /* body {
+.view-section {
+	width: 1000px;
+	background-color: white;
+	padding: 40px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
+}
+
+.question-section, .answer-section {
+	background: white;
+	padding: 20px;
+	border-bottom: 2px solid #ddd;
+	width: 800px;
+	
+}
+
+.question-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.question-meta {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+.question-content {
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.question-button-group, .answer-button-group {
+	margin-top: 10px;
+}
+
+.board-view-button {
+	padding: 10px 15px;
+	border: none;
+	background: #ddd;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.answer-profile-img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: #ddd;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.answer-header {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+}
+
+.answer-header .name {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.answer-header .date {
+	margin-left: 10px;
+	color: #666;
+}
+
+.answer-content {
+	font-size: 16px;
+	line-height: 1.6;
+	margin-top: 10px;
+	white-space: pre-wrap;
+}
+
+.board-warning {
+	margin-top: 20px;
+	padding: 10px;
+	background: #eef5ff;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.board-warning > div{
+	font-weight: bold;
+}
+.noted-item-content > li{
+	padding-left: 15px;
+	list-style: none;
+	margin: 5px 0;
+}
+/* body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -13,6 +107,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+
         } */
         .containerBox {
         	margin: 0 auto;
@@ -71,7 +166,8 @@
             background-color: #eef;
             border-radius: 5px;
         }
-    </style>
+        */
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -120,6 +216,7 @@
 	        </div>
 	    </div>
 	</div>
+
     </main>
     <script>
     	$(".del-btn").on("click", function(){
@@ -146,5 +243,143 @@
     	});
     </script>
     <th:block th:include="common/footer"></th:block>
+		<section class="view-section">
+			<div class="question-section">
+				<div class="question-title" th:text="${board.boardTitle}"></div>
+				<div class="question-meta" th:text="${board.boardWriter}+' | '+${board.boardRegDate}"></div>
+				<div class="question-content" th:text="${board.boardContent}"></div>
+				<div class="question-button-group">
+					<th:block th:if="${session.member != null}">
+						<th:block th:if="${session.member.memberId == board.boardWriter}">
+							<button type="button" class="del-btn board-view-button">삭제하기</button>
+						</th:block>
+					</th:block>
+					<th:block th:if="${comment == null}">
+						<th:block th:if="${session.doctor != null}">
+							<div class="width50">
+								<a th:href="${'/board/commentWriteFrm?boardNo='+board.boardNo}">
+									<button type="button" class="board-view-button">답변하기</button>
+								</a>
+							</div>
+						</th:block>
+					</th:block>
+				</div>
+			</div>
+			<th:block th:if="${comment} != null">
+				<div class="answer-section">
+					<div class="answer-header">
+						<img class="answer-profile-img" style="width:50px;" th:src="@{'/doctor/' + ${doctor.doctorImg}}"></img>
+						<span class="answerer-name">신종인</span>
+						<span class="answer-meta"></span>
+					</div>
+					<div class="answer-content" th:text="${comment.commentContent}"></div>
+					<div class="answer-button-group">
+						<th:block th:if="${session.doctor != null}">
+							<th:block th:if="${session.doctor.doctorNo == comment.doctorNo}">
+								<button class="board-view-button">삭제하기</button>
+							</th:block>
+						</th:block>
+					</div>
+					<div class="board-warning">
+						<div class="noted-item-title">✔ 꼭 확인해주세요</div>
+						<ul class="noted-item-content">
+							<li>폭력적/공격적인 글, 서비스 목적과 맞지 않는 질문, 여러번 중복된(도배성) 질문은 예고 없이 삭제될
+								수 있습니다.</li>
+							<li>서비스 운영을 방해하는 행위가 반복적으로 발생할 경우, 회원 및 의료진 보호를 위해 서비스 이용이
+								제한될 수 있습니다.</li>
+							<li>실시간 의료 상담 게시판에서 작성한 질문과 그 답변은 모두에게 공개되며, 서비스 홍보의 목적으로 활용될
+								수 있습니다.</li>
+							<li>실시간 의료 상담 게시판에서 받은 답변은 의학적 판단이나 진료 행위로 해석될 수 없으며,
+								Helpdoc과 답변 의료인은 이로 인해 발생하는 어떠한 책임도 지지 않습니다.</li>
+							<li>정확한 진단을 위해서는 Helpdoc 사이트 내에서 원격진료를 신청하거나, 병원을 방문해 주시기
+								바랍니다.</li>
+							<li>실시간 의료 상담 게시판에 등록된 질문은 문의를 통한 삭제 요청이 없는 한 지속적으로 남습니다.</li>
+						</ul>
+					</div>
+				</div>
+			</th:block>
+		</section>
+<!-- 		<section class="section board-section"> -->
+<!-- 			<div class="container"> -->
+<!-- 				<div class="boardTitle" th:text="${board.boardTitle}"></div> -->
+<!-- 				<div class="metadata" -->
+<!-- 					th:text="${board.boardWriter}+' | '+${board.boardRegDate}"></div> -->
+<!-- 				<div class="content" th:text="${board.boardContent}"></div> -->
+
+<!-- 				<div class="btn"> -->
+<!-- 					<th:block th:if="${session.member != null}"> -->
+<!-- 						<th:block th:if="${session.member.memberId == board.boardWriter}"> -->
+<!-- 							<div class="width30"> -->
+<!-- 								<button type="button" class="del-btn submit-button two-button">삭제하기</button> -->
+<!-- 							</div> -->
+<!-- 						</th:block> -->
+<!-- 					</th:block> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="comment"> -->
+<!-- 					<th:block th:if="${comment != null}"> -->
+<!-- 						<div class="comment-box"> -->
+<!-- 							<p class="commentContent" th:text="${comment.commentContent}"></p> -->
+<!-- 						</div> -->
+<!-- 					</th:block> -->
+<!-- 					<th:block th:if="${comment == null}"> -->
+<!-- 						<th:block th:if="${session.doctor != null}"> -->
+<!-- 							<div class="width50"> -->
+<!-- 								<a th:href="${'/board/commentWriteFrm?boardNo='+board.boardNo}"><button -->
+<!-- 										type="button" class="submit-button one-button">답변하기</button></a> -->
+<!-- 							</div> -->
+<!-- 						</th:block> -->
+<!-- 					</th:block> -->
+<!-- 				</div> -->
+
+<!-- 				<input type="text" th:value="${board.boardNo}" id="boardNoCheck" -->
+<!-- 					hidden> -->
+
+<!-- 				<div class="noted-item-wrap"> -->
+<!-- 					<div class="noted-item-title">✔ 꼭 확인해주세요</div> -->
+<!-- 					<ul class="noted-item-content"> -->
+<!-- 						<li>폭력적/공격적인 글, 서비스 목적과 맞지 않는 질문, 여러번 중복된(도배성) 질문은 예고 없이 삭제될 -->
+<!-- 							수 있습니다.</li> -->
+<!-- 						<li>서비스 운영을 방해하는 행위가 반복적으로 발생할 경우, 회원 및 의료진 보호를 위해 서비스 이용이 -->
+<!-- 							제한될 수 있습니다.</li> -->
+<!-- 						<li>실시간 의료 상담 게시판에서 작성한 질문과 그 답변은 모두에게 공개되며, 서비스 홍보의 목적으로 활용될 -->
+<!-- 							수 있습니다.</li> -->
+<!-- 						<li>실시간 의료 상담 게시판에서 받은 답변은 의학적 판단이나 진료 행위로 해석될 수 없으며, -->
+<!-- 							Helpdoc과 답변 의료인은 이로 인해 발생하는 어떠한 책임도 지지 않습니다.</li> -->
+<!-- 						<li>정확한 진단을 위해서는 Helpdoc 사이트 내에서 원격진료를 신청하거나, 병원을 방문해 주시기 -->
+<!-- 							바랍니다.</li> -->
+<!-- 						<li>실시간 의료 상담 게시판에 등록된 질문은 문의를 통한 삭제 요청이 없는 한 지속적으로 남습니다.</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</section> -->
+	</main>
+	<script>
+		$(".del-btn").on("click", function() {
+			const boardNo = $("#boardNoCheck").val();
+			$.ajax({
+				url : "/board/delete",
+				data : {
+					boardNo : boardNo
+				},
+				succes : function(result) {
+					if (result != 0) {
+						swal({
+							title : "삭제 성공",
+							text : "삭제가 완료되었습니다.",
+							icon : "success"
+						})
+					} else {
+						swal({
+							title : "삭제 실패",
+							text : "삭제가 실패되었습니다.",
+							icon : "error"
+						})
+					}
+				}
+			});
+		});
+	</script>
+	<th:block th:include="common/footer"></th:block>
 </body>
 </html>

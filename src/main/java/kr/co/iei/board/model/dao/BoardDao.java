@@ -10,7 +10,9 @@ import kr.co.iei.board.model.vo.Board;
 import kr.co.iei.board.model.vo.BoardRowMapper;
 import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.board.model.vo.CommentRowMapper;
+import kr.co.iei.board.model.vo.CommentRowMapper2;
 import kr.co.iei.doctor.model.vo.Doctor;
+import kr.co.iei.doctor.model.vo.DoctorRowMapper2;
 import kr.co.iei.member.model.vo.Member;
 
 @Repository
@@ -21,6 +23,8 @@ public class BoardDao {
 	private BoardRowMapper boardRowMapper;
 	@Autowired
 	private CommentRowMapper commentRowMapper;
+	@Autowired
+	private CommentRowMapper2 commentRowMapper2;
 	
 	public int selectBoardTotalCount() {
 		String query = "select count(*) from board";
@@ -71,9 +75,9 @@ public class BoardDao {
 	}
 	
 	public List allComment(Doctor doctor) {
-		String query = "select * from (select rownum as rnum, h.* from(select r.*,(select doctor_name from doctor_tbl where doctor_no = r.doctor_no) doctor_name from comment_tbl r where doctor_no = ? order by 1 desc)h) where rnum between 1 and 5";
+		String query = "select * from(select rownum as rnum, r.* from (select * from (select * from board join comment_tbl using (board_no))c join doctor_tbl using(doctor_no) where doctor_no = ? order by board_no desc) r) where rnum between 1 and 5";
 		Object[] params = {doctor.getDoctorNo()};
-		List allComment = jdbc.query(query, commentRowMapper, params);
+		List allComment = jdbc.query(query, commentRowMapper2, params);
 		return allComment;
 	}
 
@@ -88,7 +92,6 @@ public class BoardDao {
 	public int writeComment(Comment c) {
 		String query = "insert into comment_tbl values(comment_tbl_seq.nextval,?,to_char(sysdate,'yyyy-mm-dd'),?,?)";
 		Object[] params = {c.getCommentContent(), c.getDoctorNo(), c.getBoardNo()};
-
 		int result = jdbc.update(query, params);
 		return result;
 	}
@@ -111,4 +114,13 @@ public class BoardDao {
 		return list;
 
 	}
+
+	public int boardIsDone(Board board) {
+		String query = "update board set is_done = 1 where board_no = ?";
+		Object[] params = {board.getBoardNo()};
+		int r = jdbc.update(query, params);
+		return r;
+	}
+	
+	
 }

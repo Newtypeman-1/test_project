@@ -13,26 +13,33 @@
 			<div class="myList-info">
 				<div class="info quest-page">
 					<table class="qna-tbl">
-						<tr>
+						<tr class="qna-tbl-header">
 							<th>문의번호</th>
-							<th style="width: 50%;">제목</th>
+							<th class="width50">제목</th>
 							<th>답변</th>
 							<th>작성일</th>
 						</tr>
 						<tr th:each="board : ${boardList}" class="myList">
 							<td th:text="${board.boardNo}"></td>
 							<td th:text="${board.boardTitle}"></td>
-							<td>답변</td>
+							<th:block th:if="${board.isDone != 0}">
+								<td>답변 완료</td>
+							</th:block>
+							<th:block th:if="${board.isDone == 0}">
+								<td>답변 대기</td>
+							</th:block>
 							<td th:text="${board.boardRegDate}"></td>
 						</tr>	
 					</table>
-					<a href="/board/boardList?reqPage=1"><button type="button" class="allQna submit-button one-button">전체 문의 보기</button></a>
+					<div class="btn-div">
+						<a href="/board/boardList?reqPage=1" class="btn-a width90"><button type="button" class="allQna submit-button three-button">전체 문의 보기</button></a>
+					</div>
 				</div>
 				<div class="info quest-page">
 					<table class="qna-tbl">
-						<tr>
+						<tr class="qna-tbl-header">
 							<th>리뷰번호</th>
-							<th style="width: 50%;">내용</th>
+							<th class="width50">내용</th>
 							<th>담당의</th>
 							<th>별점</th>
 							<th>작성일</th>
@@ -46,7 +53,9 @@
 							<td th:text="${review.reviewDate}"></td>
 						</tr>
 					</table>
-					<a th:href="@{/review/list(reqPage=1, doctorNo=0)}"><button type="button" class="allReview submit-button one-button">전체 리뷰 보기</button></a>						
+					<div class="btn-div">
+						<a th:href="@{/review/list(reqPage=1, doctorNo=0)}" class="btn-a width90"><button type="button" class="allReview submit-button three-button">전체 리뷰 보기</button></a>
+					</div>						
 				</div>
 			</div>
 		</section>

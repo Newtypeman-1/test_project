@@ -47,7 +47,12 @@ public class BoardService {
 	@Transactional
 	public int commentWrtie(Comment c, Doctor doctor, Board board) {
 		int result = boardDao.commentWrite(c, doctor, board);
-		return result;
+		if(result != 0) {
+			int r = boardDao.boardIsDone(board);
+			return result;
+		}else {
+			return result;
+		}
 	}
 	
 	public List allComment(Doctor doctor) {
@@ -70,6 +75,7 @@ public class BoardService {
 		List list = boardDao.selectRecentBoardList();
 		return list;
 	}
+
 
 
 }
