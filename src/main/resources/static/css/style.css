@@ -1601,14 +1601,23 @@ select{
 	padding: 5px;
 	text-align: center;
 }
-#navi1,#navi2{
+/* #navi1,#navi2{
 	display: flex;
 	justify-content: center;
+} */
+.pageNavi{
+	display: flex;
+	justify-content: center;
+}
+.pageNavi li{
+	margin: 5px;
+	font-size: 16px;
 }
 #navi1 ul,#navi2 ul{
 	text-decoration: none;
 	list-style: none;
 }
+
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
