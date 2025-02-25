@@ -225,22 +225,29 @@
 .viewmore-icon-wrap{
 	margin: 0 auto;
 	text-align: center;
+	border: 1px solid transparent;
+	height: 112px;	
 }
 .viewmore-icon-wrap a{
 	color: #111111;
 }
 .viewmore-icon-wrap>a>div{
-	margin-top: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	/*margin-top: 5px;*/
 }
 .viewmore-icon-wrap span{
 	width: 100px;
-	height: 100px;
 	font-size: 80px;
-	border: 1px solid #ccc;
-	border-radius: 20px;
+	color: var(--color4);
+	/*height: 100px;
 	padding: 5px;
 	line-height: 100px;
-	margin-bottom: 10px;
+	margin-bottom: 10px;*/
+}
+.viewmore-icon-wrap:hover{
+	border: 1px solid var(--color6);
+	border-radius: 20px;
 }
 </style>
 </head>
@@ -283,8 +290,8 @@
 					</div>
 					<div class="viewmore-icon-wrap">
 						<a id="viewmore-symptom" class="icon">
-							<span class="material-icons">apps</span>
-							<div>증상 더보기</div>
+							<span class="material-icons">expand_more</span>
+							<div>더보기</div>
 						</a>
 					</div>
 				</div>
