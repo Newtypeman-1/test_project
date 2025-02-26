@@ -17,13 +17,13 @@
                     <ul>
                         <li><a href="/treat/allDepart">진료예약</a>
                         	<ul class="dropdown">
-                        		<!-- <li><a href="/treat/department?departmentNo=1">내과</a></li>
+                        		<li><a href="/treat/department?departmentNo=1">내과</a></li>
                         		<li><a href="/treat/department?departmentNo=2">이비인후과</a></li>
                         		<li><a href="/treat/department?departmentNo=3">산부인과</a></li>
                         		<li><a href="/treat/department?departmentNo=4">비뇨기과</a></li>
                         		<li><a href="/treat/department?departmentNo=5">피부과</a></li>
                         		<li><a href="/treat/department?departmentNo=6">안과</a></li>
-                        		<li><a href="/treat/department?departmentNo=7">정신과</a></li> -->
+                        		<li><a href="/treat/department?departmentNo=7">정신과</a></li>
                         		<li><a href="/treat/allDepart">진료과</a></li>
                         	</ul>
                         </li>
@@ -31,18 +31,19 @@
                         <li><a href="#">이용안내</a>
                         	 <ul class="dropdown">
                         	 	<li><a href="/etc/map">오시는 길</a></li>
+                        	 	<li><a href="/etc/map">오시는 길</a></li>
                         	 </ul>
                         </li>
                         <li>
                         	<th:block th:if="${session.member == null && session.doctor == null}">
                         		<a href="/">마이페이지</a>
-								</th:block>
-								<th:block th:if="${session.member != null}">
-									<a href="/member/mypage">마이페이지</a>
-								</th:block>
-								<th:block th:if="${session.doctor != null}">
-				                         	<a href="/doctor/mypage">마이페이지</a>
-								</th:block>
+							</th:block>
+							<th:block th:if="${session.member != null}">
+								<a href="/member/mypage">마이페이지</a>
+							</th:block>
+							<th:block th:if="${session.doctor != null}">
+								<a href="/doctor/mypage">마이페이지</a>
+							</th:block>
                         	<ul class="dropdown">
 								<th:block th:if="${session.member != null}">
 									<li>
@@ -67,11 +68,12 @@
                            	 		</li>
 								</th:block>
 							</ul>
-							</li>
-							<li><a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>
-							</li>
-						</ul>
-					</nav>
+						</li>
+						<li>
+							<a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>
+						</li>
+					</ul>
+				</nav>
 				<div class="header__right">
 				    <div class="header__right__auth">
 				    	<span th:if="${session.member == null && session.doctor == null}">
