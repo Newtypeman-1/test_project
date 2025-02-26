@@ -52,15 +52,24 @@ public class WebConfig implements WebMvcConfigurer{
 				.addPathPatterns("/board/delete");
 		
 		registry.addInterceptor(new DoctorLoginInterceptor())
-				.addPathPatterns("/doctor/**")
 				.addPathPatterns("/board/commentWriteFrm")
 				.addPathPatterns("/board/commentWrite")
 				
-				.excludePathPatterns("/doctor/login",
-									"/doctor/findIdPwFrm",
-									"/doctor/findId",
-									"/doctor/findPw",
-									"/doctor/loginMsg");
+//				.addPathPatterns("/doctor/**")
+//				.excludePathPatterns("/doctor/login",
+//									"/doctor/findIdPwFrm",
+//									"/doctor/findId",
+//									"/doctor/findPw",
+//									"/doctor/loginMsg");
+				
+				.addPathPatterns("/doctor/logout")
+				.addPathPatterns("/doctor/mypage")
+				.addPathPatterns("/doctor/update")
+				.addPathPatterns("/doctor/qna")
+				.addPathPatterns("/doctor/myMedicalRecordsPageFrm")
+				.addPathPatterns("/doctor/MyOpinion")
+				.addPathPatterns("/doctor/opinionSubmit");
+				
 		
 		registry.addInterceptor(new AdminInterceptor())
 				.addPathPatterns("/admin/**");

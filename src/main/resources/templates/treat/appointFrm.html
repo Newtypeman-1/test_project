@@ -76,8 +76,12 @@
 	color: white;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
+.appoint-tbl-title{
+	font-weight: bold;
+	margin-left: 10px;
+}
 .appoint-sub-part table {
-	margin-bottom: 20px;
+	margin: 10px 0 40px 20px;
 }
 .appoint-sub-part table>tbody>tr {
 	border-bottom: 1px solid #2B81C1;
@@ -96,13 +100,16 @@
 	border-radius: 20px;
 	width: 200px;
 	height: 50px;
-	margin: 100px 20px;
 }
 .btn-activated {
 	border: none;
 	background-color: rgb(255, 50, 50);
 	color: white;
 	font-weight: bold;
+	cursor: pointer;
+}
+.btn-activated:hover{
+	font-size: 15px;
 }
 
 .ul-below {
@@ -115,7 +122,8 @@
 .member-name {
 	font-size: 18px;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 .member-number {
 	background-color: #003f7f;
@@ -127,9 +135,9 @@
 
 .sub-part-footer {
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	height: 100px;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 50px;
 }
 .sub-part-footer-item {
 	flex: 1;
@@ -183,7 +191,7 @@
 					<div class="member-name" th:text="${session.member.memberName}"></div>
 					<table class="appoint-member-tbl">
 						<tr>
-							<td>환자번호</td>
+							<td style="font-weight:bold;">환자번호</td>
 							<td><span class="member-number"
 								th:text="${session.member.memberNo}"></span></td>
 						</tr>
@@ -203,7 +211,7 @@
 						<tr>
 							<th>진료과</th>
 							<td><span class="additional-effect"
-								th:text="${doctor.departmentNo}"></span></td>
+								th:text="${departmentName}"></span></td>
 						</tr>
 						<tr>
 							<th>의료진</th>
@@ -211,8 +219,8 @@
 								th:text="${doctor.doctorName}"></span></td>
 						</tr>
 						<tr>
-							<th>진료일시</th>
-							<td><span style="opacity: 0.7;" id="appoint-time">선택된 진료일시가 없습니다.</span></td>
+							<th>진료시간</th>
+							<td><span style="opacity: 0.7;" id="appoint-time">선택된 진료시간이 없습니다.</span></td>
 						</tr>
 						<tr>
 							<th>결제금액</th>
@@ -230,16 +238,23 @@
 							type="hidden" name="doctorNo" id="doctorNo"
 							th:value="${doctor.doctorNo}">
 					</form>
-					<button type="button" id="purchase-btn">예약 시간을 선택하세요</button>
+					<button type="button" id="purchase-btn">진료시간을 선택하세요</button>
 					<div class="sub-part-footer">
 						<div class="sub-part-footer-item">
-							<img src="" alt="">01 진료과 선택
+							<p style="color:#ddd;">01<br>진료과 선택</p>
 						</div>
 						<div class="sub-part-footer-item">
-							<img src="" alt="">02 의료진 선택
+							<p style="color:#ddd;">>></p>
 						</div>
 						<div class="sub-part-footer-item">
-							<img src="" alt="">03 진료시간 선택
+<!-- 							<img src="" alt="">02 의료진 선택 -->
+							<p style="color:#ddd;">02<br>의료진 선택</p>
+						</div>
+						<div class="sub-part-footer-item">
+							<p style="color:#ddd;">>></p>
+						</div>
+						<div class="sub-part-footer-item">
+							<p style="color:white;font-weight:bold;">03<br>시간 선택</p>
 						</div>
 					</div>
 				</div>
@@ -314,7 +329,7 @@
 			}
 			$(".appoint-items").css("font-weight", "400");
 			$(this).css("font-weight", "bold");
-			$("#appoint-time").text($(this).children().eq(0).text() + "시 진료");
+			$("#appoint-time").text($(this).children().eq(0).text() + ":00 시 진료 예정");
 			$("#appoint-time").css("font-weight", "bold");
 			
 			$("#appointTime").val($(this).children().eq(0).text());
@@ -325,7 +340,7 @@
 		
 		$("#purchase-btn").on("click", function(e){
 			if(!$(this).hasClass("btn-activated")){
-				e.preventDefault();
+				return;
 			}
 // 			$(".appoint-form").submit();
 			const totalPrice = $("#payAmount").val();
