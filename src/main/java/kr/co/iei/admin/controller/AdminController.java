@@ -38,11 +38,6 @@ public class AdminController {
 	@Autowired
 	private TreatService treatService;
 	
-	@GetMapping(value="/mainPage")
-	public String mainPage() {
-		return "admin/mainPage";
-	}	
-		
 	@GetMapping(value="/allMember")
 	public String allMember(Model model,int memberNo, int doctorNo) {
 		MemberPageList mpl = memberService.allMemberList(memberNo, doctorNo);
@@ -100,6 +95,14 @@ public class AdminController {
 		return "admin/allSchedule";
 	}
 	
+	@GetMapping(value="/adminMsg")
+	public String adminMsg(Model model) {
+		model.addAttribute("title","접근 제한");
+		model.addAttribute("text", "ㄴㄴ");
+		model.addAttribute("icon", "warning");
+		model.addAttribute("loc", "redirect:/");
+		return "common/msg";
+	}
 	
 }
 

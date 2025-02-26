@@ -35,6 +35,9 @@
 	.star-on-wrap>span{
 	    color: gold;
 	}
+	.writeBox{
+		height: 200px;
+	}
 </style>
 </head>
 <body>
@@ -43,7 +46,7 @@
 		<section class="section">
 			<div class="page-title">리뷰 작성</div>
 			<form action="/review/write" method="post">
-				<table class="tbl">
+				<table class="review-tbl">
 					<tr>
 						<th style="width:10%">작성자</th>
 						<td style="width:10%">
@@ -62,7 +65,7 @@
 					<tr>
 						<td colspan="4">
 							<div>
-								<textarea name="reviewContent"></textarea>
+								<textarea name="reviewContent" class="writeBox width50"></textarea>
 								<input type="hidden" id="reviewStar" name="reviewStar">
 							</div>
 						</td>

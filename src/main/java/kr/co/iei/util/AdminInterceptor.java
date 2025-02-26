@@ -16,7 +16,7 @@ public class AdminInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		Doctor d = (Doctor) session.getAttribute("doctor");
 		if(d.getDoctorId() != "admin") {
-			response.sendRedirect("/doctor/adminMsg");
+			response.sendRedirect("/admin/adminMsg");
 			return false;
 		}else {
 			return true;
