@@ -70,8 +70,8 @@ public class TreatDao {
 	}
 
 	public int insertTreatment(Treat t) {
-		String query = "insert into treatment_tbl values(treatment_seq.nextval, to_char(sysdate, 'yyyy-MM-dd'), ?, 0, 0, null, null, ?, ?)";
-		Object[] params = {t.getAppointTime(), t.getMemberNo(), t.getDoctorNo()};
+		String query = "insert into treatment_tbl values(treatment_seq.nextval, to_char(sysdate, 'yyyy-MM-dd'), ?, ?, 0, null, null, ?, ?)";
+		Object[] params = {t.getAppointTime(), t.getPayAmount(), t.getMemberNo(), t.getDoctorNo()};
 		int result = jdbc.update(query, params);
 		return result;
 	}
