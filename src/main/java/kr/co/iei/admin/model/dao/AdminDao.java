@@ -28,7 +28,7 @@ public class AdminDao {
 	}
 
 	public int deleteDoctor(Doctor d) {
-		String query = "delete doctor_tbl where doctor_id = ?";
+		String query = "delete from doctor_tbl where doctor_id = ?";
 		Object[] params = {d.getDoctorId()};
 		int r = jdbc.update(query, params);
 		return r;
