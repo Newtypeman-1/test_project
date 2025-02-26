@@ -7,7 +7,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import kr.co.iei.util.LoginInterceptor;
+import kr.co.iei.util.AdminInterceptor;
+import kr.co.iei.util.DoctorLoginInterceptor;
+import kr.co.iei.util.MemberLoginInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -30,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		WebMvcConfigurer.super.addInterceptors(registry);
-		registry.addInterceptor(new LoginInterceptor())
+		registry.addInterceptor(new MemberLoginInterceptor())
 				.addPathPatterns("/member/mypage")
 				.addPathPatterns("/member/delete")
 				.addPathPatterns("/member/myMedicalRecordsPage")
@@ -40,11 +42,27 @@ public class WebConfig implements WebMvcConfigurer{
 				.addPathPatterns("/member/logout")
 				
 				.addPathPatterns("treat/appointFrm")
+				.addPathPatterns("/treat/appoint")
+				
+				.addPathPatterns("review/writeFrm")
+				.addPathPatterns("review/write")
 				
 				.addPathPatterns("/board/writeFrm")
-				.addPathPatterns("/board/delete")
+				.addPathPatterns("/board/write")
+				.addPathPatterns("/board/delete");
+		
+		registry.addInterceptor(new DoctorLoginInterceptor())
+				.addPathPatterns("/doctor/**")
+				.addPathPatterns("/board/commentWriteFrm")
 				.addPathPatterns("/board/commentWrite")
 				
+				.excludePathPatterns("/doctor/login",
+									"/doctor/findIdPwFrm",
+									"/doctor/findId",
+									"/doctor/findPw",
+									"/doctor/loginMsg");
+		
+		registry.addInterceptor(new AdminInterceptor())
 				.addPathPatterns("/admin/**");
 	}
 	

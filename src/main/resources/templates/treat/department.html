@@ -8,26 +8,22 @@
 .title-section {
 	height: 120px;
 }
-
 .department-page-title {
 	width: 1200px;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	margin: 0 auto;
 }
-
 .department-page-title>h2 {
 	text-align: center;
 	line-height: 120px;
 	font-weight: 500;
 	font-size: 40px;
 }
-
 .content-section{
 	width: 1200px;
 	margin: 0 auto;
 }
-
 .introduce-detail {
 	margin-bottom: 100px;
 }
@@ -35,7 +31,7 @@
 .introduce-headline {
 	text-align: center;
 	padding: 50px 0;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid var(--color2);
 }
 .introduce-headline>h5{
 	font-weight: bold;
@@ -46,33 +42,6 @@
 	margin: 20px 0;
 	letter-spacing: -0.25px;
 }
-
-.doctor-up {
-	display: flex;
-}
-
-/*
-#appoint-btn {
-	border-radius: 20px;
-	padding: 8px;
-	background-color: #39A7CC;
-	border: none;
-	color: white;
-}
-*/
-
-.doctor-name {
-	font-size: 28px;
-}
-
-.department-name {
-	font-size: 14px;
-}
-
-.schedule {
-	border: 1px solid #ddd;
-}
-
 .doctor-wrap{
 	display: flex;
 	flex-wrap: wrap;
@@ -80,14 +49,12 @@
 	justify-content: center;*/
 	justify-content: space-between;
 }
-
 .doctor-container {
 	/*width: 500px;*/
 	width: calc(50% - 30px);
 	border-top: 1px solid #ccc;
 	margin: 20px 0;
 }
-
 .doctor-card {
 	display: flex;
 	justify-content: space-between;
@@ -100,9 +67,7 @@
 	width: 150px;
 	height: 150px;
 	margin-top: 10px;
-	/*background-color: #ddd;*/
 }
-
 .doctor-image-box img{
 	border-radius: 20px;
 }
@@ -111,11 +76,9 @@
 	flex-grow: 1;
 	margin-left: 30px;
 }
-
 .doctor-info p{
 	line-height: normal;
 }
-
 .doctor-info-title {
 	font-size: 20px;
 	font-weight: bold;
@@ -126,17 +89,14 @@
 	font-size: 14px;
 	margin-bottom: 20px;
 }
-
 .doctor-rating a{
 	display: flex;
 	font-size: 16px;
 }
-
 .doctor-rating a>span{
-	color: #ffa500;
+	color: var(--color6);
 	font-weight: bold;
 }
-
 .doctor-rating>a :first-child{
 	margin-right: 3px;
 }
@@ -155,57 +115,37 @@
 	margin-top: 10px;
 	display: flex;
 }
-
 .doctor-buttons a {
 	text-decoration: none;
 	padding: 5px 10px;
 	border-radius: 5px;
-	color: white;
+	color: var(--color1);
 	margin-right: 10px;
-}
-
-.info-btn {
-	background-color: #f0ad4e;
-	margin-right: 10px;
-	display: flex;
-	align-items: center;
-}
-
-.reserve-btn {
-	background-color: #007bff;
-	display: flex;
-	align-items: center;
 }
 
 .schedule {
+	border: 1px solid #ddd;
 	width: 450px;
-	/*width: 100%;*/
 	margin-top: 10px;
 	margin-left: 15px;
 	background-color: #eee;
 	font-size: 14px;
 }
-
 .schedule th, .schedule td {
 	border: 1px solid #aaa;
 	padding: 5px;
 	text-align: center;
+}
+.schedule-bottom{
+	text-align: right;
 }
 
 .appointed {
 	color: red;
 	font-weight: bold;
 }
-
-.schedule-bottom{
-	text-align: right;
-}
-
 .checkedTr{
-	background-color: white;
-}
-
-.checkedTr{
+	background-color: var(--color1);
 	height: 30px;
     padding: 5px 10px;
     border: 1px solid #e4e4e4;
