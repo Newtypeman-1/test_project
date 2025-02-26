@@ -57,7 +57,7 @@
 	border-radius: 20px;
 	margin: 20px;
 	padding: 20px;
-	background-color: white;
+	background-color: var(--color1);
 }
 .more-btn{
 	position: absolute;
@@ -70,7 +70,7 @@
 	color: #111111;
 }
 .board-content{
-	border: 1px solid black;
+	border: 1px solid var(--color2);
 	margin-top: 10px;
 	list-style: none;
 	background-color: #ccc;
@@ -128,14 +128,14 @@
 	display: none;
 }
 .guide-modal-wrap{
-    background-color: white;
+    background-color: var(--color1);
     width: 500px;
     border-radius: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 .guide-modal-header{
-	background: linear-gradient(to bottom, #fff3e0, #ffffff);
+	background: linear-gradient(to bottom, #fff3e0, var(--color1));
     padding: 20px;
     padding-top: 30px;
     text-align: center;
@@ -158,15 +158,15 @@
 	margin-bottom: 15px;
     padding: 15px;
     background: #fff;
-    border-left: 4px solid #ff8c42;
+    border-left: 4px solid var(--color7);
 }
 .guide-step div{
 	margin-top: 10px;
 	letter-spacing: -0.25px;
 }
 .step-number{
-	background: #ff8c42;
-    color: white;
+	background: var(--color7);
+    color: var(--color1);
     padding: 5px 12px;
     border-radius: 50%;
     font-weight: bold;
@@ -176,7 +176,7 @@
 .guide-modal-footer{
 	text-align: center;
     padding: 20px;
-    background: #fff;
+    background: var(--color1);
     border-top: 1px solid #eee;
 }
 .guide-modal-footer div{
@@ -191,7 +191,7 @@
     color: #666;
 }
 .guide-modal-footer button{
-	background: #ff8c42;
+	background: var(--color7);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -246,7 +246,7 @@
 	margin-bottom: 10px;*/
 }
 .viewmore-icon-wrap:hover{
-	border: 1px solid var(--color6);
+	border: 1px solid var(--color7);
 	border-radius: 20px;
 }
 </style>
@@ -374,7 +374,7 @@
 				</div>
 				<div class="guide-modal-footer">
 					<div>병원이 멀어도<br>이제 걱정하지 마세요</div>
-            		<p style="color: #ff8c42; font-weight: bold;">Helpdoc에서 간편하게 전화로 진료받아 보세요.</p>
+            		<p style="color: var(--color7); font-weight: bold;">Helpdoc에서 간편하게 전화로 진료받아 보세요.</p>
 					<button type="button" id="guideclosebtn">비대면 진료 받으러 가기</button>
 				</div>
 			</div>
