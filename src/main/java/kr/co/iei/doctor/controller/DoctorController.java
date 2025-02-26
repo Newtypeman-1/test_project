@@ -178,9 +178,9 @@ public class DoctorController {
 	@GetMapping(value="/loginMsg")
 	public String loginMsg(Model model) {
 		model.addAttribute("title","로그인 필요");
-		model.addAttribute("text","로그인.");
-		model.addAttribute("icon","warning");
-		model.addAttribute("loc", "/member/loginMsg");
+		model.addAttribute("text", "로그인을 하고 해야지");
+		model.addAttribute("icon", "warning");
+		model.addAttribute("loc", "/member/loginFrm");
 		return "common/msg";
 	}
 }
