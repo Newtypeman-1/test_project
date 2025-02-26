@@ -56,9 +56,7 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="/addAcount")
-	public String addAccount(Doctor d, Model model, MultipartFile imgFile, String email, String com1) {
-		String doctorEmail = email+"@"+com1;
-		d.setDoctorEmail(doctorEmail);
+	public String addAccount(Doctor d, Model model, MultipartFile imgFile) {
 		if(!imgFile.isEmpty()) {
 			String savepath = root+"/doctor/";
 			String filepath = fileUtils.upload(savepath, imgFile);
@@ -68,7 +66,7 @@ public class AdminController {
 		model.addAttribute("title", "회원가입 성공");
 		model.addAttribute("text","회원가입에 성공했습니다.");
 		model.addAttribute("icon","success");
-		model.addAttribute("loc", "/admin/mainPage");
+		model.addAttribute("loc", "/doctor/mypage");
 		return "common/msg";
 	}
 	
@@ -95,12 +93,12 @@ public class AdminController {
 		return "admin/allSchedule";
 	}
 	
-	@GetMapping(value="/adminMsg")
+	@RequestMapping(value="/adminMsg")
 	public String adminMsg(Model model) {
 		model.addAttribute("title","접근 제한");
 		model.addAttribute("text", "ㄴㄴ");
 		model.addAttribute("icon", "warning");
-		model.addAttribute("loc", "redirect:/");
+		model.addAttribute("loc", "/member/loginFrm");
 		return "common/msg";
 	}
 	

@@ -19,6 +19,7 @@ import kr.co.iei.board.model.service.BoardService;
 import kr.co.iei.doctor.model.service.DoctorService;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.doctor.model.vo.DoctorPageList;
+import kr.co.iei.member.model.vo.Member;
 import kr.co.iei.review.model.service.ReviewService;
 import kr.co.iei.treat.model.service.TreatService;
 import kr.co.iei.treat.model.vo.Department;
@@ -82,6 +83,18 @@ public class DoctorController {
 			return "redirect:/";
 		}
 	}
+	
+	@ResponseBody
+	@GetMapping(value="idCheck")
+	public int idCheck(Doctor d) {
+		Doctor doctor = doctorService.idCheck(d);
+		int r = 0;
+		if(doctor == null) {
+			r = 1;
+		}
+		return r;
+	}
+	
 	@GetMapping(value="/qna")
 	public String doctorQna(Model model, @SessionAttribute(required = false) Doctor doctor) {
 		List allReview = reviewService.allReview(doctor);
@@ -175,12 +188,21 @@ public class DoctorController {
 		}
 	}
 	
-	@GetMapping(value="/loginMsg")
+	@RequestMapping(value="/loginMsg")
 	public String loginMsg(Model model) {
 		model.addAttribute("title","로그인 필요");
 		model.addAttribute("text", "로그인을 하고 해야지");
 		model.addAttribute("icon", "warning");
 		model.addAttribute("loc", "/member/loginFrm");
+		return "common/msg";
+	}
+	
+	@RequestMapping(value="/adminMsg")
+	public String adminMsg(Model model) {
+		model.addAttribute("title","접근 제한");
+		model.addAttribute("text", "ㄴㄴ");
+		model.addAttribute("icon", "warning");
+		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
 }

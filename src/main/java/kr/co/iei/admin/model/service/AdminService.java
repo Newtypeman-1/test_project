@@ -53,20 +53,20 @@ public class AdminService {
 		String pageNavi = "<ul class='pageNavi'>";
 		if(reqPage > 3){
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage=1'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage=1'>";
 			pageNavi += pageF;
 			pageNavi += "</a></li>";
 			pageNavi += "<div>...</div>";
 		}
 		if(pageMM > 0) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage="+pageMM+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage="+pageMM+"'>";
 			pageNavi += pageMM;
 			pageNavi += "</a></li>";
 		}
 		if(pageM > 0) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage="+pageM+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage="+pageM+"'>";
 			pageNavi += pageM;
 			pageNavi += "</a></li>";
 		}
@@ -75,20 +75,20 @@ public class AdminService {
 		pageNavi += "</li>";
 		if(pageP > 0 && pageP <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage="+pageP+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage="+pageP+"'>";
 			pageNavi += pageP;
 			pageNavi += "</a></li>";
 		}
 		if(pagePP > 0 && pagePP <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage="+pagePP+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage="+pagePP+"'>";
 			pageNavi += pagePP;
 			pageNavi += "</a></li>";
 		}
 		if(reqPage < totalPage-2){
 			pageNavi += "<div>...</div>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/admin/schedule?reqPage="+pageE+"'>";
+			pageNavi += "<a class='page-item' href='/admin/allSchedule?reqPage="+pageE+"'>";
 			pageNavi += pageE;
 			pageNavi += "</a></li>";
 		}

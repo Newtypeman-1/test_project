@@ -101,5 +101,15 @@ public class DoctorDao {
 		int r = jdbc.queryForObject(query, Integer.class);
 		return r;
 	}
+	public Doctor idCheck(Doctor d) {
+		String query = "select * from doctor_tbl where doctor_id = ?";
+		Object[] params = {d.getDoctorId()};
+		List list = jdbc.query(query, doctorRowMapper, params);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (Doctor)list.get(0);
+		}
+	}
 	
 }

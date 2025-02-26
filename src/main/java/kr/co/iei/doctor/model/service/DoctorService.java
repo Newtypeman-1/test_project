@@ -191,5 +191,10 @@ public class DoctorService {
 		return dpl;
 	}
 
+	public Doctor idCheck(Doctor d) {
+		Doctor doctor = doctorDao.idCheck(d);
+		return doctor;
+	}
+
 	
 }

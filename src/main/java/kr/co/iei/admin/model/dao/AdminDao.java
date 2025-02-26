@@ -42,8 +42,9 @@ public class AdminDao {
 	}
 
 	public int scheduleTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		String query = "select count(*) from treatment_tbl order by 1 desc";
+		int r = jdbc.queryForObject(query, Integer.class);
+		return r;
 	}
 
 }
