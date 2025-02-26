@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Help DOC | 로그인</title>
+<style>
+#pwView,#pwView2{
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<th:block th:include="common/header"></th:block>
@@ -28,7 +33,8 @@
 								<span for="memberPw">비밀번호</span>
 							</div>
 							<div class="input-item">
-								<input type="text" class="memberPw" name="memberPw" id="memberPw">
+								<input type="password" class="memberPw" name="memberPw" id="memberPw">
+								<span class="material-icons" id="pwView">visibility_off</span>
 							</div>
 						</div>
 						<div class="wrong">
@@ -58,7 +64,8 @@
 								<span for="doctorPw">비밀번호</span>
 							</div>
 							<div class="input-item">
-								<input type="text" class="doctorPw" name="doctorPw" id="doctorPw">
+								<input type="password" class="doctorPw" name="doctorPw" id="doctorPw">
+								<span class="material-icons" id="pwView2">visibility_off</span>
 							</div>
 						</div>
 						<div class="wrong">
@@ -122,6 +129,27 @@
 			}else if(pwV === ""){
 				wm.text("비밀번호를 입력해주세요.");
 				pw.focus();
+			}
+		})
+		
+		$("#pwView").on("click", function(){
+			const viewCheck = $("#pwView");
+			if(viewCheck.text() === "visibility"){
+				$("#pwView").text("visibility_off");
+				$("#memberPw").prop("type", "password");
+			}else{
+				$("#pwView").text("visibility");
+				$("#memberPw").prop("type", "text");
+			}
+		})
+		$("#pwView2").on("click", function(){
+			const viewCheck = $("#pwView2");
+			if(viewCheck.text() === "visibility"){
+				$("#pwView2").text("visibility_off");
+				$("#doctorPw").prop("type", "password");
+			}else{
+				$("#pwView2").text("visibility");
+				$("#doctorPw").prop("type", "text");
 			}
 		})
 	</script>

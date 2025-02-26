@@ -43,8 +43,8 @@
 							<th:block th:if="${session.doctor != null}">
 								<a href="/doctor/mypage">마이페이지</a>
 							</th:block>
-                        	<ul class="dropdown">
-								<th:block th:if="${session.member != null}">
+							<th:block th:if="${session.member != null}">
+	                        	<ul class="dropdown">
 									<li>
 										<a href="/member/mypage">내 페이지</a>
                            	 		</li>
@@ -54,8 +54,10 @@
                            	 		<li>
 										<a href="/member/qna">내 문의/리뷰</a>
                            	 		</li>
-								</th:block>
-								<th:block th:if="${session.doctor != null}">
+								</ul>
+							</th:block>
+							<th:block th:if="${session.doctor != null}">
+								<ul class="dropdown">
 									<li>
 										<a href="/doctor/mypage">내 페이지</a>
                            	 		</li>
@@ -65,8 +67,8 @@
                            	 		<li>
 										<a href="/doctor/qna">내 문의/리뷰</a>
                            	 		</li>
-								</th:block>
-							</ul>
+                       	 		</ul>
+							</th:block>
 						</li>
 						<li>
 							<a href="/review/list?reqPage=1&doctorNo=0">리뷰</a>

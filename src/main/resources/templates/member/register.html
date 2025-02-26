@@ -8,6 +8,9 @@
 	height: 40px;
 	border-radius: 10px;
 }
+#pwView{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -32,7 +35,8 @@
 						<span id="pwCheckMsg"></span>
 					</div>
 					<div class="input-item">
-						<input type="text" class="essen" name="memberPw" id="memberPw">
+						<input type="password" class="essen" name="memberPw" id="memberPw">
+						<span class="material-icons" id="pwView">visibility_off</span>
 					</div>
 					<div class="msg">
 			            <div>8글자 이상 12글자 이하</div>
@@ -48,7 +52,7 @@
 						<span id="pwReCheckMsg"></span>
 					</div>
 					<div class="input-item">
-						<input type="text" class="essen" name="memberPwRe" id="memberPwRe">
+						<input type="password" class="essen" name="memberPwRe" id="memberPwRe">
 					</div>
 				</div>
 				<div class="input">
@@ -623,6 +627,16 @@
 			}
 			allCorrect();
 		});
+		$("#pwView").on("click", function(){
+			const viewCheck = $("#pwView");
+			if(viewCheck.text() === "visibility"){
+				$("#pwView").text("visibility_off");
+				$("#memberPw").prop("type", "password");
+			}else{
+				$("#pwView").text("visibility");
+				$("#memberPw").prop("type", "text");
+			}
+		})
 		
 		//비밀번호 확인 조건
 		$("#memberPwRe").on("focusout", function(){
