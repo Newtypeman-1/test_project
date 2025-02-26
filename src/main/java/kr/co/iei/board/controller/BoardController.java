@@ -54,7 +54,7 @@ public class BoardController {
 	
 	@ResponseBody
 	@GetMapping(value="/more")
-	public List<Board> boardMore(int start, int amount, int reqPage){
+	public List<Board> boardMore(int start, int amount){
 		List<Board> list = boardService.selectBoardList(start, amount);
 		return list;
 	}

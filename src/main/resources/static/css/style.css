@@ -407,12 +407,6 @@ body{
 	transform: scale(1);
 }
 
-.header__menu ul li:hover .dropdown {
-	top: 27px;
-	opacity: 1;
-	visibility: visible;
-}
-
 .header__menu ul li:last-child {
 	margin-right: 0;
 }
@@ -431,6 +425,12 @@ body{
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
+}
+
+.header__menu ul li:hover .dropdown {
+	top: 27px;
+	opacity: 1;
+	visibility: visible;
 }
 
 .header__menu ul li .dropdown li {
@@ -1341,6 +1341,8 @@ body{
 	}
 	.login-section{
 		width: 700px;
+		margin: 0 auto;
+		border-radius: 10px;
 	}
 	.submit-button{
 		width: 100%;
@@ -1565,7 +1567,7 @@ body{
 	
 .opinion-section{
 	width: 900px;
-	
+	margin: 0 auto;
 }
 .opinion-page{
 	box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.25);
@@ -1649,6 +1651,7 @@ select{
     }
 .review-section{
 	width: 1400px;
+	margin-left: 20%;
 }
 
 .boardList-section{
@@ -1682,6 +1685,7 @@ select{
 	overflow: hidden;
 	width: 100%;
 	margin-bottom: 20px;
+	margin-left: 20%;
 }
 .member-list-tbl,.doctor-list-tbl{
 	width: 100%;
