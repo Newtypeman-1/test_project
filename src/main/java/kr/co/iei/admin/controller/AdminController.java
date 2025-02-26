@@ -70,18 +70,20 @@ public class AdminController {
 		return "common/msg";
 	}
 	
-	@PostMapping(value="delAccount")
+	@PostMapping(value="delAcount")
 	public String delAccount(Doctor d, Model model) {
 		int r = adminService.deleteDoctor(d);
 		if(r != 0) {
 			model.addAttribute("title", "직원 해고 성공");
 			model.addAttribute("text", "성공적으로 직원을 해고했습니다.");
 			model.addAttribute("icon", "success");
+			model.addAttribute("loc", "/");
 			return "common/msg";
 		}else {
 			model.addAttribute("title", "직원 해고 실패");
 			model.addAttribute("text", "애석하게도 직원을 해고하지 못했습니다.");
 			model.addAttribute("icon", "error");
+			model.addAttribute("loc", "/");
 			return "common/msg";
 		}
 	}
