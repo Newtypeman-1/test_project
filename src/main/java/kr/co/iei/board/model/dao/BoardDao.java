@@ -11,6 +11,7 @@ import kr.co.iei.board.model.vo.BoardRowMapper;
 import kr.co.iei.board.model.vo.Comment;
 import kr.co.iei.board.model.vo.CommentRowMapper;
 import kr.co.iei.board.model.vo.CommentRowMapper2;
+import kr.co.iei.board.model.vo.CommentRowMapper3;
 import kr.co.iei.doctor.model.vo.Doctor;
 import kr.co.iei.member.model.vo.Member;
 
@@ -24,6 +25,8 @@ public class BoardDao {
 	private CommentRowMapper commentRowMapper;
 	@Autowired
 	private CommentRowMapper2 commentRowMapper2;
+	@Autowired
+	private CommentRowMapper3 commentRowMapper3;
 	
 	public int selectBoardTotalCount() {
 		String query = "select count(*) from board";
@@ -97,9 +100,9 @@ public class BoardDao {
 
 
 	public Comment selectComment(int boardNo) {
-		String query = "select * from (select * from board join comment_tbl using (board_no))c join doctor_tbl d using(doctor_no) join department_tbl p on d.department_no = p.department_no where doctor_no = 10";
+		String query = "select comment_no, comment_content, comment_date, doctor_no, doctor_img, doctor_name, department_name from comment_tbl join doctor_tbl using (doctor_no) join department_tbl using (department_no) where board_no = ?";
 		Object[] params = {boardNo};
-		List list = jdbc.query(query, commentRowMapper, params);
+		List list = jdbc.query(query, commentRowMapper3, params);
 		if(list.isEmpty()) {
 			return null;
 		}else {

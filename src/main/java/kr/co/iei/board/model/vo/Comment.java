@@ -14,4 +14,8 @@ public class Comment {
 	private int doctorNo;
 	private int boardNo;
 	private String isDone;
+	
+	private String doctorImg;
+	private String doctorName;
+	private	String departmentName;
 }

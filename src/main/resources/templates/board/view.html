@@ -194,12 +194,14 @@
 					</th:block>
 				</div>
 			</div>
-			<th:block th:if="${comment} != null">
+			
+			<th:block th:if="${comment != null}">
 				<div class="answer-section">
 					<div class="answer-header">
-						<img class="answer-profile-img" style="width:50px;" th:src="@{'/doctor/' + ${session.doctor.doctorImg}}"></img>
-						<span class="answerer-name" th:text="${session.doctor.doctorName}"></span>
-						<span class="answerer-name" th:text="${session.doctor.doctorName}+' | '+${session.doctor.}"></span>						
+						<img class="answer-profile-img" style="width:50px;" th:src="@{'/doctor/' + ${comment.doctorImg}}"></img>						
+						<span class="answerer-name" th:text="${comment.doctorName}+' | '+${comment.departmentName}"></span>
+						<hr>
+						<span class="answerer-name" th:text="${comment.commentDate}"></span>					
 					</div>
 					<div class="answer-content" th:text="${comment.commentContent}"></div>
 					<div class="answer-button-group">

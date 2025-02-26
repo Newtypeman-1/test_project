@@ -48,7 +48,8 @@ public class WebConfig implements WebMvcConfigurer{
 				.addPathPatterns("/admin/addAcount")
 				.addPathPatterns("/admin/delAcount")
 				.addPathPatterns("/admin/allSchedule")
-				.addPathPatterns("/admin/allMember");
+				.addPathPatterns("/admin/allMember")
+				.addPathPatterns("/admin/**");
 	}
 	
 	
