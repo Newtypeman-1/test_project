@@ -545,7 +545,7 @@
 			const icm = $("#idCheckMsg");
 			icm.removeClass("invalid").removeClass("valid").text("");
 			const regExp = /^[a-zA-Z0-9]{5,20}$/;
-			if(regExp.test(memberId)){
+			if(regExp.test(memberId) && memberId !== 'admin'){
 				$.ajax({
 					url: "/member/idCheck",
 					type: "get",
@@ -556,7 +556,7 @@
 							icm.addClass("valid");
 							essen.eq(0).addClass("correct");
 						}else {
-							icm.text("사용 할 수 없는 아이디 입니다.")
+							icm.text("사용할 수 없는 아이디거나 5자 이상 입력된 아이디를 입력해 주세요.")
 							icm.addClass("invalid");
 							essen.eq(0).removeClass("correct");
 						}
@@ -566,7 +566,7 @@
 					}
 				});
 			}else{
-				icm.text("최소 아이디는 5자 입니다.")
+				icm.text("사용할 수 없는 아이디거나 5자 이상 입력된 아이디를 입력해 주세요.")
 				icm.addClass("invalid");
 				essen.eq(0).removeClass("correct");
 			}
